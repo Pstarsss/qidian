@@ -6,7 +6,19 @@
     <!-- 导航组件 -->
     <div class="nav"></div>
     <!-- 人气点点圈 -->
-    <div class="popularity"></div>
+    <div class="popularity">
+      <a href="" class="titleMenu">
+        <menuTitle>
+          <template #title>人气点点圈</template>
+        </menuTitle>
+      </a>
+      <div class="content">
+        <div class="popularity-menu">
+          <p>新手</p>
+          <div class="popularity-menu-num"></div>
+        </div>
+      </div>
+    </div>
     <!-- 书单 -->
     <div class="book-list"></div>
     <!-- 游戏 -->
@@ -27,7 +39,20 @@
 </template>
 
 <script>
-export default {}
+import menuTitle from '../components/discover-menuTitle'
+export default {
+  components: {
+    menuTitle,
+  },
+}
 </script>
 
-<style scoped></style>
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+.discover-squares {
+  padding: 0 15px 50px;
+}
+</style>
