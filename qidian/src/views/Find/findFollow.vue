@@ -1,6 +1,6 @@
 <template>
   <!-- 发现-关注 -->
-  <div class="discover-follow"></div>
+  <div class="findFollow"></div>
 </template>
 
 <script>

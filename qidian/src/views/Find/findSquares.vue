@@ -1,6 +1,6 @@
 <template>
   <!-- 发现-广场  -->
-  <div class="discover-squares">
+  <div class="findSquares">
     <!-- 发布动态 -->
     <div class="issued"></div>
     <!-- 导航组件 -->
@@ -43,7 +43,7 @@
 
 <script>
 let num = parseInt(Math.random() * 550000) + 50000
-import menuTitle from './discover-menuTitle'
+import menuTitle from './find-menuTitle'
 import './iconfont/iconfont.css'
 export default {
   data() {

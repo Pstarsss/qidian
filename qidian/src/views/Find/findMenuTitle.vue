@@ -1,5 +1,5 @@
 <template>
-  <div class="discover-memuTitle">
+  <div class="findMemuTitle">
     <span class="left">
       <slot name="title">Title</slot>
     </span>
