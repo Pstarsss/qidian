@@ -1,13 +1,16 @@
 <template>
-   <div class=''>
-     起点必读
-   </div>
+  <div class="">
+    新人必读
+  </div>
 </template>
 
 <script>
+
 export default {
-  name:'selecthome',
+  name: 'selecthome',
+  components: {
+    
+  },
+
 }
 </script>
-<style lang='less' scoped>
-</style>

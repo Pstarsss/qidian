@@ -30,7 +30,7 @@ const routes = [
     component: Selected,
     children: [
       {
-        path: '/ selecthome',
+        path: '/selecthome',
         name: ' SelectHome',
         component:  SelectHome,
       },
