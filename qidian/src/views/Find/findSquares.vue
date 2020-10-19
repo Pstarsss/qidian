@@ -5,7 +5,7 @@
       <!-- 发布动态 -->
       <div class="issued"></div>
       <!-- 导航组件 -->
-      <div class="nav">
+      <div id="nav">
         <p>NAV</p>
       </div>
       <!-- 人气点点圈 -->
@@ -18,36 +18,14 @@
         </a>
         <!-- Content -->
         <el-row :gutter="20">
-          <el-col :span="6" class="popularity-tag">
+          <el-col
+            :span="6"
+            class="popularity-tag"
+            v-for="i in popularityTags"
+            :key="i.id"
+          >
             <div>
-              <p class="popularity-tag-title">新手</p>
-              <div class="popularity-tag-num">
-                <!-- <i class="iconfont icon-icon-wo"></i> -->
-                <span>{{ num }}</span>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="6" class="popularity-tag">
-            <div>
-              <p class="popularity-tag-title">新手</p>
-              <div class="popularity-tag-num">
-                <!-- <i class="iconfont icon-icon-wo"></i> -->
-                <span>{{ num }}</span>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="6" class="popularity-tag">
-            <div>
-              <p class="popularity-tag-title">新手</p>
-              <div class="popularity-tag-num">
-                <!-- <i class="iconfont icon-icon-wo"></i> -->
-                <span>{{ num }}</span>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="6" class="popularity-tag">
-            <div>
-              <p class="popularity-tag-title">新手</p>
+              <p class="popularity-tag-title">{{ i.name }}</p>
               <div class="popularity-tag-num">
                 <!-- <i class="iconfont icon-icon-wo"></i> -->
                 <span>{{ num }}</span>
@@ -66,40 +44,18 @@
         </a>
         <!-- Content -->
         <el-row :gutter="1">
-          <el-col :span="12">
-            <div>
-              <el-row :gutter="3">
-                <el-col :span="8">
-                  <div class="book-list-content"></div>
-                </el-col>
-                <el-col :span="8">
-                  <div class="book-list-content"></div>
-                </el-col>
-                <el-col :span="8">
-                  <div class="book-list-content"></div>
-                </el-col>
-              </el-row>
-            </div>
-          </el-col>
-          <el-col :span="12">
-            <div>
-              <el-row :gutter="3">
-                <el-col :span="8">
-                  <div class="book-list-content"></div>
-                </el-col>
-                <el-col :span="8">
-                  <div class="book-list-content"></div>
-                </el-col>
-                <el-col :span="8">
-                  <div class="book-list-content"></div>
-                </el-col>
-              </el-row>
-            </div>
+          <el-col :span="12" v-for="i in 2" :key="i.id">
+            <el-row :gutter="3">
+              <el-col :span="8" v-for="i in 3" :key="i.id">
+                <div class="book-list-content"></div>
+              </el-col>
+            </el-row>
+            <p>主推新书精选</p>
           </el-col>
         </el-row>
       </div>
       <!-- 游戏 -->
-      <div id="games" class="findSquareContent">
+      <div id="games" class="findSquareContent findSquareContentTwo">
         <!-- Title -->
         <a href="" class="titleMenu">
           <menuTitle>
@@ -108,16 +64,14 @@
         </a>
         <!-- Content -->
         <el-row :gutter="20">
-          <el-col :span="12">
-            <div></div>
-          </el-col>
-          <el-col :span="12">
-            <div></div>
+          <el-col :span="12" v-for="i in gamesContent" :key="i.id">
+            <img :src="i.src" alt="" />
+            <p>天天十连，福利爆仓</p>
           </el-col>
         </el-row>
       </div>
       <!-- 活动 -->
-      <div id="activity" class="findSquareContent">
+      <div id="activity" class="findSquareContent findSquareContentTwo">
         <!-- Title -->
         <a href="" class="titleMenu">
           <menuTitle>
@@ -128,7 +82,7 @@
       <!-- 滚动公示 -->
       <!-- <div id="roll"></div> -->
       <!-- 神创作 -->
-      <div id="created" class="findSquareContent">
+      <div id="created" class="findSquareContent findSquareContentTwo">
         <!-- Title -->
         <a href="" class="titleMenu">
           <menuTitle>
@@ -137,7 +91,7 @@
         </a>
       </div>
       <!-- 专栏精选 -->
-      <div id="choiceness" class="findSquareContent">
+      <div id="choiceness" class="findSquareContent findSquareContentTwo">
         <!-- Title -->
         <a href="" class="titleMenu">
           <menuTitle>
@@ -146,7 +100,7 @@
         </a>
       </div>
       <!-- 对话小说推荐 -->
-      <div id="recommend" class="findSquareContent">
+      <div id="recommend" class="findSquareContent findSquareContentTwo">
         <!-- Title -->
         <a href="" class="titleMenu">
           <menuTitle>
@@ -163,11 +117,35 @@
 <script>
 let num = parseInt(Math.random() * 550000) + 50000
 import menuTitle from './findMenuTitle'
+import navs from '../../components/navs'
 import './iconfont/iconfont.css'
 export default {
   data() {
     return {
+      popularityTags: [
+        { name: '新手' },
+        { name: '创作' },
+        { name: '催更' },
+        { name: '历史' },
+      ],
+      gamesContent: [
+        {
+          src:
+            'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        },
+        {
+          src:
+            'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        },
+      ],
       num,
+      navlist: [
+        { name: '专栏', src: '' },
+        { name: '新书投资', src: '' },
+        { name: '点点圈', src: '' },
+        { name: '对话小说', src: '' },
+        { name: '红包', src: '' },
+      ],
     }
   },
   components: {
@@ -187,6 +165,25 @@ export default {
 .findSquareContent {
   border-bottom: 1px solid #ddd;
   padding-bottom: 0.3rem;
+}
+.findSquareContent p {
+  font-size: 0.3rem;
+}
+.findSquareContentTwo > .el-row {
+  padding: 0;
+}
+.findSquareContentTwo .el-col-12 > p:last-of-type {
+  padding-left: 0;
+}
+.findSquareContentTwo .el-col-12:first-of-type .el-row {
+  padding-left: 0;
+}
+.findSquareContentTwo .el-col-12:last-of-type .el-row {
+  padding-right: 0;
+}
+.findSquareContentTwo img {
+  /* object-fit: cover; */
+  height: 1.5rem;
 }
 </style>
 
@@ -235,6 +232,10 @@ export default {
 }
 #book-list > .el-row {
   padding: 0;
+}
+#book-list .el-col-12 > p {
+  padding-left: 10px;
+  background-color: #f00;
 }
 #book-list .el-col-12:first-of-type .el-row {
   padding-left: 0;
