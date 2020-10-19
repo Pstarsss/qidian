@@ -58,6 +58,7 @@ export default {
 * {
   margin: 0;
   padding: 0;
+  box-sizing: content-box;
 }
 .foot {
   border-top: 1px solid #cccccc;

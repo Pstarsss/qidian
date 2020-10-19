@@ -28,12 +28,7 @@ export default {
         ]
     }
   },
-  created(){
-    axios.get('/api/books').then(res=>{
-      console.log('sss');
-      console.log(res);
-    })
-  }
+ 
 }
 </script>
 
