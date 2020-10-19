@@ -1,25 +1,37 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-
+import Bookshelf from '../views/Bookshelf.vue'
+import Selected  from '../views/Selected.vue'
+import Find from '../views/Find.vue'
+import Mine from '../views/Mine.vue'
 Vue.use(VueRouter)
-
-
-
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/bookshelf'
   },
   {
-    path: '/about',
-    name: 'About',
-    component: function () {
-      return import('../views/About.vue')
-    }
-  }
+    path: '/bookshelf',
+    name: 'Bookshelf',
+    component: Bookshelf
+  },
+  {
+    path: '/selected',
+    name: 'Selected',
+    component: Selected
+  },
+  {
+    path: '/find',
+    name: 'Find',
+    component: Find
+  },
+  {
+    path: '/mine',
+    name: 'Mine',
+    component: Mine
+  },
+  
 ]
 
 const router = new VueRouter({
