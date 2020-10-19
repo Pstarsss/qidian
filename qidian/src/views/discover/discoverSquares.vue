@@ -15,7 +15,10 @@
       <div class="content">
         <div class="popularity-menu">
           <p>新手</p>
-          <div class="popularity-menu-num"></div>
+          <div class="popularity-menu-num">
+            <i class="iconfont icon-icon-wo"></i>
+            <span>{{ num }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -39,8 +42,15 @@
 </template>
 
 <script>
-import menuTitle from '../components/discover-menuTitle'
+let num = parseInt(Math.random() * 550000) + 50000
+import menuTitle from './discover-menuTitle'
+import './iconfont/iconfont.css'
 export default {
+  data() {
+    return {
+      num,
+    }
+  },
   components: {
     menuTitle,
   },
