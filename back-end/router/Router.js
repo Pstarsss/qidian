@@ -13,8 +13,13 @@ router.get('/',function(req,res){
   res.send('welcome to my page');
 })
 
-router.get('/books',function(req,res){
-  sql.find('select * from bookinfo1').then(results=>{
+router.get('/booklist',function(req,res){
+  sql.find('select * from booklist').then(results=>{
+    res.send(results);
+  })
+});
+router.get('/booktitle',function(req,res){
+  sql.find('select * from booktitles').then(results=>{
     res.send(results);
   })
 });
