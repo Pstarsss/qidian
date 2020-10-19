@@ -8,12 +8,15 @@
 </template>
 
 <script>
-import { request } from '@/network/request.js'
-import axios from 'axios'
+
 export default {
   name: 'find',
   components: {},
- 
+ created(){
+    this.$http.get('/api/booklist/1').then(res=>{
+      console.log(res);
+    })
+  }
 }
 </script>
 
