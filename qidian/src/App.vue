@@ -63,7 +63,7 @@ export default {
 .foot {
   border-top: 1px solid #cccccc;
   position: fixed;
-  height: 1rem;
+  height: .7rem;
   z-index: 97;
   width: 100%;
   bottom: 0;
@@ -76,41 +76,29 @@ export default {
   background: #fff;
 }
 .a {
-  height: 1rem;
+  height: .7rem;
   position: relative;
   text-decoration: none;
   font-size: 0.2rem;
 }
 .bottom i {
-  width: 0.44rem;
-  height: 0.44rem;
+  width: 0.33rem;
+  height: 0.33rem;
   display: block;
-  margin-top: .12rem;
-  font-size: 0.44rem;
+  margin-top: .06rem;
+  font-size: 0.33rem;
   margin-left: auto;
   margin-right: auto;
 }
 .bottom span {
   text-align: center;
-  margin-bottom: .2rem;
-  font-size: .25rem;
+  margin-bottom: .02rem;
+  font-size: .18rem;
 }
 li {
   list-style: none;
 }
-.num1 {
-  position: absolute;
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 50%;
-  line-height: 0.4rem;
-  text-align: center;
-  background-color: #f95c52;
-  color: #fff;
-  right: -0.25rem;
-  top: 0rem;
-}
-.a.active{
+.active{
 	color:#ff6700;
 }
 .full{
