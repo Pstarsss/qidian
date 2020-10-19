@@ -37,12 +37,12 @@ export default {
 <style scoped>
 .findTop {
   background-color: #f00;
-  height: 1.3rem;
+  height: 1.4rem;
 }
 .findTop a {
   font-size: 0.35rem;
   color: #fff;
   margin: 0 10px;
-  line-height: 1.3rem;
+  line-height: 1.4rem;
 }
 </style>

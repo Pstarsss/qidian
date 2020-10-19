@@ -5,8 +5,8 @@
       <!-- 发布动态 -->
       <div class="issued"></div>
       <!-- 导航组件 -->
-      <div id="nav">
-        <p>NAV</p>
+      <div id="nav" class="findSquareContent">
+        <navs :list="navlist"></navs>
       </div>
       <!-- 人气点点圈 -->
       <div id="popularity" class="findSquareContent">
@@ -100,7 +100,7 @@ export default {
         { name: '催更' },
         { name: '历史' },
       ],
-      // 人气点点圈数字
+      // 人气点点圈 数字
       num,
       // 游戏、活动、神创作、专栏精选、对话小说推荐
       contents: [
@@ -187,16 +187,17 @@ export default {
       ],
       num,
       navlist: [
-        { name: '专栏', src: '' },
-        { name: '新书投资', src: '' },
-        { name: '点点圈', src: '' },
-        { name: '对话小说', src: '' },
-        { name: '红包', src: '' },
+        { name: '专栏', src: require('./img/zs_icon_bbjcj.png') },
+        { name: '新书投资', src: require('./img/没有积分@3x.png') },
+        { name: '点点圈', src: require('./img/海王星.png') },
+        { name: '对话小说', src: require('./img/蓝紫色星空.png') },
+        { name: '红包', src: require('./img/红包.png') },
       ],
     }
   },
   components: {
     menuTitle,
+    navs,
   },
 }
 </script>
@@ -206,11 +207,14 @@ export default {
   margin: 0;
   padding: 0;
 }
+#nav {
+  padding: 0.4em 0 0.6rem;
+}
 .findSquares {
-  padding: 0 10px 50px;
+  padding: 0 0.15rem 0.5rem;
 }
 .findSquareContent {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 0.02rem solid #ccc;
   padding-bottom: 0.3rem;
 }
 .findSquareContent p {
@@ -243,9 +247,9 @@ export default {
 .popularity-tag {
   background-image: url('https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg');
   background-size: cover;
-  padding: 10px 0;
+  padding: 0.1rem 0;
   margin: 0 0.05rem;
-  border-radius: 10px;
+  border-radius: 0.1rem;
   position: relative;
   height: 1.7rem;
   width: 1.5rem;
@@ -260,12 +264,12 @@ export default {
 }
 .popularity-tag-num {
   position: relative;
-  bottom: 5px;
+  bottom: 0.1rem;
 }
 .popularity-tag-num > span {
   background-color: #f00;
-  border-radius: 7px;
-  padding: 3px 3px;
+  border-radius: 0.1rem;
+  padding: 0.1rem;
   font-size: 0.2rem;
   color: #fff;
 }
@@ -282,7 +286,7 @@ export default {
   padding: 0;
 }
 #book-list .el-col-12 > p {
-  padding-left: 10px;
+  padding-left: 0.1rem;
 }
 #book-list .el-col-12:first-of-type .el-row {
   padding-left: 0;

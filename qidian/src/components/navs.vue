@@ -1,10 +1,10 @@
 <template>
- <div>
-    <div class="foot1" >
+  <div>
+    <div class="foot1">
       <div class="bottom1">
-        <div class="a1" v-for="(item, index) in list" :key="index">         
-          <i>{{item.src}}</i>
-          <span>{{item.name}}</span>
+        <div class="a1" v-for="(item, index) in list" :key="index">
+          <img :src="item.src" />
+          <span>{{ item.name }}</span>
         </div>
       </div>
     </div>
@@ -15,23 +15,26 @@
 import axios from 'axios'
 export default {
   name: 'navs',
-  data(){
-    return{     
-    }
+  data() {
+    return {}
   },
   props: {
-		//返回数组默认值
-	  list: {
-	    type: Array,
-	    default: function () {
-	      return []
-	    }
-	  },	  
-	},
+    //返回数组默认值
+    list: {
+      type: Array,
+      default: function() {
+        return []
+      },
+    },
+  },
 }
 </script>
 
 <style>
+img {
+  width: 0.9rem;
+  height: 0.9rem;
+}
 .foot1 {
   height: 1rem;
   z-index: 97;
@@ -55,14 +58,15 @@ export default {
   width: 0.44rem;
   height: 0.44rem;
   display: block;
-  margin-top: .12rem;
+  margin-top: 0.12rem;
   font-size: 0.44rem;
   margin-left: auto;
   margin-right: auto;
 }
 .bottom1 span {
+  display: block;
   text-align: center;
-  margin-bottom: .2rem;
-  font-size: .25rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.25rem;
 }
 </style>
