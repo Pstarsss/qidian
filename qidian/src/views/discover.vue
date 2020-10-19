@@ -9,7 +9,9 @@
 
 <script>
 import discoverFollow from './discover/discover-follow'
-export default {}
+export default {
+  // components:
+}
 </script>
 
 <style scoped></style>
