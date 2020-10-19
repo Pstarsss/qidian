@@ -28,7 +28,7 @@ function add(sql,params){
 };
 
 //数据的查询所有操作；
-function find (sql = 'select * from booklist',params){
+function find (sql = 'select * from booklist1',params){
   return new Promise((resolve,reject)=>{
     // pool.getConnection((err,connection)=>{
     //   if(err) reject(err);
