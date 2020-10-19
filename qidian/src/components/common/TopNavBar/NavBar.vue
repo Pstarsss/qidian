@@ -31,6 +31,7 @@ export default {
   text-align: center;
   padding: 0.1rem 0.1rem 0;
 }
+
 .n-center{
     flex-grow:1;
 }
@@ -39,5 +40,6 @@ export default {
   min-width: 0.4rem;
   max-width: 0.6rem;
 }
+
 
 </style>

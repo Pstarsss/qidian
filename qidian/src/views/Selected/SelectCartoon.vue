@@ -1,22 +1,18 @@
 <template>
    <div class=''>
-     
+     动漫内容
    </div>
 </template>
 
 <script>
-
 export default {
-  components: {
-
-  },
+  name:'selectcartoon',
   data() {
-    return {
-    };
-  },
+   return {
+   };
+},
 
 }
 </script>
 <style lang='less' scoped>
-
 </style>

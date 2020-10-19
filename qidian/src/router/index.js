@@ -6,6 +6,10 @@ import Find from '../views/Find.vue'
 import FindFollow from '../views/Find/findFollow.vue'
 import FindSquares from '../views/Find/findSquares.vue'
 import Mine from '../views/Mine.vue'
+import SelectHome from '../views/Selected/SelectHome.vue'
+import SelectBoys from '../views/Selected/SelectBoys.vue'
+import SelectGirls from '../views/Selected/SelectGirls.vue'
+import SelectCartoon from '../views/Selected/SelectCartoon.vue'
 
 const Login = ()=> import('@/views/Login/Login.vue')
 Vue.use(VueRouter)
@@ -24,6 +28,28 @@ const routes = [
     path: '/selected',
     name: 'Selected',
     component: Selected,
+    children: [
+      {
+        path: '/ selecthome',
+        name: ' SelectHome',
+        component:  SelectHome,
+      },
+      {
+        path: '/selectboys',
+        name: 'SelectBoys',
+        component: SelectBoys,
+      },
+      {
+        path: '/selectgirls',
+        name: 'SelectGirls',
+        component: SelectGirls,
+      },
+      {
+        path: '/selectcartoon',
+        name: 'SelectCartoon',
+        component: SelectCartoon,
+      },
+    ],
   },
 
   {
