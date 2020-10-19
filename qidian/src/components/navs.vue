@@ -1,0 +1,68 @@
+<template>
+ <div>
+    <div class="foot1" >
+      <div class="bottom1">
+        <div class="a1" v-for="(item, index) in list" :key="index">         
+          <i>{{item.src}}</i>
+          <span>{{item.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  name: 'navs',
+  data(){
+    return{     
+    }
+  },
+  props: {
+		//返回数组默认值
+	  list: {
+	    type: Array,
+	    default: function () {
+	      return []
+	    }
+	  },	  
+	},
+}
+</script>
+
+<style>
+.foot1 {
+  height: 1rem;
+  z-index: 97;
+  width: 100%;
+  bottom: 0;
+}
+.bottom1 {
+  align-items: center;
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  background: #fff;
+}
+.a1 {
+  height: 1rem;
+  position: relative;
+  text-decoration: none;
+  font-size: 0.2rem;
+}
+.bottom1 i {
+  width: 0.44rem;
+  height: 0.44rem;
+  display: block;
+  margin-top: .12rem;
+  font-size: 0.44rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.bottom1 span {
+  text-align: center;
+  margin-bottom: .2rem;
+  font-size: .25rem;
+}
+</style>
