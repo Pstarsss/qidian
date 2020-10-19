@@ -60,6 +60,9 @@ export default {
   padding: 0;
   box-sizing: content-box;
 }
+body{
+  background-color: #8080800f;
+}
 .foot {
   border-top: 1px solid #cccccc;
   position: fixed;
