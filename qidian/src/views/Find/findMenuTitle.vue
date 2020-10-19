@@ -13,9 +13,7 @@ export default {}
 
 <style scoped>
 .findMenuTitle {
-  border-top: 1px #000 solid;
   padding-top: 0.4rem;
-  /* display: flex; */
   height: 1.3rem;
 }
 .left {

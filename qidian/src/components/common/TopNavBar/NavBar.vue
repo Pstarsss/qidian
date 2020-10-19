@@ -1,5 +1,5 @@
 <template>
-   <nav class="naigaition">
+   <nav class="navigaition">
      <div class="n-left">
          <slot name="left"></slot>
      </div>
@@ -23,7 +23,7 @@ export default {
 }
 </script>
 <style  scoped>
-.naigaition{
+.navigaition{
   display:flex;
   font-size: 0.25rem;
   align-items: center;
