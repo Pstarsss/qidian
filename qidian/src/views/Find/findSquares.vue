@@ -43,7 +43,7 @@
 
 <script>
 let num = parseInt(Math.random() * 550000) + 50000
-import menuTitle from './find-menuTitle'
+import menuTitle from './findMenuTitle'
 import './iconfont/iconfont.css'
 export default {
   data() {
@@ -62,7 +62,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-.discover-squares {
+.findSquares {
   padding: 0 15px 50px;
 }
 </style>

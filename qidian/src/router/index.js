@@ -1,43 +1,57 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Bookshelf from '../views/Bookshelf.vue'
-import Selected  from '../views/Selected.vue'
+import Selected from '../views/Selected.vue'
 import Find from '../views/Find.vue'
+import FindFollow from '../views/Find/findFollow.vue'
+import FindSquares from '../views/Find/findSquares.vue'
 import Mine from '../views/Mine.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    redirect: '/bookshelf'
+    redirect: '/bookshelf',
   },
   {
     path: '/bookshelf',
     name: 'Bookshelf',
-    component: Bookshelf
+    component: Bookshelf,
   },
   {
     path: '/selected',
     name: 'Selected',
-    component: Selected
+    component: Selected,
   },
+
   {
     path: '/find',
     name: 'Find',
-    component: Find
+    component: Find,
+    children: [
+      {
+        path: '/findFollow',
+        name: 'FindFollow',
+        component: FindFollow,
+      },
+      {
+        path: '/findSquares',
+        name: 'FindSquares',
+        component: FindSquares,
+      },
+    ],
   },
   {
     path: '/mine',
     name: 'Mine',
-    component: Mine
+    component: Mine,
   },
-  
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 })
 
 export default router

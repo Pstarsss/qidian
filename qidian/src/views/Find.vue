@@ -8,20 +8,10 @@
 </template>
 
 <script>
-import findFollow from './Find/findFollow'
-import findSquares from './Find/findSquares'
-const routes = [
-  { path: '/findFollow', component: findFollow },
-  { path: './findSquares', component: findSquares },
-]
-const router = new VueRouter({
-  routes,
-})
 import { request } from '@/network/request.js'
 import axios from 'axios'
 export default {
   name: 'find',
-  router,
   components: {},
   created() {
     axios.get('/api/books').then((res) => {
@@ -31,3 +21,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+/* a {
+  font-size: 15px;
+} */
+</style>
