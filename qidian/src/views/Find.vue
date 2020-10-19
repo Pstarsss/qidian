@@ -13,12 +13,7 @@ import axios from 'axios'
 export default {
   name: 'find',
   components: {},
-  created() {
-    axios.get('/api/books').then((res) => {
-      console.log('sss')
-      console.log(res)
-    })
-  },
+ 
 }
 </script>
 
