@@ -6,6 +6,8 @@ import Find from '../views/Find.vue'
 import FindFollow from '../views/Find/findFollow.vue'
 import FindSquares from '../views/Find/findSquares.vue'
 import Mine from '../views/Mine.vue'
+
+const Login = ()=> import('@/views/Login/Login.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,6 +48,11 @@ const routes = [
     path: '/mine',
     name: 'Mine',
     component: Mine,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
 ]
 
