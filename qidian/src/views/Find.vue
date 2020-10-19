@@ -2,21 +2,29 @@
   <!-- 发现 -->
   <div class="find">
     <div class="findTop">
-      <router-link to="/findFollow">关注</router-link>
-      <router-link to="/findSquares">广场</router-link>
-      <!-- 搜索组件 -->
-      <!-- <search/> -->
+      <navBar>
+        <template #center>
+          <router-link to="/findFollow">关注</router-link>
+          <router-link to="/findSquares">广场</router-link>
+        </template>
+        <template #right>
+          <!-- 搜索 -->
+        </template>
+      </navBar>
     </div>
     <router-view />
   </div>
 </template>
 
 <script>
+import navBar from '../components/common/TopNavBar/NavBar'
 import { request } from '@/network/request.js'
 import axios from 'axios'
 export default {
   name: 'find',
-  components: {},
+  components: {
+    navBar,
+  },
   created() {
     axios.get('/api/booklist/1').then((res) => {
       console.log('sss')
@@ -30,13 +38,11 @@ export default {
 .findTop {
   background-color: #f00;
   height: 1.3rem;
-  display: block;
-  margin: 0 auto;
-  text-align: center;
 }
-.findTop > a {
+.findTop a {
   font-size: 0.35rem;
   color: #fff;
   margin: 0 10px;
+  line-height: 1.3rem;
 }
 </style>
