@@ -40,6 +40,7 @@ const routes = [
         component: FindSquares,
       },
     ],
+    redirect: '/findSquares',
   },
   {
     path: '/mine',
