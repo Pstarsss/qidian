@@ -13,7 +13,6 @@
         <div class="a"  @click="open('/find')" :class="{ 'active': isActive('/find') }">
           <i class="el-icon-view"></i>
           <span>发现</span>
-	
         </div>
         <div class="a"  @click="open('/mine')" :class="{ 'active': isActive('/mine') }">
           <i class="el-icon-user"></i>
