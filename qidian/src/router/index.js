@@ -3,9 +3,8 @@ import VueRouter from 'vue-router'
 import Bookshelf from '@/views/Bookshelf.vue'
 import Select from '@/views/Selected/Select.vue'
 import Find from '@/views/Find.vue'
-import FindFollow from '@/views/Find/findFollow.vue'
-import FindSquares from '@/views/Find/findSquares.vue'
-import FindMenuTitle from '@/views/Find/findMenuTitle.vue'
+import FindFollow from '@/views/Find/FindFollow.vue'
+import FindSquares from '@/views/Find/FindSquares.vue'
 
 import Mine from '@/views/Mine.vue'
 import mineShow from '@/views/Mine/mineShow.vue'
@@ -15,9 +14,8 @@ import SelectGirls from '@/views/Selected/SelectGirls.vue'
 import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import Detail from '@/views/Details/Detail.vue'
 
-
-const Login = ()=> import('@/views/Login/Login.vue');
-const Register = ()=> import('@/views/Login/Register.vue');
+const Login = () => import('@/views/Login/Login.vue')
+const Register = () => import('@/views/Login/Register.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,7 +36,7 @@ const routes = [
       {
         path: '/selecthome',
         name: ' SelectHome',
-        component:  SelectHome,
+        component: SelectHome,
       },
       {
         path: '/selectboys',
@@ -73,11 +71,6 @@ const routes = [
         path: '/findSquares',
         name: 'FindSquares',
         component: FindSquares,
-      },
-      {
-        path: '/findMenuTitle',
-        name: 'FindMenuTitle',
-        component: FindMenuTitle,
       },
     ],
     redirect: '/findSquares',

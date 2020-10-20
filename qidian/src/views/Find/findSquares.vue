@@ -107,7 +107,8 @@ let num1 = parseInt(Math.random() * 550000) + 50000
 let num2 = parseInt(Math.random() * 550000) + 50000
 let num3 = parseInt(Math.random() * 550000) + 50000
 let num4 = parseInt(Math.random() * 550000) + 50000
-import menuTitle from './findMenuTitle'
+import menuTitle from './components/FindMenuTitle'
+import hotDiscuss from './components/FindHotDiscuss'
 import navs from '@/components/navs'
 import './iconfont/iconfont.css'
 export default {
@@ -121,12 +122,11 @@ export default {
         { name: '对话小说', src: require('./img/蓝紫色星空.png') },
         { name: '红包', src: require('./img/红包.png') },
       ],
-      // 人气点点圈 数字
+      // 人气点点圈
       num1,
       num2,
       num3,
       num4,
-      //人气点点圈
       popularityTags: [
         {
           name: '新手',
@@ -153,6 +153,7 @@ export default {
             'https://iconfont.alicdn.com/t/684e9c2d-0be4-45e8-8e6f-222854679490.png',
         },
       ],
+      // 书单
       bookListContents: [
         {
           title: '有空推荐点好书',
@@ -272,28 +273,30 @@ export default {
           ],
         },
       ],
+      // 热门讨论
       hotDiscussionList: [
         {
           type: '点点圈',
           title: '求推荐几本三观正的书',
           content:
-            '1.三观正.替天行道或者有原则有底线的的。单女主或者无女主3.所有...',
-          img: '',
+            '1.三观正.替天行道或者有原则有底线的的。单女主或者无女主3.所有类型均可，看得下去就全顶。4.我做新媒体运营的好看帮忙在公司公...',
+          imgSrc: '',
           tag: '书荒',
           time: '10月13日 12:42',
           reviews: '367',
-          like: '274',
+          likes: '274',
         },
         {
           type: '点点圈',
-          title: '求推荐几本三观正的书',
+          title: '已签约，求波投资',
           content:
-            '1.三观正.替天行道或者有原则有底线的的。单女主或者无女主3.所有...',
-          img: '',
-          tag: '书荒',
-          time: '10月13日 12:42',
-          reviews: '367',
-          like: '274',
+            '新书《我能提升好感度》已签约，合同已寄出，求一波投资，另附站短一张，大伙抓紧时间上车',
+          imgSrc:
+            'https://iconfont.alicdn.com/t/8ead46ab-5c58-4fb2-88af-0bcfb5536d79.png',
+          tag: '新书投资团',
+          time: '前天 10.45',
+          reviews: '34',
+          likes: '42',
         },
       ],
     }
@@ -302,6 +305,7 @@ export default {
   components: {
     menuTitle,
     navs,
+    hotDiscuss,
   },
 }
 </script>
@@ -373,7 +377,7 @@ export default {
   height: 1.1rem;
 }
 .popularity-tag-num > span {
-  background-color: #f00;
+  background-color: #db3b3b;
   border-radius: 0.1rem;
   padding: 0.03rem 0.06rem;
   font-size: 0.2rem;
@@ -402,5 +406,12 @@ export default {
 }
 #book-list .el-col-12:last-of-type .el-row {
   padding-right: 0;
+}
+</style>
+
+//热门讨论
+<style scoped>
+.hot-discuss {
+  position: relative;
 }
 </style>

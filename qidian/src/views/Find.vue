@@ -12,11 +12,13 @@
         </template>
       </navBar>
     </div>
+    <publish />
     <router-view />
   </div>
 </template>
 
 <script>
+import publish from './Find/components/Publish'
 import navBar from '../components/common/TopNavBar/NavBar'
 import { request } from '@/network/request.js'
 import axios from 'axios'
@@ -24,6 +26,7 @@ export default {
   name: 'find',
   components: {
     navBar,
+    publish,
   },
   created() {
     axios.get('/api/booklist/1').then((res) => {
@@ -36,7 +39,7 @@ export default {
 
 <style scoped>
 .findTop {
-  background-color: #f00;
+  background-color: #db3b3b;
   height: 1rem;
   position: fixed;
   width: 100%;

@@ -121,10 +121,10 @@ export default {
 .login > button {
   width: 1rem;
   height: 0.6rem;
-  color: #f00;
+  color: #db3b3b;
   font-weight: bold;
   background-color: #fff;
-  border: 0.02rem solid #f00;
+  border: 0.02rem solid #db3b3b;
   border-radius: 0.3rem;
 }
 section > p {
