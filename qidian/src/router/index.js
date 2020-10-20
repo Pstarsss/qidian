@@ -11,7 +11,8 @@ import SelectBoys from '../views/Selected/SelectBoys.vue'
 import SelectGirls from '../views/Selected/SelectGirls.vue'
 import SelectCartoon from '../views/Selected/SelectCartoon.vue'
 
-const Login = ()=> import('@/views/Login/Login.vue')
+const Login = ()=> import('@/views/Login/Login.vue');
+const Register = ()=> import('@/views/Login/Register.vue');
 Vue.use(VueRouter)
 
 const routes = [
@@ -79,6 +80,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
   },
 ]
 
