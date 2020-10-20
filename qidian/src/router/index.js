@@ -5,8 +5,9 @@ import Select from '../views/Selected/Select.vue'
 import Find from '../views/Find.vue'
 import FindFollow from '../views/Find/FindFollow.vue'
 import FindSquares from '../views/Find/FindSquares.vue'
-import FindMenuTitle from '../views/Find/FindMenuTitle.vue'
+import FindMenuTitle from '../views/Find/FindMenuTitle'
 import Mine from '../views/Mine.vue'
+import mineShow from '../views/Mine/mineShow.vue'
 import SelectHome from '../views/Selected/SelectHome.vue'
 import SelectBoys from '../views/Selected/SelectBoys.vue'
 import SelectGirls from '../views/Selected/SelectGirls.vue'
@@ -84,6 +85,11 @@ const routes = [
     path: '/mine',
     name: 'Mine',
     component: Mine,
+  },
+  {
+    path: '/mineShow',
+    name: 'mineShow',
+    component: mineShow,
   },
   {
     path: '/login',

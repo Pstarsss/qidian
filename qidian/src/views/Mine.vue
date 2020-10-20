@@ -1,15 +1,15 @@
 <template>
   <div class="home">
-    我的内容
+    <mineShow></mineShow>
   </div>
 </template>
 
 <script>
-
+import mineShow from './Mine/mineShow.vue'
 export default {
   name: 'mine',
   components: {
-    
+    mineShow
   },
 
 }
