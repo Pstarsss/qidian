@@ -38,6 +38,9 @@ export default {
 .findTop {
   background-color: #f00;
   height: 1rem;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
 }
 .findTop a {
   font-size: 0.35rem;

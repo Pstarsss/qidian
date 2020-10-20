@@ -17,7 +17,7 @@
           </menuTitle>
         </a>
         <!-- Content -->
-        <el-row :gutter="20">
+        <el-row :gutter="8">
           <el-col
             :span="6"
             class="popularity-tag"
@@ -29,6 +29,7 @@
                 'background-image': 'url(' + i.src + ')',
                 'background-repeat': 'no-repeat',
                 'background-size': 'cover',
+                'background-position': 'center',
               }"
             >
               <div class="blackOp">
@@ -284,9 +285,12 @@ export default {
 #nav {
   padding: 0.3em 0 0.6rem;
 }
+.container {
+  padding-top: 1rem;
+}
 .findSquares {
   padding: 0 0.15rem 0.5rem;
-  margin-bottom: 50px;
+  margin-bottom: 0.7rem;
 }
 .findSquareContent {
   border-bottom: 0.02rem solid #ccc;
