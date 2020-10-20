@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Bookshelf from '../views/Bookshelf.vue'
-import Selected from '../views/Selected/Selected.vue'
+import Select from '../views/Selected/Select.vue'
 import Find from '../views/Find.vue'
 import FindFollow from '../views/Find/findFollow.vue'
 import FindSquares from '../views/Find/findSquares.vue'
@@ -10,6 +10,7 @@ import SelectHome from '../views/Selected/SelectHome.vue'
 import SelectBoys from '../views/Selected/SelectBoys.vue'
 import SelectGirls from '../views/Selected/SelectGirls.vue'
 import SelectCartoon from '../views/Selected/SelectCartoon.vue'
+import Detail from '../views/Details/Detail.vue'
 
 const Login = ()=> import('@/views/Login/Login.vue')
 Vue.use(VueRouter)
@@ -25,9 +26,9 @@ const routes = [
     component: Bookshelf,
   },
   {
-    path: '/selected',
-    name: 'Selected',
-    component: Selected,
+    path: '/select',
+    name: 'Select',
+    component: Select,
     children: [
       {
         path: '/selecthome',
@@ -50,6 +51,7 @@ const routes = [
         component: SelectCartoon,
       },
     ],
+    redirect: '/selectboys',
   },
 
   {
@@ -79,6 +81,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '/detail',
+    name: 'Detail',
+    component: Detail,
   },
 ]
 
