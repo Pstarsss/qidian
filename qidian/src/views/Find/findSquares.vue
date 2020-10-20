@@ -89,7 +89,14 @@
       </div>
       <!-- 热门讨论 -->
       <div id="hot-discuss">
-        <h1>阿巴阿巴</h1>
+        <!-- Title -->
+        <a href="" class="titleMenu">
+          <menuTitle>
+            <template #title>热门讨论</template>
+          </menuTitle>
+        </a>
+        <!-- Content -->
+        <hotDiscuss :hotDiscussion="hotDiscussionList"></hotDiscuss>
       </div>
     </div>
   </div>
@@ -100,12 +107,21 @@ let num1 = parseInt(Math.random() * 550000) + 50000
 let num2 = parseInt(Math.random() * 550000) + 50000
 let num3 = parseInt(Math.random() * 550000) + 50000
 let num4 = parseInt(Math.random() * 550000) + 50000
-import menuTitle from './FindMenuTitle'
 import navs from '../../components/navs'
+import menuTitle from './FindMenuTitle'
+import hotDiscuss from './FindHotDiscuss'
 import './iconfont/iconfont.css'
 export default {
   data() {
     return {
+      // 导航传参
+      navlist: [
+        { name: '专栏', src: require('./img/zs_icon_bbjcj.png') },
+        { name: '新书投资', src: require('./img/没有积分@3x.png') },
+        { name: '点点圈', src: require('./img/海王星.png') },
+        { name: '对话小说', src: require('./img/蓝紫色星空.png') },
+        { name: '红包', src: require('./img/红包.png') },
+      ],
       // 人气点点圈 数字
       num1,
       num2,
@@ -257,12 +273,29 @@ export default {
           ],
         },
       ],
-      navlist: [
-        { name: '专栏', src: require('./img/zs_icon_bbjcj.png') },
-        { name: '新书投资', src: require('./img/没有积分@3x.png') },
-        { name: '点点圈', src: require('./img/海王星.png') },
-        { name: '对话小说', src: require('./img/蓝紫色星空.png') },
-        { name: '红包', src: require('./img/红包.png') },
+      hotDiscussionList: [
+        {
+          type: '点点圈',
+          title: '求推荐几本三观正的书',
+          content:
+            '1.三观正.替天行道或者有原则有底线的的。单女主或者无女主3.所有...',
+          img: '',
+          tag: '书荒',
+          time: '10月13日 12:42',
+          reviews: '367',
+          like: '274',
+        },
+        {
+          type: '点点圈',
+          title: '求推荐几本三观正的书',
+          content:
+            '1.三观正.替天行道或者有原则有底线的的。单女主或者无女主3.所有...',
+          img: '',
+          tag: '书荒',
+          time: '10月13日 12:42',
+          reviews: '367',
+          like: '274',
+        },
       ],
     }
   },
