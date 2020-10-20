@@ -8,7 +8,7 @@
           <router-link to="/findSquares">广场</router-link>
         </template>
         <template #right>
-          <!-- 搜索 -->
+          <a href=""> </a>
         </template>
       </navBar>
     </div>
