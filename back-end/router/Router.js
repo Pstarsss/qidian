@@ -25,6 +25,11 @@ router.get('/booktitle',function(req,res){
   })
 });
 
+router.get('/recommend',function(req,res){
+  sql.find('select * from recommend').then(results=>{
+    res.send(results);
+  })
+})
 
 
 
