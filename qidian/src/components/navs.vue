@@ -54,7 +54,7 @@ img {
   text-decoration: none;
   font-size: 0.2rem;
 }
-.bottom1 i {
+/* .bottom1 i {
   width: 0.44rem;
   height: 0.44rem;
   display: block;
@@ -62,7 +62,7 @@ img {
   font-size: 0.44rem;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 .bottom1 span {
   display: block;
   text-align: center;
