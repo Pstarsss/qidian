@@ -1,59 +1,75 @@
 <template>
-   <div class='Lbox'>
-     <top-nav-bar>
-       <div slot="left" class="Lleft"><img :src="srcs" alt=""></div>
-       <div slot="center"><h2>起点账号登录</h2></div>
-     </top-nav-bar>
-      <form class="">
-     <div class="form1">
-       <input type="text" placeholder="手机/邮箱/起点账号" class="input1" name="phone" :value="phonevalue" @input="isphone">
-       <!-- <button :disabled="disabled" class="getma">获取验证码</button> -->
-     </div>
+  <div class="Rbox">
+    <top-nav-bar>
+      <div slot="left" class="Lleft" @click="backlogin"><img :src="src" alt=""></div>
+      <div slot="center"><h2>手机登录</h2></div>
+    </top-nav-bar>
+    <form class="">
+      <div class="form1">
+        <input type="text" placeholder="手机号" class="input1" :value="phonevalue" @input="isphone"> 
+        <button :disabled="disabled" class="getma" @click.prevent="btnclick1">{{message}}</button>
+      </div>
       <div v-if="error" class="errorinfo">
           {{error}}
       </div>
-     <div class="form1">
-       <input type="password" placeholder="密码" class="input1" name="password" :value="passowordvalue" autocomplete @input="ispassword">
-     </div>
-     <div class="deal">
-         <el-radio v-model="issure" class="radio" @change="aaa"> </el-radio>
-       <span>我已阅读并接受<strong>《阅文用户服务协议》</strong>及<strong>《隐私协议》</strong></span>
-     </div>
-     <div class="form1">
-       <input type="submit" @click.prevent="ddd" value="登录" class="login" >
-     </div>
-     <div class="L-pp">
-       <div>忘记密码?</div>
-       <div @click="toregister">注册新账号</div>
-     </div>
-  </form>
-   </div>
+      <div class="form1">
+        <input type="text" placeholder="验证码" class="input1" autocomplete  name="notify" :value="notifyvalue" @input="isnotify" >
+        
+      </div>
+      <div class="deal" >
+          <el-radio v-model="issure" class="radio" @change="aaa"> </el-radio>
+        <span>我已阅读并接受<strong>《阅文用户服务协议》</strong>及<strong>《隐私协议》</strong></span>
+      </div>
+      <div class="form1">
+        <input type="submit" @click.prevent="ddd" value="登录" class="login" :class="{'Llogin':issure}">
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue'
-import Scroll from '@/components/common/Scroll/scroll.vue'
 export default {
   components: {
-    TopNavBar,
-    Scroll,
+    TopNavBar
   },
   data() {
-   return {
+    return {
       input3: '',
       input4: '',
-      disabled:false,
       issure:false,
-      srcs:require('@/assets/img/loginimg/guanbi.png'),
-      phonevalue:'',
+      src:require('@/assets/img/loginimg/shangyibu.png'),
       error:'',
-      passowordvalue:''
-   };
-    
+      phonevalue:'',
+      notifyvalue:'',
+      message:'获取验证码',
+      disabled:false
+    };
+  },
+  watch:{
+
   },
   methods:{
     toregister(){
       this.$router.push('/register');
+    },
+    backlogin(){
+      this.$router.go(-1);
+    },
+    btnclick1(){
+      let time = 60;
+      this.disabled = true
+      setInterval(()=>{
+        if(time>0){
+          this.message = `重试倒计时${time}`;
+          time--;
+        }else{
+          this.message = '获取验证码';
+          this.disabled = false;
+          return ;
+        }
+      },1000);
+
     },
     isphone(){
       this.phonevalue = event.target.value;
@@ -69,8 +85,9 @@ export default {
         this.error = '手机号不能为空';
       }
     },
-    ispassword(){
-      this.passowordvalue = event.target.value;
+    isnotify(){
+      this.notifyvalue = event.target.value;
+      this.issure = true;
     },
     aaa(){
       this.issure =true;
@@ -80,28 +97,25 @@ export default {
         console.log('sss');
       }
     }
-   }
-
+  }
 }
 </script>
 <style  scoped>
-.Lbox{
+.Rbox{
     height: 100vh;
     position: absolute;
     width: 100%;
-    background-color: antiquewhite;
     z-index: 100;
     overflow: hidden;
+    background-color: antiquewhite;
 }
-.Lleft{
-  text-align: center;
-}
-.Lleft img{
-  width: 0.2rem;
-}
-
 form{
   margin-top:0.8rem;
+}
+.errorinfo{
+  font-size:0.23rem;
+  color:red;
+  text-align: center;
 }
 .form1{
   
@@ -128,6 +142,7 @@ form{
   background-color: #fff;
   font-size: 0.16rem;
   font-weight: 300;
+  color:red;
 }
 .radio{
   margin-right: 0;
@@ -158,9 +173,10 @@ strong{
   font-weight: 400;
   color:black;
 }
-.errorinfo{
-  font-size:0.23rem;
-  color:red;
-  text-align: center;
+.Lleft img{
+  width: 0.2rem;
+}
+.Llogin{
+  background-color:red;
 }
 </style>

@@ -3,7 +3,7 @@
   <form class="">
      <div class="form1">
        <input type="text" placeholder="手机/邮箱/起点账号" class="input1">
-       <button :disabled="disabled" class="getma">获取验证码</button>
+       <!-- <button :disabled="disabled" class="getma">获取验证码</button> -->
      </div>
      <div class="form1">
        <input type="password" placeholder="密码" class="input1">
@@ -17,7 +17,7 @@
      </div>
      <div class="L-pp">
        <div>忘记密码?</div>
-       <div>注册新账号</div>
+       <div @click="toregister">注册新账号</div>
      </div>
   </form>
   <div class="third">
@@ -42,7 +42,11 @@ export default {
       issure:false
     };
   },
-
+  methods:{
+    toregister(){
+      this.$router.push('/register');
+    }
+  }
 }
 </script>
 <style  scoped>
