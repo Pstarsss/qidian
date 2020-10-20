@@ -53,6 +53,10 @@ img {
   position: relative;
   text-decoration: none;
   font-size: 0.2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  flex:1;
 }
 /* .bottom1 i {
   width: 0.44rem;
