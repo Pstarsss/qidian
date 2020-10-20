@@ -1,4 +1,5 @@
 <template>
+	<scroll class="wrapper" :probeType='3'   @pullingDown="pullingDown"  @scrolly="yyy" ref="scroll">
 	<div class="mineShow">
 		<!-- 顶部 -->
 		<div class="title">
@@ -51,15 +52,73 @@
 		<div></div>
 		<!-- 列表板块 -->
 		<div></div>
-		
+
+		<!-- 这里是我测试的一点代码 -->
+		<div>
+			<ul>
+				<li>1001</li>
+				<li>1002</li>
+				<li>1003</li>
+				<li>1004</li>
+				<li>1005</li>
+				<li>1006</li>
+				<li>1007</li>
+				<li>1008</li>
+				<li>1009</li>
+				<li>10010</li>
+				<li>10011</li>
+				<li>10012</li>
+				<li>10013</li>
+				<li>10014</li>
+				<li>10015</li>
+				<li>10016</li>
+				<li>10017</li>
+				<li>10018</li>
+				<li>10019</li>
+				<li>10020</li>
+				<li>10021</li>
+				<li>10022</li>
+				<li>10023</li>
+				<li>10024</li>
+				<li>10025</li>
+				<li>10026</li>
+				<li>10027</li>
+				<li>10028</li>
+				<li>10029</li>
+				<li>10030</li>
+				<li>10031</li>
+				<li>10032</li>
+				<li>10033</li>
+				<li>10034</li>
+				<li>10035</li>
+				<li>10036</li>
+				<li>10037</li>
+				<li>10038</li>
+				<li>10039</li>
+				<li>10040</li>
+				<li>10041</li>
+				<li>10042</li>
+				<li>10043</li>
+				<li>10044</li>
+				<li>10045</li>
+				<li>10046</li>
+				<li>10047</li>
+				<li>10048</li>
+				<li>10049</li>
+				<li>10050</li>
+			</ul>
+		</div>
 	</div>
+	</scroll>
 </template>
 
 <script>
-	import navs from '../../components/navs'
+	import navs from '@/components/navs'
+	import scroll from '@/components/common/Scroll/scroll.vue'
 	export default{
 		data(){
 			return{
+
 				navlist1:[
 					{ name: '我发布的', src: require('./mine-imgs/p1.png') },
 					{ name: '关注/收藏', src: require('./mine-imgs/p2.png') },
@@ -76,9 +135,19 @@
 		},
 		methods:{
 			
+			pullingDown(){
+				console.log('111');
+
+				//结束下拉刷新事件，每次处罚都得结束才能开始第二次；
+				this.$refs.scroll.finishPullDown();
+			},
+			yyy(value){
+			
+			}
 		},
 		components: {
-		  navs,
+			navs,
+			scroll
 		},
 		
 	}
@@ -86,9 +155,8 @@
 </script>
 
 <style scoped>
-	*{
-		margin: 0;
-		padding: 0;
+	.wrapper{
+		height: calc(100vh - 40px);
 	}
 	.mineShow{
 		background-color: whitesmoke;
@@ -237,7 +305,8 @@
 	}
 	/* 开通畅享卡板块 */
 	.dredge{
-		width: 94%;        height: 2.2rem;
+		width: 94%;
+        height: 2.2rem;
 		margin-left: 3%;
 		margin-top: -4%;
 		border-radius: 0.15rem;

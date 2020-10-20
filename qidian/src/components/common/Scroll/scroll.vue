@@ -20,14 +20,22 @@ export default {
       type:[Number],
       default:1
     },
-    pullUpLoad:{
-      type:[Boolean],
-      default:false
-    }
   },
   computed: {
   },
   methods: {
+    finishPullup(){
+      this.scroll.finishPullup();
+    },
+    refresh(){
+      this.scroll && this.scroll.refresh();
+    },
+    getScrollY(){
+      this.scroll? this.scroll.y : 0;
+    },
+    finishPullDown(){
+      this.scroll.finishPullDown();
+    }
   },
   mounted(){
     // 实例滚动实例并，添加一些配置项；
@@ -35,8 +43,20 @@ export default {
       zoom:true,
       click:true,
       probeType:this.probeType,
-      pullUpload:this.pullUpload,
-    })
+      pullUpload:true,
+      pullDownRefresh: {
+          threshold: 30,
+      }
+    });
+    if(this.probeType>=2){
+      this.scroll.on('scroll',({y})=>{
+        this.$emit('scrolly',y);
+      })
+    };
+    this.scroll.on('pullingDown',()=>{
+        this.$emit('pullingDown');
+    });
+    
   }
 }
 </script>
