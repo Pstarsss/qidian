@@ -107,14 +107,8 @@ let num1 = parseInt(Math.random() * 550000) + 50000
 let num2 = parseInt(Math.random() * 550000) + 50000
 let num3 = parseInt(Math.random() * 550000) + 50000
 let num4 = parseInt(Math.random() * 550000) + 50000
-<<<<<<< HEAD
 import menuTitle from './findMenuTitle'
 import navs from '@/components/navs'
-=======
-import navs from '../../components/navs'
-import menuTitle from './FindMenuTitle'
-import hotDiscuss from './FindHotDiscuss'
->>>>>>> f5fc56c1d99e43430ce74da3a3df78397d987081
 import './iconfont/iconfont.css'
 export default {
   data() {
