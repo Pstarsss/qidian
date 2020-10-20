@@ -6,11 +6,11 @@
           <i class="el-icon-reading"></i>
           <span>书架</span>
         </div>
-        <div class="a" @click="open('/selected')" :class="{ 'active': isActive('selected') }">
+        <div class="a" @click="open('/selecthome')" :class="{ 'active': isActive('select') }">
           <i class="el-icon-s-operation"></i>
           <span>精选</span>
         </div>
-        <div class="a"  @click="open('/find')" :class="{ 'active': isActive('find') }">
+        <div class="a"  @click="open('/findSquares')" :class="{ 'active': isActive('find') }">
           <i class="el-icon-view"></i>
           <span>发现</span>
         </div>

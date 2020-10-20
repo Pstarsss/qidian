@@ -53,8 +53,12 @@ img {
   position: relative;
   text-decoration: none;
   font-size: 0.2rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  flex:1;
 }
-.bottom1 i {
+/* .bottom1 i {
   width: 0.44rem;
   height: 0.44rem;
   display: block;
@@ -62,7 +66,7 @@ img {
   font-size: 0.44rem;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 .bottom1 span {
   display: block;
   text-align: center;

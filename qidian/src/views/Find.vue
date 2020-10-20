@@ -8,7 +8,7 @@
           <router-link to="/findSquares">广场</router-link>
         </template>
         <template #right>
-          <!-- 搜索 -->
+          <a href=""> </a>
         </template>
       </navBar>
     </div>
@@ -37,12 +37,15 @@ export default {
 <style scoped>
 .findTop {
   background-color: #f00;
-  height: 1.4rem;
+  height: 1rem;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
 }
 .findTop a {
   font-size: 0.35rem;
   color: #fff;
   margin: 0 10px;
-  line-height: 1.4rem;
+  line-height: 1rem;
 }
 </style>
