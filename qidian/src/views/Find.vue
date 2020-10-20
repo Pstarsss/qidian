@@ -8,7 +8,9 @@
           <router-link to="/findSquares">广场</router-link>
         </template>
         <template #right>
-          <a href=""> </a>
+          <a href="">
+            <i class="el-icon-search"></i>
+          </a>
         </template>
       </navBar>
     </div>
