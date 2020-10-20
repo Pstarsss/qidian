@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Bookshelf from '@/views/Bookshelf.vue'
+import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
 import Select from '@/views/Selected/Select.vue'
 import Find from '@/views/Find.vue'
 import FindFollow from '@/views/Find/FindFollow.vue'

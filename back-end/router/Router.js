@@ -19,12 +19,25 @@ router.get('/booklist/:id',function(req,res){
     res.send(results);
   })
 });
+
+router.get('/detail/:id',(req,res)=>{
+  let id = req.params.id;
+  sql.find(`select * from booklist where id = ${id}`).then(results=>{
+    res.send(results);
+  });
+});
+
 router.get('/booktitle',function(req,res){
   sql.find('select * from booktitles').then(results=>{
     res.send(results);
   })
 });
 
+router.get('/recommend',function(req,res){
+  sql.find('select * from recommend').then(results=>{
+    res.send(results);
+  })
+})
 
 
 
