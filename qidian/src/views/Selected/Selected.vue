@@ -16,8 +16,9 @@
        </div>
        <div slot="right" class="select_top_right">
            <i class="el-icon-search"></i>
-       </div>
+       </div>     
         </div>
+         <router-view/>
   </div>
 </div>
 </template>

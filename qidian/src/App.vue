@@ -2,19 +2,19 @@
   <div id="app">
     <div class="foot" >
       <div class="bottom">
-        <div class="a" @click="open('/bookshelf')" :class="{ 'active': isActive('/bookshelf') }">
+        <div class="a" @click="open('/bookshelf')" :class="{ 'active': isActive('bookshelf') }">
           <i class="el-icon-reading"></i>
           <span>书架</span>
         </div>
-        <div class="a" @click="open('/selected')" :class="{ 'active': isActive('/selected') }">
+        <div class="a" @click="open('/selected')" :class="{ 'active': isActive('selected') }">
           <i class="el-icon-s-operation"></i>
           <span>精选</span>
         </div>
-        <div class="a"  @click="open('/find')" :class="{ 'active': isActive('/find') }">
+        <div class="a"  @click="open('/find')" :class="{ 'active': isActive('find') }">
           <i class="el-icon-view"></i>
           <span>发现</span>
         </div>
-        <div class="a"  @click="open('/mine')" :class="{ 'active': isActive('/mine') }">
+        <div class="a"  @click="open('/mine')" :class="{ 'active': isActive('mine') }">
           <i class="el-icon-user"></i>
           <span>我的</span>
         </div>
