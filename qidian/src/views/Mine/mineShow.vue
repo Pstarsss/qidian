@@ -1,5 +1,5 @@
 <template>
-	<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown='pullingDown'>
+	
 	<div class="mineShow">
 		<!-- 顶部 -->
 		<div class="title">
@@ -9,7 +9,7 @@
 				<i class="el-icon-moon icon-moon"></i>夜间
 			</div>
 		</div>
-		<div class="null"></div>
+		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown='pullingDown'>
 		<!-- 个人信息板块 -->
 		<div class="people">
 			<div class="details">
@@ -68,9 +68,9 @@
 				<i class="el-icon-arrow-right"></i>
 			</div>
 		</div>
-		
+		</scroll>
 	</div>
-	</scroll>
+	
 </template>
 
 <script>
@@ -130,7 +130,7 @@
 
 <style scoped>
 	.wrapper{
-		height: calc(100vh - 56px);
+		height: calc(100vh - 1.4rem);
 	}
 	.mineShow{
 		background-color: whitesmoke;
@@ -141,7 +141,7 @@
 		height: 0.7rem;
 		line-height: 0.7rem;
 		background-color: whitesmoke;
-		position: fixed;
+		position: relative;
 		padding: 0.08rem 0.08rem 0.08rem 0.08rem;
 		z-index: 120;
 	}
@@ -172,10 +172,6 @@
 		font-size: 0.4rem;
 		margin-top: 0.05rem;
 		margin-right: 0.1rem;
-	}
-	.null{
-		width: 100%;
-		height: 0.7rem;
 	}
 	/* 个人信息 */
 	.people{
