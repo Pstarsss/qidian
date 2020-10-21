@@ -1,5 +1,4 @@
 <template>
- 
   <div class="select_nav">
         <div class="navbar-top">
            <div slot="left" class="select_top_left" @click="open('/selecthome')" :class="{ 'active': isActive('selecthome') }">
