@@ -155,8 +155,99 @@
                    </div>
               </div>
          </div>
+         <div class="space-white"></div>
+         <div class="space"></div>
+         <div class="about-author">
+              <div class="about-author-detail">
+                <p class="common-title">星影仙子 <span class="btn-primary">Lv5</span></p>
+                <p class="about-author-details">现为阅读集团Lv5作家，著有《皇上非要我废除六宫》《穿书后我成了王爷的掌心娇》《听说王妃要离家出走》等作品</p>
+              </div>
+              <div class="about-author-zp">
+                <ul class="about-author-zps">
+                  <li><img src="../../assets/logo.png" alt=""></li>
+                  <li><img src="../../assets/logo.png" alt=""></li>
+                  <li><img src="../../assets/img/Detail/six.png" alt=""></li>
+                </ul>
+              </div>
+         </div>
+         <div class="space"></div>
+         <div class="detail-fans">
+           <div class="fans-rank">
+                <div class="fans-nums">
+                   <p class="common-title">粉丝榜</p>
+                   <p class="fens-num">1035 <i class="el-icon-arrow-right"></i></p>
+                </div>
+                <div><img src="../../assets/img/Detail/fens.png" alt="" class="fenstop"></div>
+           </div>
+           <div class="fans-top">
+               <div class="fans-nums">
+                   <p class="common-title">月票金主</p>
+                   <p class="fens-num">月太聚米糖 <i class="el-icon-arrow-right"></i></p>
+               </div>
+               <div><img src="../../assets/img/Detail/fenstop.png" alt="" class="fenstop"></div>
+           </div>
+         </div>
+         <div class="space"></div>
+         <div class="detail-catalog">
+           <span class="common-title">看过此书的人还看过</span>
+           <span class="detail-catalog-right">更多 <i class="el-icon-arrow-right"></i></span>
+         </div>
+         <div class="detail-lookmore">
+              <div class="lookmore-detail">
+                 <div><img src="../../assets/img/Detail/1.png" alt="" class="lookmore-detail-imgs"></div>
+                 <div class="lookmore-detail-title">
+                   <p class="lookmore-name">他从地狱来</p>
+                   <p class="lookmore-tj">81%还看过</p>
+                 </div>
+              </div>
+              <div class="lookmore-detail">
+                 <div><img src="../../assets/img/Detail/2.png" alt="" class="lookmore-detail-imgs"></div>
+                 <div class="lookmore-detail-title">
+                   <p class="lookmore-name">我的世界圈你入怀</p>
+                   <p class="lookmore-tj">80%还看过</p>
+                 </div>
+              </div>
+              <div class="lookmore-detail">
+                 <div><img src="../../assets/img/Detail/3.png" alt="" class="lookmore-detail-imgs"></div>
+                 <div class="lookmore-detail-title">
+                   <p class="lookmore-name">一代女王柳炊烟</p>
+                   <p class="lookmore-tj">80%还看过</p>
+                 </div>
+              </div>
+              <div class="lookmore-detail">
+                 <div><img src="../../assets/img/Detail/4.png" alt="" class="lookmore-detail-imgs"></div>
+                 <div class="lookmore-detail-title">
+                   <p class="lookmore-name">沐沐你别闹</p>
+                   <p class="lookmore-tj">85%还看过</p>
+                 </div>
+              </div>
+         </div>
+         <div class="space-white"></div>
+         <div class="detail-updates">
+             <hr>
+         </div>
+         
+         <div class="space-white"></div>
+         <div class="detail-updates">
+              <h3 class="detail-updade">2020年6月22日上架</h3>
+              <h3 class="detail-updade">本作品由起点女生网进行电子制作与发行</h3>
+         </div>
+         <div class="space-whites"></div>
       </div>
-      666
+      <div class="detail-bottom">
+        <div class="detail-listen">
+            <img src="../../assets/img/Detail/5.png" alt="">
+            <span>听书</span>
+        </div>
+        <div class="detail-add">
+            <img src="../../assets/img/Detail/6.png" alt="">
+            <span>加入书架</span>
+        </div>
+        <div class="free-read">
+            <p class="free-read1">免费阅读</p>
+            <p class="free-read2">4天14小时31分41秒</p>
+        </div>
+      </div>      
   </div>
 </template>
 
@@ -168,335 +259,20 @@ export default {
   },
   data() {
       return {
-        activeNames: ['1']
+        activeNames: ['0']
       };
     },
-    methods: {
+  methods: {
       handleChange(val) {
         console.log(val);
-      },
+    },
       back(){
         this.$router.go(-1)
-      }
+    },
     }
 }
 </script>
 
 <style>
-.all{
-  width: 100%;
-}
-.detail-top{
-  top: 0;
-  width: 100%;
-  height: .6rem;
-  color:black;
-  font-size: .26rem;
-  line-height: .6rem;
-  display: flex;
-  background-color: #fff;
-  justify-content: space-between;
-  position: fixed;
-}
-.detail-top-left{
-margin-left: .2rem;
-display: flex;
-justify-content: space-between;
-line-height: .6rem;
-}
-.detail-top-middle{
-  margin-left: .1rem;
-  line-height: .6rem;
-  height: .6rem;
-  display: flex;
-  justify-content: space-between;
-  justify-items: center;
-}
-.detail-top-right{
-margin-right: .2rem;
-}
-.detail-top-img{
-margin-top: .1rem;
-}
-.detail-top-content{
-margin-left: .1rem;
-height: .6rem;
-}
-.detail-top-imgs{
-  width: .35rem;
-  height: .45rem;
-}
-.detail-top-content-title{
-  font-size: .14rem;
-  color: black;
-  margin-top: -.08rem;
-  font-weight: 500;
-}
-.detail-top-content-kind{
-  font-size: .10rem;
-  color: #a2a2a2;
-  margin-top: -.38rem;
-}
-.detail-header{
-  margin-left: auto;
-  margin-right: auto;
-  width: 6.8rem;
-  height: 3.1rem;
-  background-color:rgba(147, 121, 120, 0.76);
-  z-index: 1;
-}
-.detail-header-top{
-  display: flex;
-  justify-content: space-between;
-  widows: 6.8rem;
-  height: 1.4rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-}
-.detail-header-top-imgs{
-margin-top: .7rem;
-margin-left: .2rem;
-}
-.detail-header-top-img{
-  width: 1.2rem;
-  height: 1.6rem;
-}
-.detail-header-top-title{
-margin-top: 1rem;
-margin-right: 3rem;
-color: white;
-height: 3rem;
-}
-.title-one{
-  font-size: .24rem;
-}
-.title-two{
-  font-size: .18rem;
-  color: white;
-  margin-top: .1rem;
-}
-.title-three{
-  font-size: .18rem;
-  color: rgba(255, 255, 255, 0.226);
-  margin-top: .1rem;
-}
-.detail-header-bottom{
-  background-color:rgba(101, 85, 85, 0.56);
-  height: .45rem;
-  font-size: .2rem;
-  width: 6.4rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: .9rem;
-  color: white;
-  border-radius: .05rem;
-  display: flex;
-  justify-content: space-between;
-  justify-items: center;
-  line-height: .45rem;
-}
-.tm{
-  color: #a2a2a2;
-  font-size: .18rem;
-}
-.detail-header-bottom-left{
-  margin-left: .2rem;
-}
-.rank{
-  font-size: .24rem;
-  color: white;
-}
-.el-icon-arrow-right{
-  font-size: 0.18rem;
-}
-.detail-content{
-  width: 100%;
-}
-.detail-content-body{
-  width: 6.8rem;
-  background-color: #fff;
-  z-index: 2;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 0.15rem;
-  margin-top: -.14rem;
-}
-.detail-content-top{
-  height: .2rem;
-}
-.detail-body-kind{
-  font-size: .18rem;
-  height: .3rem;
-}
-.detail-body-kind li{
-  float: left;
-  width: .6rem;
-  height: .3rem;
-  background-color: #f5f5f5;
-  border-radius: .1rem;
-  text-align: center;
-  align-items: center;
-  margin: 0 .12rem;
-}
-.detail-content-tops{
-  display: flex;
-  justify-content: space-around;
-  justify-items: center;
-  height: .8rem;
-}
-.detail-content-tops-right-top{
-  color: black;
-  font-size: .2rem;
-}
-.detail-content-tops-right-bottom{
-  color: #a2a2a2;
-  font-size: .18rem;
-  margin-top: .1rem;
-}
-.detail-content-tops-left{
-  display: flex;
-}
-.detail-content-tops-left-imgs{
-width: .6rem;
-height: .6rem;
-margin-right: .1rem;
-}
-.detail-books-details{
-  width: 6.4rem;
-  margin: .2rem auto;
-  font-size: .2rem;
-  color: black;
-}
-.detail-books-detail{
-  width: 6.4rem;
-  margin: 0 auto;
-  font-size: .2rem;
-  color: black;
-}
-.detail-role{
-  display: flex;
-  justify-content: space-between;
-}
-.detail-role-left{
-  height: 1.6rem;
-  width: 3.2rem;
-  background-color: #f9f1ef;
-  margin-left: .1rem;
-  border-radius: 0.08rem;
-}
-.detail-role-right{
-  height: 1.6rem;
-  width: 3.2rem;
-  background-color: #f9f1ef;
-  margin-right: .1rem;
-  border-radius: 0.08rem;
-}
-.detail-role-left-top{
-  display: flex;
-  justify-content: space-between;
-}
-.detail-role-left-top-imgs{
-  margin: .1rem .1rem;
-  width: .7rem;
-  height: .7rem;
-  border-radius: 50%;
-  background-color: #fff;
-}
-.detail-role-left-top-img{
-  width: .5rem;
-  height: .5rem;
-  margin-top: .15rem;
-  margin-left: .1rem;
-}
-.detail-role-left-top-name{
-  margin-right: 1.6rem;
-  margin-top: .2rem;
-}
-.detail-role-left-top-names{
-  font-size: .2rem;
-  color: black;
-}
-.detail-role-left-top-role{
-font-size: .18rem;
-color: #a2a2a2;
-}
-.detail-role-left-bottom{
-  font-size: .18rem;
-  display: flex;
-  justify-content: space-between;
-  margin: .1rem 0 0 .2rem;
-}
-.detail-role-left-bottom-num{
-  margin-right: .2rem;
-}
-.el-icon-star-off{
-  margin-left: .08rem;
-}
-.detail-catalog{
-display: flex;
-justify-content: space-between;
-height: .4rem;
-justify-items: center;
-margin: 0.1rem auto .1rem auto;
-width: 6.8rem;
-}
-.common-title{
-  font-size: .24rem;
-  color: black;
-  font-weight: 500;
-  margin-left: .1rem;
-}
-.detail-catalog-right{
-  font-size: .2rem;
-  color: #a2a2a2;
-  margin-right: .1rem;
-}
-.space{
-  height: .1rem;
-  background-color: #a2a2a2;
-}
-.detail-comment{
-  background-color: #f5f5f5;
-  width: 6.6rem;
-  margin: 0 auto;
-  border-radius: .08rem;
-  height: 1.4rem;
-}
-.detail-comment-content{
-  margin: .1rem .1rem .1rem .1rem;
-  font-size: .2rem;
-}
-.detail-comment-author{
-  display: flex;
-  justify-content: space-between;
-  height: .5rem;
-}
-.detail-comment-author-left{
-  margin: .1rem 0 0 .1rem;
-  font-size: .18rem;
-  color: #a2a2a2;
-  display: flex;
-  justify-content: center;
-}
-.author-photo{
-  width: .3rem;
-  height: .3rem;
-  border-radius: 50%;
-}
-.author-photo img{
-width: .3rem;
-height: .3rem;
-border-radius: 50%;
-}
-.detail-comment-contentss{
-  height: .2rem;
-}
-.detail-comment-author-right{
-  font-size: .2rem;
-}
-.el-icon-more1{
-  margin-top: .15rem;
-  margin-right: .15rem;
-}
+@import url("../../assets/css/Detail/detail.css");
 </style>

@@ -1,5 +1,5 @@
 <template>
- <scroll class="wrapper" :probeType="3" ref="scroll">
+ 
   <div class="select_nav">
         <div class="navbar-top">
            <div slot="left" class="select_top_left" @click="open('/selecthome')" :class="{ 'active': isActive('selecthome') }">
@@ -18,9 +18,11 @@
            <i class="el-icon-search"></i>
        </div>     
         </div>
+    <scroll class="wrapper" :probeType="3" ref="scroll">
        <router-view/>
+    </scroll>
   </div>
-  </scroll>
+
 </template>
 
 <script>
