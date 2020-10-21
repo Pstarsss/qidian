@@ -1,105 +1,107 @@
 <template>
-  <div class="container">
-    <!-- 发现-广场  -->
-    <div class="findSquares">
-      <!-- 发布动态 -->
-      <div class="issued"></div>
-      <!-- 导航组件 -->
-      <div id="nav" class="findSquareContent">
-        <navs :list="navlist"></navs>
-      </div>
-      <!-- 人气点点圈 -->
-      <div id="popularity" class="findSquareContent">
-        <!-- Title -->
-        <a href="" class="titleMenu">
-          <menuTitle>
-            <template #title>人气点点圈</template>
-          </menuTitle>
-        </a>
-        <!-- Content -->
-        <el-row :gutter="8">
-          <el-col
-            :span="6"
-            class="popularity-tag"
-            v-for="i in popularityTags"
-            :key="i.id"
-          >
-            <div
-              :style="{
-                'background-image': 'url(' + i.src + ')',
-                'background-repeat': 'no-repeat',
-                'background-size': 'cover',
-                'background-position': 'center',
-              }"
+  <scroll :probeType="3" class="wrapper" ref="scroll" @pullingUp="pullingUp">
+    <div class="container">
+      <!-- 发现-广场  -->
+      <div class="findSquares">
+        <!-- 发布动态 -->
+        <div class="issued"></div>
+        <!-- 导航组件 -->
+        <div id="nav" class="findSquareContent">
+          <navs :list="navlist"></navs>
+        </div>
+        <!-- 人气点点圈 -->
+        <div id="popularity" class="findSquareContent">
+          <!-- Title -->
+          <a href="" class="titleMenu">
+            <menuTitle>
+              <template #title>人气点点圈</template>
+            </menuTitle>
+          </a>
+          <!-- Content -->
+          <el-row :gutter="8">
+            <el-col
+              :span="6"
+              class="popularity-tag"
+              v-for="i in popularityTags"
+              :key="i.id"
             >
-              <div class="blackOp">
-                <p class="popularity-tag-title">{{ i.name }}</p>
-                <div class="popularity-tag-num">
-                  <span>
-                    <i class="iconfont icon-wodedangxuan"></i>{{ i.nums }}
-                  </span>
+              <div
+                :style="{
+                  'background-image': 'url(' + i.src + ')',
+                  'background-repeat': 'no-repeat',
+                  'background-size': 'cover',
+                  'background-position': 'center',
+                }"
+              >
+                <div class="blackOp">
+                  <p class="popularity-tag-title">{{ i.name }}</p>
+                  <div class="popularity-tag-num">
+                    <span>
+                      <i class="iconfont icon-wodedangxuan"></i>{{ i.nums }}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
-      <!-- 书单 -->
-      <div id="book-list" class="findSquareContent">
-        <!-- Title -->
-        <a href="" class="titleMenu">
-          <menuTitle>
-            <template #title>书单</template>
-          </menuTitle>
-        </a>
-        <!-- Content -->
-        <el-row :gutter="1">
-          <el-col :span="12" v-for="i in bookListContents" :key="i.id">
-            <el-row :gutter="3">
-              <el-col :span="8" v-for="ii in i.content" :key="ii.id">
-                <img :src="ii.src" alt="" />
-              </el-col>
-            </el-row>
-            <p>{{ i.title }}</p>
-          </el-col>
-        </el-row>
-      </div>
-      <!-- 滚动公示 -->
-      <div id="roll"></div>
-      <!-- 游戏、活动、神创作、专栏精选、对话小说推荐 -->
-      <div
-        :id="i.id"
-        class="findSquareContent findSquareContentTwo"
-        v-for="i in contents"
-        :key="i.id"
-      >
-        <!-- Title -->
-        <a href="" class="titleMenu">
-          <menuTitle>
-            <template #title>{{ i.title }}</template>
-          </menuTitle>
-        </a>
-        <!-- Content -->
-        <el-row :gutter="20">
-          <el-col :span="12" v-for="ii in i.content" :key="ii.id">
-            <img :src="ii.src" alt="" />
-            <p>{{ ii.msg }}</p>
-          </el-col>
-        </el-row>
-      </div>
-      <!-- 热门讨论 -->
-      <div id="hot-discuss">
-        <!-- Title -->
-        <a href="" class="titleMenu">
-          <menuTitle>
-            <template #title>热门讨论</template>
-          </menuTitle>
-        </a>
-        <!-- Content -->
-        <hotDiscuss :hotDiscussion="hotDiscussionList"></hotDiscuss>
+            </el-col>
+          </el-row>
+        </div>
+        <!-- 书单 -->
+        <div id="book-list" class="findSquareContent">
+          <!-- Title -->
+          <a href="" class="titleMenu">
+            <menuTitle>
+              <template #title>书单</template>
+            </menuTitle>
+          </a>
+          <!-- Content -->
+          <el-row :gutter="1">
+            <el-col :span="12" v-for="i in bookListContents" :key="i.id">
+              <el-row :gutter="3">
+                <el-col :span="8" v-for="ii in i.content" :key="ii.id">
+                  <img :src="ii.src" alt="" />
+                </el-col>
+              </el-row>
+              <p>{{ i.title }}</p>
+            </el-col>
+          </el-row>
+        </div>
+        <!-- 滚动公示 -->
+        <div id="roll"></div>
+        <!-- 游戏、活动、神创作、专栏精选、对话小说推荐 -->
+        <div
+          :id="i.id"
+          class="findSquareContent findSquareContentTwo"
+          v-for="i in contents"
+          :key="i.id"
+        >
+          <!-- Title -->
+          <a href="" class="titleMenu">
+            <menuTitle>
+              <template #title>{{ i.title }}</template>
+            </menuTitle>
+          </a>
+          <!-- Content -->
+          <el-row :gutter="20">
+            <el-col :span="12" v-for="ii in i.content" :key="ii.id">
+              <img :src="ii.src" alt="" />
+              <p>{{ ii.msg }}</p>
+            </el-col>
+          </el-row>
+        </div>
+        <!-- 热门讨论 -->
+        <div id="hot-discuss">
+          <!-- Title -->
+          <a href="" class="titleMenu">
+            <menuTitle>
+              <template #title>热门讨论</template>
+            </menuTitle>
+          </a>
+          <!-- Content -->
+          <hotDiscuss :hotDiscussion="hotDiscussionList"></hotDiscuss>
+        </div>
       </div>
     </div>
-  </div>
+  </scroll> 
 </template>
 
 <script>
@@ -110,6 +112,7 @@ let num4 = parseInt(Math.random() * 550000) + 50000
 import menuTitle from './components/FindMenuTitle'
 import hotDiscuss from './components/FindHotDiscuss'
 import navs from '@/components/navs'
+import scroll from '@/components/common/Scroll/scroll.vue'
 import './iconfont/iconfont.css'
 export default {
   data() {
@@ -301,28 +304,30 @@ export default {
       ],
     }
   },
-  methods: {},
+  methods: {
+    pullingUp(){
+      console.log('find上拉');
+      this.$refs.scroll.finishPullup();
+    }
+  },
   components: {
     menuTitle,
     navs,
     hotDiscuss,
+    scroll
   },
 }
 </script>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
+.wrapper{
+  height: calc(100vh - 54px);
 }
 .el-row {
   padding: 0 0.2rem;
 }
 #nav {
   padding: 0.3em 0 0.6rem;
-}
-.container {
-  padding-top: 1rem;
 }
 .findSquares {
   padding: 0 0.15rem 0.5rem;
