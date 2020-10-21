@@ -289,23 +289,27 @@ export default {
     pullingUp() {
       console.log('find上拉')
       this.$refs.scroll.finishPullup()
+      if (this.disNum <= 40) {
+        this.disLoading = true
+      }
       setTimeout(() => {
         this.disNum += 5
         this.addDisList()
         this.$refs.scroll.refresh()
       }, 500)
     },
-    updataNew() {
-      console.log('重新判断高度')
-      this.$refs.scroll.refresh()
-    },
-    updataNew2() {
-      console.log('dd2')
-      this.$refs.scroll.refresh()
-    },
+    // updataNew() {
+    //   console.log('重新判断高度')
+    //   this.$refs.scroll.refresh()
+    // },
+    // updataNew2() {
+    //   console.log('dd2')
+    //   this.$refs.scroll.refresh()
+    // },
     addDisList() {
       if (this.disNum <= 40) {
         this.$http.get('/api/hotDiscuss').then((res) => {
+          // this.disLoading = false
           console.log(this.disNum, this.disNum + 5)
           this.hotDiscussionList = [
             ...this.hotDiscussionList,
@@ -314,8 +318,8 @@ export default {
           console.log(this.hotDiscussionList)
         })
       } else {
-        this.showHotList = true
         this.disLoading = false
+        this.showHotList = true
       }
     },
   },
@@ -329,12 +333,9 @@ export default {
       console.log(this.hotDiscussionList)
     })
   },
-  updated() {
-    this.updataNew()
-  },
-  beforeUpdated() {
-    this.updataNew2()
-  },
+  // updated() {
+  //   this.updataNew()
+  // },
   components: {
     menuTitle,
     navs,
@@ -355,7 +356,7 @@ export default {
   padding: 0.3em 0 0.6rem;
 }
 .findSquares {
-  padding: 0 0.15rem 0.2rem;
+  padding: 0 0.15rem 0.05rem;
   margin-bottom: 0.7rem;
 }
 .findSquareContent {
@@ -445,18 +446,16 @@ export default {
   position: relative;
 }
 .hotNoList {
-  text-align: center;
-  font-size: 0.3rem;
+  position: absolute;
+  bottom: -0.3rem;
+  left: 37%;
+  font-size: 0.2rem;
 }
 .el-icon-loading {
   position: relative;
-  left: 35%;
-  /* right: 5s0%; */
-  bottom: 0.5rem;
-  /* display: block; */
-  margin: 0.5rem;
+  left: 44.5%;
+  bottom: 0.2rem;
   font-size: 0.7rem;
-  /* text-align: center; */
   color: #db3b3b;
 }
 </style>
