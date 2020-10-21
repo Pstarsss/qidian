@@ -72,7 +72,7 @@
 		</div>
 		<!-- 列表板块 -->
 		<div class="foot-list">
-			<div v-for="(item,index) in bottomLists" class="lists">
+			<div v-for="(item,index) in bottomLists" class="lists" >
 				<i :class="item.icon1"></i>
 				<span>{{item.content}}</span>
 				<i class="el-icon-arrow-right"></i>
@@ -286,7 +286,8 @@
 	}
 	/* 开通畅享卡板块 */
 	.dredge{
-		width: 94%;        height: 2.2rem;
+		width: 94%;
+        height: 2.2rem;
 		margin-left: 3%;
 		margin-top: -4%;
 		border-radius: 0.15rem;

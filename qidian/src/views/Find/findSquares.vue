@@ -295,8 +295,8 @@ export default {
         this.$refs.scroll.refresh()
       }, 500)
     },
-    updataNew() {
-      console.log('重新判断高度')
+    eed1() {
+      console.log('ddd1')
       this.$refs.scroll.refresh()
     },
     updataNew2() {
@@ -320,7 +320,7 @@ export default {
     },
   },
   created() {
-    // const that = this
+ 
     this.$http.get('/api/hotDiscuss').then((res) => {
       this.hotDiscussionList = [
         ...this.hotDiscussionList,
@@ -328,12 +328,22 @@ export default {
       ]
       console.log(this.hotDiscussionList)
     })
+
+    this.$nextTick(() => {
+      console.log(this.$refs.scroll.scroll)
+      this.$refs.scroll.refresh()
+    })
   },
+ 
   updated() {
     this.updataNew()
   },
   beforeUpdated() {
     this.updataNew2()
+    this.loadmore();
+  },
+  mounted() {
+   
   },
   components: {
     menuTitle,
