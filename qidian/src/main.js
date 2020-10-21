@@ -10,6 +10,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
 
+
 Vue.use(ElementUI)
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false

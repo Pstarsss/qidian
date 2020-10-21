@@ -1,9 +1,9 @@
 <template>
   <div class="findHotDiscuss">
-    <div class="" v-for="i in hotDiscussion" :key="i.id">
+    <div class="" v-for="(i, index) in hotDiscussion" :key="index">
       <!-- 点点圈(类似发朋友圈动态) -->
       <!-- 书单(给别人推荐书) -->
-      <p class="type">{{ i.type }}</p>
+      <p class="type">点点圈</p>
       <!-- 标题 -->
       <p class="title">{{ i.title }}</p>
       <!-- 内容预览 -->
@@ -34,7 +34,7 @@
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dianzan"></use>
             </svg>
-            {{ i.likes }}
+            {{ parseInt(i.likes) }}
           </span>
         </span>
       </p>
@@ -89,6 +89,17 @@ export default {
 }
 .content {
   font-size: 0.3rem;
+  margin-bottom: 0.2rem;
+  text-overflow: ellipsis;
+  /* overflow: hidden;
+  max-height: 1.2rem; */
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+img {
   margin-bottom: 0.2rem;
 }
 .tag {
