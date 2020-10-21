@@ -39,9 +39,13 @@ router.get('/recommend',function(req,res){
   })
 })
 
+router.get('/hotdiscuss',function(req,res){
+  sql.find('select * from hotdiscuss').then(results=>{
+    res.send(results);
+  })
+});
 
-
-
+  
 
 
 
