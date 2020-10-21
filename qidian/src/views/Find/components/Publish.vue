@@ -25,7 +25,7 @@ import '../iconfont/iconfont.css'
 import '../iconfont/iconfont.css'
 export default {
   data: () => ({
-    show: true,
+    show: false,
     rotate: false,
   }),
   methods: {
@@ -51,12 +51,11 @@ button {
   z-index: 999;
 }
 .in {
-  transform: rotate(45deg);
-  background: #333;
   transition: all 0.4s;
 }
 .out {
-  /* transform: rotate(-90deg); */
+  transform: rotate(45deg);
+  background: #333;
   transition: all 0.4s;
 }
 .publishContents {

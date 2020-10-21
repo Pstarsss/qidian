@@ -30,12 +30,16 @@ import axios from 'axios'
 // $(() => {})
 export default {
   name: 'find',
+  data() {
+    return {}
+  },
   components: {
     navBar,
     publish,
   },
   created() {
-    this.$http.get('/api/booklist/1').then((res) => {
+    // const that = this
+    this.$http.get('/api/hotDiscuss').then((res) => {
       console.log('sss')
       console.log(res)
     })
