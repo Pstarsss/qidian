@@ -4,7 +4,7 @@
     <div class="login">
       <img src="./img/阅读.png" alt="" />
       <p>登录后才可以查看相关内容哦</p>
-      <button @click="drawer = true" type="primary">登录</button>
+      <button @click="drawer = true">登录</button>
     </div>
     <!-- 点击登录按钮下方弹出抽屉 -->
     <el-drawer
@@ -121,10 +121,10 @@ export default {
 .login > button {
   width: 1rem;
   height: 0.6rem;
-  color: #f00;
+  color: #db3b3b;
   font-weight: bold;
   background-color: #fff;
-  border: 0.02rem solid #f00;
+  border: 0.02rem solid #db3b3b;
   border-radius: 0.3rem;
 }
 section > p {

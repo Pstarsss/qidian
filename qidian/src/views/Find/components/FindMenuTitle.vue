@@ -15,6 +15,8 @@ export default {}
 .findMenuTitle {
   padding-top: 0.4rem;
   height: 1.3rem;
+  position: relative;
+  z-index: 99;
 }
 .left {
   font-size: 0.4rem;

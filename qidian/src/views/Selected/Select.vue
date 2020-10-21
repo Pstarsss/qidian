@@ -1,5 +1,5 @@
 <template>
-<div>
+ <scroll class="wrapper" :probeType="3" ref="scroll">
   <div class="select_nav">
         <div class="navbar-top">
            <div slot="left" class="select_top_left" @click="open('/selecthome')" :class="{ 'active': isActive('selecthome') }">
@@ -18,17 +18,19 @@
            <i class="el-icon-search"></i>
        </div>     
         </div>
-         <router-view/>
+       <router-view/>
   </div>
-</div>
+  </scroll>
 </template>
 
 <script>
-import { request } from '@/network/request.js'
+import scroll from '@/components/common/Scroll/scroll.vue'
 import navs from '../../components/navs.vue'
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue'
-import axios from 'axios'
 export default {
+  components:{
+    scroll
+  },
   name: 'selected',
   data() {
     return {
@@ -53,7 +55,7 @@ export default {
 	},	
   },
   created(){
-    axios.get('/api/booklist/6').then(res=>{
+    this.$http.get('/api/booklist/6').then(res=>{
       console.log('sss');
       console.log(res);
     })
@@ -62,9 +64,8 @@ export default {
 </script>
 
 <style scoped>
-*{
-  margin: 0;
-  padding: 0;
+.wrapper{
+  height: calc(100vh - 55px);
 }
 .navbar-top{
   align-items: center;

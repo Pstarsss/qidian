@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BSscroll from 'better-scroll'
+import BS from 'better-scroll'
 export default {
   components: {},
   data() {
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     finishPullup(){
-      this.scroll.finishPullup();
+      this.scroll.finishPullUp();
     },
     refresh(){
       this.scroll && this.scroll.refresh();
@@ -39,14 +39,17 @@ export default {
   },
   mounted(){
     // 实例滚动实例并，添加一些配置项；
-    this.scroll = new BSscroll(this.$refs.wrapper,{
+    this.scroll = new BS(this.$refs.wrapper,{
       zoom:true,
       click:true,
       probeType:this.probeType,
-      pullUpload:true,
+      pullUpLoad:{
+
+      },
       pullDownRefresh: {
-          threshold: 30,
-      }
+          threshold: 0,
+          stop:0
+      },
     });
     if(this.probeType>=2){
       this.scroll.on('scroll',({y})=>{
@@ -56,7 +59,9 @@ export default {
     this.scroll.on('pullingDown',()=>{
         this.$emit('pullingDown');
     });
-    
+    this.scroll.on('pullingUp',()=>{
+        this.$emit('pullingUp');
+    });
   }
 }
 </script>
