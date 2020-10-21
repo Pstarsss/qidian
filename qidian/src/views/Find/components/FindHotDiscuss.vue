@@ -99,6 +99,9 @@ export default {
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+img{
+  margin-bottom: 0.2rem;
+}
 .tag {
   display: inline-block;
   padding: 0 0.1rem;

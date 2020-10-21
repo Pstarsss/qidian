@@ -58,7 +58,7 @@
             <el-col :span="12" v-for="i in bookListContents" :key="i.id">
               <el-row :gutter="3">
                 <el-col :span="8" v-for="ii in i.content" :key="ii.id">
-                  <img :src="ii.src" alt="" @load="eed" />
+                  <img :src="ii.src" alt="" />
                 </el-col>
               </el-row>
               <p>{{ i.title }}</p>
@@ -83,7 +83,7 @@
           <!-- Content -->
           <el-row :gutter="20">
             <el-col :span="12" v-for="ii in i.content" :key="ii.id">
-              <img :src="ii.src" alt="" @load="eedd" />
+              <img :src="ii.src" alt="" />
               <p>{{ ii.msg }}</p>
             </el-col>
           </el-row>
@@ -118,6 +118,7 @@ import './iconfont/iconfont.css'
 export default {
   data() {
     return {
+      flag: true,
       // 导航传参
       navlist: [
         { name: '专栏', src: require('./img/zs_icon_bbjcj.png') },
@@ -291,14 +292,14 @@ export default {
       this.addDisList()
       this.$refs.scroll.refresh()
     },
-    eed() {
-      console.log('ddd1')
-      this.$refs.scroll.refresh()
-    },
-    eedd() {
-      console.log('ddd')
-      this.$refs.scroll.refresh()
-    },
+    // eed() {
+    //   console.log('ddd1')
+    //   this.$refs.scroll.refresh()
+    // },
+    // eedd() {
+    //   console.log('ddd')
+    //   this.$refs.scroll.refresh();
+    // },
     addDisList() {
       if (this.disNum <= 40) {
         this.$http.get('/api/hotDiscuss').then((res) => {
@@ -324,16 +325,21 @@ export default {
       console.log(this.hotDiscussionList)
     })
 
-    this.$nextTick(() => {
-      console.log(this.$refs.scroll.scroll)
-      this.$refs.scroll.refresh()
-    })
+    // this.$nextTick(() => {
+    //   console.log(this.$refs.scroll.scroll)
+    //   this.$refs.scroll.refresh()
+    // })
+  },
+  beforeUpdate() {
+    // this.$refs.scroll.refresh()
+  },
+  updated() {
+    // this.$refs.scroll.refresh();
   },
   mounted() {
-    this.$refs.scroll.refresh()
-    this.$nextTick(() => {
-      this.$refs.scroll.refresh()
-    })
+    // setInterval(()
+    // this.$router.go(0);/
+    // this.$router.replace('/findSquares');
   },
   components: {
     menuTitle,
@@ -355,7 +361,7 @@ export default {
   padding: 0.3em 0 0.6rem;
 }
 .findSquares {
-  padding: 0 0.15rem 0.9rem;
+  padding: 0 0.15rem 0.2rem;
   margin-bottom: 0.7rem;
 }
 .findSquareContent {
