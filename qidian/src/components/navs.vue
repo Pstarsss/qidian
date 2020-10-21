@@ -12,22 +12,22 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'navs',
+  name: "navs",
   data() {
-    return {}
+    return {};
   },
   props: {
     //返回数组默认值
     list: {
       type: Array,
-      default: function() {
-        return []
+      default: function () {
+        return [];
       },
     },
   },
-}
+};
 </script>
 
 <style>
@@ -53,10 +53,10 @@ img {
   position: relative;
   text-decoration: none;
   font-size: 0.2rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  flex:1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
 }
 /* .bottom1 i {
   width: 0.44rem;
