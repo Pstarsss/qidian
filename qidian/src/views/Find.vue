@@ -15,6 +15,7 @@
       </navBar>
     </div>
     <publish />
+
     <router-view />
   </div>
 </template>
@@ -24,6 +25,8 @@ import publish from './Find/components/Publish'
 import navBar from '../components/common/TopNavBar/NavBar'
 import { request } from '@/network/request.js'
 import axios from 'axios'
+// import $ from 'jquery'
+// $(() => {})
 export default {
   name: 'find',
   components: {
