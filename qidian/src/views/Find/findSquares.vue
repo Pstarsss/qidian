@@ -58,7 +58,7 @@
             <el-col :span="12" v-for="i in bookListContents" :key="i.id">
               <el-row :gutter="3">
                 <el-col :span="8" v-for="ii in i.content" :key="ii.id">
-                  <img :src="ii.src" alt="" />
+                  <img :src="ii.src" alt="" @load="eed" />
                 </el-col>
               </el-row>
               <p>{{ i.title }}</p>
@@ -83,7 +83,7 @@
           <!-- Content -->
           <el-row :gutter="20">
             <el-col :span="12" v-for="ii in i.content" :key="ii.id">
-              <img :src="ii.src" alt="" />
+              <img :src="ii.src" alt="" @load="eedd" />
               <p>{{ ii.msg }}</p>
             </el-col>
           </el-row>
@@ -98,6 +98,7 @@
           </a>
           <!-- Content -->
           <hotDiscuss :hotDiscussion="hotDiscussionList"></hotDiscuss>
+          <p class="hotNoList" v-if="showHotList">我也是有底线的~</p>
         </div>
       </div>
     </div>
@@ -278,21 +279,60 @@ export default {
       ],
       // 热门讨论
       hotDiscussionList: [],
+      disNum: 5,
+      showHotList: false,
     }
   },
   methods: {
     pullingUp() {
       console.log('find上拉')
       this.$refs.scroll.finishPullup()
+      this.disNum += 5
+      this.addDisList()
+      this.$refs.scroll.refresh()
+    },
+    eed() {
+      console.log('ddd1')
+      this.$refs.scroll.refresh()
+    },
+    eedd() {
+      console.log('ddd')
+      this.$refs.scroll.refresh()
+    },
+    addDisList() {
+      if (this.disNum <= 40) {
+        this.$http.get('/api/hotDiscuss').then((res) => {
+          console.log(this.disNum, this.disNum + 5)
+          this.hotDiscussionList = [
+            ...this.hotDiscussionList,
+            ...res.data.slice(this.disNum, this.disNum + 5),
+          ]
+          console.log(this.hotDiscussionList)
+        })
+      } else {
+        this.showHotList = true
+      }
     },
   },
   created() {
     // const that = this
     this.$http.get('/api/hotDiscuss').then((res) => {
-      // console.log('sss')
-      // console.log(res)
-      // this.hotDiscussionList = res.data
-      console.log(res.data)
+      this.hotDiscussionList = [
+        ...this.hotDiscussionList,
+        ...res.data.slice(0, this.disNum),
+      ]
+      console.log(this.hotDiscussionList)
+    })
+
+    this.$nextTick(() => {
+      console.log(this.$refs.scroll.scroll)
+      this.$refs.scroll.refresh()
+    })
+  },
+  mounted() {
+    this.$refs.scroll.refresh()
+    this.$nextTick(() => {
+      this.$refs.scroll.refresh()
     })
   },
   components: {
@@ -315,7 +355,7 @@ export default {
   padding: 0.3em 0 0.6rem;
 }
 .findSquares {
-  padding: 0 0.15rem 0.5rem;
+  padding: 0 0.15rem 0.9rem;
   margin-bottom: 0.7rem;
 }
 .findSquareContent {
@@ -403,5 +443,9 @@ export default {
 <style scoped>
 .hot-discuss {
   position: relative;
+}
+.hotNoList {
+  text-align: center;
+  font-size: 0.3rem;
 }
 </style>

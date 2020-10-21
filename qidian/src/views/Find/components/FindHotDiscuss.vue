@@ -90,6 +90,14 @@ export default {
 .content {
   font-size: 0.3rem;
   margin-bottom: 0.2rem;
+  text-overflow: ellipsis;
+  /* overflow: hidden;
+  max-height: 1.2rem; */
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 .tag {
   display: inline-block;
