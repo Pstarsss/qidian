@@ -307,9 +307,15 @@ export default {
       }, 500)
 >>>>>>> 8351d1512b96331f7478d55e3e718b1f994c900b
     },
+<<<<<<< HEAD
     eed1() {
       console.log("ddd1");
       this.$refs.scroll.refresh();
+=======
+    updataNew() {
+      console.log('重新判断高度')
+      this.$refs.scroll.refresh()
+>>>>>>> f072fe09501fef77dcea7d4a17552c96883d669a
     },
 <<<<<<< HEAD
     eedd() {
@@ -342,6 +348,7 @@ export default {
     },
   },
   created() {
+<<<<<<< HEAD
     this.$http.get("/api/hotDiscuss").then((res) => {
       this.hotDiscussionList = [
         ...this.hotDiscussionList,
@@ -356,6 +363,17 @@ export default {
     });
   },
 
+=======
+    // const that = this
+    this.$http.get('/api/hotDiscuss').then((res) => {
+      this.hotDiscussionList = [
+        ...this.hotDiscussionList,
+        ...res.data.slice(0, this.disNum),
+      ]
+      console.log(this.hotDiscussionList)
+    })
+  },
+>>>>>>> f072fe09501fef77dcea7d4a17552c96883d669a
   updated() {
 <<<<<<< HEAD
     this.eed1();
@@ -366,11 +384,14 @@ export default {
   },
   beforeUpdated() {
     this.updataNew2()
+<<<<<<< HEAD
     this.loadmore();
   },
   mounted() {
    
 >>>>>>> 8351d1512b96331f7478d55e3e718b1f994c900b
+=======
+>>>>>>> f072fe09501fef77dcea7d4a17552c96883d669a
   },
   mounted() {},
   components: {
