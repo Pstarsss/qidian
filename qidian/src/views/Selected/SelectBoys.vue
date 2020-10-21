@@ -308,26 +308,27 @@
       </div>
 
       <!-- 个性化推荐分类 -->
-      <div class="wellsell">
-        <div class="wellsell-title">
-          <h3>你可能感兴趣的好书</h3>
-          <span>
-            <i class="el-icon-circle-close"></i>
-          </span>
-        </div>
-        <div class="wellsell-container">
-          <div class="wellsell-container-left">
-            <img
-              src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-              alt=""
-            />
+      <div class="wellsell" v-for="(item, index) in msg.data" :key="index">
+        <div v-show="display">
+          <div class="wellsell-title">
+            <h3>你可能感兴趣的好书</h3>
+            <span>
+              <i class="el-icon-circle-close" @click="deleteItem(index)"></i>
+            </span>
           </div>
-          <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">从商二十年</span>
-            <p class="wellsell-desc1">连载 323万字</p>
-            <p class="wellsell-desc2">我不是天生强者，我只是天生要强</p>
+          <div class="wellsell-container">
+            <div class="wellsell-container-left">
+              <img :src="item.images" alt="" />
+            </div>
+            <div class="wellsell-container-right">
+              <span class="wellsell-container-right-title">{{
+                item.name
+              }}</span>
+              <p class="wellsell-desc1">{{ item.wordcount }}万字</p>
+              <p class="wellsell-desc2">{{ item.intro }}</p>
+            </div>
+            <hr />
           </div>
-          <hr />
         </div>
       </div>
     </div>
@@ -394,6 +395,10 @@ export default {
       this.msgArr[9] = res;
       console.log(this.msgArr[9]);
     });
+    this.$http.get("/api/booklist/11").then((res) => {
+      this.msgArr[10] = res;
+      console.log(this.msgArr[10]);
+    });
     this.$http.get("/api/booklist").then((res) => {
       this.msg = res;
       console.log(this.msg);
@@ -401,6 +406,12 @@ export default {
   },
 
   methods: {
+    deleteItem(index) {
+      this.item.splice(index, 1);
+    },
+    hide() {
+      this.display = 0;
+    },
     change1() {
       if (this.changeend1 < 10) {
         this.changestar1 += 4;
@@ -490,6 +501,9 @@ export default {
 
   data() {
     return {
+      item: [],
+      display: 1,
+      data: {},
       changestar: 0,
       changeend: 4,
       changestar1: 0,
