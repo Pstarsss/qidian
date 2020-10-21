@@ -101,7 +101,7 @@
         </div>
       </div>
     </div>
-  </scroll> 
+  </scroll>
 </template>
 
 <script>
@@ -305,22 +305,29 @@ export default {
     }
   },
   methods: {
-    pullingUp(){
-      console.log('find上拉');
-      this.$refs.scroll.finishPullup();
-    }
+    pullingUp() {
+      console.log('find上拉')
+      this.$refs.scroll.finishPullup()
+    },
+  },
+  created() {
+    // const that = this
+    this.$http.get('/api/hotDiscuss').then((res) => {
+      // console.log('sss')
+      // console.log(res)
+    })
   },
   components: {
     menuTitle,
     navs,
     hotDiscuss,
-    scroll
+    scroll,
   },
 }
 </script>
 
 <style scoped>
-.wrapper{
+.wrapper {
   height: calc(100vh - 54px);
 }
 .el-row {
