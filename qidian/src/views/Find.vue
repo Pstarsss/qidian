@@ -1,5 +1,6 @@
 <template>
   <!-- 发现 -->
+  <scroll :probeType="3" class="wrapper" ref="scroll">
   <div class="find">
     <div class="findTop">
       <navBar>
@@ -17,21 +18,22 @@
     <publish />
     <router-view />
   </div>
+  </scroll>
 </template>
 
 <script>
 import publish from './Find/components/Publish'
 import navBar from '../components/common/TopNavBar/NavBar'
-import { request } from '@/network/request.js'
-import axios from 'axios'
+import scroll from '@/components/common/Scroll/scroll.vue'
 export default {
   name: 'find',
   components: {
     navBar,
     publish,
+    scroll
   },
   created() {
-    axios.get('/api/booklist/1').then((res) => {
+    this.$http.get('/api/booklist/1').then((res) => {
       console.log('sss')
       console.log(res)
     })
@@ -40,6 +42,9 @@ export default {
 </script>
 
 <style scoped>
+.wrapper{
+  height: calc(100vh - 54px);
+}
 .findTop {
   background-color: #db3b3b;
   height: 1rem;
