@@ -12,7 +12,11 @@ let sql = require('../store/mysql.js');
 router.get('/',function(req,res){
   res.send('welcome to my page');
 })
-
+router.get('/booklist',function(req,res){
+  sql.find(`select * from booklist`).then(results=>{
+    res.send(results);
+  })
+});
 router.get('/booklist/:id',function(req,res){
   let id = req.params.id;
   sql.find(`select * from booklist${id}`).then(results=>{

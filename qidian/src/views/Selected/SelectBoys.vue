@@ -19,9 +19,9 @@
       <!-- 推荐书籍 -->
       <div class="scroll-wrap">
         <ul class="scroll-content" :style="{ top }">
-          <li v-for="(item, index) in prizeList" :key="index">
-            <span>{{ item.type }}</span>
-            <small> {{ item.name }}</small>
+          <li v-for="(item, index) in msg.data" :key="index">
+            <span style="margin-bottom=0.rem">{{ item.type }}</span>
+            <small> {{ item.intro }}</small>
             <span class="scroll-content-more">
               <i class="el-icon-arrow-right"></i>
             </span>
@@ -37,17 +37,20 @@
             <i class="el-icon-arrow-right"></i>
           </span>
         </div>
-        <div class="wellsell-container">
+        <div
+          class="wellsell-container"
+          v-for="(item, index) in msgArr[0].data.slice(0, 3)"
+          :key="index"
+        >
           <div class="wellsell-container-left">
-            <img
-              src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-              alt=""
-            />
+            <img :src="item.images" alt="" />
           </div>
           <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">从商二十年</span>
-            <p class="wellsell-desc1">连载 323万字</p>
-            <p class="wellsell-desc2">我不是天生强者，我只是天生要强</p>
+            <span class="wellsell-container-right-title">{{ item.name }}</span>
+            <p class="wellsell-desc1">
+              {{ item.serialize }} {{ item.wordcount }}万字
+            </p>
+            <p class="wellsell-desc2">{{ item.intro }}</p>
           </div>
           <hr />
         </div>
@@ -62,17 +65,20 @@
             <i class="el-icon-arrow-right"></i>
           </span>
         </div>
-        <div class="wellsell-container">
+        <div
+          class="wellsell-container"
+          v-for="(item, index) in msgArr[1].data.slice(0, 3)"
+          :key="index"
+        >
           <div class="wellsell-container-left">
-            <img
-              src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-              alt=""
-            />
+            <img :src="item.images" alt="" />
           </div>
           <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">从商二十年</span>
-            <p class="wellsell-desc1">连载 323万字</p>
-            <p class="wellsell-desc2">我不是天生强者，我只是天生要强</p>
+            <span class="wellsell-container-right-title">{{ item.name }}</span>
+            <p class="wellsell-desc1">
+              {{ item.serialize }} {{ item.wordcount }}万字
+            </p>
+            <p class="wellsell-desc2">{{ item.intro }}</p>
           </div>
           <hr />
         </div>
@@ -91,49 +97,23 @@
         </span>
 
         <div class="time-free-container">
-          <div class="time-free-items">
+          <div
+            class="time-free-items"
+            v-for="(item, index) in msgArr[4].data.slice(
+              this.changestar,
+              this.changeend
+            )"
+            :key="index"
+          >
             <div class="time-free-item">
-              <img
-                src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-                alt=""
-              />
-              <p>从骷髅岛开始横推万界</p>
-              <span class="time-free-free">免费</span>
-            </div>
-          </div>
-          <div class="time-free-items">
-            <div class="time-free-item">
-              <img
-                src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-                alt=""
-              />
-              <p>从骷髅岛开始横推万界</p>
-              <span class="time-free-free">免费</span>
-            </div>
-          </div>
-          <div class="time-free-items">
-            <div class="time-free-item">
-              <img
-                src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-                alt=""
-              />
-              <p>从骷髅岛开始横推万界</p>
-              <span class="time-free-free">免费</span>
-            </div>
-          </div>
-          <div class="time-free-items">
-            <div class="time-free-item">
-              <img
-                src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-                alt=""
-              />
-              <p>从骷髅岛开始横推万界</p>
+              <img :src="item.images" alt="" />
+              <p>{{ item.name }}</p>
               <span class="time-free-free">免费</span>
             </div>
           </div>
         </div>
 
-        <div class="time-free-change">
+        <div class="time-free-change" @click="change()">
           <i class="el-icon-refresh"></i> 换一批
         </div>
         <hr />
@@ -149,17 +129,20 @@
           </span>
         </div>
 
-        <div class="wellsell-container">
+        <div
+          class="wellsell-container"
+          v-for="(item, index) in msgArr[5].data.slice(0, 3)"
+          :key="index"
+        >
           <div class="wellsell-container-left">
-            <img
-              src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-              alt=""
-            />
+            <img :src="item.images" alt="" />
           </div>
           <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">从商二十年</span>
-            <p class="wellsell-desc1">连载 323万字</p>
-            <span class="wellsell-desc2">我不是天生强者，我只是天生要强</span>
+            <span class="wellsell-container-right-title">{{ item.name }}</span>
+            <p class="wellsell-desc1">
+              {{ item.serialize }} {{ item.wordcount }}万字
+            </p>
+            <p class="wellsell-desc2">{{ item.intro }}</p>
           </div>
           <hr />
         </div>
@@ -168,24 +151,27 @@
       <!-- 经典完本 -->
       <div class="wellsell">
         <div class="wellsell-title">
-          <h2>畅销精选</h2>
+          <h2>经典完本</h2>
           <span>
             更多
             <i class="el-icon-arrow-right"></i>
           </span>
         </div>
 
-        <div class="wellsell-container">
+        <div
+          class="wellsell-container"
+          v-for="(item, index) in msgArr[6].data.slice(0, 3)"
+          :key="index"
+        >
           <div class="wellsell-container-left">
-            <img
-              src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-              alt=""
-            />
+            <img :src="item.images" alt="" />
           </div>
           <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">从商二十年</span>
-            <p class="wellsell-desc1">连载 323万字</p>
-            <span class="wellsell-desc2">我不是天生强者，我只是天生要强</span>
+            <span class="wellsell-container-right-title">{{ item.name }}</span>
+            <p class="wellsell-desc1">
+              {{ item.serialize }} {{ item.wordcount }}万字
+            </p>
+            <p class="wellsell-desc2">{{ item.intro }}</p>
           </div>
           <hr />
         </div>
@@ -211,17 +197,20 @@
           </span>
         </div>
 
-        <div class="wellsell-container">
+        <div
+          class="wellsell-container"
+          v-for="(item, index) in msgArr[7].data.slice(0, 3)"
+          :key="index"
+        >
           <div class="wellsell-container-left">
-            <img
-              src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-              alt=""
-            />
+            <img :src="item.images" alt="" />
           </div>
           <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">从商二十年</span>
-            <p class="wellsell-desc1">连载 323万字</p>
-            <span class="wellsell-desc2">我不是天生强者，我只是天生要强</span>
+            <span class="wellsell-container-right-title">{{ item.name }}</span>
+            <p class="wellsell-desc1">
+              {{ item.serialize }} {{ item.wordcount }}万字
+            </p>
+            <p class="wellsell-desc2">{{ item.intro }}</p>
           </div>
           <hr />
         </div>
@@ -237,17 +226,20 @@
           </span>
         </div>
 
-        <div class="wellsell-container">
+        <div
+          class="wellsell-container"
+          v-for="(item, index) in msgArr[8].data.slice(0, 3)"
+          :key="index"
+        >
           <div class="wellsell-container-left">
-            <img
-              src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-              alt=""
-            />
+            <img :src="item.images" alt="" />
           </div>
           <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">从商二十年</span>
-            <p class="wellsell-desc1">连载 323万字</p>
-            <span class="wellsell-desc2">我不是天生强者，我只是天生要强</span>
+            <span class="wellsell-container-right-title">{{ item.name }}</span>
+            <p class="wellsell-desc1">
+              {{ item.serialize }} {{ item.wordcount }}万字
+            </p>
+            <p class="wellsell-desc2">{{ item.intro }}</p>
           </div>
           <hr />
         </div>
@@ -256,55 +248,30 @@
       <!-- 出版力荐 -->
       <div class="time-free">
         <h2>出版力荐</h2>
+
         <span class="for-more">
           更多
           <i class="el-icon-arrow-right"></i>
         </span>
 
         <div class="time-free-container">
-          <div class="time-free-items">
+          <div
+            class="time-free-items"
+            v-for="(item, index) in msgArr[9].data.slice(
+              this.changestar1,
+              this.changeend1
+            )"
+            :key="index"
+          >
             <div class="time-free-item">
-              <img
-                src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-                alt=""
-              />
-              <p>从骷髅岛开始横推万界</p>
-              <span class="time-free-author">王小枪</span>
-            </div>
-          </div>
-          <div class="time-free-items">
-            <div class="time-free-item">
-              <img
-                src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-                alt=""
-              />
-              <p>从骷髅岛开始横推万界</p>
-              <span class="time-free-author">王小枪</span>
-            </div>
-          </div>
-          <div class="time-free-items">
-            <div class="time-free-item">
-              <img
-                src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-                alt=""
-              />
-              <p>从骷髅岛开始横推万界</p>
-              <span class="time-free-author">王小枪</span>
-            </div>
-          </div>
-          <div class="time-free-items">
-            <div class="time-free-item">
-              <img
-                src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
-                alt=""
-              />
-              <p>从骷髅岛开始横推万界</p>
-              <span class="time-free-author">王小枪</span>
+              <img :src="item.images" alt="" />
+              <p>{{ item.name }}</p>
+              <span class="time-free-free">免费</span>
             </div>
           </div>
         </div>
 
-        <div class="time-free-change">
+        <div class="time-free-change" @click="change1()">
           <i class="el-icon-refresh"></i> 换一批
         </div>
         <hr />
@@ -377,7 +344,7 @@ export default {
   },
   computed: {
     top() {
-      return -this.activeIndex * 0.5 + "rem";
+      return -this.activeIndex * 0.55 + "rem";
     },
   },
   created() {
@@ -386,8 +353,66 @@ export default {
     this.sec = 0;
     this.overtime = "2021-11-01 00:00:00";
     this.inittime();
+
+    this.$http.get("/api/booklist/1").then((res) => {
+      this.msgArr[0] = res;
+      console.log(this.msgArr[0]);
+    });
+    this.$http.get("/api/booklist/2").then((res) => {
+      this.msgArr[1] = res;
+      console.log(this.msgArr[1]);
+    });
+    this.$http.get("/api/booklist/3").then((res) => {
+      this.msgArr[2] = res;
+      console.log(this.msgArr[2]);
+    });
+    this.$http.get("/api/booklist/4").then((res) => {
+      this.msgArr[3] = res;
+      console.log(this.msgArr[3]);
+    });
+    this.$http.get("/api/booklist/5").then((res) => {
+      this.msgArr[4] = res;
+      console.log(this.msgArr[4]);
+    });
+    this.$http.get("/api/booklist/6").then((res) => {
+      this.msgArr[5] = res;
+      console.log(this.msgArr[5]);
+    });
+    this.$http.get("/api/booklist/7").then((res) => {
+      this.msgArr[6] = res;
+      console.log(this.msgArr[6]);
+    });
+    this.$http.get("/api/booklist/8").then((res) => {
+      this.msgArr[7] = res;
+      console.log(this.msgArr[7]);
+    });
+    this.$http.get("/api/booklist/9").then((res) => {
+      this.msgArr[8] = res;
+      console.log(this.msgArr[8]);
+    });
+    this.$http.get("/api/booklist/10").then((res) => {
+      this.msgArr[9] = res;
+      console.log(this.msgArr[9]);
+    });
+    this.$http.get("/api/booklist").then((res) => {
+      this.msg = res;
+      console.log(this.msg);
+    });
   },
+
   methods: {
+    change1() {
+      if (this.changeend1 < 10) {
+        this.changestar1 += 4;
+        this.changeend1 += 4;
+      }
+    },
+    change() {
+      if (this.changeend < 10) {
+        this.changestar += 4;
+        this.changeend += 4;
+      }
+    },
     inittime() {
       var timer = setInterval(() => {
         var offset = Math.floor(
@@ -465,6 +490,12 @@ export default {
 
   data() {
     return {
+      changestar: 0,
+      changeend: 4,
+      changestar1: 0,
+      changeend1: 4,
+      msg: {},
+      msgArr: [],
       prizeList: [
         { type: "考古", name: "保护性挖掘" },
         { type: "谍影", name: "张晨你就是个傻狗" },
@@ -496,7 +527,7 @@ export default {
   },
   mounted() {
     setInterval((_) => {
-      if (this.activeIndex < this.prizeList.length) {
+      if (this.activeIndex < 8) {
         this.activeIndex += 1;
       } else {
         this.activeIndex = 0;
@@ -506,6 +537,9 @@ export default {
 };
 </script>
 <style scoped>
+.time-free-item > img {
+  height: 1.8rem;
+}
 .el-carousel__item,
 .el-carousel__mask {
   height: 2.4rem !important;
@@ -529,10 +563,27 @@ export default {
   overflow: hidden;
 }
 small {
+  margin-top: 0.2rem;
+  text-overflow: ellipsis;
+  width: 4rem;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
   padding-left: 0.1rem;
   font-size: 0.2rem;
 }
-
+.time-free-item > p {
+  width: 2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.wellsell-desc2 {
+  width: 4.5rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 .scroll-content {
   position: relative;
   transition: top 2s;
@@ -541,7 +592,6 @@ small {
 .scroll-content > li {
   text-align: left;
   font-size: 0.22rem;
-  line-height: 0.5rem;
 }
 .scroll-content > li > span {
   font-size: 0.2rem;
