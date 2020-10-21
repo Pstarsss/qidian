@@ -57,6 +57,14 @@ export default {
       this.$router.go(-1);
     },
     btnclick1(){
+      console.log(this.phonevalue);
+      this.$http.post('/api/validate',{
+        iphone:this.phonevalue
+      }).then((results=>{
+        console.log(results);
+      })).catch(err=>{
+        console.log(err);
+      })
       let time = 60;
       this.disabled = true
       setInterval(()=>{
