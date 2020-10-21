@@ -282,50 +282,26 @@ export default {
       hotDiscussionList: [],
       disNum: 5,
       showHotList: false,
-<<<<<<< HEAD
+      disLoading: true,
     };
   },
   methods: {
     pullingUp() {
       console.log("find上拉");
       this.$refs.scroll.finishPullup();
-      this.disNum += 5;
-      this.addDisList();
-      this.$refs.scroll.refresh();
-=======
-      disLoading: true,
-    }
-  },
-  methods: {
-    pullingUp() {
-      console.log('find上拉')
-      this.$refs.scroll.finishPullup()
       setTimeout(() => {
-        this.disNum += 5
-        this.addDisList()
-        this.$refs.scroll.refresh()
-      }, 500)
->>>>>>> 8351d1512b96331f7478d55e3e718b1f994c900b
+        this.disNum += 5;
+        this.addDisList();
+        this.$refs.scroll.refresh();
+      }, 500);
     },
-<<<<<<< HEAD
-    eed1() {
-      console.log("ddd1");
-      this.$refs.scroll.refresh();
-=======
     updataNew() {
-      console.log('重新判断高度')
-      this.$refs.scroll.refresh()
->>>>>>> f072fe09501fef77dcea7d4a17552c96883d669a
-    },
-<<<<<<< HEAD
-    eedd() {
-      console.log("ddd");
+      console.log("重新判断高度");
       this.$refs.scroll.refresh();
-=======
+    },
     updataNew2() {
-      console.log('dd2')
-      this.$refs.scroll.refresh()
->>>>>>> 8351d1512b96331f7478d55e3e718b1f994c900b
+      console.log("dd2");
+      this.$refs.scroll.refresh();
     },
     addDisList() {
       if (this.disNum <= 40) {
@@ -338,17 +314,13 @@ export default {
           console.log(this.hotDiscussionList);
         });
       } else {
-<<<<<<< HEAD
         this.showHotList = true;
-=======
-        this.showHotList = true
-        this.disLoading = false
->>>>>>> 8351d1512b96331f7478d55e3e718b1f994c900b
+        this.disLoading = false;
       }
     },
   },
   created() {
-<<<<<<< HEAD
+    // const that = this
     this.$http.get("/api/hotDiscuss").then((res) => {
       this.hotDiscussionList = [
         ...this.hotDiscussionList,
@@ -356,44 +328,13 @@ export default {
       ];
       console.log(this.hotDiscussionList);
     });
-
-    this.$nextTick(() => {
-      console.log(this.$refs.scroll.scroll);
-      this.$refs.scroll.refresh();
-    });
   },
-
-=======
-    // const that = this
-    this.$http.get('/api/hotDiscuss').then((res) => {
-      this.hotDiscussionList = [
-        ...this.hotDiscussionList,
-        ...res.data.slice(0, this.disNum),
-      ]
-      console.log(this.hotDiscussionList)
-    })
-  },
->>>>>>> f072fe09501fef77dcea7d4a17552c96883d669a
   updated() {
-<<<<<<< HEAD
-    this.eed1();
-    // this.eed1()
-    // this.$refs.scroll.refresh();
-=======
-    this.updataNew()
+    this.updataNew();
   },
   beforeUpdated() {
-    this.updataNew2()
-<<<<<<< HEAD
-    this.loadmore();
+    this.updataNew2();
   },
-  mounted() {
-   
->>>>>>> 8351d1512b96331f7478d55e3e718b1f994c900b
-=======
->>>>>>> f072fe09501fef77dcea7d4a17552c96883d669a
-  },
-  mounted() {},
   components: {
     menuTitle,
     navs,
