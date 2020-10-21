@@ -5,7 +5,7 @@
       <div class="block">
         <el-carousel style="height: 2.6rem">
           <el-carousel-item v-for="(item, index) in arrs" :key="index">
-            <img :src="item.src" />
+            <img class="top-img-scroll" :src="item.src" />
           </el-carousel-item>
         </el-carousel>
       </div>
@@ -14,17 +14,20 @@
       <bnavs :list="navlist"> </bnavs>
 
       <!-- 分割线奥 -->
-      <hr style="margin-top: 0.7rem" />
+      <hr style="margin-top: 0.3rem" />
 
       <!-- 推荐书籍 -->
-      <div class="recommend-list">
-        <span class="recommend-list-left"> 秦汉 </span>
-        <span class="recommend-list-right">
-          从今天起，别叫我阿斗，叫我凯撒大帝
-        </span>
-        <i class="el-icon-arrow-right"></i>
+      <div class="scroll-wrap">
+        <ul class="scroll-content" :style="{ top }">
+          <li v-for="(item, index) in prizeList" :key="index">
+            <span>{{ item.type }}</span>
+            <small> {{ item.name }}</small>
+            <span class="scroll-content-more">
+              <i class="el-icon-arrow-right"></i>
+            </span>
+          </li>
+        </ul>
       </div>
-
       <!-- 畅销精选 -->
       <div class="wellsell">
         <div class="wellsell-title">
@@ -78,8 +81,9 @@
       <!-- 限时免费 -->
       <div class="time-free">
         <h2>限时免费</h2>
-        <span class="free-hour">17</span> : <span class="free-minu">22</span> :
-        <span class="free-sec">54</span>
+        <span class="free-hour">{{ this.hour }}</span> :
+        <span class="free-minu">{{ this.min }}</span> :
+        <span class="free-sec">{{ this.sec }}</span>
 
         <span class="for-more">
           更多
@@ -316,7 +320,13 @@
           </span>
         </div>
 
-        <el-carousel :interval="4000" type="card" arrow="never" ref="carousel">
+        <el-carousel
+          style="height: 2rem"
+          :interval="4000"
+          type="card"
+          arrow="never"
+          ref="carousel"
+        >
           <el-carousel-item v-for="item in carouseData" :key="item.id">
             <img class="element-img" alt="" :src="item.src" />
           </el-carousel-item>
@@ -324,18 +334,85 @@
       </div>
 
       <!-- 个性化推荐 -->
+      <div class="special-for">
+        <h2>个性化推荐</h2>
+        <span>根据你的阅读口味或自定义偏好生成</span>
+        &nbsp;<span>设置偏好></span>
+      </div>
+
+      <!-- 个性化推荐分类 -->
+      <div class="wellsell">
+        <div class="wellsell-title">
+          <h3>你可能感兴趣的好书</h3>
+          <span>
+            <i class="el-icon-circle-close"></i>
+          </span>
+        </div>
+        <div class="wellsell-container">
+          <div class="wellsell-container-left">
+            <img
+              src="http://www.zwdu.com/files/article/image/23/23488/23488s.jpg"
+              alt=""
+            />
+          </div>
+          <div class="wellsell-container-right">
+            <span class="wellsell-container-right-title">从商二十年</span>
+            <p class="wellsell-desc1">连载 323万字</p>
+            <p class="wellsell-desc2">我不是天生强者，我只是天生要强</p>
+          </div>
+          <hr />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import $ from "jquery";
 import bnavs from "../../components/navs";
 export default {
   name: "selectboys",
   components: {
     bnavs,
   },
+  computed: {
+    top() {
+      return -this.activeIndex * 0.5 + "rem";
+    },
+  },
+  created() {
+    this.hour = 0;
+    this.min = 0;
+    this.sec = 0;
+    this.overtime = "2021-11-01 00:00:00";
+    this.inittime();
+  },
   methods: {
+    inittime() {
+      var timer = setInterval(() => {
+        var offset = Math.floor(
+          (Date.parse(this.overtime) - Date.now()) / 1000
+        );
+        if (offset <= 0) {
+          clearInterval(timer);
+        }
+        var secLeft = offset % 60;
+        var minLeft = Math.floor(offset / 60) % 60;
+        var hourLeft = Math.floor(offset / 60 / 60) % 24;
+        var day = Math.floor(offset / 60 / 60 / 24);
+
+        // 补0操作
+        secLeft = (secLeft < 10 ? "0" : "") + secLeft;
+        minLeft = (minLeft < 10 ? "0" : "") + minLeft;
+        hourLeft = (hourLeft < 10 ? "0" : "") + hourLeft;
+
+        // 4）拼接时间格式，写入timehtml
+        this.hour = parseInt(hourLeft);
+        this.min = parseInt(minLeft);
+        this.sec = parseInt(secLeft);
+      }, 1000);
+    },
+
     function() {
       function slideBanner() {
         //选中item的盒子
@@ -385,8 +462,17 @@ export default {
       }
     },
   },
+
   data() {
     return {
+      prizeList: [
+        { type: "考古", name: "保护性挖掘" },
+        { type: "谍影", name: "张晨你就是个傻狗" },
+        { type: "冒险", name: "张晨你就是个傻狗" },
+        { type: "侦探", name: "张晨你就是个傻狗" },
+        { type: "历史", name: "张晨你就是个傻狗" },
+      ],
+      activeIndex: 0,
       carouseData: [
         { src: require("../../assets/img/SelectBoys/sp1.png") },
         { src: require("../../assets/img/SelectBoys/sp2.png") },
@@ -408,15 +494,89 @@ export default {
       ],
     };
   },
+  mounted() {
+    setInterval((_) => {
+      if (this.activeIndex < this.prizeList.length) {
+        this.activeIndex += 1;
+      } else {
+        this.activeIndex = 0;
+      }
+    }, 2000);
+  },
 };
 </script>
 <style scoped>
+.el-carousel__item,
+.el-carousel__mask {
+  height: 2.4rem !important;
+}
+.el-carousel_item {
+  height: 10rem !important;
+}
+.block .top-img-scroll {
+  height: 3rem !important;
+}
+.scroll-wrap .scroll-content-more {
+  position: absolute;
+  right: 0;
+  background: #ffffff;
+  color: #a2a2a2;
+}
+.scroll-wrap {
+  margin-left: 0.3rem;
+  width: 92%;
+  height: 0.5rem;
+  overflow: hidden;
+}
+small {
+  padding-left: 0.1rem;
+  font-size: 0.2rem;
+}
+
+.scroll-content {
+  position: relative;
+  transition: top 2s;
+}
+
+.scroll-content > li {
+  text-align: left;
+  font-size: 0.22rem;
+  line-height: 0.5rem;
+}
+.scroll-content > li > span {
+  font-size: 0.2rem;
+  background: #e2353b;
+  color: white;
+  padding: 0.05rem 0.08rem;
+
+  border-radius: 0.06rem;
+}
+#news {
+  width: 300px;
+  height: 100px;
+  margin: 20px auto;
+  background-color: #ccc;
+  border: #039 solid 1px;
+  overflow: hidden; /*这里必须设置哦，否则滚动会消失的，如果设置为scroll，更容易明白原理*/
+}
+#news li {
+  line-height: 30px;
+}
+.bar {
+  font-size: 10px;
+}
+li {
+  list-style-type: none;
+}
+.el-carousel__item img {
+  height: 2.3rem !important;
+}
+.wellsell-title > h3 {
+  font-size: 0.22rem;
+}
 .element-img {
   padding-top: 0.3rem;
   width: 80%;
-}
-.el-carousel__container {
-  height: 0.2rem !important;
 }
 
 .el-carousel__item img {
@@ -582,10 +742,13 @@ hr {
 }
 .special-list {
   margin-top: 0.2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 0rem;
 }
 .special-list > ul {
   white-space: nowrap;
+}
+.el-carousel__indicators--outside {
+  display: none !important;
 }
 .special-list > ul > li {
   width: 90%;
@@ -595,5 +758,29 @@ hr {
 .special-list > ul > li > img {
   float: left;
   width: 100%;
+}
+.el-carousel__container {
+  height: 1.8rem !important;
+}
+.el-carousel__item img {
+  height: 1.5rem !important;
+}
+.special-for {
+  padding-left: 0.3rem;
+  font-size: 18px;
+  height: 1.2rem;
+  width: 100%;
+  background: #e4343e;
+}
+.special-for > h2 {
+  font-size: 0.3rem;
+  color: white;
+  padding-top: 0.2rem;
+}
+.special-for > span {
+  display: inline-block;
+  font-size: 0.2rem;
+  color: white;
+  padding-top: 0.08rem;
 }
 </style>

@@ -12,22 +12,21 @@
 </template>
 
 <script>
-
 export default {
-  name: 'navs',
+  name: "navs",
   data() {
-    return {}
+    return {};
   },
   props: {
     //返回数组默认值
     list: {
       type: Array,
-      default: function() {
-        return []
+      default: function () {
+        return [];
       },
     },
   },
-}
+};
 </script>
 
 <style>
