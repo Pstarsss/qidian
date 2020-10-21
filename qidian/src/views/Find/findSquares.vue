@@ -99,6 +99,7 @@
           <!-- Content -->
           <hotDiscuss :hotDiscussion="hotDiscussionList"></hotDiscuss>
           <p class="hotNoList" v-if="showHotList">我也是有底线的~</p>
+          <i class="el-icon-loading" v-show="disLoading"></i>
         </div>
       </div>
     </div>
@@ -118,7 +119,6 @@ import './iconfont/iconfont.css'
 export default {
   data() {
     return {
-      flag: true,
       // 导航传参
       navlist: [
         { name: '专栏', src: require('./img/zs_icon_bbjcj.png') },
@@ -282,22 +282,25 @@ export default {
       hotDiscussionList: [],
       disNum: 5,
       showHotList: false,
+      disLoading: true,
     }
   },
   methods: {
     pullingUp() {
       console.log('find上拉')
       this.$refs.scroll.finishPullup()
-      this.disNum += 5
-      this.addDisList()
+      setTimeout(() => {
+        this.disNum += 5
+        this.addDisList()
+        this.$refs.scroll.refresh()
+      }, 500)
+    },
+    updataNew() {
+      console.log('重新判断高度')
       this.$refs.scroll.refresh()
     },
-    eed1() {
-      console.log('ddd1')
-      this.$refs.scroll.refresh()
-    },
-    eedd() {
-      console.log('ddd')
+    updataNew2() {
+      console.log('dd2')
       this.$refs.scroll.refresh()
     },
     addDisList() {
@@ -312,6 +315,7 @@ export default {
         })
       } else {
         this.showHotList = true
+        this.disLoading = false
       }
     },
   },
@@ -324,24 +328,12 @@ export default {
       ]
       console.log(this.hotDiscussionList)
     })
-
-    // this.$nextTick(() => {
-    //   console.log(this.$refs.scroll.scroll)
-    //   this.$refs.scroll.refresh()
-    // })
-  },
-  beforeUpdate() {
-    // this.$refs.scroll.refresh()
   },
   updated() {
-    this.eed1()
-    // this.eed1()
-    // this.$refs.scroll.refresh();
+    this.updataNew()
   },
-  mounted() {
-    // setInterval(()
-    // this.$router.go(0);/
-    // this.$router.replace('/findSquares');
+  beforeUpdated() {
+    this.updataNew2()
   },
   components: {
     menuTitle,
@@ -455,5 +447,16 @@ export default {
 .hotNoList {
   text-align: center;
   font-size: 0.3rem;
+}
+.el-icon-loading {
+  position: relative;
+  left: 35%;
+  /* right: 5s0%; */
+  bottom: 0.5rem;
+  /* display: block; */
+  margin: 0.5rem;
+  font-size: 0.7rem;
+  /* text-align: center; */
+  color: #db3b3b;
 }
 </style>
