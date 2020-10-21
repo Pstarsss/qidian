@@ -328,7 +328,7 @@ export default {
 
 <style scoped>
 .wrapper {
-  height: calc(100vh - 54px);
+  height: calc(100vh - 1.7rem);
 }
 .el-row {
   padding: 0 0.2rem;

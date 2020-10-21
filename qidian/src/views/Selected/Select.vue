@@ -1,5 +1,5 @@
 <template>
- <scroll class="wrapper" :probeType="3" ref="scroll">
+ 
   <div class="select_nav">
         <div class="navbar-top">
            <div slot="left" class="select_top_left" @click="open('/selecthome')" :class="{ 'active': isActive('selecthome') }">
@@ -18,9 +18,11 @@
            <i class="el-icon-search"></i>
        </div>     
         </div>
-       <router-view/>
+        <scroll class="wrapper" :probeType="3" ref="scroll">
+          <router-view/>
+       </scroll>
   </div>
-  </scroll>
+  
 </template>
 
 <script>
@@ -59,13 +61,19 @@ export default {
       console.log('sss');
       console.log(res);
     })
+  },
+  mounted(){
+    setTimeout(()=>{
+      this.$refs.scroll.refresh();
+    },3000);
+    
   }
 }
 </script>
 
 <style scoped>
 .wrapper{
-  height: calc(100vh - 55px);
+   height: calc(100vh - 1.2rem);
 }
 .navbar-top{
   align-items: center;
