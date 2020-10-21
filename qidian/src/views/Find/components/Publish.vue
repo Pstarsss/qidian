@@ -2,39 +2,26 @@
   <div class="publish">
     <button
       @click="
-        show = !show
         trans()
+        show = !show
       "
       :class="[rotate ? 'out' : 'in']"
     >
       <i class="iconfont icon-jia1"></i>
     </button>
-    <div style="margin-top: 20px;">
-      <el-collapse-transition>
-        <div v-show="show">
-          <div class="transition-box">
-            <i class="iconfont icon-pinglun"></i>
-            文字
-          </div>
-          <div class="transition-box">
-            <i class="iconfont icon-tupian"></i>
-            图片
-          </div>
-          <div class="transition-box">
-            <i class="iconfont icon-shu"></i>
-            推书
-          </div>
-          <div class="transition-box">
-            <i class="iconfont icon-shu1"></i>
-            专栏
-          </div>
-        </div>
-      </el-collapse-transition>
-    </div>
+    <transition class="publishContents" name="el-zoom-in-bottom">
+      <div v-show="show" class="transition-box publishContents">
+        <p><i class="iconfont icon-pinglun" /> 文字</p>
+        <p><i class="iconfont icon-tupian" /> 图片</p>
+        <p><i class="iconfont icon-shu" /> 推书</p>
+        <p><i class="iconfont icon-shu1" /> 专栏</p>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
+import '../iconfont/iconfont.css'
 import '../iconfont/iconfont.css'
 export default {
   data: () => ({
@@ -51,10 +38,6 @@ export default {
 
 <style scoped>
 .publish {
-  position: fixed;
-  z-index: 999;
-  top: 2rem;
-  /* right: 2rem; */
 }
 button {
   width: 0.7rem;
@@ -62,25 +45,32 @@ button {
   border-radius: 50%;
   background-color: #db3b3b;
   color: #fff;
+  position: fixed;
+  bottom: 2rem;
+  right: 0.1rem;
+  z-index: 999;
 }
 .in {
-  transition: all 0.5s;
+  transition: all 0.4s;
 }
 .out {
-  transform: rotate(90deg);
-  transition: all 0.5s;
+  transform: rotate(45deg);
+  background: #333;
+  transition: all 0.4s;
 }
-.transition-box {
-  display: block;
-  margin-bottom: 0.1rem;
-  /* width: 0.8rem;
-  height: 0.4rem; */
-  border-radius: 0.5rem;
-  background-color: #db3b3b;
-  text-align: center;
+.publishContents {
+  position: fixed;
+  z-index: 998;
+  bottom: 2.7rem;
+  right: 0.1rem;
+}
+.publishContents p {
+  background: #db3b3b;
+  border-radius: 0.4rem;
+  margin-bottom: 0.3rem;
+  padding: 0.23rem 0.3rem;
+  font-size: 0.22rem;
+  font-weight: bold;
   color: #fff;
-  padding: 0.2rem 0.3rem;
-  /* box-sizing: border-box; */
-  font-size: 0.2rem;
 }
 </style>

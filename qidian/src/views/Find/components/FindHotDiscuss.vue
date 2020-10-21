@@ -3,7 +3,7 @@
     <div class="" v-for="i in hotDiscussion" :key="i.id">
       <!-- 点点圈(类似发朋友圈动态) -->
       <!-- 书单(给别人推荐书) -->
-      <p class="type">{{ i.type }}</p>
+      <p class="type">点点圈</p>
       <!-- 标题 -->
       <p class="title">{{ i.title }}</p>
       <!-- 内容预览 -->

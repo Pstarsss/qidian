@@ -1,5 +1,6 @@
 <template>
   <!-- 发现 -->
+
   <div class="find">
     <div class="findTop">
       <navBar>
@@ -15,6 +16,7 @@
       </navBar>
     </div>
     <publish />
+
     <router-view />
   </div>
 </template>
@@ -24,15 +26,21 @@ import publish from './Find/components/Publish'
 import navBar from '../components/common/TopNavBar/NavBar'
 import { request } from '@/network/request.js'
 import axios from 'axios'
+// import $ from 'jquery'
+// $(() => {})
 export default {
   name: 'find',
+  data() {
+    return {}
+  },
   components: {
     navBar,
     publish,
   },
   created() {
-    axios.get('/api/booklist/1').then((res) => {
-      console.log('sss')
+    // const that = this
+    this.$http.get('/api/hotDiscuss').then((res) => {
+      // console.log('sss')
       console.log(res)
     })
   },
@@ -43,7 +51,7 @@ export default {
 .findTop {
   background-color: #db3b3b;
   height: 1rem;
-  position: fixed;
+  position: relative;
   width: 100%;
   z-index: 999;
 }
