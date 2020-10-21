@@ -1,6 +1,6 @@
 <template>
   <div class="findHotDiscuss">
-    <div class="" v-for="i in hotDiscussion" :key="i.id">
+    <div class="" v-for="(i, index) in hotDiscussion" :key="index">
       <!-- 点点圈(类似发朋友圈动态) -->
       <!-- 书单(给别人推荐书) -->
       <p class="type">点点圈</p>
@@ -34,7 +34,7 @@
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dianzan"></use>
             </svg>
-            {{ i.likes }}
+            {{ parseInt(i.likes) }}
           </span>
         </span>
       </p>
@@ -99,7 +99,7 @@ export default {
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
-img{
+img {
   margin-bottom: 0.2rem;
 }
 .tag {

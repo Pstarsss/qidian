@@ -46,7 +46,7 @@ button {
   background-color: #db3b3b;
   color: #fff;
   position: fixed;
-  bottom: 2rem;
+  bottom: 1rem;
   right: 0.1rem;
   z-index: 999;
 }
@@ -61,7 +61,7 @@ button {
 .publishContents {
   position: fixed;
   z-index: 998;
-  bottom: 2.7rem;
+  bottom: 1.7rem;
   right: 0.1rem;
 }
 .publishContents p {
