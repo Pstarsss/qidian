@@ -14,7 +14,14 @@ for(let i =0;i<6;i++){
 
 router.get('/',function(req,res){
   res.send('welcome to my page');
-})
+});
+router.get('/read/:id',function(req,res){
+  let id = req.params.id;
+  sql.find(`select * from book${id}`).then(results=>{
+    res.send(results);
+  })
+});
+
 router.get('/booklist',function(req,res){
   sql.find(`select * from booklist`).then(results=>{
     res.send(results);

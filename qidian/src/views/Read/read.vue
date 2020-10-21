@@ -2,13 +2,13 @@
   <div class="read">
       <div class="read-content">
            <div class="read-book-imgs">
-               <img src="../../assets/img/Detail/3.png" alt="" class="read-book-img">
+               <img :src="info.images" alt="" class="read-book-img">
            </div>
-           <h3 class="read-book-name">回到明朝做昏君</h3>
+           <h3 class="read-book-name">{{infor.bookName}}</h3>
 
            <div class="read-book-detail">
                <div>
-                   <p class="read-book-detail-top">历史</p>
+                   <p class="read-book-detail-top">{{info.type}}</p>
                    <p class="read-book-detail-bottom">类型</p>
                </div>
                <div>
@@ -16,26 +16,25 @@
                    <p class="read-book-detail-bottom">上架</p>
                </div>
                <div>
-                   <p class="read-book-detail-top">155</p>
+                   <p class="read-book-detail-top">{{info.wordcount}}</p>
                    <p class="read-book-detail-bottom">万字/连载</p>
                </div>
            </div>
 
            <div class="read-author-speak">
                 <p>希望大家喜欢这本书，并支持正版阅读！</p>
-                <p class="read-author-name">—— 郭勇</p>
+                <p class="read-author-name">—— 张晨</p>
            </div>
            <p class="read-book-bottom">[盟主]迪迪卡卡俱乐部[盟主]Cz丶</p>
            <p class="read-book-bottom">- 本作品由起点中文网进行电子制作与发行 -</p>
            <p class="read-book-bottom1">版权所有·侵权必究</p>
-      </div>
-      
+      </div>    
       <div class="read-content">
           <p class="book-content-icon"> <i class="el-icon-magic-stick"></i></p>   
-          <p class="book-content-name">回到明朝做昏君</p>
+          <p class="book-content-name">{{infor.bookName}}</p>
           <h1 class="book-content-content">正文卷</h1>   
-          <h1 class="book-content-title">第一章 木匠皇帝</h1>
-          <p class="book-content-contents">小说内容</p> 
+          <h1 class="book-content-title">{{infor.title}}</h1>
+          <p class="book-content-contents">{{infor.content}}</p> 
       </div>
       <div class="read-space"></div>
       <div class="read-bottom">
@@ -45,16 +44,24 @@
 </template>
 
 <script>
-
 export default {
   name: 'Read',
-  components: {
-    
+  components: {},
+  data(){
+      return{
+          info:{},
+          infor:{}
+      }
   },
    created(){
     let id = this.$router.currentRoute.params.id;
-    this.$http.get('/api/read/'+id).then(res=>{
+    this.$http.get('/api/detail/'+id).then(res=>{
       this.info=res.data[0];
+      console.log('sss');
+      console.log(res.data);
+    })
+    this.$http.get('/api/read/'+id).then(res=>{
+      this.infor=res.data[0];
       console.log('sss');
       console.log(res.data);
     })

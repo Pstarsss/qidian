@@ -17,6 +17,7 @@ import Detail from '@/views/Details/Detail.vue'
 const Login = () => import('@/views/Login/Login.vue')
 const Register = () => import('@/views/Login/Register.vue')
 const Read = () => import('@/views/Read/read.vue')
+const Chapter = () => import('@/views/Details/Chapter.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -95,6 +96,12 @@ const routes = [
     path: '/detail/:id',
     name: 'Detail',
     component: Detail,
+    children:[]
+  },
+  {
+    path: '/chapter/:id',
+    name: 'Chapter',
+    component: Chapter,
   },
   {
     path: '/register',
