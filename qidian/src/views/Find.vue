@@ -40,7 +40,7 @@ export default {
   created() {
     // const that = this
     this.$http.get('/api/hotDiscuss').then((res) => {
-      console.log('sss')
+      // console.log('sss')
       console.log(res)
     })
   },

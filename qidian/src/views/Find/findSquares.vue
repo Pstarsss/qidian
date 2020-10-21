@@ -277,31 +277,7 @@ export default {
         },
       ],
       // 热门讨论
-      hotDiscussionList: [
-        {
-          type: '点点圈',
-          title: '求推荐几本三观正的书',
-          content:
-            '1.三观正.替天行道或者有原则有底线的的。单女主或者无女主3.所有类型均可，看得下去就全顶。4.我做新媒体运营的好看帮忙在公司公...',
-          imgSrc: '',
-          tag: '书荒',
-          time: '10月13日 12:42',
-          reviews: '367',
-          likes: '274',
-        },
-        {
-          type: '点点圈',
-          title: '已签约，求波投资',
-          content:
-            '新书《我能提升好感度》已签约，合同已寄出，求一波投资，另附站短一张，大伙抓紧时间上车',
-          imgSrc:
-            'https://iconfont.alicdn.com/t/8ead46ab-5c58-4fb2-88af-0bcfb5536d79.png',
-          tag: '新书投资团',
-          time: '前天 10.45',
-          reviews: '34',
-          likes: '42',
-        },
-      ],
+      hotDiscussionList: [],
     }
   },
   methods: {
@@ -315,6 +291,8 @@ export default {
     this.$http.get('/api/hotDiscuss').then((res) => {
       // console.log('sss')
       // console.log(res)
+      // this.hotDiscussionList = res.data
+      console.log(res.data)
     })
   },
   components: {
