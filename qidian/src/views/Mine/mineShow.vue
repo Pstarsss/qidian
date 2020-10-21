@@ -1,4 +1,5 @@
 <template>
+	<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown='pullingDown'>
 	<div class="mineShow">
 		<!-- 顶部 -->
 		<div class="title">
@@ -45,7 +46,7 @@
 				<span>享免费书库等10项福利<i class="el-icon-arrow-right"></i></span>
 			</div>
 			<div class="dredge-bottom">
-				<div v-for="(item,index) in drLists">
+				<div v-for="(item,index) in drLists" :key="index">
 					<i :class='item.icon'></i>{{item.title}}
 				</div>
 			</div>
@@ -61,7 +62,7 @@
 		</div>
 		<!-- 列表板块 -->
 		<div class="foot-list">
-			<div v-for="(item,index) in bottomLists" class="lists">
+			<div v-for="(item,index) in bottomLists" class="lists" :key="index">
 				<i :class="item.icon1"></i>
 				<span>{{item.content}}</span>
 				<i class="el-icon-arrow-right"></i>
@@ -69,9 +70,11 @@
 		</div>
 		
 	</div>
+	</scroll>
 </template>
 
 <script>
+	import scroll from '@/components/common/Scroll/scroll.vue'
 	import navs from '../../components/navs'
 	export default{
 		data(){
@@ -110,10 +113,15 @@
 			}
 		},
 		methods:{
-			
+			//这个就是当你下拉的时候触发的方法；
+			pullingDown(){
+				console.log('ddd');
+				this.$refs.scroll.finishPullDown();
+			}
 		},
 		components: {
-		  navs,
+			navs,
+			scroll
 		},
 		
 	}
@@ -121,9 +129,8 @@
 </script>
 
 <style scoped>
-	*{
-		margin: 0;
-		padding: 0;
+	.wrapper{
+		height: calc(100vh - 56px);
 	}
 	.mineShow{
 		background-color: whitesmoke;
@@ -273,7 +280,8 @@
 	}
 	/* 开通畅享卡板块 */
 	.dredge{
-		width: 94%;        height: 2.2rem;
+		width: 94%;
+        height: 2.2rem;
 		margin-left: 3%;
 		margin-top: -4%;
 		border-radius: 0.15rem;
