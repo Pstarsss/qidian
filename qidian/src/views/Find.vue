@@ -1,5 +1,6 @@
 <template>
   <!-- 发现 -->
+
   <div class="find">
     <div class="findTop">
       <navBar>
@@ -34,7 +35,7 @@ export default {
     publish,
   },
   created() {
-    axios.get('/api/booklist/1').then((res) => {
+    this.$http.get('/api/booklist/1').then((res) => {
       console.log('sss')
       console.log(res)
     })
@@ -46,7 +47,7 @@ export default {
 .findTop {
   background-color: #db3b3b;
   height: 1rem;
-  position: fixed;
+  position: relative;
   width: 100%;
   z-index: 999;
 }
