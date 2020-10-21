@@ -1,5 +1,4 @@
 <template>
-	
 	<div class="mineShow">
 		<!-- 顶部 -->
 		<div class="title">
@@ -9,7 +8,7 @@
 				<i class="el-icon-moon icon-moon"></i>夜间
 			</div>
 		</div>
-		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown='pullingDown'>
+		<div class="null"></div>
 		<!-- 个人信息板块 -->
 		<div class="people">
 			<div class="details">
@@ -30,8 +29,8 @@
 			<div class="others">
 				<div class="others-list">
 					<span><b>0</b><br />推荐票</span>
-					<span><b>0</b><br />推荐票</span>
-					<span><b>0点</b><br />推荐票</span>
+					<span><b>0</b><br />月票</span>
+					<span><b>0点</b><br />我的账户</span>
 				</div>
 				<span class="charge">
 					充值
@@ -46,8 +45,8 @@
 				<span>享免费书库等10项福利<i class="el-icon-arrow-right"></i></span>
 			</div>
 			<div class="dredge-bottom">
-				<div v-for="(item,index) in drLists" :key="index">
-					<i :class='item.icon'></i>{{item.title}}
+				<div v-for="(item,index) in drLists">
+					<i :class='item.icon' class="icon-drlists"></i>{{item.title}}
 				</div>
 			</div>
 		</div>
@@ -58,23 +57,33 @@
 		</div>
 		<!-- 轮播板块 -->
 		<div class="lunbo">
-			<div class="lunbo-content"></div>
+			<el-carousel trigger="click"  height="0.9rem" class="lunbo-content" indicator-position="none">
+				 <el-carousel-item>
+				    <img src="./mine-imgs/01.jpg" />
+				    <span>猜你喜欢|《无限之从写轮眼到轮回眼》少年出英雄 著</span>
+					<i class="el-icon-arrow-right"></i>
+				 </el-carousel-item>
+				 <el-carousel-item>
+					<img src="./mine-imgs/02.jpg" />
+					<span>猜你喜欢|《惊雷》只爱煞英雄 著 军事 谍战特工</span>
+					<i class="el-icon-arrow-right"></i>
+				 </el-carousel-item>
+			</el-carousel>
 		</div>
 		<!-- 列表板块 -->
 		<div class="foot-list">
-			<div v-for="(item,index) in bottomLists" class="lists" :key="index">
+			<div v-for="(item,index) in bottomLists" class="lists" >
 				<i :class="item.icon1"></i>
 				<span>{{item.content}}</span>
 				<i class="el-icon-arrow-right"></i>
 			</div>
 		</div>
-		</scroll>
+		<div class="null"></div>
+		
 	</div>
-	
 </template>
 
 <script>
-	import scroll from '@/components/common/Scroll/scroll.vue'
 	import navs from '../../components/navs'
 	export default{
 		data(){
@@ -108,20 +117,14 @@
 					{ icon1:'el-icon-coin', content:'积分商城'},
 					{ icon1:'el-icon-edit', content:'成为作家'},
 					{ icon1:'el-icon-date', content:'起点星专属卡'},
-					{ icon1:'el-icon-date', content:'新书投资'},
 				],
 			}
 		},
 		methods:{
-			//这个就是当你下拉的时候触发的方法；
-			pullingDown(){
-				console.log('ddd');
-				this.$refs.scroll.finishPullDown();
-			}
+			
 		},
 		components: {
-			navs,
-			scroll
+		  navs,
 		},
 		
 	}
@@ -129,8 +132,9 @@
 </script>
 
 <style scoped>
-	.wrapper{
-		height: calc(100vh - 1.4rem);
+	*{
+		margin: 0;
+		padding: 0;
 	}
 	.mineShow{
 		background-color: whitesmoke;
@@ -141,7 +145,7 @@
 		height: 0.7rem;
 		line-height: 0.7rem;
 		background-color: whitesmoke;
-		position: relative;
+		position: fixed;
 		padding: 0.08rem 0.08rem 0.08rem 0.08rem;
 		z-index: 120;
 	}
@@ -172,6 +176,10 @@
 		font-size: 0.4rem;
 		margin-top: 0.05rem;
 		margin-right: 0.1rem;
+	}
+	.null{
+		width: 100%;
+		height: 0.7rem;
 	}
 	/* 个人信息 */
 	.people{
@@ -257,9 +265,11 @@
 		justify-content: space-around;
 		font-size: 0.2rem;
 		width: 50%;
+		color:gainsboro;
 	}
 	.others span b{
 		font-size: 0.28rem;
+		color: #000000;
 	}
 	.charge{
 		width: 1rem;
@@ -287,9 +297,8 @@
 	.dredge-top{
 		height: 40%;
 		padding: 0.08rem;
-		color: gold;
-		/* position: relative; */
-		border-bottom: 1px solid rgba(255,255,0,0.5);
+		color: #FED9AB;
+		border-bottom: 1px solid #FED9AB;
 	}
 	.dredge-top .icon-sunrise{
 		font-size: 0.4rem;
@@ -298,28 +307,35 @@
 		margin-top: 0.08rem;
 	}
 	.dredge-top .span1{
-		font-size: 0.3rem;
+		font-size: 0.32rem;
 		font-weight: 540;
 		display: inline-block;
 		float: left;
 		margin-top: 0.08rem;
+		font-family: "楷体","楷体_GB2312";
 	}
 	.dredge-top span:last-child{
-		font-size: 0.25rem;
+		font-size: 0.23rem;
 		float: right;
 		margin-top: 0.1rem;
 	}
 	.dredge-bottom{
 		height: 60%;
-		padding: 0.08rem;
-		color: gold;
-		font-size: 0.25rem;
+		padding: 0.1rem;
+		color: #FED9AB;
+		font-size: 0.2rem;
 		display: flex;
 	    justify-content: space-around;
 		flex-wrap: wrap;
 		margin-top: 0.1rem;
 	}
-	
+	.dredge-bottom>div{
+		margin-right: 0.1rem;
+	}
+	.dredge-bottom .icon-drlists{
+		margin-right: 0.1rem;
+		font-size: 0.25rem;
+	}
 	/* 分类板块 */
 	#nav .nav1{
 		margin-bottom:0.4rem;
@@ -331,19 +347,49 @@
 	.lunbo{
 		width:100%;
 		height: 1.4rem;
-		background-color: darkorange;
+		background-color: #fff;
 		margin-top: 0.6rem;
-		z-index: 100;
-		position: relative;
 		padding-top: 0.3rem;
 	}
 	.lunbo-content{
 		width: 94%;
 		height: 0.9rem;
 		margin-left: 3%;
-		background-color: ghostwhite;
+		background-color: whitesmoke;
 		border-radius: 0.6rem;
+		position: relative;
 	} 
+	.lunbo .el-carousel__item img{
+		width: 0.7rem;
+		height: 0.7rem;
+		border-radius: 50%;
+		line-height: 0.7rem;
+		margin-top: 0.1rem;
+		margin-left: 0.2rem;
+	}
+	.lunbo .el-carousel__item span{
+		font-size:0.25rem;
+		font-weight: 500;
+		display: inline-block;
+		position: absolute;
+		top: 0.3rem;
+		left: 1.2rem;
+		width:70%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.lunbo .el-carousel__item i{
+		font-size: 0.25rem;
+		color: gainsboro;
+		position: absolute;
+		top:0.35rem;
+		right: 0.3rem;
+		font-weight: 500;
+	}
+	.el-carousel__item:nth-child(n){
+	     background-color: whitesmoke;
+	  }
 	/* 底部列表板块 */
 	.foot-list{
 		list-style: none;	
