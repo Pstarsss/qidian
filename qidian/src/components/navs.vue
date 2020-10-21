@@ -49,16 +49,17 @@ img {
   background: #fff;
 }
 .a1 {
-  height: 1rem;
+  height: 1.5rem;
   position: relative;
   text-decoration: none;
   font-size: 0.2rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  flex:1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.1rem;
 }
-/* .bottom1 i {
+.bottom1 i {
   width: 0.44rem;
   height: 0.44rem;
   display: block;
@@ -66,7 +67,7 @@ img {
   font-size: 0.44rem;
   margin-left: auto;
   margin-right: auto;
-} */
+}
 .bottom1 span {
   display: block;
   text-align: center;
