@@ -43,7 +43,8 @@ export default {
       phonevalue:'',
       notifyvalue:'',
       message:'获取验证码',
-      disabled:false
+      disabled:false,
+      validation:''
     };
   },
   watch:{
@@ -61,7 +62,7 @@ export default {
       this.$http.post('/api/validate',{
         iphone:this.phonevalue
       }).then((results=>{
-        console.log(results);
+        this.validation = results.data;
       })).catch(err=>{
         console.log(err);
       })
@@ -102,7 +103,19 @@ export default {
     },
     ddd(){
       if(this.issure&&this.notifyvalue&&this.phonevalue){
-        console.log('sss');
+        if(this.notifyvalue == this.validation){ 
+         this.$notify({
+            title: '成功',
+            message: '这是一条成功的提示消息',
+            type: 'success'
+         });
+          this.$router.push('/mimineShowne');
+        }else{
+          this.$notify.error({
+            title: '错误',
+            message: '这是一条错误的提示消息'
+          });
+        }
       }
     }
   }

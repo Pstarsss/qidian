@@ -292,14 +292,10 @@ export default {
       this.addDisList()
       this.$refs.scroll.refresh()
     },
-    // eed() {
-    //   console.log('ddd1')
-    //   this.$refs.scroll.refresh()
-    // },
-    // eedd() {
-    //   console.log('ddd')
-    //   this.$refs.scroll.refresh();
-    // },
+    loadmore(){
+      this.$refs.scroll.refresh();
+    },
+   
     addDisList() {
       if (this.disNum <= 40) {
         this.$http.get('/api/hotDiscuss').then((res) => {
@@ -316,7 +312,7 @@ export default {
     },
   },
   created() {
-    // const that = this
+ 
     this.$http.get('/api/hotDiscuss').then((res) => {
       this.hotDiscussionList = [
         ...this.hotDiscussionList,
@@ -325,21 +321,18 @@ export default {
       console.log(this.hotDiscussionList)
     })
 
-    // this.$nextTick(() => {
-    //   console.log(this.$refs.scroll.scroll)
-    //   this.$refs.scroll.refresh()
-    // })
+    this.$nextTick(() => {
+      console.log(this.$refs.scroll.scroll)
+      this.$refs.scroll.refresh()
+    })
   },
-  beforeUpdate() {
-    // this.$refs.scroll.refresh()
-  },
+ 
   updated() {
-    // this.$refs.scroll.refresh();
+    this.loadmore();
+    
   },
   mounted() {
-    // setInterval(()
-    // this.$router.go(0);/
-    // this.$router.replace('/findSquares');
+   
   },
   components: {
     menuTitle,
