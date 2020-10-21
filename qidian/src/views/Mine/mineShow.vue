@@ -1,16 +1,15 @@
 <template>
-	
 	<div class="mineShow">
 		<!-- 顶部 -->
 		<div class="title">
-			<i class="el-icon-set-up icon-set" @click="set"></i>
+			<i class="el-icon-set-up icon-set"></i>
 			<i class="el-icon-message icon-msg"></i>
 			<div class="change">
 				<i class="el-icon-moon icon-moon"></i>夜间
 			</div>
 		</div>
+		<div class="null"></div>
 		<!-- 个人信息板块 -->
-		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingUp">
 		<div class="people">
 			<div class="details">
 				<div class="details1">
@@ -46,7 +45,7 @@
 				<span>享免费书库等10项福利<i class="el-icon-arrow-right"></i></span>
 			</div>
 			<div class="dredge-bottom">
-				<div v-for="(item,index) in drLists" :key="index">
+				<div v-for="(item,index) in drLists">
 					<i :class='item.icon' class="icon-drlists"></i>{{item.title}}
 				</div>
 			</div>
@@ -73,19 +72,19 @@
 		</div>
 		<!-- 列表板块 -->
 		<div class="foot-list">
-			<div v-for="(item,index) in bottomLists" :key="index" class="lists">
+			<div v-for="(item,index) in bottomLists" class="lists" >
 				<i :class="item.icon1"></i>
 				<span>{{item.content}}</span>
 				<i class="el-icon-arrow-right"></i>
 			</div>
 		</div>
-		</scroll>
+		<div class="null"></div>
+		
 	</div>
 </template>
 
 <script>
-	import scroll from '@/components/common/Scroll/scroll.vue'
-	import navs from '@/components/navs'
+	import navs from '../../components/navs'
 	export default{
 		data(){
 			return{
@@ -122,17 +121,10 @@
 			}
 		},
 		methods:{
-			set(){
-				this.$router.push('/mineSet')
-			},
-			pullingUp(){
-				//console.log(12);
-				this.$refs.scroll.finishPullDown();
-			}
+			
 		},
 		components: {
 		  navs,
-		  scroll
 		},
 		
 	}
@@ -140,6 +132,10 @@
 </script>
 
 <style scoped>
+	*{
+		margin: 0;
+		padding: 0;
+	}
 	.mineShow{
 		background-color: whitesmoke;
 	}
@@ -149,7 +145,7 @@
 		height: 0.7rem;
 		line-height: 0.7rem;
 		background-color: whitesmoke;
-		position: relative;
+		position: fixed;
 		padding: 0.08rem 0.08rem 0.08rem 0.08rem;
 		z-index: 120;
 	}
@@ -180,6 +176,10 @@
 		font-size: 0.4rem;
 		margin-top: 0.05rem;
 		margin-right: 0.1rem;
+	}
+	.null{
+		width: 100%;
+		height: 0.7rem;
 	}
 	/* 个人信息 */
 	.people{
@@ -286,7 +286,8 @@
 	}
 	/* 开通畅享卡板块 */
 	.dredge{
-		width: 94%;        height: 2.2rem;
+		width: 94%;
+        height: 2.2rem;
 		margin-left: 3%;
 		margin-top: -4%;
 		border-radius: 0.15rem;

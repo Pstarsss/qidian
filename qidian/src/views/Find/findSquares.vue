@@ -3,8 +3,6 @@
     <div class="container">
       <!-- 发现-广场  -->
       <div class="findSquares">
-        <!-- 发布动态 -->
-        <div class="issued"></div>
         <!-- 导航组件 -->
         <div id="nav" class="findSquareContent">
           <navs :list="navlist"></navs>
@@ -282,12 +280,12 @@ export default {
       hotDiscussionList: [],
       disNum: 5,
       showHotList: false,
-      disLoading: true,
+      disLoading: false,
     }
   },
   methods: {
     pullingUp() {
-      console.log('find上拉')
+      console.log('findSquares上拉')
       this.$refs.scroll.finishPullup()
       if (this.disNum <= 40) {
         this.disLoading = true
@@ -452,7 +450,7 @@ export default {
   font-size: 0.2rem;
 }
 .el-icon-loading {
-  position: relative;
+  position: absolute;
   left: 44.5%;
   bottom: 0.2rem;
   font-size: 0.7rem;

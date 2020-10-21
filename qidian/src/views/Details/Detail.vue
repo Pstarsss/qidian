@@ -125,7 +125,7 @@
          </div>
          <div class="detail-catalog">
            <span class="common-title">目录</span>
-           <span class="detail-catalog-right" @click="capter">连载至513章·15小时前更新 <i class="el-icon-arrow-right"></i></span>
+           <span class="detail-catalog-right">连载至513章·15小时前更新 <i class="el-icon-arrow-right"></i></span>
          </div>
 
          <div class="space"></div>
@@ -241,7 +241,7 @@
             <img src="../../assets/img/Detail/6.png" alt="">
             <span>加入书架</span>
         </div>
-        <div class="free-read" @click="open()">
+        <div class="free-read">
             <p class="free-read1">免费阅读</p>
             <p class="free-read2">4天14小时31分41秒</p>
         </div>
@@ -296,14 +296,6 @@ export default {
           this.msg2=this.msg2;
         } 
       },
-      open(){
-        let id = this.$router.currentRoute.params.id;
-        this.$router.push('/read/'+id)
-      },
-      capter(){
-        let id = this.$router.currentRoute.params.id;
-        this.$router.push('/chapter/'+id)
-      }
     }
 }
 </script>

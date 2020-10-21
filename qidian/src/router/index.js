@@ -3,11 +3,12 @@ import VueRouter from 'vue-router'
 import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
 import Select from '@/views/Selected/Select.vue'
 import Find from '@/views/Find.vue'
-import FindFollow from '@/views/Find/findFollow.vue'
-import FindSquares from '@/views/Find/findSquares.vue'
+import FindFollow from '@/views/Find/FindFollow.vue'
+import FindSquares from '@/views/Find/FindSquares.vue'
+import findDetails from '@/views/Find/FindeDetails.vue'
+
 import Mine from '@/views/Mine.vue'
 import mineShow from '@/views/Mine/mineShow.vue'
-import mineSet from '@/views/Mine/components/mineSet.vue'
 import SelectHome from '@/views/Selected/SelectHome.vue'
 import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
@@ -17,7 +18,6 @@ import Detail from '@/views/Details/Detail.vue'
 const Login = () => import('@/views/Login/Login.vue')
 const Register = () => import('@/views/Login/Register.vue')
 const Read = () => import('@/views/Read/read.vue')
-const Chapter = () => import('@/views/Details/Chapter.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -78,6 +78,11 @@ const routes = [
     redirect: '/findSquares',
   },
   {
+    path: '/findDetails',
+    name: 'findDetails',
+    component: findDetails,
+  },
+  {
     path: '/mine',
     name: 'Mine',
     component: Mine,
@@ -88,11 +93,6 @@ const routes = [
     component: mineShow,
   },
   {
-    path: '/mineSet',
-    name: 'mineSet',
-    component: mineSet,
-  },
-  {
     path: '/login',
     name: 'Login',
     component: Login,
@@ -101,12 +101,6 @@ const routes = [
     path: '/detail/:id',
     name: 'Detail',
     component: Detail,
-    children:[]
-  },
-  {
-    path: '/chapter/:id',
-    name: 'Chapter',
-    component: Chapter,
   },
   {
     path: '/register',
@@ -117,7 +111,7 @@ const routes = [
     path: '/read/:id',
     name: 'Read',
     component: Read,
-  }
+  },
 ]
 
 const router = new VueRouter({
