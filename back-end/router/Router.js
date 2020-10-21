@@ -15,7 +15,7 @@ for(let i =0;i<6;i++){
 router.get('/',function(req,res){
   res.send('welcome to my page');
 })
-router.get(`/book/:id`,function(req,res){
+router.get(`/read/:id`,function(req,res){
   let id = req.params.id;
   sql.find(`select * from book${id}`).then(results=>{
     res.send(results);
