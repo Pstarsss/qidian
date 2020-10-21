@@ -1,5 +1,4 @@
 <template>
-	<scroll class="wrapper" :probeType='3'   @pullingDown="pullingDown"  @scrolly="yyy" ref="scroll">
 	<div class="mineShow">
 		<!-- 顶部 -->
 		<div class="title">
@@ -40,8 +39,16 @@
 		</div>
 		<!-- 开通畅享卡板块 -->
 		<div class="dredge">
-			<div></div>
-			<div></div>
+			<div class="dredge-top">
+			    <i class="el-icon-sunrise-1 icon-sunrise"></i>
+				<span class="span1">开通畅享卡</span>
+				<span>享免费书库等10项福利<i class="el-icon-arrow-right"></i></span>
+			</div>
+			<div class="dredge-bottom">
+				<div v-for="(item,index) in drLists">
+					<i :class='item.icon'></i>{{item.title}}
+				</div>
+			</div>
 		</div>
 		<!-- 分类板块 -->
 		<div id="nav" class="msg-plate">
@@ -49,76 +56,26 @@
 			<navs :list="navlist2" class="nav2"></navs>
 		</div>
 		<!-- 轮播板块 -->
-		<div></div>
-		<!-- 列表板块 -->
-		<div></div>
-
-		<!-- 这里是我测试的一点代码 -->
-		<div>
-			<ul>
-				<li>1001</li>
-				<li>1002</li>
-				<li>1003</li>
-				<li>1004</li>
-				<li>1005</li>
-				<li>1006</li>
-				<li>1007</li>
-				<li>1008</li>
-				<li>1009</li>
-				<li>10010</li>
-				<li>10011</li>
-				<li>10012</li>
-				<li>10013</li>
-				<li>10014</li>
-				<li>10015</li>
-				<li>10016</li>
-				<li>10017</li>
-				<li>10018</li>
-				<li>10019</li>
-				<li>10020</li>
-				<li>10021</li>
-				<li>10022</li>
-				<li>10023</li>
-				<li>10024</li>
-				<li>10025</li>
-				<li>10026</li>
-				<li>10027</li>
-				<li>10028</li>
-				<li>10029</li>
-				<li>10030</li>
-				<li>10031</li>
-				<li>10032</li>
-				<li>10033</li>
-				<li>10034</li>
-				<li>10035</li>
-				<li>10036</li>
-				<li>10037</li>
-				<li>10038</li>
-				<li>10039</li>
-				<li>10040</li>
-				<li>10041</li>
-				<li>10042</li>
-				<li>10043</li>
-				<li>10044</li>
-				<li>10045</li>
-				<li>10046</li>
-				<li>10047</li>
-				<li>10048</li>
-				<li>10049</li>
-				<li>10050</li>
-			</ul>
+		<div class="lunbo">
+			<div class="lunbo-content"></div>
 		</div>
+		<!-- 列表板块 -->
+		<div class="foot-list">
+			<div v-for="(item,index) in bottomLists" class="lists">
+				<i :class="item.icon1"></i>
+				<span>{{item.content}}</span>
+				<i class="el-icon-arrow-right"></i>
+			</div>
+		</div>
+		
 	</div>
-	</scroll>
 </template>
 
 <script>
-	import navs from '@/components/navs'
-	import scroll from '@/components/common/Scroll/scroll.vue'
+	import navs from '../../components/navs'
 	export default{
 		data(){
 			return{
-
 				navlist1:[
 					{ name: '我发布的', src: require('./mine-imgs/p1.png') },
 					{ name: '关注/收藏', src: require('./mine-imgs/p2.png') },
@@ -131,23 +88,32 @@
 					{ name: '徽章/称号', src: require('./mine-imgs/p7.png') },
 					{ name: '浏览记录', src: require('./mine-imgs/p8.png') },
 				],
+				drLists:[
+					{ title:'免费书库', icon:'el-icon-notebook-1'},
+					{ title:'票券福利', icon:'el-icon-postcard'},
+					{ title:'签到特权', icon:'el-icon-map-location'},
+					{ title:'专属任务', icon:'el-icon-news'},
+					{ title:'头像挂件', icon:'el-icon-present'},
+					{ title:'阅读页主题', icon:'el-icon-magic-stick'},
+					{ title:'专属表情包', icon:'el-icon-pie-chart'},
+					{ title:'专属徽章', icon:'el-icon-medal-1'},
+				],
+				bottomLists:[
+					{ icon1:'el-icon-tickets', content:'新书投资'},
+					{ icon1:'el-icon-position', content:'我的游戏'},
+					{ icon1:'el-icon-bangzhu', content:'领币'},
+					{ icon1:'el-icon-coin', content:'积分商城'},
+					{ icon1:'el-icon-edit', content:'成为作家'},
+					{ icon1:'el-icon-date', content:'起点星专属卡'},
+					{ icon1:'el-icon-date', content:'新书投资'},
+				],
 			}
 		},
 		methods:{
 			
-			pullingDown(){
-				console.log('111');
-
-				//结束下拉刷新事件，每次处罚都得结束才能开始第二次；
-				this.$refs.scroll.finishPullDown();
-			},
-			yyy(value){
-			
-			}
 		},
 		components: {
-			navs,
-			scroll
+		  navs,
 		},
 		
 	}
@@ -155,8 +121,9 @@
 </script>
 
 <style scoped>
-	.wrapper{
-		height: calc(100vh - 40px);
+	*{
+		margin: 0;
+		padding: 0;
 	}
 	.mineShow{
 		background-color: whitesmoke;
@@ -166,9 +133,10 @@
 		width: 100%;
 		height: 0.7rem;
 		line-height: 0.7rem;
-		/* background-color: whitesmoke; */
+		background-color: whitesmoke;
 		position: fixed;
 		padding: 0.08rem 0.08rem 0.08rem 0.08rem;
+		z-index: 120;
 	}
 	.icon-set{
 		float: left;
@@ -305,22 +273,101 @@
 	}
 	/* 开通畅享卡板块 */
 	.dredge{
-		width: 94%;
-        height: 2.2rem;
+		width: 94%;        height: 2.2rem;
 		margin-left: 3%;
 		margin-top: -4%;
 		border-radius: 0.15rem;
 		padding: 0.08rem 0.08rem 0.08rem 0.08rem;
 		background-color: coral;
-		
 	}
+	.dredge-top{
+		height: 40%;
+		padding: 0.08rem;
+		color: gold;
+		/* position: relative; */
+		border-bottom: 1px solid rgba(255,255,0,0.5);
+	}
+	.dredge-top .icon-sunrise{
+		font-size: 0.4rem;
+		float: left;
+		margin-right: 0.2rem;
+		margin-top: 0.08rem;
+	}
+	.dredge-top .span1{
+		font-size: 0.3rem;
+		font-weight: 540;
+		display: inline-block;
+		float: left;
+		margin-top: 0.08rem;
+	}
+	.dredge-top span:last-child{
+		font-size: 0.25rem;
+		float: right;
+		margin-top: 0.1rem;
+	}
+	.dredge-bottom{
+		height: 60%;
+		padding: 0.08rem;
+		color: gold;
+		font-size: 0.25rem;
+		display: flex;
+	    justify-content: space-around;
+		flex-wrap: wrap;
+		margin-top: 0.1rem;
+	}
+	
 	/* 分类板块 */
 	#nav .nav1{
-		margin-bottom:0.28rem ;
+		margin-bottom:0.4rem;
 	}
 	#nav .nav2{
-		margin-bottom:0.3rem ;
+		margin-bottom:0.3rem;
 	}
+	/* 轮播图板块 */
+	.lunbo{
+		width:100%;
+		height: 1.4rem;
+		background-color: darkorange;
+		margin-top: 0.6rem;
+		z-index: 100;
+		position: relative;
+		padding-top: 0.3rem;
+	}
+	.lunbo-content{
+		width: 94%;
+		height: 0.9rem;
+		margin-left: 3%;
+		background-color: ghostwhite;
+		border-radius: 0.6rem;
+	} 
+	/* 底部列表板块 */
+	.foot-list{
+		list-style: none;	
+		width: 100%;
+		background-color: #fff;
+	}
+	.lists{
+		width: 94%;
+		margin-left: 3%;
+		height: 0.65rem;
+		line-height: 0.65rem;
+	}
+	.lists i:first-child{
+		font-size: 0.3rem;
+		float: left;
+		margin-top: 0.2rem;
+	}
+	.lists span{
+		margin-left:0.2rem;
+		font-size: 0.25rem;
+		float: left;
+	}
+	.lists i:last-child{
+		font-size: 0.3rem;
+		float: right;
+		margin-top: 0.2rem;
+	}
+	
 	
 	
 </style>
