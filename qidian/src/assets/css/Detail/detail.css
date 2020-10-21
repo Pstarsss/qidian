@@ -62,7 +62,6 @@
   }
   .detail-header-top{
     display: flex;
-    justify-content: space-between;
     widows: 6.8rem;
     height: 1.4rem;
     margin-left: auto;
@@ -70,16 +69,17 @@
     margin-top: 0;
   }
   .detail-header-top-imgs{
+    float: left;
   margin-top: .7rem;
   margin-left: .2rem;
   }
   .detail-header-top-img{
     width: 1.2rem;
-    height: 1.6rem;
+    height: 1.4rem;
   }
   .detail-header-top-title{
-  margin-top: 1rem;
-  margin-right: 3rem;
+  margin-top: .85rem;
+  margin-left: .5rem;
   color: white;
   height: 3rem;
   }
@@ -478,4 +478,10 @@
   }
   .free-read2{
     font-size: .16rem;
+  }
+  .active1{
+    color: red;
+  }
+  .active2{
+    color: red;
   }

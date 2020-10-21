@@ -6,10 +6,10 @@
             <i class="el-icon-arrow-left"></i>
           </div>         
            <div class="detail-top-middle">
-              <div class="detail-top-img"><img src="../../assets/logo.png" alt="" class="detail-top-imgs"></div>            
+              <div class="detail-top-img"><img :src="info.images" alt="" class="detail-top-imgs"></div>            
               <div class="detail-top-content">
-                <div class="detail-top-content-title"><span >皇上非要为我废除六宫</span></div>
-                <div class="detail-top-content-kind"><span >古代言情</span></div>                 
+                <div class="detail-top-content-title"><span >{{info.name}}</span></div>
+                <div class="detail-top-content-kind"><span >{{info.type}}</span></div>                 
               </div>
         </div>
         </div>
@@ -21,12 +21,12 @@
       <div class="detail-header">
            <div class="detail-header-top">
               <div class="detail-header-top-imgs">
-                <img src="../../assets/logo.png" alt="" class="detail-header-top-img">
+                <img :src="info.images" alt="" class="detail-header-top-img">
               </div>
               <div class="detail-header-top-title">
-                  <h3 class="title-one">皇上非要我废除六宫</h3>
-                  <p class="title-two">星影仙子<i class="el-icon-arrow-right"></i></p>                 
-                  <p class="title-three">古代言情 · 穿越奇情</p>
+                  <h3 class="title-one">{{info.name}}</h3>
+                  <p class="title-two">{{info.author}}<i class="el-icon-arrow-right"></i></p>                 
+                  <p class="title-three">{{info.type}}</p>
               </div>
            </div>
            <div class="detail-header-bottom">
@@ -35,7 +35,7 @@
                     <span class="tm">™</span>
                 </div>
                 <div class="detail-header-bottom-right">
-                    <span class="tm">Lv1初出茅庐  </span>
+                    <span class="tm">Lv{{info.ratings}} 初出茅庐 </span>
                     <span class="rank"> 30 <i class="el-icon-arrow-right"></i></span>
                 </div>
            </div>
@@ -55,8 +55,8 @@
                        </div>
                   </div>
                   <div class="detail-content-tops-right">
-                    <p class="detail-content-tops-right-top"><span>52</span>万字</p>
-                    <p class="detail-content-tops-right-bottom">连载</p>
+                    <p class="detail-content-tops-right-top"><span>{{info.wordcount}}</span>万字</p>
+                    <p class="detail-content-tops-right-bottom">{{info.serialize}}</p>
                   </div>
                   <div class="detail-content-tops-right">
                     <p class="detail-content-tops-right-top">1593</p>
@@ -82,9 +82,7 @@
                  <el-collapse v-model="activeNames" @change="handleChange" class="detail-books-details">
                 <el-collapse-item title="故事详情" name="1">
                    <div class="detail-books-detail"> 
-                    王唏的母亲为给她说门体面的亲事，把她送到京城的永城侯府家镀金。可出身蜀中巨贾之家的王晞却觉得京城哪哪儿都不好，
-                    只想着什么时候能早点回家。直到有一天，她偶然间发现自己住的后院假山上可以用千里镜看见隔壁长公主.府.....她顿时眼睛一亮一长 
-                    公主之子陈珞可真英俊!永城侯府的表姐们可真有趣!京城好好玩!
+                    {{info.intro}}
                     </div>                
                 </el-collapse-item> 
             </el-collapse>
@@ -100,9 +98,9 @@
                       </div>
                       <div class="detail-role-left-bottom">
                            <span>可爱，盟，机智怜悯</span>
-                           <span>
-                             <p><i class="el-icon-star-off"></i></p>
-                             <span class="detail-role-left-bottom-num">100</span>
+                           <span  @click="addin">
+                             <p><i class="el-icon-star-off" :class="{active1}"></i></p>
+                             <span class="detail-role-left-bottom-num">{{msg1}}</span>
                            </span>
                       </div>
                  </div>
@@ -117,9 +115,9 @@
                       </div>
                       <div class="detail-role-left-bottom">
                            <span>傲娇，口嫌体正直，专一</span>
-                           <span>
-                             <p><i class="el-icon-star-off"></i></p>
-                             <span class="detail-role-left-bottom-num">100</span>
+                           <span @click="addin1">
+                             <p><i class="el-icon-star-off" :class="{active2}"></i></p>
+                             <span class="detail-role-left-bottom-num">{{msg2}}</span>
                            </span>
                       </div>
                  </div>
@@ -252,23 +250,52 @@
 </template>
 
 <script>
-
 export default {
+  
   name: 'Detail',
   components: {   
   },
   data() {
       return {
-        activeNames: ['0']
+        activeNames: ['0'],
+        msg1:100,
+        msg2:100,
+        info:{},
+        active1:false,
+        active2:false,
       };
     },
+    created(){
+    let id = this.$router.currentRoute.params.id;
+    this.$http.get('/api/detail/'+id).then(res=>{
+      this.info=res.data[0];
+      console.log('sss');
+      console.log(res.data);
+    })
+  },
   methods: {
       handleChange(val) {
         console.log(val);
     },
       back(){
-        this.$router.go(-1)
+        this.$router.go(-1);
     },
+      addin(){
+        if(this.msg1=100){
+           this.msg1++;
+           this.active1=true;
+        }else{
+          this.msg1=this.msg1;
+        }        
+      },
+      addin1(){
+          if(this.msg2=100){
+           this.msg2++;
+           this.active2=true;
+        }else{
+          this.msg2=this.msg2;
+        } 
+      },
     }
 }
 </script>
