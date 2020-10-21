@@ -292,14 +292,14 @@ export default {
       this.addDisList()
       this.$refs.scroll.refresh()
     },
-    // eed() {
-    //   console.log('ddd1')
-    //   this.$refs.scroll.refresh()
-    // },
-    // eedd() {
-    //   console.log('ddd')
-    //   this.$refs.scroll.refresh();
-    // },
+    eed1() {
+      console.log('ddd1')
+      this.$refs.scroll.refresh()
+    },
+    eedd() {
+      console.log('ddd')
+      this.$refs.scroll.refresh()
+    },
     addDisList() {
       if (this.disNum <= 40) {
         this.$http.get('/api/hotDiscuss').then((res) => {
@@ -334,6 +334,8 @@ export default {
     // this.$refs.scroll.refresh()
   },
   updated() {
+    this.eed1()
+    // this.eed1()
     // this.$refs.scroll.refresh();
   },
   mounted() {

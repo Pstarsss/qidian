@@ -65,7 +65,7 @@ export default {
   mounted(){
     setTimeout(()=>{
       this.$refs.scroll.refresh();
-    },3000);
+    },1000);
     
   }
 }
