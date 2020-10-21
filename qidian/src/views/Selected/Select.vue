@@ -18,11 +18,19 @@
            <i class="el-icon-search"></i>
        </div>     
         </div>
+<<<<<<< HEAD
         <scroll class="wrapper" :probeType="3" ref="scroll">
           <router-view/>
        </scroll>
   </div>
   
+=======
+    <scroll class="wrapper" :probeType="3" ref="scroll">
+       <router-view/>
+    </scroll>
+  </div>
+
+>>>>>>> 4001b3e8eb094b9f32a06e987835bcd4b7c97f57
 </template>
 
 <script>
