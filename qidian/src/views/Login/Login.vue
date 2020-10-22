@@ -16,15 +16,15 @@
        <input type="password" placeholder="密码" class="input1" name="password" :value="passowordvalue" autocomplete @input="ispassword">
      </div>
      <div class="deal">
-         <el-radio v-model="issure" class="radio" @change="aaa"> </el-radio>
+         <el-radio v-model="issure" class="radio" @change="isradio"> </el-radio>
        <span>我已阅读并接受<strong>《阅文用户服务协议》</strong>及<strong>《隐私协议》</strong></span>
      </div>
      <div class="form1">
-       <input type="submit" @click.prevent="ddd" value="登录" class="login1" >
+       <input type="submit" @click.prevent="rush" value="登录" class="login1" >
      </div>
      <div class="L-pp">
-       <div>注册新账号</div>
-       <div @click="toregister">手机验证码登录</div>
+       <div @click="toregister">注册新账号</div>
+       <div @click="tovalidate">手机验证码登录</div>
      </div>
   </form>
    </div>
@@ -49,11 +49,13 @@ export default {
       error:'',
       passowordvalue:''
    };
-    
   },
   methods:{
     toregister(){
       this.$router.push('/register');
+    },
+    tovalidate(){
+      this.$router.push('/validatelogin');
     },
     isphone(){
       this.phonevalue = event.target.value;
@@ -72,10 +74,10 @@ export default {
     ispassword(){
       this.passowordvalue = event.target.value;
     },
-    aaa(){
+    isradio(){
       this.issure =true;
     },
-    ddd(){
+    rush(){
       if(this.issure&&this.phonevalue&&this.passowordvalue){
         this.$http.post('/api/login',{
           iphone:this.phonevalue,

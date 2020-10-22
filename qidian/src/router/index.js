@@ -17,6 +17,7 @@ import Detail from '@/views/Details/Detail.vue'
 
 const Login = () => import('@/views/Login/Login.vue')
 const validatelogin = () => import('@/views/Login/validatelogin.vue')
+const Register = () => import('@/views/Login/Register.vue')
 const Read = () => import('@/views/Read/read.vue')
 Vue.use(VueRouter)
 
@@ -92,11 +93,7 @@ const routes = [
     name: 'mineShow',
     component: mineShow,
   },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-  },
+
   {
     path: '/detail/:id',
     name: 'Detail',
@@ -106,6 +103,16 @@ const routes = [
     path: '/validatelogin',
     name: 'validatelogin',
     component: validatelogin,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
   },
   {
     path: '/read/:id',
