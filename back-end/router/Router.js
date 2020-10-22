@@ -58,7 +58,22 @@ router.get('/hotdiscuss',function(req,res){
     res.send(results);
   })
 });
+router.post('/post',(req,res)=>{
+  let {iphone,password,username} = req.body;
+  sql.add(`insert into user (iphone,password,username) values  (${iphone},${password},'${username}')`).then(re=>{
+    res.send('恭喜,注册成功');
+  });
+});
 
+router.post('/login',(req,res)=>{
+  let {iphone,password } = req.body;
+  sql.find('select * from user where iphone = ? and password = ?',[iphone,password]).then((re)=>{
+    console.log(re);
+  }).catch((err)=>{
+    console.log(err);
+  })
+  res.send('11');
+});
   
 const Core = require('@alicloud/pop-core');
 

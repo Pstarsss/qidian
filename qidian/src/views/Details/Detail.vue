@@ -60,11 +60,11 @@
                   </div>
                   <div class="detail-content-tops-right">
                     <p class="detail-content-tops-right-top">1593</p>
-                   <p class="detail-content-tops-right-bottom">推荐票<i class="el-icon-arrow-right"></i></p>
+                   <p class="detail-content-tops-right-bottom">推荐票</p>
                   </div>
                   <div class="detail-content-tops-right">
                     <p class="detail-content-tops-right-top">135</p>
-                    <p class="detail-content-tops-right-bottom">月票<i class="el-icon-arrow-right"></i></p>
+                    <p class="detail-content-tops-right-bottom">月票</p>
                   </div>
             </div>
 
@@ -90,7 +90,7 @@
             <div class="detail-role">
                  <div class="detail-role-left">
                       <div class="detail-role-left-top">
-                           <div class="detail-role-left-top-imgs"><img src="../../assets/logo.png"  alt="" class="detail-role-left-top-img"></div>
+                           <div class="detail-role-left-top-imgs"><img src="../../assets/img/Detail/1.jpg"  alt="" class="detail-role-left-top-img"></div>
                            <div class="detail-role-left-top-name">
                              <p class="detail-role-left-top-names">萧仙仙</p>
                              <p class="detail-role-left-top-role">女主</p>
@@ -107,7 +107,7 @@
 
                  <div class="detail-role-right">
                        <div class="detail-role-left-top">
-                           <div class="detail-role-left-top-imgs"><img src="../../assets/logo.png"  alt="" class="detail-role-left-top-img"></div>
+                           <div class="detail-role-left-top-imgs"><img src="../../assets/img/Detail/gy.jpg"  alt="" class="detail-role-left-top-img"></div>
                            <div class="detail-role-left-top-name">
                              <p class="detail-role-left-top-names">郭勇</p>
                              <p class="detail-role-left-top-role">男主</p>
@@ -125,7 +125,11 @@
          </div>
          <div class="detail-catalog">
            <span class="common-title">目录</span>
+<<<<<<< HEAD
+           <span class="detail-catalog-right" @click="capter">连载至{{info3.length}}章·15小时前更新 <i class="el-icon-arrow-right"></i></span>
+=======
            <span class="detail-catalog-right">连载至513章·15小时前更新 <i class="el-icon-arrow-right"></i></span>
+>>>>>>> b34be9f37daded1835041cb1478b2931347eb58f
          </div>
 
          <div class="space"></div>
@@ -145,7 +149,7 @@
               </div>
               <div class="detail-comment-author">
                    <div class="detail-comment-author-left">
-                        <div class="author-photo"><img src="../../assets/logo.png" alt=""></div>
+                        <div class="author-photo"><img src="../../assets/img/Detail/1.jpg" alt=""></div>
                         <span class="author-name">萌萌朦丶懵</span>
                    </div>
                    <div class="detail-comment-author-right">
@@ -157,13 +161,12 @@
          <div class="space"></div>
          <div class="about-author">
               <div class="about-author-detail">
-                <p class="common-title">星影仙子 <span class="btn-primary">Lv5</span></p>
-                <p class="about-author-details">现为阅读集团Lv5作家，著有《皇上非要我废除六宫》《穿书后我成了王爷的掌心娇》《听说王妃要离家出走》等作品</p>
+                <p class="common-title">{{info.author}} <span class="btn-primary">Lv{{info.ratings}}</span></p>
+                <p class="about-author-details">现为阅读集团Lv{{info.ratings}}作家，著有<span :key="index" v-for="(item,index) in info1">《{{item.name}}》</span>等作品</p>
               </div>
               <div class="about-author-zp">
                 <ul class="about-author-zps">
-                  <li><img src="../../assets/logo.png" alt=""></li>
-                  <li><img src="../../assets/logo.png" alt=""></li>
+                  <li :key="index" v-for="(item,index) in info2"><img :src="item.images" alt=""></li>
                   <li><img src="../../assets/img/Detail/six.png" alt=""></li>
                 </ul>
               </div>
@@ -173,17 +176,32 @@
            <div class="fans-rank">
                 <div class="fans-nums">
                    <p class="common-title">粉丝榜</p>
-                   <p class="fens-num">1035 <i class="el-icon-arrow-right"></i></p>
+                   <p class="fens-num">1035</p>
                 </div>
                 <div><img src="../../assets/img/Detail/fens.png" alt="" class="fenstop"></div>
            </div>
            <div class="fans-top">
                <div class="fans-nums">
                    <p class="common-title">月票金主</p>
-                   <p class="fens-num">月太聚米糖 <i class="el-icon-arrow-right"></i></p>
+                   <p class="fens-num">月太聚米糖</p>
                </div>
                <div><img src="../../assets/img/Detail/fenstop.png" alt="" class="fenstop"></div>
            </div>
+         </div>
+         <div class="space"></div>
+
+          <div class="detail-catalog">
+           <span class="common-title">同类作品推荐</span>
+           <span class="detail-catalog-right">更多 <i class="el-icon-arrow-right"></i></span>
+         </div>
+         <div class="detail-lookmore">
+              <div class="lookmore-detail" :key="index" v-for="(item,index) in info4">
+                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs"></div>
+                 <div class="lookmore-detail-title">
+                   <p class="lookmore-name">{{item.name}}</p>
+                   <p class="lookmore-tj">{{item.wordcount}}万字</p>
+                 </div>
+              </div>
          </div>
          <div class="space"></div>
          <div class="detail-catalog">
@@ -191,35 +209,15 @@
            <span class="detail-catalog-right">更多 <i class="el-icon-arrow-right"></i></span>
          </div>
          <div class="detail-lookmore">
-              <div class="lookmore-detail">
-                 <div><img src="../../assets/img/Detail/1.png" alt="" class="lookmore-detail-imgs"></div>
+              <div class="lookmore-detail" :key="index" v-for="(item,index) in info1">
+                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs" @click="openDetail(index)"></div>
                  <div class="lookmore-detail-title">
-                   <p class="lookmore-name">他从地狱来</p>
-                   <p class="lookmore-tj">81%还看过</p>
-                 </div>
-              </div>
-              <div class="lookmore-detail">
-                 <div><img src="../../assets/img/Detail/2.png" alt="" class="lookmore-detail-imgs"></div>
-                 <div class="lookmore-detail-title">
-                   <p class="lookmore-name">我的世界圈你入怀</p>
+                   <p class="lookmore-name">{{item.name}}</p>
                    <p class="lookmore-tj">80%还看过</p>
-                 </div>
-              </div>
-              <div class="lookmore-detail">
-                 <div><img src="../../assets/img/Detail/3.png" alt="" class="lookmore-detail-imgs"></div>
-                 <div class="lookmore-detail-title">
-                   <p class="lookmore-name">一代女王柳炊烟</p>
-                   <p class="lookmore-tj">80%还看过</p>
-                 </div>
-              </div>
-              <div class="lookmore-detail">
-                 <div><img src="../../assets/img/Detail/4.png" alt="" class="lookmore-detail-imgs"></div>
-                 <div class="lookmore-detail-title">
-                   <p class="lookmore-name">沐沐你别闹</p>
-                   <p class="lookmore-tj">85%还看过</p>
                  </div>
               </div>
          </div>
+        
          <div class="space-white"></div>
          <div class="detail-updates">
              <hr>
@@ -260,9 +258,13 @@ export default {
         activeNames: ['0'],
         msg1:100,
         msg2:100,
-        info:{},
         active1:false,
         active2:false,
+        info:{},     
+        info1:{},
+        info2:{},
+        info3:[],
+        info4:[]
       };
     },
     created(){
@@ -271,9 +273,32 @@ export default {
       this.info=res.data[0];
       console.log('sss');
       console.log(res.data);
+    });
+    this.$http.get('/api/booklist/'+id).then(res=>{
+      this.info1=res.data.slice(1,5);
+      console.log(res.data.slice(1,5));
+    })
+    this.$http.get('/api/booklist/'+id).then(res=>{
+      this.info2=res.data.slice(1,3);
+      console.log(res.data.slice(1,3));
+    })
+     this.$http.get('/api/read/'+id).then(res=>{
+      this.info3=res.data.slice(0,1000);
+      console.log(res.data.slice(0,1000));
+    })
+    this.$http.get('/api/booklist/'+id).then(res=>{
+      this.info4=res.data.slice(6,10);
+      console.log(res.data.slice(6,10));
     })
   },
   methods: {
+     openDetail(index) {
+      this.$http.get("/api/booklist").then((res) => {
+        this.msg = res;
+        let a = this.msg.data[index].id;
+        this.$router.push("/detail/" + a);
+      });
+    },
       handleChange(val) {
         console.log(val);
     },

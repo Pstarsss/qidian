@@ -3,12 +3,18 @@ import VueRouter from 'vue-router'
 import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
 import Select from '@/views/Selected/Select.vue'
 import Find from '@/views/Find.vue'
+<<<<<<< HEAD
 import FindFollow from '@/views/Find/findFollow.vue'
+=======
+import FindFollow from '@/views/Find/findFollow.vue'
+>>>>>>> 9fa6eebd36a4ba1ba4e94937345d2fde8006f9f5
 import FindSquares from '@/views/Find/findSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
 import Mine from '@/views/Mine.vue'
 import mineShow from '@/views/Mine/mineShow.vue'
+import mineSet from '@/views/Mine/components/mineSet.vue'
+import mineMsg from '@/views/Mine/components/mineMsg.vue'
 import SelectHome from '@/views/Selected/SelectHome.vue'
 import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
@@ -16,6 +22,7 @@ import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import Detail from '@/views/Details/Detail.vue'
 
 const Login = () => import('@/views/Login/Login.vue')
+const validatelogin = () => import('@/views/Login/validatelogin.vue')
 const Register = () => import('@/views/Login/Register.vue')
 const Read = () => import('@/views/Read/read.vue')
 Vue.use(VueRouter)
@@ -63,6 +70,9 @@ const routes = [
     path: '/find',
     name: 'Find',
     component: Find,
+    meta: {
+      keepAlive: true,
+    },
     children: [
       {
         path: '/findFollow',
@@ -78,7 +88,7 @@ const routes = [
     redirect: '/findSquares',
   },
   {
-    path: '/findDetails',
+    path: '/findDetails/:id',
     name: 'findDetails',
     component: findDetails,
   },
@@ -93,14 +103,30 @@ const routes = [
     component: mineShow,
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login,
+    path: '/mineSet',
+    name: 'mineSet',
+    component: mineSet,
   },
+  {
+    path: '/mineMsg',
+    name: 'mineMsg',
+    component: mineMsg,
+  },
+
   {
     path: '/detail/:id',
     name: 'Detail',
     component: Detail,
+  },
+  {
+    path: '/validatelogin',
+    name: 'validatelogin',
+    component: validatelogin,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
   {
     path: '/register',

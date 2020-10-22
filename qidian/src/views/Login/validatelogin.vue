@@ -2,31 +2,26 @@
   <div class="Rbox">
     <top-nav-bar>
       <div slot="left" class="Lleft" @click="backlogin"><img :src="src" alt=""></div>
-      <div slot="center"><h2>起点账号注册</h2></div>
+      <div slot="center"><h2>手机登录</h2></div>
     </top-nav-bar>
     <form class="">
       <div class="form1">
-       <input type="text" placeholder="用户名" class="input1" name="username" :value="uservalue" autocomplete="off" @input="isuser">
-     </div>
-      <div class="form1">
-        <input type="text" placeholder="手机号" class="input1" :value="phonevalue" autocomplete="off" @input="isphone"> 
+        <input type="text" placeholder="手机号" class="input1" :value="phonevalue" @input="isphone"> 
         <button :disabled="disabled" class="getma" @click.prevent="btnclick1">{{message}}</button>
       </div>
       <div v-if="error" class="errorinfo">
           {{error}}
       </div>
       <div class="form1">
-        <input type="text" placeholder="验证码" class="input1" autocomplete="off"  name="notify" :value="notifyvalue" @input="isnotify" >
+        <input type="text" placeholder="验证码" class="input1" autocomplete  name="notify" :value="notifyvalue" @input="isnotify" >
+        
       </div>
-      <div class="form1">
-       <input type="password" placeholder="密码" class="input1" name="password" :value="passowordvalue" autocomplete="off" @input="ispassword">
-     </div>
       <div class="deal" >
-          <el-radio v-model="issure" class="radio" @change="isradio"> </el-radio>
+          <el-radio v-model="issure" class="radio" @change="aaa"> </el-radio>
         <span>我已阅读并接受<strong>《阅文用户服务协议》</strong>及<strong>《隐私协议》</strong></span>
       </div>
       <div class="form1">
-        <input type="submit" @click.prevent="ddd" value="注册" class="login" :class="{'Llogin':issure}">
+        <input type="submit" @click.prevent="ddd" value="登录" class="login" :class="{'Llogin':issure}">
       </div>
     </form>
   </div>
@@ -40,6 +35,8 @@ export default {
   },
   data() {
     return {
+      input3: '',
+      input4: '',
       issure:false,
       src:require('@/assets/img/loginimg/shangyibu.png'),
       error:'',
@@ -47,27 +44,27 @@ export default {
       notifyvalue:'',
       message:'获取验证码',
       disabled:false,
-      validation:'',
-      uservalue:'',
-      passowordvalue:'',
+      validation:''
     };
   },
   watch:{
 
   },
   methods:{
-    // 回到上一级;
+    toregister(){
+      this.$router.push('/register');
+    },
     backlogin(){
       this.$router.go(-1);
     },
-
-    // 获取验证码
     btnclick1(){
       console.log(this.phonevalue);
       this.$http.post('/api/validate',{
         iphone:this.phonevalue
       }).then((results=>{
+        
         this.validation = results.data;
+
       })).catch(err=>{
         console.log(err);
       })
@@ -103,39 +100,23 @@ export default {
       this.notifyvalue = event.target.value;
       this.issure = true;
     },
-    ispassword(){
-      this.passowordvalue = event.target.value;
-    },
-    isuser(){
-      this.uservalue = event.target.value;
-    },
-    isradio(){
+    aaa(){
       this.issure =true;
     },
     ddd(){
       if(this.issure&&this.notifyvalue&&this.phonevalue){
         if(this.notifyvalue == this.validation){ 
-          this.$http.post('/api/post',{
-            iphone : this.phonevalue,
-            password : this.passowordvalue,
-            username: this.uservalue
-          }).then(res=>{
-            console.log(res);
-             this.$notify({
-                title: '成功',
-                message: '这是一条成功的提示消息',
-                type: 'success'
-            });
-            this.$router.push('/login');
-          })
+         this.$notify({
+            title: '成功',
+            message: '这是一条成功的提示消息',
+            type: 'success'
+         });
+          this.$router.push('/mineShow');
         }else{
           this.$notify.error({
             title: '错误',
             message: '这是一条错误的提示消息'
           });
-          this.phonevalue = "";
-          this.passowordvalue = "";
-          this.uservalue = "";
         }
       }
     }
