@@ -83,13 +83,11 @@ export default {
       console.log(res);
     });
   },
-  beforeUpdate(){
-    this.$refs.scroll.refresh();
-  },
+  // updated(){
+  //   this.$refs.scroll.refresh();
+  // },
   mounted() {
-    setTimeout(() => {
-      this.$refs.scroll.refresh();
-    }, 3000);
+    
   },
 };
 </script>
