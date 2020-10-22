@@ -23,7 +23,7 @@
       <el-divider></el-divider>
       <!-- 登陆方式 -->
       <el-row :gutter="20">
-        <a href="">
+        <a href="/login">
           <el-col :span="6">
             <div class="loginWay">
               <svg class="icon" aria-hidden="true">
@@ -33,7 +33,7 @@
             </div>
           </el-col>
         </a>
-        <a href="">
+        <a href="/login">
           <el-col :span="6">
             <div class="loginWay">
               <svg class="icon" aria-hidden="true">
@@ -43,7 +43,7 @@
             </div>
           </el-col>
         </a>
-        <a>
+        <a href="/login">
           <el-col :span="6">
             <div class="loginWay">
               <svg class="icon" aria-hidden="true">
@@ -53,7 +53,7 @@
             </div>
           </el-col>
         </a>
-        <a>
+        <a href="/login">
           <el-col :span="6">
             <div class="loginWay">
               <svg class="icon" aria-hidden="true">

@@ -2,13 +2,13 @@
   <div class="read">
       <div class="read-content">
            <div class="read-book-imgs">
-               <img src="../../assets/img/Detail/3.png" alt="" class="read-book-img">
+               <img :src="info.images" alt="" class="read-book-img">
            </div>
-           <h3 class="read-book-name">回到明朝做昏君</h3>
+           <h3 class="read-book-name">{{infor.bookName}}</h3>
 
            <div class="read-book-detail">
                <div>
-                   <p class="read-book-detail-top">历史</p>
+                   <p class="read-book-detail-top">{{info.type}}</p>
                    <p class="read-book-detail-bottom">类型</p>
                </div>
                <div>
@@ -16,14 +16,14 @@
                    <p class="read-book-detail-bottom">上架</p>
                </div>
                <div>
-                   <p class="read-book-detail-top">155</p>
+                   <p class="read-book-detail-top">{{info.wordcount}}</p>
                    <p class="read-book-detail-bottom">万字/连载</p>
                </div>
            </div>
 
            <div class="read-author-speak">
                 <p>希望大家喜欢这本书，并支持正版阅读！</p>
-                <p class="read-author-name">—— 郭勇</p>
+                 <p class="read-author-name">—— 张晨</p>
            </div>
            <p class="read-book-bottom">[盟主]迪迪卡卡俱乐部[盟主]Cz丶</p>
            <p class="read-book-bottom">- 本作品由起点中文网进行电子制作与发行 -</p>
@@ -51,6 +51,12 @@
 
 export default {
   name: 'Read',
+  data(){
+      return{
+         infor:{},
+         info:{}
+      }      
+  },
   components: {
     
   },
@@ -60,6 +66,11 @@ export default {
       this.infor=res.data.slice(0,2000);
       console.log('sss');
       console.log(res.data.slice(0,2000));
+    })
+    this.$http.get('/api/detail/'+id).then(res=>{
+      this.info=res.data[0];
+      console.log('sss');
+      console.log(res.data);
     })
   },
   

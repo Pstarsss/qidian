@@ -68,8 +68,22 @@ router.get('/hotdiscuss',function(req,res){
     res.send(results);
   })
 });
+<<<<<<< HEAD
 
 // 用户注册
+=======
+router.get('/finddetail/:id',function(req,res){
+  let id = req.params.id;
+  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+    console.log(results);
+    res.send(results);
+
+  }).catch(err=>{
+     res.send('-1');
+  })
+});
+
+>>>>>>> 95da0d1098205619861e0f64672724682592b9db
 router.post('/post',(req,res)=>{
   let {iphone,password,username} = req.body;
   sql.find(`select * from user`).then((rr)=>{
