@@ -59,7 +59,7 @@ export default {
 .findTop a {
   font-size: 0.35rem;
   color: #fff;
-  margin: 0 0.1rem;
+  margin: 0 0.3rem;
   line-height: 1rem;
 }
 </style>

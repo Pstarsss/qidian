@@ -40,15 +40,20 @@ export default {
 .publish {
 }
 button {
-  width: 0.7rem;
-  height: 0.7rem;
+  width: 0.9rem;
+  height: 0.9rem;
   border-radius: 50%;
   background-color: #db3b3b;
   color: #fff;
   position: fixed;
   bottom: 1rem;
-  right: 0.1rem;
-  z-index: 999;
+  right: 0.2rem;
+  z-index: 50;
+  box-shadow: 0 0 30px 0px rgba(255, 0, 0, 0.3);
+}
+button i {
+  font-size: 0.4rem;
+  font-weight: bold;
 }
 .in {
   transition: all 0.4s;
@@ -62,13 +67,13 @@ button {
   position: fixed;
   z-index: 998;
   bottom: 1.7rem;
-  right: 0.1rem;
+  right: 0.2rem;
 }
 .publishContents p {
   background: #db3b3b;
   border-radius: 0.4rem;
   margin-bottom: 0.3rem;
-  padding: 0.23rem 0.3rem;
+  padding: 0.25rem 0.3rem;
   font-size: 0.22rem;
   font-weight: bold;
   color: #fff;
