@@ -40,19 +40,19 @@
         <i class="el-icon-search"></i>
       </div>
     </div>
-    <scroll class="wrapper" :probeType="3" ref="scroll">
+    
       <router-view />
-    </scroll>
+    
   </div>
 </template>
 
 <script>
-import scroll from "@/components/common/Scroll/scroll.vue";
+
 import navs from "../../components/navs.vue";
 import TopNavBar from "@/components/common/TopNavBar/NavBar.vue";
 export default {
   components: {
-    scroll,
+
   },
   name: "selected",
   data() {
@@ -82,6 +82,9 @@ export default {
       console.log("sss");
       console.log(res);
     });
+  },
+  beforeUpdate(){
+    this.$refs.scroll.refresh();
   },
   mounted() {
     setTimeout(() => {

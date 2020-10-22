@@ -3,8 +3,6 @@
     <div class="container">
       <!-- 发现-广场  -->
       <div class="findSquares">
-        <!-- 发布动态 -->
-        <div class="issued"></div>
         <!-- 导航组件 -->
         <div id="nav" class="findSquareContent">
           <navs :list="navlist"></navs>
@@ -66,7 +64,14 @@
           </el-row>
         </div>
         <!-- 滚动公示 -->
-        <div id="roll"></div>
+        <div id="roll">
+          <i class="el-icon-bell"></i>
+          <ul :style="{ top }">
+            <li v-for="i in rollMsg" :key="i.id">
+              {{ i.msg }}
+            </li>
+          </ul>
+        </div>
         <!-- 游戏、活动、神创作、专栏精选、对话小说推荐 -->
         <div
           :id="i.id"
@@ -278,16 +283,31 @@ export default {
           ],
         },
       ],
+      // 滚动公示
+      rollMsg: [
+        { msg: '同人文创作来袭' },
+        { msg: '十月新书制霸榜' },
+        { msg: '点点日报VOL.378' },
+        { msg: '一路走来，感谢陪伴' },
+        { msg: '我有黑科技模拟器' },
+        { msg: '同人大触扶持计划' },
+        { msg: '名单公示' },
+        { msg: '最爽翻车现场' },
+        { msg: '合光 · 向融' },
+        { msg: '非童凡响，童心入梦' },
+        { msg: '每周畅读福利' },
+      ],
+      activeIndex: 1,
       // 热门讨论
       hotDiscussionList: [],
       disNum: 5,
       showHotList: false,
-      disLoading: true,
+      disLoading: false,
     }
   },
   methods: {
     pullingUp() {
-      console.log('find上拉')
+      console.log('findSquares上拉')
       this.$refs.scroll.finishPullup()
       if (this.disNum <= 40) {
         this.disLoading = true
@@ -332,6 +352,20 @@ export default {
       ]
       console.log(this.hotDiscussionList)
     })
+  },
+  computed: {
+    top() {
+      return -this.activeIndex * 0.5 + 'rem'
+    },
+  },
+  mounted() {
+    setInterval((_) => {
+      if (this.activeIndex < 11) {
+        this.activeIndex += 1
+      } else {
+        this.activeIndex = 1
+      }
+    }, 2000)
   },
   // updated() {
   //   this.updataNew()
@@ -440,6 +474,47 @@ export default {
 }
 </style>
 
+// 滚动公示
+<style lang="css" scoped>
+#roll {
+  width: 100%;
+  height: 0.7rem;
+  background-color: #eee;
+  margin: 0.2rem 0;
+  padding: 0.15rem 0.2rem;
+  overflow: hidden;
+  border-radius: 0.1rem;
+  /* border-top: 0.15rem #eee solid;
+  border-bottom: 0.15rem #eee solid; */
+}
+#roll i {
+  display: block;
+  font-size: 0.3rem;
+  font-weight: bold;
+  line-height: 0.4rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  text-align: center;
+  color: #000;
+}
+#roll ul {
+  position: relative;
+  left: 0.55rem;
+  bottom: 0.5rem;
+  transition: all 0.3s;
+}
+#roll li {
+  font-size: 0.3rem;
+  display: block;
+  line-height: 0.4rem;
+  margin: 0.1rem 0;
+  text-align: left;
+  color: #000;
+  /* position: absolute; */
+  /* transition: all 2s ; */
+}
+</style>
+
 //热门讨论
 <style scoped>
 .hot-discuss {
@@ -452,7 +527,7 @@ export default {
   font-size: 0.2rem;
 }
 .el-icon-loading {
-  position: relative;
+  position: absolute;
   left: 44.5%;
   bottom: 0.2rem;
   font-size: 0.7rem;

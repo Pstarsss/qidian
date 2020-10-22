@@ -4,7 +4,7 @@
 		<!-- 顶部 -->
 		<div class="title">
 			<i class="el-icon-set-up icon-set" @click="set"></i>
-			<i class="el-icon-message icon-msg"></i>
+			<i class="el-icon-message icon-msg" @click="Msg"></i>
 			<div class="change">
 				<i class="el-icon-moon icon-moon"></i>夜间
 			</div>
@@ -124,6 +124,9 @@
 		methods:{
 			set(){
 				this.$router.push('/mineSet')
+			},
+			Msg(){
+				this.$router.push('/mineMsg')
 			},
 			pullingUp(){
 				//console.log(12);

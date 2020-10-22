@@ -1,6 +1,7 @@
 <template>
   <div>
     <book-crack class="bookcolor"></book-crack>
+    <book-list></book-list>
     <div class="b-findmore">
         <button>查找更多精彩作品</button>
     </div>
@@ -9,12 +10,13 @@
 </template>
 
 <script>
-
 import BookCrack from '@/components/common/bookcrack/BookCrack.vue'
+import BookList from '@/components/common/bookcrack/Bookposition.vue'
 export default {
   name: 'bookshelf',
   components: {
-    BookCrack
+    BookCrack,
+    BookList
   },
   
 }

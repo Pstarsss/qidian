@@ -16,8 +16,9 @@
       </navBar>
     </div>
     <publish />
-
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
@@ -58,7 +59,7 @@ export default {
 .findTop a {
   font-size: 0.35rem;
   color: #fff;
-  margin: 0 10px;
+  margin: 0 0.1rem;
   line-height: 1rem;
 }
 </style>
