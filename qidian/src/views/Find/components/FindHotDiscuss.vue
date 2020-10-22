@@ -1,6 +1,11 @@
 <template>
   <div class="findHotDiscuss">
-    <div class="" v-for="(i, index) in hotDiscussion" :key="index">
+    <div
+      class=""
+      v-for="(i, index) in hotDiscussion"
+      :key="index"
+      @click="intoDetails(i.discussid)"
+    >
       <!-- 点点圈(类似发朋友圈动态) -->
       <!-- 书单(给别人推荐书) -->
       <p class="type">点点圈</p>
@@ -52,6 +57,11 @@ export default {
     hotDiscussion: {
       type: Array,
       default: () => {},
+    },
+  },
+  methods: {
+    intoDetails(e) {
+      this.$router.push({ path: '/findDetails/' + e })
     },
   },
 }

@@ -16,8 +16,9 @@
       </navBar>
     </div>
     <publish />
-
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
