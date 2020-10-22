@@ -59,6 +59,15 @@ router.get('/hotdiscuss',function(req,res){
   })
 });
 
+router.post('/login',(req,res)=>{
+  let {iphone,password } = req.body;
+  sql.find('select * from user where iphone = ? and password = ?',[iphone,password]).then((re)=>{
+    console.log(re);
+  }).catch((err)=>{
+    console.log(err);
+  })
+  res.send('11');
+});
   
 const Core = require('@alicloud/pop-core');
 

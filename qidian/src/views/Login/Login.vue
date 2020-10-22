@@ -20,11 +20,11 @@
        <span>我已阅读并接受<strong>《阅文用户服务协议》</strong>及<strong>《隐私协议》</strong></span>
      </div>
      <div class="form1">
-       <input type="submit" @click.prevent="ddd" value="登录" class="login" >
+       <input type="submit" @click.prevent="ddd" value="登录" class="login1" >
      </div>
      <div class="L-pp">
-       <div>忘记密码?</div>
-       <div @click="toregister">注册新账号</div>
+       <div>注册新账号</div>
+       <div @click="toregister">手机验证码登录</div>
      </div>
   </form>
    </div>
@@ -76,8 +76,13 @@ export default {
       this.issure =true;
     },
     ddd(){
-      if(this.issure&&this.notifyvalue&&this.phonevalue){
-        console.log('sss');
+      if(this.issure&&this.phonevalue&&this.passowordvalue){
+        this.$http.post('/api/login',{
+          iphone:this.phonevalue,
+          password:this.passowordvalue
+        }).then(res=>{
+          this.$router.push('/mineShow');
+        })
       }
     }
    }
@@ -140,7 +145,7 @@ form{
 strong{
   font-weight:600;
 }
-.login{
+.login1{
   color: #fff;
     background-color: #80808033;
     outline: none;
