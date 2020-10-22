@@ -4,14 +4,14 @@
      <top-nav-bar>
         <div slot="left" @click="$router.go(-1)"><i class="el-icon-arrow-left"></i></div>
         <div slot="center">目录</div>
-        <div slot="right"><i class="el-icon-sort"></i></div>
+        <div slot="right"><i class="el-icon-sort" @click="overturn"></i></div>
      </top-nav-bar>
     <div class="chapter-top">
         <p class="chapter-top-content">正文卷</p>
     </div>
   </div>
   <ul class="chapter-titleall">
-      <li class="chapter-title1" :key="index" v-for="(item,index) in info">{{item.title}}</li>
+      <li class="chapter-title1" :key="index" v-for="(item,index) in info" @click="read(index)">{{item.title}}</li>
   </ul>
 </div>
  
@@ -32,12 +32,25 @@ export default {
    created(){
     let id = this.$router.currentRoute.params.id;
     this.$http.get('/api/read/'+id).then(res=>{
-      this.info=res.data.slice(0,100);
+      this.info=res.data.slice(0,1000);
       console.log('sss');
       console.log(res.data);
     })
   },
-  
+  methods:{
+     read(index){
+      let id = this.$router.currentRoute.params.id;
+       this.$router.push('/read/'+id);
+     },
+     overturn(){
+      let id = this.$router.currentRoute.params.id;
+      this.$http.get('/api/read/'+id).then(res=>{
+          this.info=res.data.reverse().slice(0,1000);
+          console.log('sss');
+          console.log(res.data.reverse().slice(0,1000));
+    })
+     }
+  },
 }
 </script>
 
