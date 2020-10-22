@@ -1,323 +1,84 @@
 <template>
   <div class="">
     <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
-    <div class="container">
-      <!-- 顶部轮播图 -->
-      <div class="block">
-        <el-carousel style="height: 2.6rem">
-          <el-carousel-item v-for="(item, index) in arrs" :key="index">
-            <img class="top-img-scroll" :src="item.src" />
-          </el-carousel-item>
-        </el-carousel>
-      </div>
+      <div class="container">
+        <!-- 顶部轮播图 -->
+        <div class="block">
+          <el-carousel style="height: 2.6rem">
+            <el-carousel-item v-for="(item, index) in arrs" :key="index">
+              <img class="top-img-scroll" :src="item.src" />
+            </el-carousel-item>
+          </el-carousel>
+        </div>
 
-      <!-- 分类图标 -->
-      <bnavs :list="navlist"> </bnavs>
+        <!-- 分类图标 -->
+        <bnavs :list="navlist"> </bnavs>
 
-      <!-- 分割线奥 -->
-      <hr style="margin-top: 0.3rem" />
+        <!-- 分割线奥 -->
+        <hr style="margin-top: 0.3rem" />
 
-      <!-- 推荐书籍 -->
-      <div class="scroll-wrap">
-        <ul class="scroll-content" :style="{ top }">
-          <li v-for="(item, index) in msg.data" :key="index">
-            <span style="margin-bottom=0.rem">{{ item.type }}</span>
-            <small> {{ item.intro }}</small>
-            <span class="scroll-content-more">
+        <!-- 推荐书籍 -->
+        <div class="scroll-wrap">
+          <ul class="scroll-content" :style="{ top }">
+            <li
+              v-for="(item, index) in msg.data"
+              :key="index"
+              @click="openDetail1(index)"
+            >
+              <span style="margin-bottom=0.rem">{{ item.type }}</span>
+              <small> {{ item.intro }}</small>
+              <span class="scroll-content-more">
+                <i class="el-icon-arrow-right"></i>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <!-- 畅销精选 -->
+        <div class="wellsell">
+          <div class="wellsell-title">
+            <h2>畅销精选</h2>
+            <span>
+              更多
               <i class="el-icon-arrow-right"></i>
             </span>
-          </li>
-        </ul>
-      </div>
-      <!-- 畅销精选 -->
-      <div class="wellsell">
-        <div class="wellsell-title">
-          <h2>畅销精选</h2>
-          <span>
-            更多
-            <i class="el-icon-arrow-right"></i>
-          </span>
-        </div>
-        <div
-          class="wellsell-container"
-          v-for="(item, index) in msgArr[0].data.slice(0, 3)"
-          :key="index"
-        >
-          <div class="wellsell-container-left">
-            <img :src="item.images" alt="" />
           </div>
-          <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">{{ item.name }}</span>
-            <p class="wellsell-desc1">
-              {{ item.serialize }} {{ item.wordcount }}万字
-            </p>
-            <p class="wellsell-desc2">{{ item.intro }}</p>
-          </div>
-          <hr />
-        </div>
-      </div>
-
-      <!-- 主编力荐 -->
-      <div class="wellsell">
-        <div class="wellsell-title">
-          <h2>主编力荐</h2>
-          <span>
-            更多
-            <i class="el-icon-arrow-right"></i>
-          </span>
-        </div>
-        <div
-          class="wellsell-container"
-          v-for="(item, index) in msgArr[1].data.slice(0, 3)"
-          :key="index"
-        >
-          <div class="wellsell-container-left">
-            <img :src="item.images" alt="" />
-          </div>
-          <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">{{ item.name }}</span>
-            <p class="wellsell-desc1">
-              {{ item.serialize }} {{ item.wordcount }}万字
-            </p>
-            <p class="wellsell-desc2">{{ item.intro }}</p>
-          </div>
-          <hr />
-        </div>
-      </div>
-
-      <!-- 限时免费 -->
-      <div class="time-free">
-        <h2>限时免费</h2>
-        <span class="free-hour">{{ this.hour }}</span> :
-        <span class="free-minu">{{ this.min }}</span> :
-        <span class="free-sec">{{ this.sec }}</span>
-
-        <span class="for-more">
-          更多
-          <i class="el-icon-arrow-right"></i>
-        </span>
-
-        <div class="time-free-container">
           <div
-            class="time-free-items"
-            v-for="(item, index) in msgArr[4].data.slice(
-              this.changestar,
-              this.changeend
-            )"
+            class="wellsell-container"
+            v-for="(item, index) in msgArr[0].data.slice(0, 3)"
             :key="index"
+            @click="openDetail(index, 0)"
           >
-            <div class="time-free-item">
-              <img :src="item.images" alt="" />
-              <p>{{ item.name }}</p>
-              <span class="time-free-free">免费</span>
+            <div class="wellsell-container-left">
+              <img :src="item.images" alt="" @click="openDetail(index, 0)" />
             </div>
-          </div>
-        </div>
-
-        <div class="time-free-change" @click="change()">
-          <i class="el-icon-refresh"></i> 换一批
-        </div>
-        <hr />
-      </div>
-
-      <!-- 新书强推 -->
-      <div class="wellsell">
-        <div class="wellsell-title">
-          <h2>新书强推</h2>
-          <span>
-            更多
-            <i class="el-icon-arrow-right"></i>
-          </span>
-        </div>
-
-        <div
-          class="wellsell-container"
-          v-for="(item, index) in msgArr[5].data.slice(0, 3)"
-          :key="index"
-        >
-          <div class="wellsell-container-left">
-            <img :src="item.images" alt="" />
-          </div>
-          <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">{{ item.name }}</span>
-            <p class="wellsell-desc1">
-              {{ item.serialize }} {{ item.wordcount }}万字
-            </p>
-            <p class="wellsell-desc2">{{ item.intro }}</p>
-          </div>
-          <hr />
-        </div>
-      </div>
-
-      <!-- 经典完本 -->
-      <div class="wellsell">
-        <div class="wellsell-title">
-          <h2>经典完本</h2>
-          <span>
-            更多
-            <i class="el-icon-arrow-right"></i>
-          </span>
-        </div>
-
-        <div
-          class="wellsell-container"
-          v-for="(item, index) in msgArr[6].data.slice(0, 3)"
-          :key="index"
-        >
-          <div class="wellsell-container-left">
-            <img :src="item.images" alt="" />
-          </div>
-          <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">{{ item.name }}</span>
-            <p class="wellsell-desc1">
-              {{ item.serialize }} {{ item.wordcount }}万字
-            </p>
-            <p class="wellsell-desc2">{{ item.intro }}</p>
-          </div>
-          <hr />
-        </div>
-      </div>
-
-      <!-- 潜力新书和优质精品 -->
-      <div class="qianli-youzhi">
-        <img src="../../assets/img/SelectBoys/1.png" alt="" />
-        <img
-          class="qianli-youzhi-img2"
-          src="../../assets/img/SelectBoys/2.png"
-          alt=""
-        />
-      </div>
-
-      <!-- 二次元精品 -->
-      <div class="wellsell">
-        <div class="wellsell-title">
-          <h2>二次元精品</h2>
-          <span>
-            更多
-            <i class="el-icon-arrow-right"></i>
-          </span>
-        </div>
-
-        <div
-          class="wellsell-container"
-          v-for="(item, index) in msgArr[7].data.slice(0, 3)"
-          :key="index"
-        >
-          <div class="wellsell-container-left">
-            <img :src="item.images" alt="" />
-          </div>
-          <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">{{ item.name }}</span>
-            <p class="wellsell-desc1">
-              {{ item.serialize }} {{ item.wordcount }}万字
-            </p>
-            <p class="wellsell-desc2">{{ item.intro }}</p>
-          </div>
-          <hr />
-        </div>
-      </div>
-
-      <!-- 军事精品 -->
-      <div class="wellsell">
-        <div class="wellsell-title">
-          <h2>军事精品</h2>
-          <span>
-            更多
-            <i class="el-icon-arrow-right"></i>
-          </span>
-        </div>
-
-        <div
-          class="wellsell-container"
-          v-for="(item, index) in msgArr[8].data.slice(0, 3)"
-          :key="index"
-        >
-          <div class="wellsell-container-left">
-            <img :src="item.images" alt="" />
-          </div>
-          <div class="wellsell-container-right">
-            <span class="wellsell-container-right-title">{{ item.name }}</span>
-            <p class="wellsell-desc1">
-              {{ item.serialize }} {{ item.wordcount }}万字
-            </p>
-            <p class="wellsell-desc2">{{ item.intro }}</p>
-          </div>
-          <hr />
-        </div>
-      </div>
-
-      <!-- 出版力荐 -->
-      <div class="time-free">
-        <h2>出版力荐</h2>
-
-        <span class="for-more">
-          更多
-          <i class="el-icon-arrow-right"></i>
-        </span>
-
-        <div class="time-free-container">
-          <div
-            class="time-free-items"
-            v-for="(item, index) in msgArr[9].data.slice(
-              this.changestar1,
-              this.changeend1
-            )"
-            :key="index"
-          >
-            <div class="time-free-item">
-              <img :src="item.images" alt="" />
-              <p>{{ item.name }}</p>
-              <span class="time-free-free">免费</span>
+            <div class="wellsell-container-right">
+              <span class="wellsell-container-right-title">{{
+                item.name
+              }}</span>
+              <p class="wellsell-desc1">
+                {{ item.serialize }} {{ item.wordcount }}万字
+              </p>
+              <p class="wellsell-desc2">{{ item.intro }}</p>
             </div>
+            <hr />
           </div>
         </div>
 
-        <div class="time-free-change" @click="change1()">
-          <i class="el-icon-refresh"></i> 换一批
-        </div>
-        <hr />
-      </div>
-
-      <!-- 专题 -->
-      <div class="wellsell">
-        <div class="wellsell-title">
-          <h2>专题</h2>
-          <span>
-            更多
-            <i class="el-icon-arrow-right"></i>
-          </span>
-        </div>
-
-        <el-carousel
-          style="height: 2rem"
-          :interval="4000"
-          type="card"
-          arrow="never"
-          ref="carousel"
-        >
-          <el-carousel-item v-for="item in carouseData" :key="item.id">
-            <img class="element-img" alt="" :src="item.src" />
-          </el-carousel-item>
-        </el-carousel>
-      </div>
-
-      <!-- 个性化推荐 -->
-      <div class="special-for">
-        <h2>个性化推荐</h2>
-        <span>根据你的阅读口味或自定义偏好生成</span>
-        &nbsp;<span>设置偏好></span>
-      </div>
-
-      <!-- 个性化推荐分类 -->
-      <div class="wellsell" v-for="(item, index) in msg.data" :key="index">
-        <div v-show="display">
+        <!-- 主编力荐 -->
+        <div class="wellsell">
           <div class="wellsell-title">
-            <h3>你可能感兴趣的好书</h3>
+            <h2>主编力荐</h2>
             <span>
-              <i class="el-icon-circle-close" @click="deleteItem(index)"></i>
+              更多
+              <i class="el-icon-arrow-right"></i>
             </span>
           </div>
-          <div class="wellsell-container">
+          <div
+            class="wellsell-container"
+            v-for="(item, index) in msgArr[1].data.slice(0, 3)"
+            :key="index"
+            @click="openDetail(index, 1)"
+          >
             <div class="wellsell-container-left">
               <img :src="item.images" alt="" />
             </div>
@@ -325,14 +86,291 @@
               <span class="wellsell-container-right-title">{{
                 item.name
               }}</span>
-              <p class="wellsell-desc1">{{ item.wordcount }}万字</p>
+              <p class="wellsell-desc1">
+                {{ item.serialize }} {{ item.wordcount }}万字
+              </p>
               <p class="wellsell-desc2">{{ item.intro }}</p>
             </div>
             <hr />
           </div>
         </div>
+
+        <!-- 限时免费 -->
+        <div class="time-free">
+          <h2>限时免费</h2>
+          <span class="free-hour">{{ this.hour }}</span> :
+          <span class="free-minu">{{ this.min }}</span> :
+          <span class="free-sec">{{ this.sec }}</span>
+
+          <span class="for-more">
+            更多
+            <i class="el-icon-arrow-right"></i>
+          </span>
+
+          <div class="time-free-container">
+            <div
+              @click="openDetail(index, 4)"
+              class="time-free-items"
+              v-for="(item, index) in msgArr[4].data.slice(
+                this.changestar,
+                this.changeend
+              )"
+              :key="index"
+            >
+              <div class="time-free-item">
+                <img :src="item.images" alt="" />
+                <p>{{ item.name }}</p>
+                <span class="time-free-free">免费</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="time-free-change" @click="change()">
+            <i class="el-icon-refresh"></i> 换一批
+          </div>
+          <hr />
+        </div>
+
+        <!-- 新书强推 -->
+        <div class="wellsell">
+          <div class="wellsell-title">
+            <h2>新书强推</h2>
+            <span>
+              更多
+              <i class="el-icon-arrow-right"></i>
+            </span>
+          </div>
+
+          <div
+            @click="openDetail(index, 5)"
+            class="wellsell-container"
+            v-for="(item, index) in msgArr[5].data.slice(0, 3)"
+            :key="index"
+          >
+            <div class="wellsell-container-left">
+              <img :src="item.images" alt="" />
+            </div>
+            <div class="wellsell-container-right">
+              <span class="wellsell-container-right-title">{{
+                item.name
+              }}</span>
+              <p class="wellsell-desc1">
+                {{ item.serialize }} {{ item.wordcount }}万字
+              </p>
+              <p class="wellsell-desc2">{{ item.intro }}</p>
+            </div>
+            <hr />
+          </div>
+        </div>
+
+        <!-- 经典完本 -->
+        <div class="wellsell">
+          <div class="wellsell-title">
+            <h2>经典完本</h2>
+            <span>
+              更多
+              <i class="el-icon-arrow-right"></i>
+            </span>
+          </div>
+
+          <div
+            @click="openDetail(index, 6)"
+            class="wellsell-container"
+            v-for="(item, index) in msgArr[6].data.slice(0, 3)"
+            :key="index"
+          >
+            <div class="wellsell-container-left">
+              <img :src="item.images" alt="" />
+            </div>
+            <div class="wellsell-container-right">
+              <span class="wellsell-container-right-title">{{
+                item.name
+              }}</span>
+              <p class="wellsell-desc1">
+                {{ item.serialize }} {{ item.wordcount }}万字
+              </p>
+              <p class="wellsell-desc2">{{ item.intro }}</p>
+            </div>
+            <hr />
+          </div>
+        </div>
+
+        <!-- 潜力新书和优质精品 -->
+        <div class="qianli-youzhi">
+          <img src="../../assets/img/SelectBoys/1.png" alt="" />
+          <img
+            class="qianli-youzhi-img2"
+            src="../../assets/img/SelectBoys/2.png"
+            alt=""
+          />
+        </div>
+
+        <!-- 二次元精品 -->
+        <div class="wellsell">
+          <div class="wellsell-title">
+            <h2>二次元精品</h2>
+            <span>
+              更多
+              <i class="el-icon-arrow-right"></i>
+            </span>
+          </div>
+
+          <div
+            @click="openDetail(index, 7)"
+            class="wellsell-container"
+            v-for="(item, index) in msgArr[7].data.slice(0, 3)"
+            :key="index"
+          >
+            <div class="wellsell-container-left">
+              <img :src="item.images" alt="" />
+            </div>
+            <div class="wellsell-container-right">
+              <span class="wellsell-container-right-title">{{
+                item.name
+              }}</span>
+              <p class="wellsell-desc1">
+                {{ item.serialize }} {{ item.wordcount }}万字
+              </p>
+              <p class="wellsell-desc2">{{ item.intro }}</p>
+            </div>
+            <hr />
+          </div>
+        </div>
+
+        <!-- 军事精品 -->
+        <div class="wellsell">
+          <div class="wellsell-title">
+            <h2>军事精品</h2>
+            <span>
+              更多
+              <i class="el-icon-arrow-right"></i>
+            </span>
+          </div>
+
+          <div
+            @click="openDetail(index, 8)"
+            class="wellsell-container"
+            v-for="(item, index) in msgArr[8].data.slice(0, 3)"
+            :key="index"
+          >
+            <div class="wellsell-container-left">
+              <img :src="item.images" alt="" />
+            </div>
+            <div class="wellsell-container-right">
+              <span class="wellsell-container-right-title">{{
+                item.name
+              }}</span>
+              <p class="wellsell-desc1">
+                {{ item.serialize }} {{ item.wordcount }}万字
+              </p>
+              <p class="wellsell-desc2">{{ item.intro }}</p>
+            </div>
+            <hr />
+          </div>
+        </div>
+
+        <!-- 出版力荐 -->
+        <div class="time-free">
+          <h2>出版力荐</h2>
+
+          <span class="for-more">
+            更多
+            <i class="el-icon-arrow-right"></i>
+          </span>
+
+          <div class="time-free-container">
+            <div
+              @click="openDetail(index, 9)"
+              class="time-free-items"
+              v-for="(item, index) in msgArr[9].data.slice(
+                this.changestar1,
+                this.changeend1
+              )"
+              :key="index"
+            >
+              <div class="time-free-item">
+                <img :src="item.images" alt="" />
+                <p>{{ item.name }}</p>
+                <span class="time-free-free">免费</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="time-free-change" @click="change1()">
+            <i class="el-icon-refresh"></i> 换一批
+          </div>
+          <hr />
+        </div>
+
+        <!-- 专题 -->
+        <div class="wellsell">
+          <div class="wellsell-title">
+            <h2>专题</h2>
+            <span>
+              更多
+              <i class="el-icon-arrow-right"></i>
+            </span>
+          </div>
+
+          <el-carousel
+            style="height: 2rem"
+            :interval="4000"
+            type="card"
+            arrow="never"
+            ref="carousel"
+          >
+            <el-carousel-item
+              @click="openDetail(index)"
+              v-for="item in carouseData"
+              :key="item.id"
+            >
+              <img class="element-img" alt="" :src="item.src" />
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+
+        <!-- 个性化推荐 -->
+        <div class="special-for">
+          <h2>个性化推荐</h2>
+          <span>根据你的阅读口味或自定义偏好生成</span>
+          &nbsp;<span>设置偏好></span>
+        </div>
+
+        <!-- 个性化推荐分类 -->
+        <div class="bottomtuijian">
+          <div
+            @click="openDetail1(index)"
+            class="wellsell"
+            v-for="(item, index) in msg.data.slice(startline, endline)"
+            :key="index"
+          >
+            <div v-show="display">
+              <div class="wellsell-title">
+                <h3>你可能感兴趣的好书</h3>
+                <span>
+                  <i
+                    class="el-icon-circle-close"
+                    @click="deleteItem(index)"
+                  ></i>
+                </span>
+              </div>
+              <div class="wellsell-container">
+                <div class="wellsell-container-left">
+                  <img :src="item.images" alt="" />
+                </div>
+                <div class="wellsell-container-right">
+                  <span class="wellsell-container-right-title">{{
+                    item.name
+                  }}</span>
+                  <p class="wellsell-desc1">{{ item.wordcount }}万字</p>
+                  <p class="wellsell-desc2">{{ item.intro }}</p>
+                </div>
+                <hr />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     </scroll>
   </div>
 </template>
@@ -361,47 +399,36 @@ export default {
 
     this.$http.get("/api/booklist/1").then((res) => {
       this.msgArr[0] = res;
-      console.log(this.msgArr[0]);
     });
     this.$http.get("/api/booklist/2").then((res) => {
       this.msgArr[1] = res;
-      console.log(this.msgArr[1]);
     });
     this.$http.get("/api/booklist/3").then((res) => {
       this.msgArr[2] = res;
-      console.log(this.msgArr[2]);
     });
     this.$http.get("/api/booklist/4").then((res) => {
       this.msgArr[3] = res;
-      console.log(this.msgArr[3]);
     });
     this.$http.get("/api/booklist/5").then((res) => {
       this.msgArr[4] = res;
-      console.log(this.msgArr[4]);
     });
     this.$http.get("/api/booklist/6").then((res) => {
       this.msgArr[5] = res;
-      console.log(this.msgArr[5]);
     });
     this.$http.get("/api/booklist/7").then((res) => {
       this.msgArr[6] = res;
-      console.log(this.msgArr[6]);
     });
     this.$http.get("/api/booklist/8").then((res) => {
       this.msgArr[7] = res;
-      console.log(this.msgArr[7]);
     });
     this.$http.get("/api/booklist/9").then((res) => {
       this.msgArr[8] = res;
-      console.log(this.msgArr[8]);
     });
     this.$http.get("/api/booklist/10").then((res) => {
       this.msgArr[9] = res;
-      console.log(this.msgArr[9]);
     });
     this.$http.get("/api/booklist/11").then((res) => {
       this.msgArr[10] = res;
-      console.log(this.msgArr[10]);
     });
     this.$http.get("/api/booklist").then((res) => {
       this.msg = res;
@@ -410,9 +437,19 @@ export default {
   },
 
   methods: {
-    pullingUp(){
-      console.log('dddd');
+    openDetail(index, i) {
+      let a = this.msgArr[i].data[index].id;
+      this.$router.push("/detail/" + a);
+    },
+    openDetail1(index) {
+      let a = this.msg.data[index].id;
+      this.$router.push("/detail/" + a);
+    },
+    pullingUp() {
+      this.endline += 4;
       this.$refs.scroll.finishPullup();
+      this.$refs.scroll.refresh();
+      console.log(this.startline, this.endline);
     },
     deleteItem(index) {
       this.item.splice(index, 1);
@@ -509,6 +546,8 @@ export default {
 
   data() {
     return {
+      startline: 0,
+      endline: 1,
       item: [],
       display: 1,
       data: {},
@@ -518,13 +557,6 @@ export default {
       changeend1: 4,
       msg: {},
       msgArr: [],
-      prizeList: [
-        { type: "考古", name: "保护性挖掘" },
-        { type: "谍影", name: "张晨你就是个傻狗" },
-        { type: "冒险", name: "张晨你就是个傻狗" },
-        { type: "侦探", name: "张晨你就是个傻狗" },
-        { type: "历史", name: "张晨你就是个傻狗" },
-      ],
       activeIndex: 0,
       carouseData: [
         { src: require("../../assets/img/SelectBoys/sp1.png") },
@@ -559,7 +591,10 @@ export default {
 };
 </script>
 <style scoped>
-.wrapper{
+.bottomtuijian {
+  margin-bottom: 2rem;
+}
+.wrapper {
   height: calc(100vh - 1.2rem);
 }
 .time-free-item > img {

@@ -40,20 +40,16 @@
         <i class="el-icon-search"></i>
       </div>
     </div>
-    
-      <router-view />
-    
+
+    <router-view />
   </div>
 </template>
 
 <script>
-
 import navs from "../../components/navs.vue";
 import TopNavBar from "@/components/common/TopNavBar/NavBar.vue";
 export default {
-  components: {
-
-  },
+  components: {},
   name: "selected",
   data() {
     return {
@@ -83,12 +79,18 @@ export default {
       console.log(res);
     });
   },
-  beforeUpdate(){
-    this.$refs.scroll.refresh();
+
+  // updated(){
+  //   this.$refs.scroll.refresh();
+  // },
+
+  beforeUpdate() {
+  // this.$refs.scroll.refresh();
   },
+
   mounted() {
     setTimeout(() => {
-      this.$refs.scroll.refresh();
+      // this.$refs.scroll.refresh();
     }, 3000);
   },
 };

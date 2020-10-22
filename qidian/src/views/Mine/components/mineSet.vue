@@ -4,7 +4,7 @@
 			<i class="el-icon-arrow-left icon-left" @click="back"></i>
 			设置
 		</div>
-		<!-- <scroll :probeType="3" class="wrapper" ref="scroll" @pullingUp="pullingUp"> -->
+		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingUp="pullingUp">
 		<div class="list1">
 			推送通知
 			<i class="el-icon-arrow-right icon-right"></i>
@@ -51,7 +51,7 @@
 			<i class="el-icon-arrow-right icon-right"></i>
 			<span class="text">{{item.text}}</span>
 		</div>
-		<!-- </scroll> -->
+		</scroll>
 		<div class="foot">
 			切换账号
 		</div>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-	// import scroll from '@/components/common/Scroll/scroll.vue'
+	import scroll from '@/components/common/Scroll/scroll.vue'
 	export default{
 		data(){
 			return{
@@ -82,14 +82,18 @@
 			}
 		},
 		methods:{
-			// pullingUp(){
-			// 	console.log(12);
-			// 	this.$refs.scroll.finishPullUp();
-			// },
+			pullingUp(){
+				console.log(12);
+				this.$refs.scroll.finishPullUp();
+			},
 			back(){
 				this.$router.go(-1);
 			}
-		}	
+		},
+		components:{
+			scroll
+		}
+		
 	}
 </script>
 
