@@ -19,7 +19,7 @@
 
 <script>
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue'
-export default {
+export default {  
   name: 'Chapter',
   components: {
     TopNavBar,

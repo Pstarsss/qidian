@@ -3,12 +3,8 @@ import VueRouter from 'vue-router'
 import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
 import Select from '@/views/Selected/Select.vue'
 import Find from '@/views/Find.vue'
-<<<<<<< HEAD
-import FindFollow from '@/views/Find/findFollow.vue'
-=======
-import FindFollow from '@/views/Find/findFollow.vue'
->>>>>>> 9fa6eebd36a4ba1ba4e94937345d2fde8006f9f5
-import FindSquares from '@/views/Find/findSquares.vue'
+import FindFollow from '@/views/Find/FindFollow.vue'
+import FindSquares from '@/views/Find/FindSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
 import Mine from '@/views/Mine.vue'

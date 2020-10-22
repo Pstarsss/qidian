@@ -79,28 +79,19 @@ export default {
       console.log(res);
     });
   },
-<<<<<<< HEAD
+
   beforeUpdate() {
     // this.$refs.scroll.refresh();
-=======
-<<<<<<< HEAD
+
   // updated(){
   //   this.$refs.scroll.refresh();
   // },
-=======
-  beforeUpdate(){
-    this.$refs.scroll.refresh();
->>>>>>> 9fa6eebd36a4ba1ba4e94937345d2fde8006f9f5
   },
->>>>>>> b34be9f37daded1835041cb1478b2931347eb58f
+
   mounted() {
-<<<<<<< HEAD
     setTimeout(() => {
       // this.$refs.scroll.refresh();
     }, 3000);
-=======
-    
->>>>>>> 9fa6eebd36a4ba1ba4e94937345d2fde8006f9f5
   },
 };
 </script>
