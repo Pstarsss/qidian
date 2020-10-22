@@ -19,6 +19,17 @@ router.get('/read/:id',function(req,res){
   let id = req.params.id;
   sql.find(`select * from book${id}`).then(results=>{
     res.send(results);
+  }).catch(err=>{
+    res.send(-1);
+  })
+});
+router.get('/read/:id/:pp',function(req,res){
+  let id = req.params.id;
+  console.log(req.params);
+  console.log(req.params);
+  let pp = req.params.pp;
+  sql.find(`select * from book${id} where id = ${pp}`).then(results=>{
+    res.send(results);
   })
 });
 
@@ -41,8 +52,9 @@ router.get('/detail/:id',(req,res)=>{
   });
 });
 
-router.get('/booktitle',function(req,res){
-  sql.find('select * from booktitles').then(results=>{
+router.get('/booktitle/:id',function(req,res){
+  let id = req.params.id;
+  sql.find(`select * from booktitles where id = ${id}`).then(results=>{
     res.send(results);
   })
 });
