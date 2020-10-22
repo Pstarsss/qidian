@@ -62,7 +62,9 @@ export default {
       this.$http.post('/api/validate',{
         iphone:this.phonevalue
       }).then((results=>{
+        
         this.validation = results.data;
+
       })).catch(err=>{
         console.log(err);
       })
