@@ -18,7 +18,7 @@
       <!-- 帖子内容 -->
       <div class="detail">
         <!-- 圈子 -->
-        <div class="tag">
+        <div class="tag" v-if="this.e">
           <div class="tagLeft">
             <p>好</p>
           </div>
@@ -32,7 +32,7 @@
         </div>
         <!-- 分割线 -->
         <el-divider></el-divider>
-        <!-- 内容 -->
+        <!-- 内容 -->  
         <div class="content">
           <p>
             <span v-for="i in 2" :key="i.id">讨论</span>
@@ -69,10 +69,11 @@ export default {
       direction: 'btt',
       drawerSize: '3.5rem',
       e: {},
+      id:''
     }
   },
   created() {
-    this.getDetail()
+    this.getDetail();
   },
   methods: {
     pullingUp() {
@@ -84,8 +85,11 @@ export default {
     },
     getDetail() {
       // let that = this
-      this.e = this.$route.query.e
-      console.log(this.e)
+      this.id = this.$router.currentRoute.params.id;
+      this.$http.get(`/api/finddetail/${this.id}`).then((res)=>{
+        console.log(res);
+        this.e = res.data[0];
+      });
     },
   },
   components: {

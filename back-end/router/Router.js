@@ -58,6 +58,17 @@ router.get('/hotdiscuss',function(req,res){
     res.send(results);
   })
 });
+router.get('/finddetail/:id',function(req,res){
+  let id = req.params.id;
+  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+    console.log(results);
+    res.send(results);
+
+  }).catch(err=>{
+     res.send('-1');
+  })
+});
+
 router.post('/post',(req,res)=>{
   let {iphone,password,username} = req.body;
   sql.add(`insert into user (iphone,password,username) values  (${iphone},${password},'${username}')`).then(re=>{
