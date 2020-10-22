@@ -125,7 +125,11 @@
          </div>
          <div class="detail-catalog">
            <span class="common-title">目录</span>
+<<<<<<< HEAD
            <span class="detail-catalog-right" @click="capter">连载至{{info3.length}}章·15小时前更新 <i class="el-icon-arrow-right"></i></span>
+=======
+           <span class="detail-catalog-right">连载至513章·15小时前更新 <i class="el-icon-arrow-right"></i></span>
+>>>>>>> b34be9f37daded1835041cb1478b2931347eb58f
          </div>
 
          <div class="space"></div>

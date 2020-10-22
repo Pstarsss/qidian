@@ -32,6 +32,7 @@
       
       <div class="read-content">
           <p class="book-content-icon"> <i class="el-icon-magic-stick"></i></p>   
+<<<<<<< HEAD
           <p class="book-content-name">{{infor.bookName}}</p>
           <h1 class="book-content-content">正文卷</h1> 
           <div :key="index" v-for="(item,index) in infor" id="index">
@@ -39,6 +40,12 @@
                <p class="book-content-contents">{{item.content}}</p> 
           </div>  
           
+=======
+          <p class="book-content-name">回到明朝做昏君</p>
+          <h1 class="book-content-content">正文卷</h1>   
+          <h1 class="book-content-title">第一章 木匠皇帝</h1>
+          <p class="book-content-contents">小说内容</p> 
+>>>>>>> b34be9f37daded1835041cb1478b2931347eb58f
       </div>
       <div class="read-space"></div>
       <div class="read-bottom">
@@ -57,7 +64,11 @@ export default {
    created(){
     let id = this.$router.currentRoute.params.id;
     this.$http.get('/api/read/'+id).then(res=>{
+<<<<<<< HEAD
       this.infor=res.data.slice(0,2000);
+=======
+      this.info=res.data[0];
+>>>>>>> b34be9f37daded1835041cb1478b2931347eb58f
       console.log('sss');
       console.log(res.data.slice(0,2000));
     })

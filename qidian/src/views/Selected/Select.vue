@@ -83,9 +83,15 @@ export default {
       console.log(res);
     });
   },
+<<<<<<< HEAD
   // updated(){
   //   this.$refs.scroll.refresh();
   // },
+=======
+  beforeUpdate(){
+    this.$refs.scroll.refresh();
+  },
+>>>>>>> b34be9f37daded1835041cb1478b2931347eb58f
   mounted() {
     
   },
