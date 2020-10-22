@@ -339,7 +339,6 @@
         <!-- 个性化推荐分类 -->
         <div class="bottomtuijian">
           <div
-            @click="openDetail1(index)"
             class="wellsell"
             v-for="(item, index) in msg.data.slice(startline, endline)"
             :key="index"
@@ -356,7 +355,7 @@
               </div>
               <div class="wellsell-container">
                 <div class="wellsell-container-left">
-                  <img :src="item.images" alt="" />
+                  <img :src="item.images" alt="" @click="openDetail1(index)" />
                 </div>
                 <div class="wellsell-container-right">
                   <span class="wellsell-container-right-title">{{
@@ -452,7 +451,7 @@ export default {
       console.log(this.startline, this.endline);
     },
     deleteItem(index) {
-      this.item.splice(index, 1);
+      this.msg.data.splice(index, 1);
     },
     hide() {
       this.display = 0;
