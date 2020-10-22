@@ -4,7 +4,7 @@
       class=""
       v-for="(i, index) in hotDiscussion"
       :key="index"
-      @click="intoDetails(i.discussid)"
+      @click="intoDetail(i)"
     >
       <!-- 点点圈(类似发朋友圈动态) -->
       <!-- 书单(给别人推荐书) -->
@@ -51,7 +51,9 @@
 import '../iconfont/iconfont.css'
 export default {
   data() {
-    return {}
+    return {
+      // detailE,
+    }
   },
   props: {
     hotDiscussion: {
@@ -60,8 +62,12 @@ export default {
     },
   },
   methods: {
-    intoDetails(e) {
-      this.$router.push({ path: '/findDetails/' + e })
+    intoDetail(e) {
+      // this.detailE = e
+      // console.log(e)
+      this.$router.push({
+        path: '/findDetails/' + e.discussid
+      })
     },
   },
 }

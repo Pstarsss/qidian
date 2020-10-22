@@ -1,5 +1,11 @@
 <template>
-  <scroll :probeType="3" class="wrapper" ref="scroll" @pullingUp="pullingUp">
+  <scroll
+    :probeType="3"
+    class="wrapper"
+    ref="scroll"
+    @pullingUp="pullingUp"
+    @scrolly="scrolly"
+  >
     <div class="container">
       <!-- 发现-广场  -->
       <div class="findSquares">
@@ -317,6 +323,9 @@ export default {
         this.addDisList()
         this.$refs.scroll.refresh()
       }, 500)
+    },
+    scrolly(value) {
+      // console.log(value);
     },
     // updataNew() {
     //   console.log('重新判断高度')
