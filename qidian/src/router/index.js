@@ -16,7 +16,7 @@ import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import Detail from '@/views/Details/Detail.vue'
 
 const Login = () => import('@/views/Login/Login.vue')
-const Register = () => import('@/views/Login/Register.vue')
+const validatelogin = () => import('@/views/Login/validatelogin.vue')
 const Read = () => import('@/views/Read/read.vue')
 Vue.use(VueRouter)
 
@@ -106,9 +106,9 @@ const routes = [
     component: Detail,
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register,
+    path: '/validatelogin',
+    name: 'validatelogin',
+    component: validatelogin,
   },
   {
     path: '/read/:id',

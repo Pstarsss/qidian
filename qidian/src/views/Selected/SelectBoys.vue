@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
     <div class="container">
       <!-- 顶部轮播图 -->
       <div class="block">
@@ -332,16 +333,19 @@
         </div>
       </div>
     </div>
+    </scroll>
   </div>
 </template>
 
 <script>
+import scroll from "@/components/common/Scroll/scroll.vue";
 import $ from "jquery";
 import bnavs from "../../components/navs";
 export default {
   name: "selectboys",
   components: {
     bnavs,
+    scroll,
   },
   computed: {
     top() {
@@ -406,6 +410,10 @@ export default {
   },
 
   methods: {
+    pullingUp(){
+      console.log('dddd');
+      this.$refs.scroll.finishPullup();
+    },
     deleteItem(index) {
       this.item.splice(index, 1);
     },
@@ -551,6 +559,9 @@ export default {
 };
 </script>
 <style scoped>
+.wrapper{
+  height: calc(100vh - 1.2rem);
+}
 .time-free-item > img {
   height: 1.8rem;
 }
