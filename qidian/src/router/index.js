@@ -63,6 +63,9 @@ const routes = [
     path: '/find',
     name: 'Find',
     component: Find,
+    meta: {
+      keepAlive: true,
+    },
     children: [
       {
         path: '/findFollow',
@@ -78,7 +81,7 @@ const routes = [
     redirect: '/findSquares',
   },
   {
-    path: '/findDetails',
+    path: '/findDetails/:id',
     name: 'findDetails',
     component: findDetails,
   },
