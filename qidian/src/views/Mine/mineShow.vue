@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<!-- 分类板块 -->
-		<div id="nav" class="msg-plate">
+		<div id="nav" class="msg-plate" style="margin-top: -19.5%;">
 			<navs :list="navlist1" class="nav1"></navs>
 			<navs :list="navlist2" class="nav2"></navs>
 		</div>
@@ -129,6 +129,8 @@
 				this.$router.push('/mineMsg')
 			},
 			pullingUp(){
+				let nav = document.getElementById("nav");
+				nav.style.marginTop = "0";
 				//console.log(12);
 				this.$refs.scroll.finishPullDown();
 			}
@@ -293,7 +295,7 @@
 		margin-left: 3%;
 		margin-top: -4%;
 		border-radius: 0.15rem;
-		padding: 0.08rem 0.08rem 0.08rem 0.08rem;
+		padding: 0.08rem;
 		background-color: coral;
 	}
 	.dredge-top{
