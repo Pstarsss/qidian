@@ -51,6 +51,15 @@
 			<i class="el-icon-arrow-right icon-right"></i>
 			<span class="text">{{item.text}}</span>
 		</div>
+		<div class="list2">
+			修改密码
+			<el-switch
+			  v-model="value2"
+			  active-color="gainsboro"
+			  inactive-color="#ff4949" class="switch"
+				@change="tochangepassword">
+			</el-switch>
+		</div>
 		</scroll>
 		<div class="foot">
 			切换账号
@@ -70,9 +79,9 @@
 				],
 				 value1: true,
 				 value2: true, 
+				 value3: true,
 				 lists:[
 					 { title:'安全中心'},
-					 { title:'修改密码'},
 					 { title:'青少年模式',text:'未开启'},
 					 { title:'吐个槽'},
 					 { title:'客服与帮助'},
@@ -93,6 +102,9 @@
 			go(){
 				this.$router.push('/privacySet');
 			},	
+			tochangepassword(){
+				this.$router.push('/changepassword');
+			}
 		},
 		components:{
 			scroll

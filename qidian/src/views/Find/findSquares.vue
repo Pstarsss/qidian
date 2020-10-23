@@ -4,7 +4,6 @@
     class="wrapper"
     ref="scroll"
     @pullingUp="pullingUp"
-    @scrolly="scrolly"
   >
     <div class="container">
       <!-- 发现-广场  -->
@@ -313,7 +312,7 @@ export default {
   },
   methods: {
     pullingUp() {
-      console.log('findSquares上拉')
+      // console.log('findSquares上拉')
       this.$refs.scroll.finishPullup()
       if (this.disNum <= 40) {
         this.disLoading = true
@@ -324,27 +323,19 @@ export default {
         this.$refs.scroll.refresh()
       }, 500)
     },
-    // scrolly(value) {
-    //   console.log(value);
-    // },
     // updataNew() {
-    //   console.log('重新判断高度')
-    //   this.$refs.scroll.refresh()
-    // },
-    // updataNew2() {
-    //   console.log('dd2')
     //   this.$refs.scroll.refresh()
     // },
     addDisList() {
       if (this.disNum <= 40) {
         this.$http.get('/api/hotDiscuss').then((res) => {
           // this.disLoading = false
-          console.log(this.disNum, this.disNum + 5)
+          // console.log(this.disNum, this.disNum + 5)
           this.hotDiscussionList = [
             ...this.hotDiscussionList,
             ...res.data.slice(this.disNum, this.disNum + 5),
           ]
-          console.log(this.hotDiscussionList)
+          // console.log(this.hotDiscussionList)
         })
       } else {
         this.disLoading = false
@@ -359,7 +350,7 @@ export default {
         ...this.hotDiscussionList,
         ...res.data.slice(0, this.disNum),
       ]
-      console.log(this.hotDiscussionList)
+      // console.log(this.hotDiscussionList)
     })
   },
   computed: {

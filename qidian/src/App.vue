@@ -5,7 +5,7 @@
         <div
           class="a"
           @click="open('/bookshelf')"
-          :class="{ active: isActive('bookshelf') }"
+          :class="{ active: isActive('Bookshelf') }"
         >
           <i class="el-icon-reading"></i>
           <span>书架</span>
@@ -13,7 +13,7 @@
         <div
           class="a"
           @click="open('/selecthome')"
-          :class="{ active: isActive('select') }"
+          :class="{ active: isActive('Select') }"
         >
           <i class="el-icon-s-operation"></i>
           <span>精选</span>
@@ -21,7 +21,7 @@
         <div
           class="a"
           @click="open('/findSquares')"
-          :class="{ active: isActive('find') }"
+          :class="{ active: isActive('Find') }"
         >
           <i class="el-icon-view"></i>
           <span>发现</span>
@@ -29,19 +29,20 @@
         <div
           class="a"
           @click="open('/mine')"
-          :class="{ active: isActive('mine') }"
+          :class="{ active: isActive('Mine') }"
         >
           <i class="el-icon-user"></i>
           <span>我的</span>
         </div>
       </div>
     </div>
+    <keep-alive>
     <router-view />
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   name: "App",
   data() {
@@ -67,8 +68,10 @@ export default {
         this.$router.push(a);
       }
     },
-    isActive(name) {
-      return this.nowUrl.indexOf(name) != -1;
+    isActive(names) {
+      if(this.$router.name){
+        return this.$route.name.includes(names);
+      }
     },
   },
 };

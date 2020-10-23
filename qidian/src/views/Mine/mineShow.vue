@@ -1,4 +1,5 @@
 <template>
+	
 	<div class="mineShow">
 		<!-- 顶部 -->
 		<div class="title">
@@ -11,7 +12,7 @@
 		<!-- 个人信息板块 -->
 		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown" @scrolly='scrolly' @click.native="stopflag">
 		<div class="people">
-			<div class="details" @click="people">
+			<div class="details">
 				<div class="details1">
 					<img src="./mine-imgs/05.jpg" />
 				</div>
@@ -130,9 +131,6 @@
 			Msg(){
 				this.$router.push('/mineMsg')
 			},
-			people(){
-				this.$router.push('/peopleDetails')
-			},
 			pullingDown(){
 				// this.scrolly();
 				this.flag = true;
@@ -156,7 +154,9 @@
 		  navs,
 		  scroll
 		},
+		
 	}
+	
 </script>
 
 <style scoped>
@@ -323,8 +323,8 @@
 	}
 	.dredge-top{
 		height: 0.6rem;
-        padding: 0.08rem;
-        color: #FED9AB;
+    padding: 0.08rem;
+    color: #FED9AB;
 	}
 	.dredge-top .icon-sunrise{
 		font-size: 0.4rem;
@@ -348,22 +348,22 @@
 	.dredge-bottom{
 		color: #FED9AB;
 		font-size: 0.2rem;
-        display: inline-flex;
-        justify-content: space-around;
-        align-items: center;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
 		flex-wrap: wrap;
 		border-top: 1px solid #ffffff2e;
 		height:auto;
 		margin-top: 0.2rem;
 		padding-top: 0.2rem;
-        border-radius: 2px;
+    border-radius: 2px;
 	}
 	.dredge-bottom>div{
 		width: 25%;
-       padding: 0.1rem;
-       overflow: hidden;
-       white-space: nowrap;
-       text-overflow: ellipsis;
+    padding: 0.1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 	}
 	.dredge-bottom .icon-drlists{
 		margin-right: 0.1rem;
@@ -450,4 +450,7 @@
 		float: right;
 		margin-top: 0.2rem;
 	}
+	
+	
+	
 </style>
