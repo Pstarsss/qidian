@@ -11,6 +11,8 @@ import Mine from '@/views/Mine.vue'
 import mineShow from '@/views/Mine/mineShow.vue'
 import mineSet from '@/views/Mine/components/mineSet.vue'
 import mineMsg from '@/views/Mine/components/mineMsg.vue'
+import peopleDetails from '@/views/Mine/components/peopleDetails.vue'
+
 import SelectHome from '@/views/Selected/SelectHome.vue'
 import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
@@ -107,7 +109,11 @@ const routes = [
     name: 'mineMsg',
     component: mineMsg,
   },
-
+  {
+    path: '/peopleDetails',
+    name: 'peopleDetails',
+    component: peopleDetails,
+  },
   {
     path: '/detail/:id',
     name: 'Detail',
