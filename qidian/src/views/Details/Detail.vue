@@ -192,7 +192,7 @@
          </div>
          <div class="detail-lookmore">
               <div class="lookmore-detail" :key="index" v-for="(item,index) in info4">
-                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs"></div>
+                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs"  @click="openDetail(index)"></div>
                  <div class="lookmore-detail-title">
                    <p class="lookmore-name">{{item.name}}</p>
                    <p class="lookmore-tj">{{item.wordcount}}万字</p>
@@ -292,7 +292,7 @@ export default {
       this.$http.get("/api/booklist").then((res) => {
         this.msg = res;
         let a = this.msg.data[index].id;
-        this.$router.push("/detail/" + a);
+        this.$router.push('/detail/'+a);
       });
     },
       handleChange(val) {

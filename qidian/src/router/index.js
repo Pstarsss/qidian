@@ -133,7 +133,7 @@ const routes = [
     component: Register,
   },
   {
-    path: '/read/:id',
+    path: '/read/:id/chapter/:pp',
     name: 'Read',
     component: Read,
   },

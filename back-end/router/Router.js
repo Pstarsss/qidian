@@ -15,18 +15,33 @@ for(let i =0;i<6;i++){
 router.get('/',function(req,res){
   res.send('welcome to my page');
 });
+// 单本小说的章节内容
 router.get('/read/:id',function(req,res){
   let id = req.params.id;
   sql.find(`select * from book${id}`).then(results=>{
     res.send(results);
+  }).catch(err=>{
+    res.send(-1);
+  })
+});
+router.get('/read/:id/:pp',function(req,res){
+  let id = req.params.id;
+  console.log(req.params);
+  console.log(req.params);
+  let pp = req.params.pp;
+  sql.find(`select * from book${id} where id = ${pp}`).then(results=>{
+    res.send(results);
   })
 });
 
+//所有小说list
 router.get('/booklist',function(req,res){
   sql.find(`select * from booklist`).then(results=>{
     res.send(results);
   })
 });
+
+//指定表的list
 router.get('/booklist/:id',function(req,res){
   let id = req.params.id;
   sql.find(`select * from booklist${id}`).then(results=>{
@@ -34,6 +49,7 @@ router.get('/booklist/:id',function(req,res){
   })
 });
 
+// 详情页面数据获取; 单本小说的基本信息获取
 router.get('/detail/:id',(req,res)=>{
   let id = req.params.id;
   sql.find(`select * from booklist where id = ${id}`).then(results=>{
@@ -41,18 +57,22 @@ router.get('/detail/:id',(req,res)=>{
   });
 });
 
-router.get('/booktitle',function(req,res){
-  sql.find('select * from booktitles').then(results=>{
+router.get('/booktitle/:id',function(req,res){
+  let id = req.params.id;
+  sql.find(`select * from booktitles where id = ${id}`).then(results=>{
     res.send(results);
   })
 });
 
+
+// 获取select的推荐信息；
 router.get('/recommend',function(req,res){
   sql.find('select * from recommend').then(results=>{
     res.send(results);
   })
 })
 
+//获取find的评论信息；
 router.get('/hotdiscuss',function(req,res){
   sql.find('select * from hotdiscuss').then(results=>{
     res.send(results);
@@ -71,11 +91,21 @@ router.get('/finddetail/:id',function(req,res){
 
 router.post('/post',(req,res)=>{
   let {iphone,password,username} = req.body;
-  sql.add(`insert into user (iphone,password,username) values  (${iphone},${password},'${username}')`).then(re=>{
-    res.send('恭喜,注册成功');
-  });
+  sql.find(`select * from user`).then((rr)=>{
+    let {iphones,usernames} = rr;
+  })
+    sql.add(`insert into user (iphone,password,username) values  (${iphone},${password},'${username}')`).then(re=>{
+      res.send('恭喜,注册成功');
+  
+})
+
+  
+
+
+  
 });
 
+//用户登录
 router.post('/login',(req,res)=>{
   let {iphone,password } = req.body;
   sql.find('select * from user where iphone = ? and password = ?',[iphone,password]).then((re)=>{
@@ -108,6 +138,7 @@ var params = {
 var requestOption = {
   method: 'POST'
 };
+// 用户手机验证码
 router.post('/validate',(req,res)=>{
   params.PhoneNumbers = req.body.iphone;
   client.request('SendSms', params, requestOption).then((result) => {
@@ -117,6 +148,7 @@ router.post('/validate',(req,res)=>{
     console.log(ex);
   })
 });
+// 获取所以用户信息；
 router.get('/ddd',(req,res)=>{
   sql.find('select * from user').then(re=>{
     res.send(JSON.stringify(re));
