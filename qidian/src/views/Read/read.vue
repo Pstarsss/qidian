@@ -94,8 +94,7 @@ export default {
    beforeDestroy(){
           console.log('0000');
           console.log(this.$store);
-          this.$store.state.this.id=this.pp;
-          
+          this.$store.state.this.id=this.pp;      
       },
   
 }

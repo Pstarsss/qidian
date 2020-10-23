@@ -323,7 +323,7 @@ export default {
       },
       read(){
         let id = this.$router.currentRoute.params.id;
-        this.$router.push('/read/'+id)
+        this.$router.push('/read/'+id+"/chapter/"+1);
       }
     }
 }
