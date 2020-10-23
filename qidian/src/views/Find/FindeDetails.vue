@@ -18,12 +18,12 @@
       <!-- 帖子内容 -->
       <div class="detail">
         <!-- 圈子 -->
-        <div class="tag" v-if="this.e">
+        <div class="tag" v-if="this.det">
           <div class="tagLeft">
             <p>好</p>
           </div>
           <div class="tagCenter">
-            <p>{{ e.tag }}圈</p>
+            <p>{{ det.tag }}圈</p>
             <p>999 成员 · 999 帖子</p>
           </div>
           <div class="tagRight">
@@ -51,24 +51,29 @@
               </div>
             </div>
             <div class="title">
-              <p>{{ e.title }}</p>
-              <el-divider></el-divider>
+              <p>{{ det.title }}</p>
             </div>
           </div>
+          <el-divider></el-divider>
           <!-- 内容 -->
-          <p class="detailContent">{{ e.content }}</p>
+          <p class="detailContent">{{ det.content }}</p>
           <!-- 时间,点赞 -->
-          <p>
+          <p class="timeAndLikes">
             <!-- 时间 -->
-            <span class="detailTime">{{ e.time }}</span>
+            <span>{{ det.time }}</span>
+            <span class="detailLikes">
+              <i class="iconfont icon-dianzan"></i>
+              {{ det.likes }}
+            </span>
           </p>
         </div>
-        <!-- 分界线 -->
-        <div class=""></div>
-        <!-- 回复 -->
-        <div class=""></div>
       </div>
+      <!-- 分界线 -->
+      <el-divider class="bigDivider"></el-divider>
       <!-- 回复 -->
+      <div class="reviews">
+        <review :reviews="revs" />
+      </div>
     </scroll>
     <!-- 底部组件 -->
     <findDetailsBottom />
@@ -79,7 +84,9 @@
       :direction="direction"
       :size="drawerSize"
     >
-      <span>我来啦!</span>
+      <p>分享</p>
+      <p>举报</p>
+      <p>取消</p>
     </el-drawer>
   </div>
 </template>
@@ -89,23 +96,30 @@ import navBar from '@/components/common/TopNavBar/NavBar'
 import scroll from '@/components/common/Scroll/scroll.vue'
 import findDetailsBottom from './components/FindDetailsBottom'
 // import findDetailsContent from './components/FindDetailsContent'
-import findDetailsReviews from './components/FindDetailsReviews'
-
+import findDetailsReviews from './components/FindDetailsReview'
+import './iconfont/iconfont'
+import review from './components/FindDetailsReview'
 export default {
   data() {
     return {
       drawer: false,
       direction: 'btt',
-      drawerSize: '3.5rem',
-      e: {},
+      drawerSize: '4.5rem',
+      det: {},
+      revs: [],
       id: '',
       touSize: 'small',
       touSrc:
         'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
     }
   },
+  beforeCreate() {
+    this.$refs.scroll.refresh()
+  },
   created() {
     this.getDetail()
+    this.getReviews()
+    // this.$refs.scroll.refresh()
   },
   methods: {
     pullingUp() {
@@ -119,10 +133,19 @@ export default {
       // let that = this
       this.id = this.$router.currentRoute.params.id
       this.$http.get(`/api/finddetail/${this.id}`).then((res) => {
-        console.log(res)
-        this.e = res.data[0]
+        this.det = res.data[0]
+        console.log(this.det)
       })
     },
+    getReviews() {
+      this.$http.get('/api/detaildiscuss').then((res) => {
+        this.revs = res.data
+        console.log(this.revs)
+      })
+    },
+    // clsDrawer() {
+    //   this.$emit('update:drawer', false)
+    // },
   },
   components: {
     navBar,
@@ -130,6 +153,7 @@ export default {
     // findDetailsContent,
     findDetailsReviews,
     findDetailsBottom,
+    review,
   },
 }
 </script>
@@ -138,6 +162,7 @@ export default {
 .findDetails .el-drawer__wrapper > div > div {
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
+  padding: 0.2rem;
 }
 </style>
 // 顶部标题
@@ -269,6 +294,45 @@ export default {
   /* margin-top: 1.4rem; */
   display: block;
   font-size: 0.3rem;
-  padding: 0 0.2rem;
+  /* padding: 0 0.2rem; */
+  margin: 0 0.2rem;
+}
+.timeAndLikes {
+  font-size: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  /* padding: 0 0.2rem; */
+  margin: 0.3rem 0.2rem;
+  line-height: 0.2rem;
+}
+.detailsLikes > i {
+  font-weight: bold;
+}
+.bigDivider {
+  margin: 0.3rem 0;
+  height: 0.13rem;
+  background-color: #f5f5f5;
+}
+</style>
+// 回复
+<style lang="css" scoped></style>
+// 抽屉
+<style lang="css" scoped>
+.findDetails .el-drawer__wrapper > div > div {
+  padding: 0.2rem;
+}
+.el-drawer p {
+  font-size: 0.3rem;
+  font-weight: 600;
+  margin: 0.45rem 0;
+}
+.el-drawer p:last-of-type {
+  width: 100%;
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  text-align: center;
+  line-height: 0.35rem;
+  color: #808080;
 }
 </style>

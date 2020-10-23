@@ -80,21 +80,12 @@ export default {
     });
   },
 
-<<<<<<< HEAD
   beforeUpdate() {
     // this.$refs.scroll.refresh();
 
   // updated(){
   //   this.$refs.scroll.refresh();
   // },
-=======
-  // updated(){
-  //   this.$refs.scroll.refresh();
-  // },
-
-  beforeUpdate() {
-  // this.$refs.scroll.refresh();
->>>>>>> 95da0d1098205619861e0f64672724682592b9db
   },
 
   mounted() {
