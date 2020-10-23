@@ -7,7 +7,7 @@ import actions from './Actions.js'
 import getters from './Getter.js'
 import modules from './Module.js'
 const state = {
-
+  
 }
 export default new Vuex.Store({
   state,
