@@ -18,7 +18,7 @@
 			<i class="el-icon-arrow-right icon-right"></i>
 			<span class="text">{{item.text}}</span>
 		</div>
-		<div class="list3">
+		<div class="list3"  @click="go">
 			隐私设置
 			<i class="el-icon-arrow-right icon-right"></i>
 		</div>
@@ -89,7 +89,10 @@
 			},
 			back(){
 				this.$router.go(-1);
-			}
+			},
+			go(){
+				this.$router.push('/privacySet');
+			},	
 		},
 		components:{
 			scroll

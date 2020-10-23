@@ -3,8 +3,12 @@
 		<mineTopbar>
 			<i slot="left" class="el-icon-arrow-left"  @click="back"></i>
 			<i slot="right" class="el-icon-brush icon-draw"></i>
-			<i slot="right" class="el-icon-more"></i>
+			<i slot="right" class="el-icon-more" @click="dialog = true"></i>
 		</mineTopbar>
+		<el-drawer title="我是标题" :before-close="handleClose" :visible.sync="dialog" :with-header="false"  direction="btt" size="21%">
+		  <span class="drawerSet" @click="go">隐私设置</span>
+		  <el-button @click="cancel" class="drawBtn">取 消</el-button>
+		</el-drawer>
 		<div class="main">
 			    <div><img src="../mine-imgs/05.jpg"/></div>
 				<div class="main-div1">star_8</div>
@@ -43,13 +47,30 @@
 					{ num:0, text:'粉丝称号'},
 					{ num:0, text:'获得花束'},
 					{ num:0, text:'关注TA', people:'人'},
-				]	
+				],
+				drawer: false,
+				timer: null,
+				dialog: false,
+				loading: false,
 			}
 		},
 		methods:{
 			back(){
 				this.$router.go(-1);
-			}
+			},
+			go(){
+				this.$router.push('/privacySet');
+			},
+			 handleClose(done) {
+			      if (this.loading) {
+			        return;
+			      }
+			},
+			cancel() {
+			      this.loading = false;
+			      this.dialog = false;
+			      clearTimeout(this.timer);
+			    }
 		},
 		components:{
 			mineTopbar
@@ -110,8 +131,8 @@
 		height: 1.1rem;
 		display: flex;
 		justify-content: space-around;
-		border-top: 1px solid rgba(0,0,0,0.1);
-		border-bottom: 1px solid rgba(0,0,0,0.1);
+		border-top: 1px solid whitesmoke;
+		border-bottom: 1px solid whitesmoke;
 	}
 	.list-content{
 		margin-bottom:1rem ;
@@ -151,6 +172,7 @@
 		height: 1.1rem;
 		/* padding: 0.1rem; */
 		color: #fff;
+		margin-bottom: 1.5rem;
 	}
 	.bottom1{
 		width: 85%;
@@ -186,5 +208,28 @@
 		font-size: 0.2rem;
 		margin-top: 0.3rem;
 		color: gainsboro;
+	}
+	/* 抽屉部分 */
+	.drawerSet{
+		font-size: 0.3rem;
+		display: block;
+		text-align: center;
+		margin: 0.1rem auto;
+		width: 100%;
+		height: 0.7rem;
+		line-height: 0.7rem;
+		border-bottom: 1px solid whitesmoke;
+		/* background-color: pink; */
+	}
+	.drawBtn{
+		width: 94%;
+		height: 1rem;
+		background-color: whitesmoke;
+		margin-left: 3%;
+		font-size: 0.3rem;
+		border-radius: 0.5rem;
+		color: gainsboro;
+		position: absolute;
+		bottom: 15%;
 	}
 </style>
