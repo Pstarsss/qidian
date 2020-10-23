@@ -35,13 +35,11 @@
                 <p class="book-content-icon"> <i class="el-icon-magic-stick"></i></p>   
                 <p class="book-content-name">{{infor.bookName}}</p>
                 <h1 class="book-content-content">正文卷</h1> 
-                
                         <div :key="index" v-for="(item,index) in infor" id="index">
                             <h1 class="book-content-title">{{item.title}}</h1>
-                            <p class="book-content-contents">{{item.content}}</p> 
+                            <p class="book-content-contents" v-for="(m,n) in item.content" :key="n">{{m}}</p> 
                         </div>  
-                
-            </div>
+                </div>
       </scroll>
       <div class="read-space"></div>
       <div class="read-bottom">
@@ -69,9 +67,8 @@ export default {
     this.id = this.$router.currentRoute.params.id;
     this.pp = this.$router.currentRoute.params.pp;  
     this.$http.get('/api/read/'+this.id+'/'+this.pp).then(res=>{
-        let temp = res.data[0].content.split('-');
+        res.data[0].content = res.data[0].content.split('-');
         this.infor=res.data;
-        // this.infor.content = temp;
     });
     this.$http.get('/api/detail/'+this.id).then(res=>{
       this.info=res.data[0];
@@ -87,12 +84,18 @@ export default {
       },
       pullingUp(){
         this.$http.get('/api/read/'+this.id+'/'+(++this.pp)).then(res=>{
+            res.data[0].content = res.data[0].content.split('-');
             this.infor = [...this.infor,...res.data];
-            console.log(this.infor);
-        })
+        });
+
         this.$refs.scroll.finishPullup();
       },
-  }
+  },
+   beforeDestroy(){
+          console.log('0000');
+          console.log(this.$store);
+          this.$store.state.this.id=this.pp;      
+      },
   
 }
 </script>
@@ -199,7 +202,6 @@ margin: .2rem auto;
     font-size: .2rem;
     margin: .1rem .2rem;
     text-indent: .4rem;
-    padding-bottom: .7rem;
 }
 .read-bottom{
     height: .7rem;
