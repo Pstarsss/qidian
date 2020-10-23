@@ -57,6 +57,7 @@
           <el-divider></el-divider>
           <!-- 内容 -->
           <p class="detailContent">{{ det.content }}</p>
+          <img :src="det.imgSrc" class="contentImg" />
           <!-- 时间,点赞 -->
           <p class="timeAndLikes">
             <!-- 时间 -->
@@ -72,7 +73,7 @@
       <el-divider class="bigDivider"></el-divider>
       <!-- 回复 -->
       <div class="reviews">
-        <review :reviews="revs" />
+        <reviews :reviews="revs" />
       </div>
     </scroll>
     <!-- 底部组件 -->
@@ -96,9 +97,9 @@ import navBar from '@/components/common/TopNavBar/NavBar'
 import scroll from '@/components/common/Scroll/scroll.vue'
 import findDetailsBottom from './components/FindDetailsBottom'
 // import findDetailsContent from './components/FindDetailsContent'
-import findDetailsReviews from './components/FindDetailsReview'
+// import findDetailsReviews from './components/FindDetailsReviews'
 import './iconfont/iconfont'
-import review from './components/FindDetailsReview'
+import reviews from './components/FindDetailsReviews'
 export default {
   data() {
     return {
@@ -113,13 +114,15 @@ export default {
         'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
     }
   },
-  beforeCreate() {
-    this.$refs.scroll.refresh()
-  },
+  // beforeCreate() {
+  //   this.$refs.scroll.refresh()
+  // },
   created() {
     this.getDetail()
     this.getReviews()
-    // this.$refs.scroll.refresh()
+  },
+  updated() {
+    this.$refs.scroll.refresh()
   },
   methods: {
     pullingUp() {
@@ -151,9 +154,8 @@ export default {
     navBar,
     scroll,
     // findDetailsContent,
-    findDetailsReviews,
     findDetailsBottom,
-    review,
+    reviews,
   },
 }
 </script>
@@ -236,6 +238,7 @@ export default {
 }
 .el-divider {
   margin: 0.2rem 0;
+  /* overflow: hidden; */
 }
 .contentTag {
   height: 0.4rem;
@@ -296,6 +299,10 @@ export default {
   font-size: 0.3rem;
   /* padding: 0 0.2rem; */
   margin: 0 0.2rem;
+  color: #000;
+}
+.contentImg {
+  margin: 0.2rem;
 }
 .timeAndLikes {
   font-size: 0.2rem;
@@ -334,5 +341,7 @@ export default {
   text-align: center;
   line-height: 0.35rem;
   color: #808080;
+}
+.reviewsTitle {
 }
 </style>
