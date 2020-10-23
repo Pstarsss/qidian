@@ -67,7 +67,7 @@ export default {
 </script>
 <style  scoped>
 .wrapper{
-  height:calc(100vh - 130px);
+  height:calc(100vh - 1.4rem);
   overflow: hidden;
 }
 </style>

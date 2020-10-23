@@ -3,19 +3,22 @@ import VueRouter from 'vue-router'
 import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
 import Select from '@/views/Selected/Select.vue'
 import Find from '@/views/Find.vue'
-import FindFollow from '@/views/Find/FindFollow.vue'
-import FindSquares from '@/views/Find/FindSquares.vue'
+import FindFollow from '@/views/Find/findFollow.vue'
+import FindSquares from '@/views/Find/findSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
 import Mine from '@/views/Mine.vue'
 import mineShow from '@/views/Mine/mineShow.vue'
 import mineSet from '@/views/Mine/components/mineSet.vue'
 import mineMsg from '@/views/Mine/components/mineMsg.vue'
+import peopleDetails from '@/views/Mine/components/peopleDetails.vue'
+
 import SelectHome from '@/views/Selected/SelectHome.vue'
 import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
 import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import Detail from '@/views/Details/Detail.vue'
+import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
 
 const Login = () => import('@/views/Login/Login.vue')
 const validatelogin = () => import('@/views/Login/validatelogin.vue')
@@ -35,6 +38,11 @@ const routes = [
     component: Bookshelf,
   },
   {
+    path: '/selectboysfree',
+    name: 'SelectBoysfree',
+    component: SelectBoysfree,
+  },
+  {
     path: '/select',
     name: 'Select',
     component: Select,
@@ -48,6 +56,7 @@ const routes = [
         path: '/selectboys',
         name: 'SelectBoys',
         component: SelectBoys,
+       
       },
       {
         path: '/selectgirls',
@@ -106,7 +115,11 @@ const routes = [
     name: 'mineMsg',
     component: mineMsg,
   },
-
+  {
+    path: '/peopleDetails',
+    name: 'peopleDetails',
+    component: peopleDetails,
+  },
   {
     path: '/detail/:id',
     name: 'Detail',
@@ -133,7 +146,7 @@ const routes = [
     component: Register,
   },
   {
-    path: '/read/:id',
+    path: '/read/:id/chapter/:pp',
     name: 'Read',
     component: Read,
   },

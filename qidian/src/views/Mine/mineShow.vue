@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
 	
 	<div class="mineShow">
@@ -156,6 +157,154 @@
 		},
 		
 	}
+=======
+<template>
+	
+	<div class="mineShow">
+		<!-- 顶部 -->
+		<div class="title">
+			<i class="el-icon-set-up icon-set" @click="set"></i>
+			<i class="el-icon-message icon-msg" @click="Msg"></i>
+			<div class="change">
+				<i class="el-icon-moon icon-moon"></i>夜间
+			</div>
+		</div>
+		<!-- 个人信息板块 -->
+		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingUp">
+		<div class="people">
+			<div class="details" @click="peopleDetails">
+				<div class="details1">
+					<img src="./mine-imgs/05.jpg" />
+				</div>
+				<div class="details2">
+					<p class="details2-p1">star_8</p>
+					<p class="details2-p2">
+						<span><i class="el-icon-s-opportunity icon-op"></i></span>Lv.0
+						<span><i class="el-icon-star-on icon-star"></i></span>普通用户
+					</p>
+				</div>
+				<div class="details3">
+				   <i class="el-icon-arrow-right"></i>
+				</div>
+			</div>
+			<div class="others">
+				<div class="others-list">
+					<span><b>0</b><br />推荐票</span>
+					<span><b>0</b><br />月票</span>
+					<span><b>0点</b><br />我的账户</span>
+				</div>
+				<span class="charge">
+					充值
+				</span>
+			</div>
+		</div>
+		<!-- 开通畅享卡板块 -->
+		<div class="dredge">
+			<div class="dredge-top">
+			    <i class="el-icon-sunrise-1 icon-sunrise"></i>
+				<span class="span1">开通畅享卡</span>
+				<span>享免费书库等10项福利<i class="el-icon-arrow-right"></i></span>
+			</div>
+			<div class="dredge-bottom">
+				<div v-for="(item,index) in drLists" :key="index">
+					<i :class='item.icon' class="icon-drlists"></i>{{item.title}}
+				</div>
+			</div>
+		</div>
+		<!-- 分类板块 -->
+		<div id="nav" class="msg-plate" style="margin-top: -19.5%;">
+			<navs :list="navlist1" class="nav1"></navs>
+			<navs :list="navlist2" class="nav2"></navs>
+		</div>
+		<!-- 轮播板块 -->
+		<div class="lunbo">
+			<el-carousel trigger="click"  height="0.9rem" class="lunbo-content" indicator-position="none">
+				 <el-carousel-item>
+				    <img src="./mine-imgs/01.jpg" />
+				    <span>猜你喜欢|《无限之从写轮眼到轮回眼》少年出英雄 著</span>
+					<i class="el-icon-arrow-right"></i>
+				 </el-carousel-item>
+				 <el-carousel-item>
+					<img src="./mine-imgs/02.jpg" />
+					<span>猜你喜欢|《惊雷》只爱煞英雄 著 军事 谍战特工</span>
+					<i class="el-icon-arrow-right"></i>
+				 </el-carousel-item>
+			</el-carousel>
+		</div>
+		<!-- 列表板块 -->
+		<div class="foot-list">
+			<div v-for="(item,index) in bottomLists" :key="index" class="lists">
+				<i :class="item.icon1"></i>
+				<span>{{item.content}}</span>
+				<i class="el-icon-arrow-right"></i>
+			</div>
+		</div>
+		</scroll>
+	</div>
+</template>
+
+<script>
+	import scroll from '@/components/common/Scroll/scroll.vue'
+	import navs from '@/components/navs'
+	export default{
+		data(){
+			return{
+				navlist1:[
+					{ name: '我发布的', src: require('./mine-imgs/p1.png') },
+					{ name: '关注/收藏', src: require('./mine-imgs/p2.png') },
+					{ name: '活动中心', src: require('./mine-imgs/p3.png') },
+					{ name: '阅读时长', src: require('./mine-imgs/p4.png') },
+				],
+				navlist2:[
+					{ name: '我的装扮', src: require('./mine-imgs/p5.png') },
+					{ name: '我的卡牌 ', src: require('./mine-imgs/p6.png') },
+					{ name: '徽章/称号', src: require('./mine-imgs/p7.png') },
+					{ name: '浏览记录', src: require('./mine-imgs/p8.png') },
+				],
+				drLists:[
+					{ title:'免费书库', icon:'el-icon-notebook-1'},
+					{ title:'票券福利', icon:'el-icon-postcard'},
+					{ title:'签到特权', icon:'el-icon-map-location'},
+					{ title:'专属任务', icon:'el-icon-news'},
+					{ title:'头像挂件', icon:'el-icon-present'},
+					{ title:'阅读页主题', icon:'el-icon-magic-stick'},
+					{ title:'专属表情包', icon:'el-icon-pie-chart'},
+					{ title:'专属徽章', icon:'el-icon-medal-1'},
+				],
+				bottomLists:[
+					{ icon1:'el-icon-tickets', content:'新书投资'},
+					{ icon1:'el-icon-position', content:'我的游戏'},
+					{ icon1:'el-icon-bangzhu', content:'领币'},
+					{ icon1:'el-icon-coin', content:'积分商城'},
+					{ icon1:'el-icon-edit', content:'成为作家'},
+					{ icon1:'el-icon-date', content:'起点星专属卡'},
+				],
+			}
+		},
+		methods:{
+			set(){
+				this.$router.push('/mineSet')
+			},
+			Msg(){
+				this.$router.push('/mineMsg')
+			},
+			peopleDetails(){
+				this.$router.push('/peopleDetails')
+			},
+			pullingUp(){
+				let nav = document.getElementById("nav");
+				nav.style.marginTop = "0";
+				//console.log(12);
+				this.$refs.scroll.finishPullDown();
+			}
+		},
+		components: {
+		  navs,
+		  scroll
+		},
+		
+	}
+>>>>>>> d36bc373754e32b52cefe5a6b55b42934b6646b7
 	
 </script>
 

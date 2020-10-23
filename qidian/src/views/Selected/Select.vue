@@ -87,7 +87,6 @@ export default {
   //   this.$refs.scroll.refresh();
   // },
   },
-
   mounted() {
     setTimeout(() => {
       // this.$refs.scroll.refresh();

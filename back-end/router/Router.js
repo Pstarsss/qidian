@@ -20,6 +20,17 @@ router.get('/read/:id',function(req,res){
   let id = req.params.id;
   sql.find(`select * from book${id}`).then(results=>{
     res.send(results);
+  }).catch(err=>{
+    res.send(-1);
+  })
+});
+router.get('/read/:id/:pp',function(req,res){
+  let id = req.params.id;
+  console.log(req.params);
+  console.log(req.params);
+  let pp = req.params.pp;
+  sql.find(`select * from book${id} where id = ${pp}`).then(results=>{
+    res.send(results);
   })
 });
 
@@ -46,10 +57,9 @@ router.get('/detail/:id',(req,res)=>{
   });
 });
 
-
-// 获取的小说目录信息；
-router.get('/booktitle',function(req,res){
-  sql.find('select * from booktitles').then(results=>{
+router.get('/booktitle/:id',function(req,res){
+  let id = req.params.id;
+  sql.find(`select * from booktitles where id = ${id}`).then(results=>{
     res.send(results);
   })
 });
@@ -68,8 +78,22 @@ router.get('/hotdiscuss',function(req,res){
     res.send(results);
   })
 });
+<<<<<<< HEAD
 
 // 用户注册
+=======
+router.get('/finddetail/:id',function(req,res){
+  let id = req.params.id;
+  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+    console.log(results);
+    res.send(results);
+
+  }).catch(err=>{
+     res.send('-1');
+  })
+});
+
+>>>>>>> d36bc373754e32b52cefe5a6b55b42934b6646b7
 router.post('/post',(req,res)=>{
   let {iphone,password,username} = req.body;
   sql.find(`select * from user`).then((rr)=>{
@@ -136,7 +160,11 @@ router.get('/ddd',(req,res)=>{
   })
 })
 
-
+router.get('/detaildiscuss',(req,res)=>{
+  sql.find('select * from discuss1').then(re=>{
+    res.send(JSON.stringify(re));
+  })
+})
 
 
 

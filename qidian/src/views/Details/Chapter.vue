@@ -11,7 +11,7 @@
     </div>
   </div>
   <ul class="chapter-titleall">
-      <li class="chapter-title1" :key="index" v-for="(item,index) in info" @click="read(index)">{{item.title}}</li>
+      <li class="chapter-title1" :key="index" v-for="(item,index) in info" @click="read(index)">{{item}}</li>
   </ul>
 </div>
  
@@ -31,16 +31,16 @@ export default {
   },
    created(){
     let id = this.$router.currentRoute.params.id;
-    this.$http.get('/api/read/'+id).then(res=>{
-      this.info=res.data.slice(0,1000);
+    this.$http.get('/api/booktitle/'+id).then(res=>{
+      this.info=res.data[0].titles.split('-');
       console.log('sss');
-      console.log(res.data);
+      console.log(res.data[0].titles.split('-'));
     })
   },
   methods:{
      read(index){
-      let id = this.$router.currentRoute.params.id;
-       this.$router.push('/read/'+id);
+      let id = this.$router.currentRoute.params.id; 
+      this.$router.push('/read/'+id+"/chapter/"+(index+1));
      },
      overturn(){
       let id = this.$router.currentRoute.params.id;
@@ -76,7 +76,7 @@ export default {
   color: black;
   width: 6.6rem;
   margin: .1rem auto;
-   font-weight: 520;
+  font-weight: 520;
 }
 .chapter-title1{
   float: left;
