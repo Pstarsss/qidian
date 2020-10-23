@@ -80,14 +80,15 @@ export default {
     });
   },
 
-  // updated(){
-  //   this.$refs.scroll.refresh();
-  // },
-
   beforeUpdate() {
     // this.$refs.scroll.refresh();
+    // updated(){
+    //   this.$refs.scroll.refresh();
+    // },
+    // updated(){
+    //   this.$refs.scroll.refresh();
+    // },
   },
-
   mounted() {
     setTimeout(() => {
       // this.$refs.scroll.refresh();

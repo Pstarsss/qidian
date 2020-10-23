@@ -4,7 +4,7 @@
     <div class="login">
       <img src="./img/阅读.png" alt="" />
       <p>登录后才可以查看相关内容哦</p>
-      <button @click="drawer = true">登录</button>
+      <button @click="drawer=true">登录</button>
     </div>
     <!-- 点击登录按钮下方弹出抽屉 -->
     <el-drawer
@@ -23,7 +23,7 @@
       <el-divider></el-divider>
       <!-- 登陆方式 -->
       <el-row :gutter="20">
-        <a href="">
+        <a href="/login">
           <el-col :span="6">
             <div class="loginWay">
               <svg class="icon" aria-hidden="true">
@@ -33,7 +33,7 @@
             </div>
           </el-col>
         </a>
-        <a href="">
+        <a href="/login">
           <el-col :span="6">
             <div class="loginWay">
               <svg class="icon" aria-hidden="true">
@@ -43,7 +43,7 @@
             </div>
           </el-col>
         </a>
-        <a>
+        <a href="/login">
           <el-col :span="6">
             <div class="loginWay">
               <svg class="icon" aria-hidden="true">
@@ -53,7 +53,7 @@
             </div>
           </el-col>
         </a>
-        <a>
+        <a href="/login">
           <el-col :span="6">
             <div class="loginWay">
               <svg class="icon" aria-hidden="true">
@@ -79,7 +79,8 @@ export default {
       drawerSize: '3.5rem',
     }
   },
-  methods: {},
+  methods: {
+  },
 }
 </script>
 <style>
