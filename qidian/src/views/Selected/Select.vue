@@ -75,23 +75,15 @@ export default {
   },
   created() {
     this.$http.get("/api/booklist").then((res) => {
-      console.log("sss");
-      console.log(res);
+      // console.log("sss");
+      // console.log(res);
     });
   },
 
-  beforeUpdate() {
-    // this.$refs.scroll.refresh();
 
   // updated(){
   //   this.$refs.scroll.refresh();
   // },
-  },
-  mounted() {
-    setTimeout(() => {
-      // this.$refs.scroll.refresh();
-    }, 3000);
-  },
 };
 </script>
 
@@ -106,12 +98,13 @@ export default {
   justify-content: space-around;
   background-color: red;
   color: white;
+  height: 0.7rem;
 }
 .select_nav {
   display: inline;
 }
 .select_top_left {
-  font-size: 0.22rem;
+  font-size: 0.25rem;
   font-weight: 700;
 }
 .select_top_center {
@@ -126,7 +119,7 @@ ul {
 }
 li {
   float: left;
-  font-size: 0.22rem;
+  font-size: 0.25rem;
   height: 0.5rem;
   line-height: 0.5rem;
 }

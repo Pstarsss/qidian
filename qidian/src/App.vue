@@ -1,56 +1,80 @@
 <template>
   <div id="app">
-    <div class="foot" >
+    <div class="foot" v-if="footShow">
       <div class="bottom">
-        <div class="a" @click="open('/bookshelf')" :class="{ 'active': isActive('bookshelf') }">
+        <div
+          class="a"
+          @click="open('/bookshelf')"
+          :class="{ active: isActive('Bookshelf') }"
+        >
           <i class="el-icon-reading"></i>
           <span>书架</span>
         </div>
-        <div class="a" @click="open('/selecthome')" :class="{ 'active': isActive('select') }">
+        <div
+          class="a"
+          @click="open('/selecthome')"
+          :class="{ active: isActive('Select') }"
+        >
           <i class="el-icon-s-operation"></i>
           <span>精选</span>
         </div>
-        <div class="a"  @click="open('/findSquares')" :class="{ 'active': isActive('find') }">
+        <div
+          class="a"
+          @click="open('/findSquares')"
+          :class="{ active: isActive('Find') }"
+        >
           <i class="el-icon-view"></i>
           <span>发现</span>
         </div>
-        <div class="a"  @click="open('/mine')" :class="{ 'active': isActive('mine') }">
+        <div
+          class="a"
+          @click="open('/mine')"
+          :class="{ active: isActive('Mine') }"
+        >
           <i class="el-icon-user"></i>
           <span>我的</span>
         </div>
       </div>
     </div>
+    <keep-alive>
     <router-view />
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
-  name:'App',
+  name: "App",
   data() {
     return {
-  	  nowUrl: '/bookshelf'
+      footShow: true,
+      nowUrl: "/bookshelf",
     };
   },
-   watch: {
-    '$route' (to, from) {      
-      this.nowUrl = to.fullPath//全称路径
-    }
+
+  watch: {
+    $route(to, from) {
+      if (this.$route.path == "/selectboysfree") {
+        this.footShow = false;
+      }
+      this.nowUrl = to.fullPath; //全称路径
+    },
   },
   methods: {
     open(a) {
-     if(this.$route.path == a){
-		 return ''
-     }else{
-		 this.$router.push(a);
-     }
+      if (this.$route.path == a) {
+        return "";
+      } else {
+        this.$router.push(a);
+      }
     },
-	isActive(name) {
-	    return this.nowUrl.indexOf(name) != -1
-	},	
+    isActive(names) {
+      if(this.$router.name){
+        return this.$route.name.includes(names);
+      }
+    },
   },
-}
+};
 </script>
 
 <style>
@@ -59,13 +83,13 @@ export default {
   padding: 0;
   box-sizing: content-box;
 }
-body{
+body {
   background-color: #8080800f;
 }
 .foot {
   border-top: 1px solid #cccccc;
   position: fixed;
-  height: .7rem;
+  height: 0.7rem;
   z-index: 97;
   width: 100%;
   bottom: 0;
@@ -78,7 +102,7 @@ body{
   background: #fff;
 }
 .a {
-  height: .7rem;
+  height: 0.7rem;
   position: relative;
   text-decoration: none;
   font-size: 0.2rem;
@@ -87,23 +111,23 @@ body{
   width: 0.33rem;
   height: 0.33rem;
   display: block;
-  margin-top: .06rem;
+  margin-top: 0.06rem;
   font-size: 0.33rem;
   margin-left: auto;
   margin-right: auto;
 }
 .bottom span {
   text-align: center;
-  margin-bottom: .02rem;
-  font-size: .18rem;
+  margin-bottom: 0.02rem;
+  font-size: 0.18rem;
 }
 li {
   list-style: none;
 }
-.active{
-	color:#ff6700;
+.active {
+  color: #ff6700;
 }
-.full{
-	font-size: 0.28rem;
+.full {
+  font-size: 0.28rem;
 }
 </style>
