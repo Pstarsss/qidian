@@ -48,6 +48,7 @@ const routes = [
         path: '/selectboys',
         name: 'SelectBoys',
         component: SelectBoys,
+       
       },
       {
         path: '/selectgirls',

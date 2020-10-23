@@ -32,12 +32,41 @@
         </div>
         <!-- 分割线 -->
         <el-divider></el-divider>
-        <!-- 内容 -->  
+        <!-- 帖子 -->
         <div class="content">
-          <p>
+          <!-- 帖子tag -->
+          <div class="contentTag">
             <span v-for="i in 2" :key="i.id">讨论</span>
+          </div>
+          <!-- 作者/标题 -->
+          <div class="authorAndTitle">
+            <div class="authorAndFollow">
+              <div class="author">
+                <el-avatar :size="touSize" :src="touSrc"></el-avatar>
+                <p>蒋子明</p>
+              </div>
+              <div class="follow">
+                <i class="el-icon-plus"></i>
+                <p>关注</p>
+              </div>
+            </div>
+            <div class="title">
+              <p>{{ e.title }}</p>
+              <el-divider></el-divider>
+            </div>
+          </div>
+          <!-- 内容 -->
+          <p class="detailContent">{{ e.content }}</p>
+          <!-- 时间,点赞 -->
+          <p>
+            <!-- 时间 -->
+            <span class="detailTime">{{ e.time }}</span>
           </p>
         </div>
+        <!-- 分界线 -->
+        <div class=""></div>
+        <!-- 回复 -->
+        <div class=""></div>
       </div>
       <!-- 回复 -->
     </scroll>
@@ -69,11 +98,14 @@ export default {
       direction: 'btt',
       drawerSize: '3.5rem',
       e: {},
-      id:''
+      id: '',
+      touSize: 'small',
+      touSrc:
+        'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
     }
   },
   created() {
-    this.getDetail();
+    this.getDetail()
   },
   methods: {
     pullingUp() {
@@ -85,11 +117,11 @@ export default {
     },
     getDetail() {
       // let that = this
-      this.id = this.$router.currentRoute.params.id;
-      this.$http.get(`/api/finddetail/${this.id}`).then((res)=>{
-        console.log(res);
-        this.e = res.data[0];
-      });
+      this.id = this.$router.currentRoute.params.id
+      this.$http.get(`/api/finddetail/${this.id}`).then((res) => {
+        console.log(res)
+        this.e = res.data[0]
+      })
     },
   },
   components: {
@@ -129,7 +161,7 @@ export default {
 .wrapper {
   height: calc(100vh - 2rem);
 }
-</style>
+</style scoped>
 // 帖子内容
 <style lang="css" scoped>
 .tag {
@@ -180,7 +212,10 @@ export default {
 .el-divider {
   margin: 0.2rem 0;
 }
-.content > p > span {
+.contentTag {
+  height: 0.4rem;
+}
+.contentTag > span {
   font-size: 0.1rem;
   display: block;
   float: left;
@@ -188,5 +223,52 @@ export default {
   border: 1px solid #999;
   padding: 0.02rem 0.08rem;
   border-radius: 0.1rem;
+}
+.authorAndTitle {
+  font-size: 0.2rem;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  align-items: center;
+  /* height: 0.5rem; */
+  margin: 0.3rem 0.2rem;
+  /* line-height: 0.4rem ; */
+}
+.authorAndFollow {
+  display: flex;
+  justify-content: space-between;
+}
+.author {
+  display: flex;
+}
+.author p {
+  line-height: 0.5rem;
+  color: #000;
+  margin-left: 0.2rem;
+  font-weight: bold;
+  font-size: 0.25rem;
+}
+.follow {
+  display: flex;
+  background-color: #db3b3b;
+  border-radius: 0.5rem;
+  padding: 0 0.15rem;
+}
+.follow i,
+.follow p {
+  line-height: 0.5rem;
+  margin: 0 0.05rem;
+  color: #fff;
+}
+.title {
+  font-size: 0.35rem;
+  font-weight: bold;
+  color: #000;
+  margin: 0.2rem 0;
+}
+.detailContent {
+  /* margin-top: 1.4rem; */
+  display: block;
+  font-size: 0.3rem;
+  padding: 0 0.2rem;
 }
 </style>
