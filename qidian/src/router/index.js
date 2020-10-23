@@ -16,6 +16,7 @@ import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
 import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import Detail from '@/views/Details/Detail.vue'
+import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
 
 const Login = () => import('@/views/Login/Login.vue')
 const validatelogin = () => import('@/views/Login/validatelogin.vue')
@@ -33,6 +34,11 @@ const routes = [
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
+  },
+  {
+    path: '/selectboysfree',
+    name: 'SelectBoysfree',
+    component: SelectBoysfree,
   },
   {
     path: '/select',

@@ -12,7 +12,7 @@
         </div>
 
         <!-- 分类图标 -->
-        <bnavs :list="navlist"> </bnavs>
+        <bnavs :list="navlist" @click="openkinds(index)"> </bnavs>
 
         <!-- 分割线奥 -->
         <hr style="margin-top: 0.3rem" />
@@ -571,11 +571,31 @@ export default {
         { src: require("../../assets/img/SelectBoys/sp4.png") },
       ],
       navlist: [
-        { name: "分类", src: require("../../assets/img/SelectBoys/item1.png") },
-        { name: "排行", src: require("../../assets/img/SelectBoys/item2.png") },
-        { name: "三江", src: require("../../assets/img/SelectBoys/item3.png") },
-        { name: "免费", src: require("../../assets/img/SelectBoys/item4.png") },
-        { name: "完本", src: require("../../assets/img/SelectBoys/item5.png") },
+        {
+          index: 1,
+          name: "分类",
+          src: require("../../assets/img/SelectBoys/item1.png"),
+        },
+        {
+          index: 2,
+          name: "排行",
+          src: require("../../assets/img/SelectBoys/item2.png"),
+        },
+        {
+          index: 3,
+          name: "三江",
+          src: require("../../assets/img/SelectBoys/item3.png"),
+        },
+        {
+          index: 4,
+          name: "免费",
+          src: require("../../assets/img/SelectBoys/item4.png"),
+        },
+        {
+          index: 5,
+          name: "完本",
+          src: require("../../assets/img/SelectBoys/item5.png"),
+        },
       ],
       arrs: [
         { src: require("../../assets/img/SelectBoys/lb1.png") },
@@ -586,6 +606,7 @@ export default {
     };
   },
   mounted() {
+    console.log(this.$children);
     setInterval((_) => {
       if (this.activeIndex < 8) {
         this.activeIndex += 1;
