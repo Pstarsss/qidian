@@ -94,9 +94,8 @@ export default {
    beforeDestroy(){
           console.log('0000');
           console.log(this.$store);
-          this.$store.state.this.id=this.pp;      
-      },
-  
+        //   this.$store.state.this.id=this.pp;      
+      }, 
 }
 </script>
 
@@ -200,7 +199,7 @@ margin: .2rem auto;
 }
 .book-content-contents{
     font-size: .2rem;
-    margin: .1rem .2rem;
+    margin: .01rem .2rem;
     text-indent: .4rem;
 }
 .read-bottom{

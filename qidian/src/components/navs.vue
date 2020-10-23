@@ -17,6 +17,9 @@ export default {
   data() {
     return {};
   },
+  methods:{
+    
+  },
   props: {
     //返回数组默认值
     list: {

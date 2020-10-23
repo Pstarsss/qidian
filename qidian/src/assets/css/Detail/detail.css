@@ -409,6 +409,7 @@
   }
   .lookmore-name{
     font-size: .2rem;
+    max-width: 1.5rem;
     color: black;
     margin: .1rem;
   }

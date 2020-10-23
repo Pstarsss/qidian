@@ -22,6 +22,7 @@ const validatelogin = () => import('@/views/Login/validatelogin.vue')
 const Register = () => import('@/views/Login/Register.vue')
 const Read = () => import('@/views/Read/read.vue')
 const Chapter = () => import('@/views/Details/Chapter.vue')
+const Detaildiscuss = () => import('@/views/Details/Detaildiscuss.vue')
 Vue.use(VueRouter)
 
 const routes = [
@@ -137,6 +138,11 @@ const routes = [
     path: '/read/:id/chapter/:pp',
     name: 'Read',
     component: Read,
+  },
+  {
+    path: '/detaildiscuss/:id',
+    name: 'Detaildiscuss',
+    component: Detaildiscuss,
   },
 ]
 
