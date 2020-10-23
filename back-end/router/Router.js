@@ -155,7 +155,11 @@ router.get('/ddd',(req,res)=>{
   })
 })
 
-
+router.get('/detaildiscuss',(req,res)=>{
+  sql.find('select * from discuss1').then(re=>{
+    res.send(JSON.stringify(re));
+  })
+})
 
 
 

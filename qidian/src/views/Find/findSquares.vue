@@ -324,9 +324,9 @@ export default {
         this.$refs.scroll.refresh()
       }, 500)
     },
-    scrolly(value) {
-      // console.log(value);
-    },
+    // scrolly(value) {
+    //   console.log(value);
+    // },
     // updataNew() {
     //   console.log('重新判断高度')
     //   this.$refs.scroll.refresh()

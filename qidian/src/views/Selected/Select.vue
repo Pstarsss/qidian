@@ -82,12 +82,10 @@ export default {
 
   beforeUpdate() {
     // this.$refs.scroll.refresh();
-    // updated(){
-    //   this.$refs.scroll.refresh();
-    // },
-    // updated(){
-    //   this.$refs.scroll.refresh();
-    // },
+
+  // updated(){
+  //   this.$refs.scroll.refresh();
+  // },
   },
   mounted() {
     setTimeout(() => {

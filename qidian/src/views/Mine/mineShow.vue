@@ -12,7 +12,7 @@
 		<!-- 个人信息板块 -->
 		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingUp">
 		<div class="people">
-			<div class="details">
+			<div class="details" @click="peopleDetails">
 				<div class="details1">
 					<img src="./mine-imgs/05.jpg" />
 				</div>
@@ -127,6 +127,9 @@
 			},
 			Msg(){
 				this.$router.push('/mineMsg')
+			},
+			peopleDetails(){
+				this.$router.push('/peopleDetails')
 			},
 			pullingUp(){
 				let nav = document.getElementById("nav");
