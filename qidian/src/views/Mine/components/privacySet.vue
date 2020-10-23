@@ -20,15 +20,15 @@
 				<p>用于向你推荐相关度更高的优质内容</p>
 			</div>
 			<div class="set1-right">
-				<el-popover placement="bottom-end"  width="200"  v-model="visible">
-					<p>关闭后你将无法获得与你相关度更高、更适合你的书籍内容，确定要关闭嘛</p>
-					  <div style="text-align: right; margin: 0">
-					    <el-button size="mini" type="text" @click="visible = false">确定关闭</el-button>
-					    <el-button type="primary" size="mini" @click="visible = false">暂不关闭</el-button>
-					  </div>
-				<el-switch v-model="value2" active-color="gainsboro" inactive-color="#ff4949" slot="reference">
+				<el-switch v-model="value2" active-color="gainsboro" inactive-color="#ff4949"  @change="closeswitch">
 				</el-switch>
-				</el-popover>
+				<el-dialog title="关闭个性化推荐" :visible.sync="centerDialogVisible" width="80%"center>
+				  <span>关闭后你将无法获得与你相关度更高、更适合你的书籍内容，确定要关闭嘛</span>
+				  <span slot="footer" class="dialog-footer">
+				    <el-button @click="centerDialogVisible = false">确定关闭</el-button>
+				    <el-button type="primary" @click="switchOpen" >暂不关闭</el-button>
+				  </span>
+				</el-dialog>
 			</div>
 		</div>
 		<div class="set2" v-for="(item,index) in lists" :key="index">
@@ -53,7 +53,7 @@
 			return{
 				value1: true,
 				value2: false,
-				 visible: false,
+				 centerDialogVisible: false,
 				lists:[
 					{p1:'允许起点读书访问存储权限',p2:'用于正常存储和读取图片及文档信息'},
 					{p1:'允许起点读书访问相机权限',p2:'用于拍照上传和保存图片，扫描及直播功能'},
@@ -64,6 +64,14 @@
 		methods:{
 			back(){
 				this.$router.go(-1);
+			},
+			closeswitch(){
+				if(this.value2){
+					this.centerDialogVisible=true
+				}
+			},
+			switchOpen(){
+				this.centerDialogVisible = false
 			}
 		},
 		components:{
