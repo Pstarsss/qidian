@@ -436,6 +436,13 @@ export default {
   },
 
   methods: {
+    open(a) {
+      if (this.$route.path == a) {
+        return "";
+      } else {
+        this.$router.push(a);
+      }
+    },
     openDetail(index, i) {
       let a = this.msgArr[i].data[index].id;
       this.$router.push("/detail/" + a);
