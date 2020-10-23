@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="peopleDetails">
 		<mineTopbar>
 			<i slot="left" class="el-icon-arrow-left"  @click="back"></i>
 			<i slot="right" class="el-icon-brush icon-draw"></i>
@@ -9,6 +9,7 @@
 		  <span class="drawerSet" @click="go">隐私设置</span>
 		  <el-button @click="cancel" class="drawBtn">取 消</el-button>
 		</el-drawer>
+		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown">
 		<div class="main">
 			    <div><img src="../mine-imgs/05.jpg"/></div>
 				<div class="main-div1">star_8</div>
@@ -16,10 +17,12 @@
 				<div class="main-div3">给自己写一个不一样的介绍吧</div>
 				<div class="main-div4">编辑资料</div>
 		</div>
-		<div class="list">
-			<div v-for="(item,index) in lists" :key="index" class="list-content">
-				<span class="spanNum">{{item.num}}</span><span class="spanPeople">{{item.people}}</span>
-				<p>{{item.text}}</p>
+		<div style="background-color: #fff;">
+			<div class="list">
+				<div v-for="(item,index) in lists" :key="index" class="list-content">
+					<span class="spanNum">{{item.num}}</span><span class="spanPeople">{{item.people}}</span>
+					<p>{{item.text}}</p>
+				</div>
 			</div>
 		</div>
 		<div class="show">
@@ -34,10 +37,12 @@
 				<i class="el-icon-arrow-right icon-right"></i>
 			</div>
 		</div>
+		</scroll>
 	</div>
 </template>
 
 <script>
+	import scroll from '@/components/common/Scroll/scroll.vue'
 	import mineTopbar from '@/components/mineTopbar.vue'
 	export default{
 		data(){
@@ -73,7 +78,8 @@
 			    }
 		},
 		components:{
-			mineTopbar
+			mineTopbar,
+			scroll
 		}
 		
 	}
@@ -81,6 +87,9 @@
 </script>
 
 <style scoped>
+	.peopleDetails{
+		background-color: whitesmoke;
+	}
 	.icon-draw{
 		margin-right: 0.3rem;
 	}
@@ -88,6 +97,7 @@
 		width: 100%;
 		height: 3.3rem;
 		text-align: center;
+		background-color: #fff;
 	}
 	.main img{
 		width: 1rem;
@@ -154,6 +164,7 @@
 		width: 100%;
 		height: 5rem;
 		position: relative;
+		background-color: #fff;
 	}
 	.show div{
 		font-size: 0.25rem;

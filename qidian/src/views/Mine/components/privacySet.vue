@@ -4,6 +4,7 @@
 			<i class="el-icon-arrow-left" slot="left" @click="back"></i>
 			<span slot="center">隐私设置</span>
 		</mineTopbar>
+		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown">
 		<div class="set1">
 			<div class="set1-left">
 				<p>社区信息仅对自己可见</p>
@@ -42,11 +43,12 @@
 			</div>
 		</div>
 		<p style="font-size: 0.2rem;text-align: center;margin-top: 0.1rem;">列表仅展示核心权限，如需要查看更多可查看<span style="color:#0086B3">《隐私政策》</span></p>
-		
+		</scroll>
 	</div>
 </template>
 
 <script>
+	import scroll from '@/components/common/Scroll/scroll.vue'
 	import mineTopbar from '@/components/mineTopbar.vue'
 	export default{
 		data(){
@@ -75,7 +77,8 @@
 			}
 		},
 		components:{
-			mineTopbar
+			mineTopbar,
+			scroll
 		}
 		
 	}
