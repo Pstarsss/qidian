@@ -27,7 +27,7 @@
 				  <span>关闭后你将无法获得与你相关度更高、更适合你的书籍内容，确定要关闭嘛</span>
 				  <span slot="footer" class="dialog-footer">
 				    <el-button @click="centerDialogVisible = false">确定关闭</el-button>
-				    <el-button type="primary" @click="switchOpen" >暂不关闭</el-button>
+				    <el-button type="primary" @click="centerDialogVisible = false" >暂不关闭</el-button>
 				  </span>
 				</el-dialog>
 			</div>
@@ -72,9 +72,10 @@
 					this.centerDialogVisible=true
 				}
 			},
-			switchOpen(){
-				this.centerDialogVisible = false
-			}
+			pullingDown(){
+				console.log(12);
+				this.$refs.scroll.finishPullDown();
+			},
 		},
 		components:{
 			mineTopbar,

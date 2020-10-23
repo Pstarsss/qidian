@@ -60,6 +60,10 @@
 			}
 		},
 		methods:{
+			pullingDown(){
+				console.log(12);
+				this.$refs.scroll.finishPullDown();
+			},
 			back(){
 				this.$router.go(-1);
 			},
