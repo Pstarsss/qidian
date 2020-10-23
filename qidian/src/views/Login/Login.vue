@@ -32,11 +32,9 @@
 
 <script>
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue'
-import Scroll from '@/components/common/Scroll/scroll.vue'
 export default {
   components: {
     TopNavBar,
-    Scroll,
   },
   data() {
    return {

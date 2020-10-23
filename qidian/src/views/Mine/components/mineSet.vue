@@ -4,7 +4,7 @@
 			<i class="el-icon-arrow-left icon-left" @click="back"></i>
 			设置
 		</div>
-		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingUp="pullingUp">
+		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown">
 		<div class="list1">
 			推送通知
 			<i class="el-icon-arrow-right icon-right"></i>
@@ -18,7 +18,7 @@
 			<i class="el-icon-arrow-right icon-right"></i>
 			<span class="text">{{item.text}}</span>
 		</div>
-		<div class="list3">
+		<div class="list3"  @click="go">
 			隐私设置
 			<i class="el-icon-arrow-right icon-right"></i>
 		</div>
@@ -51,6 +51,15 @@
 			<i class="el-icon-arrow-right icon-right"></i>
 			<span class="text">{{item.text}}</span>
 		</div>
+		<div class="list2">
+			修改密码
+			<el-switch
+			  v-model="value2"
+			  active-color="gainsboro"
+			  inactive-color="#ff4949" class="switch"
+				@change="tochangepassword">
+			</el-switch>
+		</div>
 		</scroll>
 		<div class="foot">
 			切换账号
@@ -70,6 +79,7 @@
 				],
 				 value1: true,
 				 value2: true, 
+				 value3: true,
 				 lists:[
 					 { title:'安全中心'},
 					 { title:'青少年模式',text:'未开启'},
@@ -82,12 +92,18 @@
 			}
 		},
 		methods:{
-			pullingUp(){
+			pullingDown(){
 				console.log(12);
-				this.$refs.scroll.finishPullUp();
+				this.$refs.scroll.finishPullDown();
 			},
 			back(){
 				this.$router.go(-1);
+			},
+			go(){
+				this.$router.push('/privacySet');
+			},	
+			tochangepassword(){
+				this.$router.push('/changepassword');
 			}
 		},
 		components:{

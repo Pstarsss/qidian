@@ -1,25 +1,33 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+// 书架
 import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
-import Select from '@/views/Selected/Select.vue'
+
+
+// 发现
 import Find from '@/views/Find.vue'
 import FindFollow from '@/views/Find/FindFollow.vue'
 import FindSquares from '@/views/Find/FindSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
+
+// 我的
 import Mine from '@/views/Mine.vue'
 import mineShow from '@/views/Mine/mineShow.vue'
 import mineSet from '@/views/Mine/components/mineSet.vue'
 import mineMsg from '@/views/Mine/components/mineMsg.vue'
+import peopleDetails from '@/views/Mine/components/peopleDetails.vue'
+import privacySet from '@/views/Mine/components/privacySet.vue'
+
+// 精选
+import Select from '@/views/Selected/Select.vue'
 import SelectHome from '@/views/Selected/SelectHome.vue'
 import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
 import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import Detail from '@/views/Details/Detail.vue'
-
-const Login = () => import('@/views/Login/Login.vue')
-const validatelogin = () => import('@/views/Login/validatelogin.vue')
-const Register = () => import('@/views/Login/Register.vue')
+import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
 const Read = () => import('@/views/Read/read.vue')
 const Chapter = () => import('@/views/Details/Chapter.vue')
 const Detaildiscuss = () => import('@/views/Details/Detaildiscuss.vue')
@@ -30,10 +38,18 @@ const routes = [
     path: '/',
     redirect: '/bookshelf',
   },
+  //书架
   {
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
+  },
+
+  // 精选的
+  {
+    path: '/selectboysfree',
+    name: 'SelectBoysfree',
+    component: SelectBoysfree,
   },
   {
     path: '/select',
@@ -64,7 +80,24 @@ const routes = [
     ],
     redirect: '/selectboys',
   },
+  // 阅读页面
+  {
+    path: '/detail/:id',
+    name: 'Detail',
+    component: Detail,
+  },
+  {
+    path: '/chapter/:id',
+    name: 'Chapter',
+    component: Chapter,
+  },
+  {
+    path: '/read/:id/chapter/:pp',
+    name: 'Read',
+    component: Read,
+  },
 
+  //发现页面的
   {
     path: '/find',
     name: 'Find',
@@ -85,9 +118,12 @@ const routes = [
   },
   {
     path: '/findDetails/:id',
-    name: 'findDetails',
+    name: 'FindDetails',
     component: findDetails,
   },
+
+
+  // 我的页面
   {
     path: '/mine',
     name: 'Mine',
@@ -95,33 +131,38 @@ const routes = [
   },
   {
     path: '/mineShow',
-    name: 'mineShow',
+    name: 'MineShow',
     component: mineShow,
   },
   {
     path: '/mineSet',
-    name: 'mineSet',
+    name: 'MineSet',
     component: mineSet,
   },
   {
     path: '/mineMsg',
-    name: 'mineMsg',
+    name: 'MineMsg',
     component: mineMsg,
   },
+  {
+    path: '/peopleDetails',
+    name: 'PeopleDetails',
+    component: peopleDetails,
+  },
+  {
+    path: '/privacySet',
+    name: 'PrivacySet',
+    component: privacySet,
+  },
+  
 
-  {
-    path: '/detail/:id',
-    name: 'Detail',
-    component: Detail,
-  },
-  {
-    path: '/chapter/:id',
-    name: 'Chapter',
-    component: Chapter,
-  },
+
+
+
+  //用户的登录及账号管理‘
   {
     path: '/validatelogin',
-    name: 'validatelogin',
+    name: 'Validatelogin',
     component: validatelogin,
   },
   {

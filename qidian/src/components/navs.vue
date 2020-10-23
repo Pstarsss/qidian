@@ -3,7 +3,7 @@
     <div class="foot1">
       <div class="bottom1">
         <div class="a1" v-for="(item, index) in list" :key="index">
-          <img :src="item.src" />
+          <img :src="item.src" @click="openkinds(item.index)" />
           <span>{{ item.name }}</span>
         </div>
       </div>
@@ -17,8 +17,13 @@ export default {
   data() {
     return {};
   },
-  methods:{
-    
+  methods: {
+    openkinds(a) {
+      console.log(a);
+      if (a == 4) {
+        this.$router.push("/selectboysfree");
+      }
+    },
   },
   props: {
     //返回数组默认值
