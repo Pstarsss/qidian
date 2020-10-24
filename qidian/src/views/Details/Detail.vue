@@ -132,14 +132,14 @@
 
          <div class="detail-catalog">
            <span class="common-title">书友圈</span>
-           <span class="detail-catalog-right">运营团队 (招募中) | 讨论贴(17) <i class="el-icon-arrow-right"></i></span>
+           <span class="detail-catalog-right" @click="opendiscuss">运营团队 (招募中) | 讨论贴(17) <i class="el-icon-arrow-right"></i></span>
          </div>
          <div class="detail-comment">
               <div class="detail-comment-content">
                 <div class="detail-comment-contentss">
                       
                 </div>
-                <span class="detail-comment-contents">
+                <span class="detail-comment-contents" >
                     很有趣的女频文！本书存在一个及其尖锐的矛盾，目前我也只看了几十章，期待后面作者如何展开解决矛盾
                 </span>
               </div>
@@ -192,7 +192,7 @@
          </div>
          <div class="detail-lookmore">
               <div class="lookmore-detail" :key="index" v-for="(item,index) in info4">
-                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs"></div>
+                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs" @click="openDetail(index)"></div>
                  <div class="lookmore-detail-title">
                    <p class="lookmore-name">{{item.name}}</p>
                    <p class="lookmore-tj">{{item.wordcount}}万字</p>
@@ -324,6 +324,10 @@ export default {
       read(){
         let id = this.$router.currentRoute.params.id;
         this.$router.push('/read/'+id+"/chapter/"+1);
+      },
+      opendiscuss(){
+         let id = this.$router.currentRoute.params.id;
+         this.$router.push('/detaildiscuss/'+id);
       }
     }
 }

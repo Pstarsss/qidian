@@ -18,7 +18,7 @@
         <hr style="margin-top: 0.3rem" />
 
         <!-- 推荐书籍 -->
-        <div class="scroll-wrap">
+        <div class="scroll-wrap" v-if="msg">
           <ul class="scroll-content" :style="{ top }">
             <li
               v-for="(item, index) in msg.data"
@@ -34,7 +34,7 @@
           </ul>
         </div>
         <!-- 畅销精选 -->
-        <div class="wellsell">
+        <div class="wellsell" v-if="msgArr">
           <div class="wellsell-title">
             <h2>畅销精选</h2>
             <span>
@@ -65,7 +65,7 @@
         </div>
 
         <!-- 主编力荐 -->
-        <div class="wellsell">
+        <div class="wellsell" v-if="msgArr">
           <div class="wellsell-title">
             <h2>主编力荐</h2>
             <span>
@@ -96,7 +96,7 @@
         </div>
 
         <!-- 限时免费 -->
-        <div class="time-free">
+        <div class="time-free" v-if="msgArr">
           <h2>限时免费</h2>
           <span class="free-hour">{{ this.hour }}</span> :
           <span class="free-minu">{{ this.min }}</span> :
@@ -132,7 +132,7 @@
         </div>
 
         <!-- 新书强推 -->
-        <div class="wellsell">
+        <div class="wellsell" v-if="msgArr">
           <div class="wellsell-title">
             <h2>新书强推</h2>
             <span>
@@ -164,7 +164,7 @@
         </div>
 
         <!-- 经典完本 -->
-        <div class="wellsell">
+        <div class="wellsell" v-if="msgArr">
           <div class="wellsell-title">
             <h2>经典完本</h2>
             <span>
@@ -206,7 +206,7 @@
         </div>
 
         <!-- 二次元精品 -->
-        <div class="wellsell">
+        <div class="wellsell" v-if="msgArr">
           <div class="wellsell-title">
             <h2>二次元精品</h2>
             <span>
@@ -238,7 +238,7 @@
         </div>
 
         <!-- 军事精品 -->
-        <div class="wellsell">
+        <div class="wellsell" v-if="msgArr">
           <div class="wellsell-title">
             <h2>军事精品</h2>
             <span>
@@ -270,7 +270,7 @@
         </div>
 
         <!-- 出版力荐 -->
-        <div class="time-free">
+        <div class="time-free" v-if="msgArr">
           <h2>出版力荐</h2>
 
           <span class="for-more">
@@ -337,8 +337,9 @@
         </div>
 
         <!-- 个性化推荐分类 -->
-        <div class="bottomtuijian">
+        <div class="bottomtuijian" v-if="msg">
           <div
+            @click="openDetail1(index)"
             class="wellsell"
             v-for="(item, index) in msg.data.slice(startline, endline)"
             :key="index"
@@ -354,7 +355,7 @@
               </div>
               <div class="wellsell-container">
                 <div class="wellsell-container-left">
-                  <img :src="item.images" alt="" @click="openDetail1(index)" />
+                  <img :src="item.images" alt="" />
                 </div>
                 <div class="wellsell-container-right">
                   <span class="wellsell-container-right-title">{{
@@ -430,7 +431,6 @@ export default {
     });
     this.$http.get("/api/booklist").then((res) => {
       this.msg = res;
-      console.log(this.msg);
     });
   },
 
@@ -522,10 +522,10 @@ export default {
       this.endline += 4;
       this.$refs.scroll.finishPullup();
       this.$refs.scroll.refresh();
-      console.log(this.startline, this.endline);
+      // console.log(this.startline, this.endline);
     },
     deleteItem(index) {
-      this.msg.data.splice(index, 1);
+      this.item.splice(index, 1);
     },
     hide() {
       this.display = 0;
@@ -566,7 +566,6 @@ export default {
         this.sec = parseInt(secLeft);
       }, 1000);
     },
-
     function() {
       function slideBanner() {
         //选中item的盒子
@@ -575,13 +574,11 @@ export default {
         var startPoint = 0;
         //手指滑动重点X坐标
         var stopPoint = 0;
-
         //重置坐标
         var resetPoint = function () {
           startPoint = 0;
           stopPoint = 0;
         };
-
         //手指按下
         box.addEventListener("touchstart", function (e) {
           //手指按下的时候停止自动轮播
@@ -673,7 +670,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$children);
+    // console.log(this.$children);
     setInterval((_) => {
       if (this.activeIndex < 8) {
         this.activeIndex += 1;
@@ -711,7 +708,7 @@ export default {
   margin-bottom: 2rem;
 }
 .wrapper {
-  height: calc(100vh - 1.2rem);
+  height: calc(100vh - 1.4rem);
 }
 .time-free-item > img {
   height: 1.8rem;

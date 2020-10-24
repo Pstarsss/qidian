@@ -10,9 +10,9 @@
 			</div>
 		</div>
 		<!-- 个人信息板块 -->
-		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingUp">
+		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown" @scrolly='scrolly' @click.native="stopflag">
 		<div class="people">
-			<div class="details" @click="peopleDetails">
+			<div class="details" @click="people">
 				<div class="details1">
 					<img src="./mine-imgs/05.jpg" />
 				</div>
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<!-- 开通畅享卡板块 -->
-		<div class="dredge">
+		<div class="dredge" ref="nav">
 			<div class="dredge-top">
 			    <i class="el-icon-sunrise-1 icon-sunrise"></i>
 				<span class="span1">开通畅享卡</span>
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 		<!-- 分类板块 -->
-		<div id="nav" class="msg-plate" style="margin-top: -19.5%;">
+		<div  class="msg-plate">
 			<navs :list="navlist1" class="nav1"></navs>
 			<navs :list="navlist2" class="nav2"></navs>
 		</div>
@@ -119,6 +119,9 @@
 					{ icon1:'el-icon-edit', content:'成为作家'},
 					{ icon1:'el-icon-date', content:'起点星专属卡'},
 				],
+				y:'',
+				flag:false,
+				flag1:false
 			}
 		},
 		methods:{
@@ -128,14 +131,26 @@
 			Msg(){
 				this.$router.push('/mineMsg')
 			},
-			peopleDetails(){
+			people(){
 				this.$router.push('/peopleDetails')
 			},
-			pullingUp(){
-				let nav = document.getElementById("nav");
-				nav.style.marginTop = "0";
-				//console.log(12);
+			pullingDown(){
+				// this.scrolly();
+				this.flag = true;
+				// this.$refs.nav.style.marginTop = `0.${this.y}rem`;
+				
+				// this.$refs.nav.style.marginTop = "-19.5%";
 				this.$refs.scroll.finishPullDown();
+			},
+			scrolly(value){
+				this.y = value;
+				console.log(this.flag);
+				if(this.flag){
+					this.$refs.nav.style.height= `${56+value}px`;
+				}
+			},
+			stopflag(){
+				this.flag = false;
 			}
 		},
 		components: {
@@ -148,6 +163,9 @@
 </script>
 
 <style scoped>
+.wrapper {
+    height: calc(100vh - 1.4rem);
+}
 	.mineShow{
 		background-color: whitesmoke;
 	}
@@ -294,18 +312,22 @@
 	}
 	/* 开通畅享卡板块 */
 	.dredge{
-		width: 94%;        height: 2.2rem;
+		width: 94%;
 		margin-left: 3%;
 		margin-top: -4%;
 		border-radius: 0.15rem;
 		padding: 0.08rem;
-		background-color: coral;
+		background-color: #fd0000b5;
+		display: flex;
+		flex-direction: column;
+		border-bottom-right-radius: initial;
+		border-bottom-left-radius: initial;
+		height:0.75rem;
 	}
 	.dredge-top{
-		height: 40%;
-		padding: 0.08rem;
-		color: #FED9AB;
-		border-bottom: 1px solid #FED9AB;
+		height: 0.6rem;
+    padding: 0.08rem;
+    color: #FED9AB;
 	}
 	.dredge-top .icon-sunrise{
 		font-size: 0.4rem;
@@ -327,17 +349,24 @@
 		margin-top: 0.1rem;
 	}
 	.dredge-bottom{
-		height: 60%;
-		padding: 0.1rem;
 		color: #FED9AB;
 		font-size: 0.2rem;
-		display: flex;
-	    justify-content: space-around;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
 		flex-wrap: wrap;
-		margin-top: 0.1rem;
+		border-top: 1px solid #ffffff2e;
+		height:auto;
+		margin-top: 0.2rem;
+		padding-top: 0.2rem;
+    border-radius: 2px;
 	}
 	.dredge-bottom>div{
-		margin-right: 0.1rem;
+		width: 25%;
+    padding: 0.1rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 	}
 	.dredge-bottom .icon-drlists{
 		margin-right: 0.1rem;
