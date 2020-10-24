@@ -12,7 +12,7 @@
 		<!-- 个人信息板块 -->
 		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown" @scrolly='scrolly' @click.native="stopflag">
 		<div class="people">
-			<div class="details">
+			<div class="details" @click="people">
 				<div class="details1">
 					<img src="./mine-imgs/05.jpg" />
 				</div>
@@ -131,6 +131,9 @@
 			Msg(){
 				this.$router.push('/mineMsg')
 			},
+			people(){
+				this.$router.push('/peopleDetails')
+			},
 			pullingDown(){
 				// this.scrolly();
 				this.flag = true;
@@ -141,7 +144,6 @@
 			},
 			scrolly(value){
 				this.y = value;
-				console.log(this.flag);
 				if(this.flag){
 					this.$refs.nav.style.height= `${56+value}px`;
 				}

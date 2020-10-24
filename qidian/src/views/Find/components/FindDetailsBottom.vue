@@ -2,9 +2,8 @@
   <!-- 帖子详情底部 -->
   <div class="findDetailsBottom">
     <div class="content">
-      <div class="review">
-        <input type="text" class="" :placeholder="icon" />
-        <!-- <p>服服服服服服</p> -->
+      <div class="review" @click="drawer = true">
+        <p class="iconfont icon-bi">终于来啦，聊聊吧~</p>
       </div>
       <div class="interact">
         <i class="iconfont icon-fenxiang"></i>
@@ -12,6 +11,37 @@
         <i class="iconfont icon-dianzan"></i>
       </div>
     </div>
+    <el-drawer
+      title=""
+      :with-header="false"
+      :visible.sync="drawer"
+      direction="btt"
+      :size="drawerSize"
+      :modal="true"
+      :append-to-body="true"
+    >
+      <form action="submitReview" method="POST">
+        <p>
+          <span>发表评论</span>
+          <button type="submmit">发布</button>
+        </p>
+        <el-divider></el-divider>
+        <textarea
+          name="publishReviewContent"
+          id=""
+          v-model="publishReview"
+          placeholder="说点什么吧~"
+          maxlength="200"
+        ></textarea>
+      </form>
+      <p class="submitReviewBottom">
+        <span>
+          <i class="el-icon-chicken"></i>
+          <i class="el-icon-picture-outline"></i>
+        </span>
+        <span>{{ publishReview.length }}/200</span>
+      </p>
+    </el-drawer>
   </div>
 </template>
 
@@ -20,13 +50,33 @@ import '../iconfont/iconfont'
 export default {
   data() {
     return {
-      icon: '终于来啦，聊聊吧...',
+      drawerSize: '30%',
+      drawer: false,
+      publishReview: '',
     }
+  },
+  watch: {
+    // drawer(e) {
+    //   if (e == true) {
+    //     this.$nextTick(() => {
+    //       this.$refs.textarea.focus()
+    //     })
+    //   }
+    // },
   },
 }
 </script>
 
-<style lang="scss"></style>
+<style>
+.el-drawer {
+  border-top-left-radius: 5%;
+  border-top-right-radius: 5%;
+  padding: 0.2rem;
+}
+/* .findDetailsBottom .el-drawer__body {
+  margin: 0.2rem;
+} */
+</style>
 <style scoped>
 .findDetailsBottom {
   background: #fff;
@@ -47,18 +97,17 @@ export default {
 }
 .review {
   display: inline-block;
-  height: 0.7rem;
+  height: 0.6rem;
   flex-grow: 1;
-  padding: 0.1rem 0.1rem 0.1rem 0.2rem;
+  padding: 0.1rem 0.2rem;
+  background: #f5f5f5;
+  margin-left: 0.2rem;
+  border-radius: 0.2rem;
 }
-.review input {
-  display: block;
-  background-color: #eee;
-  height: 100%;
-  width: 100%;
-  outline: none;
-  border-radius: 0.5rem;
-  padding: 0.1rem 0.3rem;
+.review p {
+  line-height: 0.4rem;
+  font-size: 0.25rem;
+  color: #aaa;
 }
 .interact {
   height: 100%;
@@ -74,5 +123,50 @@ export default {
   margin: 0 0.2rem;
   line-height: 0.8rem;
   float: left;
+}
+section {
+  /* padding: 0.2rem; */
+}
+section > form > p:first-of-type {
+  line-height: 0.6rem;
+  color: #000;
+  font-size: 0.3rem;
+  display: flex;
+  justify-content: space-between;
+}
+form button {
+  border-radius: 0.1rem;
+  padding: 0.1rem 0.2rem;
+  background-color: #db3b3b;
+  color: #fff;
+}
+.el-divider {
+  margin: 0.1rem 0;
+}
+form {
+  height: 90%;
+  /* padding-bottom: 2rem; */
+}
+textarea {
+  resize: none;
+  height: 75%;
+  width: 100%;
+  padding: 0.05rem;
+  font-size: 0.3rem;
+  border-bottom: 1px #db3b3b solid;
+}
+.submitReviewBottom {
+  display: flex;
+  justify-content: space-between;
+}
+.submitReviewBottom {
+  font-size: 0.3rem;
+  top: 0.1rem;
+  position: relative;
+}
+.submitReviewBottom > span:first-of-type > i {
+  margin-right: 0.2rem;
+  font-size: 0.4rem;
+  /* line-height: 0.35rem; */
 }
 </style>
