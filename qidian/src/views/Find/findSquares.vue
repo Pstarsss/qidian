@@ -1,10 +1,5 @@
 <template>
-  <scroll
-    :probeType="3"
-    class="wrapper"
-    ref="scroll"
-    @pullingUp="pullingUp"
-  >
+  <scroll :probeType="3" class="wrapper" ref="scroll" @pullingUp="pullingUp">
     <div class="container">
       <!-- 发现-广场  -->
       <div class="findSquares">
@@ -121,6 +116,12 @@ let num1 = parseInt(Math.random() * 550000) + 50000
 let num2 = parseInt(Math.random() * 550000) + 50000
 let num3 = parseInt(Math.random() * 550000) + 50000
 let num4 = parseInt(Math.random() * 550000) + 50000
+// const [(num1, num2, num3, num4)] = [
+//   parseInt(Math.random() * 550000) + 50000,
+//   parseInt(Math.random() * 550000) + 50000,
+//   parseInt(Math.random() * 550000) + 50000,
+//   parseInt(Math.random() * 550000) + 50000,
+// ]
 import menuTitle from './components/FindMenuTitle'
 import hotDiscuss from './components/FindHotDiscuss'
 import navs from '@/components/navs'

@@ -57,7 +57,7 @@ export default {
   z-index: 999;
 }
 .findTop a {
-  font-size: 0.35rem;
+  font-size: 0.3rem;
   color: #fff;
   margin: 0 0.3rem;
   line-height: 1rem;
