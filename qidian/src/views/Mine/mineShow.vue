@@ -144,7 +144,6 @@
 			},
 			scrolly(value){
 				this.y = value;
-				console.log(this.flag);
 				if(this.flag){
 					this.$refs.nav.style.height= `${56+value}px`;
 				}

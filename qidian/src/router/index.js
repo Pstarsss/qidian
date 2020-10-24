@@ -35,10 +35,10 @@ const Chapter = () => import('@/views/Details/Chapter.vue')
 const Detaildiscuss = () => import('@/views/Details/Detaildiscuss.vue')
 
 //登录注册
-const Login = () => import('@/views/Login/Login.vue')
-const Validatelogin = () => import('@/views/Login/validatelogin.vue')
-const Register = () => import('@/views/Login/Register.vue')
-
+const Login = () => import('@/views/Login/Login.vue');
+const Validatelogin = () => import('@/views/Login/validatelogin.vue');
+const Register = () => import('@/views/Login/Register.vue');
+const ChangePassword = () => import('@/views/Login/ChangePassword.vue');
 
 Vue.use(VueRouter)
 
@@ -169,10 +169,6 @@ const routes = [
     component: privacySet,
   },
   
-
-
-
-
   //用户的登录及账号管理‘
   {
     path: '/validatelogin',
@@ -189,6 +185,11 @@ const routes = [
     name: 'Register',
     component: Register,
   },
+  {
+    path:'/changepassword',
+    name: 'ChangePassword',
+    component: ChangePassword
+  }
 ]
 
 const router = new VueRouter({
