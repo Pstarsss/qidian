@@ -1,6 +1,25 @@
 <template>
-  <div class="read">
+  <div class="read"> 
+        <top-nav-bar class="detail-topss" >
+            <div slot="left" @click="$router.go(-1)"><i class="el-icon-arrow-left"></i></div>
+            <div slot="center"></div>
+            <div slot="right">
+                <el-dropdown  hide-on-click>
+                <span class="el-dropdown-link">
+                   <i class="el-icon-more"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                   <el-dropdown-item @click="xq"> <i class="el-icon-view" command="a"></i> 详情</el-dropdown-item>
+                    <el-dropdown-item @click="ss" divided command="b"><i class="el-icon-search"></i> 搜索</el-dropdown-item>
+                    <el-dropdown-item @click="ml" divided command="c"><i class="el-icon-tickets"></i> 目录</el-dropdown-item>   
+                    <el-dropdown-item @click="syq" divided command="d"><i class="el-icon-chat-dot-round"></i> 书友圈</el-dropdown-item> 
+                </el-dropdown-menu>
+                </el-dropdown>
+       
+            </div>
+        </top-nav-bar>
       <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
+          
             <div class="read-content">
                 <div class="read-book-imgs">
                     <img :src="info.images" alt="" class="read-book-img">
@@ -39,17 +58,18 @@
                             <h1 class="book-content-title">{{item.title}}</h1>
                             <p class="book-content-contents" v-for="(m,n) in item.content" :key="n">{{m}}</p> 
                         </div>  
-                </div>
+                </div>    
+                <div class="read-space"></div>
+      <div class="read-bottom" v-show="qidian">
+          —— · 已经没有啦 · ——
+      </div>   
       </scroll>
-      <div class="read-space"></div>
-      <div class="read-bottom">
-          —— · 起点读书 · ——
-      </div>
   </div>
 </template>
 
 <script>
 import scroll from "@/components/common/Scroll/scroll.vue";
+import TopNavBar from '@/components/common/TopNavBar/NavBar.vue';
 export default {
   name: 'Read',
   data(){
@@ -57,11 +77,13 @@ export default {
          infor:{},
          info:{},
          pp:'',
-         id:''
+         id:'',
+         qidian:'false',
       }      
   },
   components: {
     scroll ,
+    TopNavBar,
   },
    created(){
     this.id = this.$router.currentRoute.params.id;
@@ -82,26 +104,62 @@ export default {
       rrr(){
           this.$refs.scroll.refresh();
       },
-      pullingUp(){
+      pullingUp(){ 
         this.$http.get('/api/read/'+this.id+'/'+(++this.pp)).then(res=>{
             res.data[0].content = res.data[0].content.split('-');
             this.infor = [...this.infor,...res.data];
+        }).catch(res=>{
+            this.qidian=true;
         });
-
         this.$refs.scroll.finishPullup();
       },
+      xq(){
+          this.$router.push('/detail/'+this.id)
+      },
+      ss(){
+
+      },
+      ml(){
+         this.$router.push('/chapter/'+this.id) 
+      },
+      syq(){
+         this.$router.push('/detaildiscuss/'+this.id) 
+      },
+    //    handleCommand(command) {
+    //      this.$router.push('/detail/'+command);
+         
+    //   }
   },
    beforeDestroy(){
           console.log('0000');
-          console.log(this.$store);
-        //   this.$store.state.this.id=this.pp;      
+          console.log(this.$store);     
       }, 
 }
 </script>
 
 <style scoped>
+.el-icon-more{
+    color: #555;
+}
+.detail-topss{
+    display: fiex;
+    display: flex;
+    font-size: 0.25rem;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    padding: 0.1rem 0.1rem 0.15rem
+}
+.read-space{
+    height: .8rem;
+}
 .wrapper{
-    height: calc(100vh - 0.55rem);
+   height: calc(100vh);
+    /* z-index: 100; */
+    position: absolute;
+    z-index: 120;
+    width: 100VW;
+    background-color: #fff;
 }
 .read{
     width: 100%;
@@ -203,7 +261,7 @@ margin: .2rem auto;
     text-indent: .4rem;
 }
 .read-bottom{
-    height: .7rem;
+    height: .6rem;
     width: 100%;
     text-align: center;
     font-size: .16rem;
@@ -211,7 +269,14 @@ margin: .2rem auto;
     background-color: #fff;
     z-index: 99;
     bottom: 0;
-    line-height: .7rem;
+    line-height: .6rem;
     border-top: none;
 }
+ .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
 </style>

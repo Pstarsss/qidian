@@ -4,11 +4,13 @@ import VueRouter from 'vue-router'
 // 书架
 import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
 
+//搜索
+import Search from '@/views/Search/Search.vue'
 
 // 发现
 import Find from '@/views/Find.vue'
-import FindFollow from '@/views/Find/FindFollow.vue'
-import FindSquares from '@/views/Find/FindSquares.vue'
+import FindFollow from '@/views/Find/findFollow.vue'
+import FindSquares from '@/views/Find/findSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
 
@@ -169,8 +171,12 @@ const routes = [
     component: privacySet,
   },
   
-
-
+ //搜索
+ {
+  path: '/search',
+  name: 'Search',
+  component: Search,
+ },
 
 
   //用户的登录及账号管理‘
