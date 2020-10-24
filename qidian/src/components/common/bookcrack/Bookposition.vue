@@ -1,18 +1,20 @@
 <template>
-   <div class='bookposition'>
-      <div class="bp-left">
-         <img :src="src" alt="">
+   <div class='bookposition' @click="aa">
+      <div class="bp-left" v-show='image'>
+          <img :src="image" alt="">
       </div>
       <div class="bp-center">
          <div class="bp-title">
-            {{data.name}}
+                {{data.bookname}}
+         </div>
+         <div class="author">
+                {{data.author}}
          </div>
          <div class="bp-intro">
-            {{data.intro}}
+                {{data.booktitle}}
          </div>
-
       </div>
-      <div class="bp-right">
+      <div class="bp-right" @click.stop="bb">
          <i class="el-icon-more"></i>
       </div>
    </div>
@@ -21,18 +23,28 @@
 <script>
 export default {
   components: {},
+  props:{
+     data:{
+        type:[Object,Array],
+        default:null
+     },
+     image:{
+        type:[String,Object],
+        default:''
+     }
+  },
   data() {
    return {
-      data:'',
-      src :''
-   };
+      
+   }
  },
- created(){
-    this.$http.get('/api/detail/1').then((res)=>{
-       this.data = res.data[0];
-       this.src =res.data[0].images;
-       console.log(this.data);
-    })
+ methods:{
+    aa(){
+       this.$emit('toread',this.data.chapter,this.data.collections);
+    },
+    bb(){
+      console.log('ss111s');
+    }
  }
 
 }
@@ -44,6 +56,7 @@ export default {
    display: flex;
    justify-content: center;
    align-items: center;
+   padding: 0.1rem;
 }
 .bookposition > div{
    padding: 0.1rem;
@@ -51,16 +64,31 @@ export default {
 .bp-center{
    font-size: 0.25rem;
    flex: 1;
-   overflow:hidden; 
-   text-overflow:ellipsis;
-   display:-webkit-box; 
-   -webkit-box-orient:vertical;
-   -webkit-line-clamp:2; 
-   
-   
+}
+.bp-center > div{
+   padding: 0.02rem;
+   color: #626262;
+}
+.bp-center .bp-intro{
+   white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 5.2rem;
+}
+.bp-left img{
+   width: 1rem;
+    border-radius: 5px;
 }
 .bp-title{
-   font-weight: bold;
-   font-size: 0.4rem;
+    font-weight: bold;
+    font-size: 0.4rem;
+    font-family: fangsong;
+    color: black !important;
+}
+.bp-right{
+   font-size: 0.35rem;
+   position: absolute;
+    right: 0.5%;
+
 }
 </style>

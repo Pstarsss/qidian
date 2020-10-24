@@ -69,8 +69,8 @@ export default {
       }
     },
     isActive(names) {
-      if(this.$router.name){
-        return this.$route.name.includes(names);
+      if(this.$router.currentRoute.name){
+        return this.$router.currentRoute.name.includes(names);
       }
     },
   },

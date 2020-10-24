@@ -1,6 +1,6 @@
 <template>
     <nav-bar class="booknav">
-      <div slot="left">
+      <div slot="left" class="b-left">
         <i class="el-icon-menu"></i>
       </div>
       <div slot="center" class="bookcenter">
@@ -42,5 +42,8 @@ export default {
   position: absolute;
   top: 10%;
   right: 10%;
+}
+.b-left{
+  font-size: 0.4rem;
 }
 </style>
