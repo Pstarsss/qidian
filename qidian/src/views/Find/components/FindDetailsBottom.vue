@@ -12,7 +12,6 @@
       </div>
     </div>
     <el-drawer
-      class="submitReview"
       title=""
       :with-header="false"
       :visible.sync="drawer"
@@ -69,14 +68,14 @@ export default {
 </script>
 
 <style>
-.findDetailsBottom .el-drawer {
+.el-drawer {
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
   padding: 0.2rem;
 }
-.findDetailsBottom .el-drawer__body {
+/* .findDetailsBottom .el-drawer__body {
   margin: 0.2rem;
-}
+} */
 </style>
 <style scoped>
 .findDetailsBottom {
