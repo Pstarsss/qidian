@@ -82,8 +82,8 @@
       title=""
       :visible.sync="drawer"
       :with-header="false"
-      :direction="direction"
-      :size="drawerSize"
+      direction="btt"
+      size="4.5rem"
     >
       <p>分享</p>
       <p>举报</p>
@@ -104,8 +104,8 @@ export default {
   data() {
     return {
       drawer: false,
-      direction: 'btt',
-      drawerSize: '4.5rem',
+      // direction: 'btt',
+      // drawerSize: '4.5rem',
       det: {},
       revs: [],
       id: '',
@@ -142,7 +142,7 @@ export default {
     },
     getReviews() {
       this.$http.get('/api/detaildiscuss').then((res) => {
-        this.revs = res.data
+        this.revs = res.data.reverse()
         console.log(this.revs)
       })
     },

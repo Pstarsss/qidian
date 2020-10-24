@@ -14,6 +14,8 @@
         :with-header="false"
         :direction="direction"
         :size="drawerSize"
+        :modal="false"
+        :append-to-body="true"
       >
         <p>
           <svg class="icon" aria-hidden="true">
@@ -115,7 +117,7 @@ import './iconfont/iconfont'
 export default {
   data() {
     return {
-      noLogin: false,
+      noLogin: true,
       drawer: false,
       direction: 'btt',
       drawerSize: '3.5rem',
