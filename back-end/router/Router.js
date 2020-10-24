@@ -79,23 +79,15 @@ router.get('/hotdiscuss',function(req,res){
   })
 });
 
-<<<<<<< HEAD
 
 
 // 搜索
 router.post('/search',function(req,res){
   sql.find('select * from hotdiscuss').then(results=>{
-=======
-router.get('/finddetail/:id',function(req,res){
-  let id = req.params.id;
-
-  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
->>>>>>> aee8ebd6867d1be98777d30aba4b1af2ba1c4c05
     res.send(results);
   })
 });
 
-<<<<<<< HEAD
 
 // 用户登录后获取的书架信息;
 router.post('/userbasic',function(req,res){
@@ -106,8 +98,6 @@ router.post('/userbasic',function(req,res){
   })
 });
 
-=======
->>>>>>> aee8ebd6867d1be98777d30aba4b1af2ba1c4c05
 // 用户注册
 router.post('/post',(req,res)=>{
   let {iphone,password,username} = req.body;
