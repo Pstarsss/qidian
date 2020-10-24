@@ -32,6 +32,7 @@
 
 <script>
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue'
+
 export default {
   components: {
     TopNavBar,
@@ -82,17 +83,22 @@ export default {
           iphone:this.phonevalue,
           password:this.passowordvalue
         }).then(res=>{
-          let {iphone,password,userid,username} = res.data[0]
+          let {iphone,password,userid,username} = res.data[0];
+          
           sessionStorage.setItem('iphone',iphone);
           sessionStorage.setItem('password',password);
           sessionStorage.setItem('userid',userid);
           sessionStorage.setItem('username',username);
+          
           this.$http.post('/api/userbasic',{
               userid,
           }).then((res1)=>{
-              console.log(res1);
+             let temp = res1.data;
+             this.$store.dispatch('add',temp).then(res2=>{
+                
+             });
           }).catch(()=>{
-              console.log('sss');
+              console.log('fffail ');
           })
           this.$router.push('/mineShow');
         }).catch(()=>{
