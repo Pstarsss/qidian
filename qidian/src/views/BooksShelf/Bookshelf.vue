@@ -12,13 +12,21 @@
 <script>
 import BookCrack from '@/components/common/bookcrack/BookCrack.vue'
 import BookList from '@/components/common/bookcrack/Bookposition.vue'
+import { mapGetters} from 'vuex'
 export default {
   name: 'bookshelf',
   components: {
     BookCrack,
     BookList
   },
-  
+  computed:{
+    ...mapGetters({
+      booklists : "getBookRecord"
+    })
+  },
+  created(){
+
+  }
 }
 </script>
 <style scoped>
