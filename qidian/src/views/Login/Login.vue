@@ -83,12 +83,12 @@ export default {
           iphone:this.phonevalue,
           password:this.passowordvalue
         }).then(res=>{
-          let {iphone,password,userid,username} = res.data[0];
-          
+          let {iphone,password,userid,username,userhead} = res.data[0];
           sessionStorage.setItem('iphone',iphone);
           sessionStorage.setItem('password',password);
           sessionStorage.setItem('userid',userid);
           sessionStorage.setItem('username',username);
+          sessionStorage.setItem('userhead',userhead);
           
           this.$http.post('/api/userbasic',{
               userid,

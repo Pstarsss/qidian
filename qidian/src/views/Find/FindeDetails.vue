@@ -77,7 +77,7 @@
       </div>
     </scroll>
     <!-- 底部组件 -->
-    <findDetailsBottom />
+    <findDetailsBottom @submits="submits"></findDetailsBottom>
     <el-drawer
       title=""
       :visible.sync="drawer"
@@ -118,34 +118,41 @@ export default {
   //   this.$refs.scroll.refresh()
   // },
   created() {
-    this.getDetail()
-    this.getReviews()
+    this.getDetail();
+    this.getReviews();
   },
   updated() {
-    this.$refs.scroll.refresh()
+    this.$refs.scroll.refresh();
   },
   methods: {
     pullingUp() {
-      console.log('findDetails上拉')
-      this.$refs.scroll.finishPullup()
+      console.log('findDetails上拉');
+      this.$refs.scroll.finishPullup();
     },
     findDetailsBack() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     },
     getDetail() {
       // let that = this
-      this.id = this.$router.currentRoute.params.id
+      this.id = this.$router.currentRoute.params.id;
       this.$http.get(`/api/finddetail/${this.id}`).then((res) => {
-        this.det = res.data[0]
-        console.log(this.det)
+        this.det = res.data[0];
+        console.log(this.det);
       })
     },
     getReviews() {
       this.$http.get('/api/detaildiscuss').then((res) => {
-        this.revs = res.data.reverse()
-        console.log(this.revs)
+        this.revs = res.data.reverse();
+        console.log(this.revs);
       })
     },
+    submits(value){
+      this.$http.post('/api/adddiscuss',{
+        value
+      }).then(ree=>{
+        console.log(ree);
+      })
+    }
     // clsDrawer() {
     //   this.$emit('update:drawer', false)
     // },
