@@ -79,14 +79,35 @@ router.get('/hotdiscuss',function(req,res){
   })
 });
 
+<<<<<<< HEAD
+
+
+// 搜索
+router.post('/search',function(req,res){
+  sql.find('select * from hotdiscuss').then(results=>{
+=======
 router.get('/finddetail/:id',function(req,res){
   let id = req.params.id;
 
   sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+>>>>>>> aee8ebd6867d1be98777d30aba4b1af2ba1c4c05
     res.send(results);
   })
 });
 
+<<<<<<< HEAD
+
+// 用户登录后获取的书架信息;
+router.post('/userbasic',function(req,res){
+  let {userid} = req.body;
+  sql.find(`select * from userbookshelf where userid = ${userid}`).then(results=>{
+    console.log(results);
+    res.send(JSON.parse(JSON.stringify(results)));
+  })
+});
+
+=======
+>>>>>>> aee8ebd6867d1be98777d30aba4b1af2ba1c4c05
 // 用户注册
 router.post('/post',(req,res)=>{
   let {iphone,password,username} = req.body;
@@ -95,26 +116,32 @@ router.post('/post',(req,res)=>{
   })
     sql.add(`insert into user (iphone,password,username) values  (${iphone},${password},'${username}')`).then(re=>{
       res.send('恭喜,注册成功');
-  
-})
-
-  
-
-
-  
+  }) 
 });
 
 //用户登录
 router.post('/login',(req,res)=>{
   let {iphone,password } = req.body;
   sql.find('select * from user where iphone = ? and password = ?',[iphone,password]).then((re)=>{
-    console.log(re);
+    console.log(JSON.parse(JSON.stringify(re)));
+    res.send(re);
   }).catch((err)=>{
-    console.log(err);
+    res.send('登录失败');
   })
-  res.send('11');
 });
-  
+
+
+//密码修改
+router.put('/changepassword',(req,res)=>{
+  let {password2,iphone} = req.body;
+  sql.find('update user set ? where iphone = ?',[{'password':password2},iphone]).then(re=>{
+    res.send('密码修改成功');
+  }).catch(eer=>{
+    res.send('修改失败');
+  });
+});
+
+
 const Core = require('@alicloud/pop-core');
 
 var client = new Core({

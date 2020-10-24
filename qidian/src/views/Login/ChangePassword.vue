@@ -44,14 +44,15 @@ export default {
       this.passowordvalue2 = event.target.value;
     },
     rush(){
-      if(this.issure&&this.phonevalue&&this.passowordvalue){
-        this.$http.post('/api/changepassword',{
-          password1:this.passowordvalue1,
-          password2:this.passowordvalue2
-        }).then(res=>{
-          this.$router.push('/mineShow');
-        })
-      }
+      console.log(sessionStorage);
+      // if(this.issure&&this.phonevalue&&this.passowordvalue){
+      //   this.$http.post('/api/changepassword',{
+      //     password2:this.passowordvalue2,
+
+      //   }).then(res=>{
+      //     this.$router.push('/mineShow');
+      //   })
+      // }
     }
    }
 
