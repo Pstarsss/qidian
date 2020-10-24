@@ -12,14 +12,14 @@
         </div>
 
         <!-- 分类图标 -->
-        <bnavs :list="navlist" @click="openkinds(index)"> </bnavs>
+        <bnavs :list="navlist"> </bnavs>
 
         <!-- 分割线奥 -->
         <hr style="margin-top: 0.3rem" />
 
         <!-- 推荐书籍 -->
         <div class="scroll-wrap" v-if="msg">
-          <ul class="scroll-content" :style="{ top }" >
+          <ul class="scroll-content" :style="{ top }">
             <li
               v-for="(item, index) in msg.data"
               :key="index"
@@ -330,7 +330,7 @@
         </div>
 
         <!-- 个性化推荐 -->
-        <div class="special-for" >
+        <div class="special-for">
           <h2>个性化推荐</h2>
           <span>根据你的阅读口味或自定义偏好生成</span>
           &nbsp;<span>设置偏好></span>
@@ -348,10 +348,9 @@
               <div class="wellsell-title">
                 <h3>你可能感兴趣的好书</h3>
                 <span>
-                  <i
-                    class="el-icon-circle-close"
-                    @click="deleteItem(index)"
-                  ></i>
+                  <el-button type="text" @click="open1">
+                    <i class="el-icon-circle-close"></i
+                  ></el-button>
                 </span>
               </div>
               <div class="wellsell-container">
@@ -436,6 +435,81 @@ export default {
   },
 
   methods: {
+    open1() {
+      const showConfirmButton = false;
+      const h = this.$createElement;
+      this.$msgbox({
+        title: "对内容不感兴趣",
+        message: h("p", null, [
+          h(
+            "span",
+            { style: "color: gray;padding-left:.1rem;font-size:.18rem" },
+            "选择下方理由，优化推荐 "
+          ),
+          h(
+            "span",
+            {
+              style:
+                "border-radius: 1rem;color: black;font-size: .22rem;background: #f5f5f5;padding: .1rem;    width: 2.5rem;position: absolute;text-align: center;left: 0;top: .45rem;",
+            },
+            "已读过 "
+          ),
+          h(
+            "span",
+            {
+              style:
+                "border-radius: 1rem;color: black;font-size: .22rem;background: #f5f5f5;padding: .1rem;    width: 2.5rem;position: absolute;text-align: center;left: 3rem;top: .45rem;",
+            },
+            "书质量差 "
+          ),
+          h(
+            "span",
+            {
+              style:
+                "border-radius: 1rem;color: black;font-size: .22rem;background: #f5f5f5;padding: .1rem;    width: 2.5rem;position: absolute;text-align: center;left: 0rem;top: 1rem;",
+            },
+            "书不喜欢 "
+          ),
+          h(
+            "span",
+            {
+              style:
+                "margin-top: -.5rem;border-radius: 1rem;color:white;float:right;font-size:.18rem;background:#e4343e;padding:.06rem .1rem",
+            },
+            "不感兴趣"
+          ),
+        ]),
+        // showCancelButton: true,
+        // confirmButtonText: "确定",
+        // cancelButtonText: "取消",
+        beforeClose: (action, instance, done) => {
+          if (action === "confirm") {
+            instance.confirmButtonLoading = true;
+            instance.confirmButtonText = "执行中...";
+            setTimeout(() => {
+              done();
+              setTimeout(() => {
+                instance.confirmButtonLoading = false;
+              }, 300);
+            }, 3000);
+          } else {
+            done();
+          }
+        },
+      }).then((action) => {
+        this.$message({
+          type: "info",
+          message: "删除成功",
+        });
+      });
+    },
+    open(a) {
+      if (this.$route.path == a) {
+        return "";
+      } else {
+        this.$router.push(a);
+      }
+    },
     openDetail(index, i) {
       let a = this.msgArr[i].data[index].id;
       this.$router.push("/detail/" + a);
@@ -607,7 +681,29 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
+.el-button--mini,
+.el-button--small {
+  display: none !important;
+}
+.el-message-box__headerbtn {
+  display: none !important;
+}
+
+.el-message-box__title {
+  padding-top: 0.1rem;
+  padding-left: 0.1rem !important;
+  margin-bottom: 0;
+  font-size: 0.26rem !important;
+  line-height: 1;
+  color: #303133;
+}
+.el-message-box {
+  border: 0px solid #ebeef5 !important;
+  border-radius: 0.2rem !important;
+  width: 90% !important;
+  height: 2.5rem !important;
+}
 .bottomtuijian {
   margin-bottom: 2rem;
 }

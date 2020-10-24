@@ -3,10 +3,10 @@
 		<mineTopbar>
 			<i slot="left" class="el-icon-arrow-left"  @click="back"></i>
 			<i slot="right" class="el-icon-brush icon-draw"></i>
-			<i slot="right" class="el-icon-more" @click="dialog = true"></i>
+			<i slot="right" class="el-icon-more" @click="isdialog"></i>
 		</mineTopbar>
-		<el-drawer title="我是标题" :before-close="handleClose" :visible.sync="dialog" :with-header="false"  direction="btt" size="21%">
-		  <span class="drawerSet" @click="go">隐私设置</span>
+		<el-drawer  :before-close="handleClose" :visible="dialog" :with-header="false"  direction="btt" size="21%">
+		  <span class="drawerSet" @click.capture="toprivacy">隐私设置</span>
 		  <el-button @click="cancel" class="drawBtn">取 消</el-button>
 		</el-drawer>
 		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown">
@@ -61,25 +61,29 @@
 		},
 		methods:{
 			pullingDown(){
-				console.log(12);
 				this.$refs.scroll.finishPullDown();
 			},
 			back(){
 				this.$router.go(-1);
 			},
-			go(){
+			isdialog(){
+				this.dialog = true;
+
+			},
+			toprivacy(){
+				this.dialog = false;
 				this.$router.push('/privacySet');
 			},
-			 handleClose(done) {
-			      if (this.loading) {
-			        return;
-			      }
+			handleClose(done) {
+					done();
+					this.dialog = false;
 			},
-			cancel() {
+			cancel() 
+			{
 			      this.loading = false;
 			      this.dialog = false;
 			      clearTimeout(this.timer);
-			    }
+			}
 		},
 		components:{
 			mineTopbar,

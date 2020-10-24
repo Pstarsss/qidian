@@ -20,7 +20,7 @@
        <span>我已阅读并接受<strong>《阅文用户服务协议》</strong>及<strong>《隐私协议》</strong></span>
      </div>
      <div class="form1">
-       <input type="submit" @click.prevent="rush" value="登录" class="login1" >
+       <input type="submit" @click.prevent="rush" value="登录" :class="[issure?'login1red':'login1']" >
      </div>
      <div class="L-pp">
        <div @click="toregister">注册新账号</div>
@@ -45,7 +45,7 @@ export default {
       srcs:require('@/assets/img/loginimg/guanbi.png'),
       phonevalue:'',
       error:'',
-      passowordvalue:''
+      passowordvalue:'',
    };
   },
   methods:{
@@ -77,11 +77,27 @@ export default {
     },
     rush(){
       if(this.issure&&this.phonevalue&&this.passowordvalue){
+
         this.$http.post('/api/login',{
           iphone:this.phonevalue,
           password:this.passowordvalue
         }).then(res=>{
+          let {iphone,password,userid,username} = res.data[0]
+          sessionStorage.setItem('iphone',iphone);
+          sessionStorage.setItem('password',password);
+          sessionStorage.setItem('userid',userid);
+          sessionStorage.setItem('username',username);
+          this.$http.post('/api/userbasic',{
+              userid,
+          }).then((res1)=>{
+              console.log(res1);
+          }).catch(()=>{
+              console.log('sss');
+          })
           this.$router.push('/mineShow');
+        }).catch(()=>{
+          this.issure = false;
+          console.log('账号或者密码错误');
         })
       }
     }
@@ -150,6 +166,9 @@ strong{
     background-color: #80808033;
     outline: none;
     border: none !important;
+}
+.login1red{
+  background-color: red;
 }
 .L-pp{
     font-size: 0.2rem;
