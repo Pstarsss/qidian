@@ -78,7 +78,14 @@ router.get('/hotdiscuss',function(req,res){
     res.send(results);
   })
 });
+// 获取finddetail
+router.get('/finddetail/:id',function(req,res){
+  let id = req.params.id;
 
+  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+    res.send(results);
+  })
+});
 
 
 // 搜索

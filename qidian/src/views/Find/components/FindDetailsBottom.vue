@@ -18,7 +18,7 @@
       :visible.sync="drawer"
       direction="btt"
       :size="drawerSize"
-      :modal="false"
+      :modal="true"
       :append-to-body="true"
     >
       <form action="submitReview" method="POST">
@@ -72,10 +72,10 @@ export default {
 .findDetailsBottom .el-drawer {
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
-  padding: 0.2rem; 
+  padding: 0.2rem;
 }
 .findDetailsBottom .el-drawer__body {
-  /* margin: 0.2rem; */
+  margin: 0.2rem;
 }
 </style>
 <style scoped>
