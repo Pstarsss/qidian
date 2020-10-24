@@ -26,11 +26,20 @@ import SelectHome from '@/views/Selected/SelectHome.vue'
 import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
 import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
-import Detail from '@/views/Details/Detail.vue'
 import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
+
+//详情
+const Detail = () => import('@/views/Details/Detail.vue')
 const Read = () => import('@/views/Read/read.vue')
 const Chapter = () => import('@/views/Details/Chapter.vue')
 const Detaildiscuss = () => import('@/views/Details/Detaildiscuss.vue')
+
+//登录注册
+const Login = () => import('@/views/Login/Login.vue')
+const Validatelogin = () => import('@/views/Login/validatelogin.vue')
+const Register = () => import('@/views/Login/Register.vue')
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -95,6 +104,11 @@ const routes = [
     path: '/read/:id/chapter/:pp',
     name: 'Read',
     component: Read,
+  },
+  {
+    path: '/detaildiscuss/:id',
+    name: 'Detaildiscuss',
+    component: Detaildiscuss,
   },
 
   //发现页面的
@@ -163,7 +177,7 @@ const routes = [
   {
     path: '/validatelogin',
     name: 'Validatelogin',
-    component: validatelogin,
+    component: Validatelogin,
   },
   {
     path: '/login',
@@ -174,16 +188,6 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
-  },
-  {
-    path: '/read/:id/chapter/:pp',
-    name: 'Read',
-    component: Read,
-  },
-  {
-    path: '/detaildiscuss/:id',
-    name: 'Detaildiscuss',
-    component: Detaildiscuss,
   },
 ]
 
