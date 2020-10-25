@@ -8,11 +8,11 @@
                 <span class="el-dropdown-link">
                    <i class="el-icon-more"></i>
                 </span>
-                <el-dropdown-menu slot="dropdown">
-                   <el-dropdown-item @click="xq"> <i class="el-icon-view" command="a"></i> 详情</el-dropdown-item>
-                    <el-dropdown-item @click="ss" divided command="b"><i class="el-icon-search"></i> 搜索</el-dropdown-item>
-                    <el-dropdown-item @click="ml" divided command="c"><i class="el-icon-tickets"></i> 目录</el-dropdown-item>   
-                    <el-dropdown-item @click="syq" divided command="d"><i class="el-icon-chat-dot-round"></i> 书友圈</el-dropdown-item> 
+                <el-dropdown-menu slot="dropdown" v-show="menu">
+                   <el-dropdown-item @click.native="xq"> <i class="el-icon-view" command="a"></i> 详情</el-dropdown-item>
+                    <el-dropdown-item @click.native="ss" divided command="b"><i class="el-icon-search sss"></i> 搜索</el-dropdown-item>
+                    <el-dropdown-item @click.native="ml" divided command="c"><i class="el-icon-tickets"></i> 目录</el-dropdown-item>   
+                    <el-dropdown-item @click.native="syq" divided command="d"><i class="el-icon-chat-dot-round "></i> 书友圈</el-dropdown-item> 
                 </el-dropdown-menu>
                 </el-dropdown>
        
@@ -88,9 +88,13 @@ export default {
          pp:'',
          id:'',
          qidian:'false',
+<<<<<<< HEAD
+         menu:true,
+=======
          isshow:false,
          message:'本小说是否加入书架记录',
          isshow2:''
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
       }      
   },
   components: {
@@ -207,10 +211,11 @@ export default {
         this.$refs.scroll.finishPullup();
       },
       xq(){
-          this.$router.push('/detail/'+this.id)
+          this.$router.push('/detail/'+this.id);
+          this.menu=false;
       },
       ss(){
-
+          this.$router.push('/search')
       },
       ml(){
          this.$router.push('/chapter/'+this.id) 
@@ -373,6 +378,11 @@ margin: .2rem auto;
   .el-icon-arrow-down {
     font-size: 12px;
   }
+<<<<<<< HEAD
+  .sss{
+      font-size: 14px;
+      color: #606266;
+=======
 
 
     .tologin{
@@ -402,5 +412,6 @@ margin: .2rem auto;
   .tologin span{
     font-size: 0.26rem;
     padding: 0.1rem;
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
   }
 </style>

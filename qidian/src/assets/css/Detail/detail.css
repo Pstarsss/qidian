@@ -94,7 +94,7 @@
   }
   .title-three{
     font-size: .18rem;
-    color: rgba(255, 255, 255, 0.226);
+    color: rgba(255, 255, 255, 0.526);
     margin-top: .1rem;
   }
   .detail-header-bottom{
@@ -282,7 +282,7 @@
     width: 6.6rem;
     margin: 0 auto;
     border-radius: .08rem;
-    height: 1.4rem;
+    height: 1.2rem;
   }
   .detail-comment-content{
     margin: .1rem .1rem .1rem .1rem;
@@ -491,6 +491,11 @@
   .active2{
     color: red;
   }
+<<<<<<< HEAD
+  .author-name{
+    margin-left: .1rem;
+    margin-top: .02rem;
+=======
   .tologin{
     position: absolute;
     top: 26%;
@@ -515,4 +520,5 @@
   .tologin span{
     font-size: 0.3rem;
     padding:0.1rem;
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
   }

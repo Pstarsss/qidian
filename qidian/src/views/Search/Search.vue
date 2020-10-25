@@ -17,7 +17,9 @@
          <li>郭勇傻狗</li>
          <li>郭勇傻狗</li>
          <li>郭勇傻狗</li>
-         <li>郭勇傻狗</li>      
+         <li>郭勇傻狗</li> 
+         <li>郭勇傻狗</li>
+         <li>郭勇傻狗</li>       
      </ul>
 
       <div class="hot-search">
@@ -29,10 +31,7 @@
          <li>郭勇傻狗</li>
          <li>郭勇傻狗</li>
          <li>郭勇傻狗</li>
-         <li>郭勇傻狗</li>
-         <li>郭勇傻狗</li>
-         <li>郭勇傻狗</li>
-         <li>郭勇傻狗</li>      
+         <li>郭勇傻狗</li>    
      </ul>
 
      <div class="hot-search">
@@ -54,14 +53,8 @@
                 </div>                     
                 <span><i class="el-icon-arrow-right"></i></span>
           </li>
-          <li>   
-                <div class="search-tj-left">
-                     <img src="../../assets/img/Detail/1.jpg" alt="">
-                     <span class="search-tj-center">666</span>
-                </div>                     
-                <span><i class="el-icon-arrow-right"></i></span>
-          </li>
       </ul>
+      <div class="search-space"></div>
   </div>
 </template>
 
@@ -72,11 +65,34 @@ export default {
   components: {
     TopNavBar,
   },
-  
+  data(){
+      return{
+        info1:{},
+        info2:{}
+      }      
+  },
+  created(){
+    let id = this.$router.currentRoute.params.id;
+    this.$http.get('/api/booklist/'+id).then(res=>{
+      this.info1=res.data.slice(0,9);
+      console.log(sss)
+      console.log(res.data.slice(0,9));
+    })
+    this.$http.get('/api/booklist/'+id).then(res=>{
+      this.info2=res.data.slice(10,19);
+      console.log(sss)
+      console.log(res.data.slice(10,19));
+    })
+  },  
 }
 </script>
 
 <style>
+.search-space{
+    height: 1rem;
+    width: 100vw;
+    margin-bottom: 1rem;
+}
 .search-content{
     text-align: left;
 }

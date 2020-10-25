@@ -132,7 +132,7 @@
 
          <div class="detail-catalog">
            <span class="common-title">书友圈</span>
-           <span class="detail-catalog-right" @click="opendiscuss">运营团队 (招募中) | 讨论贴(17) <i class="el-icon-arrow-right"></i></span>
+           <span class="detail-catalog-right" @click="opendiscuss">运营团队 (招募中) | 讨论贴({{info6.length}}) <i class="el-icon-arrow-right"></i></span>
          </div>
          <div class="detail-comment">
               <div class="detail-comment-content">
@@ -140,13 +140,13 @@
                       
                 </div>
                 <span class="detail-comment-contents" >
-                    很有趣的女频文！本书存在一个及其尖锐的矛盾，目前我也只看了几十章，期待后面作者如何展开解决矛盾
+                    {{info5.content}}
                 </span>
               </div>
               <div class="detail-comment-author">
-                   <div class="detail-comment-author-left">
-                        <div class="author-photo"><img src="../../assets/img/Detail/1.jpg" alt=""></div>
-                        <span class="author-name">萌萌朦丶懵</span>
+                   <div class="detail-comment-author-left" >
+                        <div class="author-photo"><img :src="info5.headimg" alt=""></div>
+                        <span class="author-name">{{info5.name}}</span>
                    </div>
                    <div class="detail-comment-author-right">
                        <i class="el-icon-more el-icon-more1"></i>
@@ -271,7 +271,13 @@ export default {
         info2:{},
         info3:[],
         info4:[],
+<<<<<<< HEAD
+        info5:{},
+        info6:{},
+        pp:'',
+=======
         isshow:false,
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
       };
     },
     created(){
@@ -288,14 +294,25 @@ export default {
       this.info2=res.data.slice(1,3);
       // console.log(res.data.slice(1,3));
     })
+<<<<<<< HEAD
+    this.$http.get('/api/booktitle/'+id).then(res=>{
+      this.info3=res.data[0].titles.split('-');
+      console.log('sss');
+=======
      this.$http.get('/api/read/'+id).then(res=>{
       this.info3=res.data.slice(0,1000);
       // console.log(res.data.slice(0,1000));
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
     })
     this.$http.get('/api/booklist/'+id).then(res=>{
       this.info4=res.data.slice(6,10);
       // console.log(res.data.slice(6,10));
     })
+    this.$http.get('/api/detaildiscuss/').then(res=>{
+      this.info5=res.data[id];
+      this.info6=res.data
+      console.log(res.data.length);
+    });
   },
   methods: {
      openDetail(index) {
