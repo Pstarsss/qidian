@@ -83,24 +83,38 @@ export default {
           iphone:this.phonevalue,
           password:this.passowordvalue
         }).then(res=>{
-          let {iphone,password,userid,username} = res.data[0];
-          
-          sessionStorage.setItem('iphone',iphone);
+          let {iphone,password,userid,username,userhead} = res.data[0];
+          sessionStorage.setItem('userinfo',iphone);
           sessionStorage.setItem('password',password);
           sessionStorage.setItem('userid',userid);
           sessionStorage.setItem('username',username);
+          sessionStorage.setItem('userhead',userhead);
           
           this.$http.post('/api/userbasic',{
               userid,
           }).then((res1)=>{
              let temp = res1.data;
+             let image = (temp.map(i=>i.image)).join('-');
+             let bookname = (temp.map(i=>i.bookname)).join('-');
+             let author = (temp.map(i=>i.author)).join('-');
+             let chapter = (temp.map(i=>i.Chapter)).join('-');
+             let bookid = (temp.map(i=>i.collections)).join('-');
+             let booktitle = (temp.map(i=>i.booktitle)).join('-');
+             sessionStorage.setItem('image',image);
+             sessionStorage.setItem('bookname',bookname);
+             sessionStorage.setItem('author',author);
+             sessionStorage.setItem('chapter',chapter);
+             sessionStorage.setItem('collections',bookid);
+             sessionStorage.setItem('booktitle',booktitle);
              this.$store.dispatch('add',temp).then(res2=>{
                 
              });
+             this.$router.push('/mineShow');
           }).catch(()=>{
               console.log('fffail ');
+             this.$router.push('/mineShow');
           })
-          this.$router.push('/mineShow');
+          
         }).catch(()=>{
           this.issure = false;
           console.log('账号或者密码错误');

@@ -1,6 +1,6 @@
 <template>
     <nav-bar class="booknav">
-      <div slot="left">
+      <div slot="left" class="b-left">
         <i class="el-icon-menu"></i>
       </div>
       <div slot="center" class="bookcenter">
@@ -39,8 +39,13 @@ export default {
   font-size:0.3rem;
 }
 .b-search{
-  position: absolute;
-  top: 10%;
-  right: 10%;
+    position: absolute;
+     top: 24%;
+    right: 8%;
+    color: #fff;
+    font-size: 0.26rem;
+}
+.b-left{
+  font-size: 0.4rem;
 }
 </style>

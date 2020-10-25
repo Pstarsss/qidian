@@ -231,7 +231,7 @@
             <img src="../../assets/img/Detail/5.png" alt="">
             <span>听书</span>
         </div>
-        <div class="detail-add">
+        <div class="detail-add" @click="addCollections">
             <img src="../../assets/img/Detail/6.png" alt="">
             <span>加入书架</span>
         </div>
@@ -239,7 +239,17 @@
             <p class="free-read1">免费阅读</p>
             <p class="free-read2">4天14小时31分41秒</p>
         </div>
-      </div>      
+      </div>  
+      <div class="tologin" v-if="isshow">
+        <div>
+          <h2>您需要登录才能加入书架</h2>
+        </div>
+        <div>
+            <span @click="tologin">登录</span>
+            <span @click="cancel">就看看</span>
+        </div>
+        
+      </div>    
   </div>
 </template>
 
@@ -261,33 +271,42 @@ export default {
         info2:{},
         info3:[],
         info4:[],
+<<<<<<< HEAD
         info5:{},
         info6:{},
         pp:'',
+=======
+        isshow:false,
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
       };
     },
     created(){
     let id = this.$router.currentRoute.params.id;
     this.$http.get('/api/detail/'+id).then(res=>{
       this.info=res.data[0];
-      console.log('sss');
-      console.log(res.data);
+      // console.log(res.data);
     });
     this.$http.get('/api/booklist/'+id).then(res=>{
       this.info1=res.data.slice(1,5);
-      console.log(res.data.slice(1,5));
+      // console.log(res.data.slice(1,5));
     })
     this.$http.get('/api/booklist/'+id).then(res=>{
       this.info2=res.data.slice(1,3);
-      console.log(res.data.slice(1,3));
+      // console.log(res.data.slice(1,3));
     })
+<<<<<<< HEAD
     this.$http.get('/api/booktitle/'+id).then(res=>{
       this.info3=res.data[0].titles.split('-');
       console.log('sss');
+=======
+     this.$http.get('/api/read/'+id).then(res=>{
+      this.info3=res.data.slice(0,1000);
+      // console.log(res.data.slice(0,1000));
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
     })
     this.$http.get('/api/booklist/'+id).then(res=>{
       this.info4=res.data.slice(6,10);
-      console.log(res.data.slice(6,10));
+      // console.log(res.data.slice(6,10));
     })
     this.$http.get('/api/detaildiscuss/').then(res=>{
       this.info5=res.data[id];
@@ -336,6 +355,67 @@ export default {
       opendiscuss(){
          let id = this.$router.currentRoute.params.id;
          this.$router.push('/detaildiscuss/'+id);
+      },
+      addCollections(){
+        if(sessionStorage.getItem('userid')){
+          this.isshow = false;
+          let userid = sessionStorage.getItem('userid');
+          let collections = this.$router.currentRoute.params.id;
+          let Chapter = 1;
+          let image = this.info.images;
+          let bookname = this.info.name;
+          let author = this.info.author;
+          this.$http.post('/api/getchaptertitle',{
+            userid,
+            collections,
+            Chapter
+          }).then((res)=>{
+            let flag = res.data.has;
+            let booktitle = res.data.title;
+            let temp = {
+                userid,
+                collections,
+                Chapter,
+                image,
+                bookname,
+                author,
+                booktitle
+            }
+            if(!flag){
+                this.$http.post('/api/adduserbook',{
+                  temp
+                }).then(res1=>{
+                  console.log(res1);
+                });
+                this.$store.dispatch('add',temp).then(res3=>{
+                    console.log(res3);
+                });
+            }else{
+                this.$http.post('/api/updateuserbook',{
+                  userid,
+                  collections,
+                  Chapter,
+                  booktitle
+                }).then(res1=>{
+                  console.log(res1);
+                });
+                 this.$store.dispatch('change',temp1).then(res3=>{
+                    console.log(res3);
+                });
+            }
+            
+          });
+        }else{
+          this.isshow = true;
+        }
+      },
+      tologin(){
+        setTimeout(()=>{
+          this.$router.push('/login');
+        },800);
+      },
+      cancel(){
+        this.isshow = false;
       }
     }
 }

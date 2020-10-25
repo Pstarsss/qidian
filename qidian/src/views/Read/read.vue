@@ -1,7 +1,7 @@
 <template>
   <div class="read"> 
         <top-nav-bar class="detail-topss" >
-            <div slot="left" @click="$router.go(-1)"><i class="el-icon-arrow-left"></i></div>
+            <div slot="left" @click="goback"><i class="el-icon-arrow-left"></i></div>
             <div slot="center"></div>
             <div slot="right">
                 <el-dropdown  hide-on-click>
@@ -64,6 +64,15 @@
           —— · 已经没有啦 · ——
       </div>   
       </scroll>
+      <div class="tologin" v-if="isshow">
+        <div>
+          <h2>{{message}}</h2>
+        </div>
+        <div>
+            <span @click="tologin">加入</span>
+            <span @click="cancel">就看看</span>
+        </div>
+      </div>   
   </div>
 </template>
 
@@ -79,7 +88,13 @@ export default {
          pp:'',
          id:'',
          qidian:'false',
+<<<<<<< HEAD
          menu:true,
+=======
+         isshow:false,
+         message:'本小说是否加入书架记录',
+         isshow2:''
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
       }      
   },
   components: {
@@ -102,6 +117,87 @@ export default {
       this.rrr();
   },
   methods:{
+      goback(){
+          this.isshow = true;
+        if(sessionStorage.getItem('userid')){
+          this.message = '您是否添加本书阅读记录';
+          this.isshow2 = true;
+        }else{
+          this.message = '您需要登录才能加入书架';
+          this.isshow2 = false;
+        }
+      },
+      tologin(){
+          
+          if(this.isshow2){
+              // 用户添加本书阅读记录
+          let userid = sessionStorage.getItem('userid');
+          let collections = this.$router.currentRoute.params.id;
+          let Chapter = this.pp;
+          let image = this.infor.images;
+          let bookname = this.infor.name;
+          let author = this.infor.author;
+          this.$http.post('/api/getchaptertitle',{
+            userid,
+            collections,
+            Chapter
+          }).then((res)=>{
+            let flag = res.data.has;
+            console.log(res.data);
+            let booktitle = res.data.title;
+            let temp = {
+                userid,
+                collections,
+                Chapter,
+                image,
+                bookname,
+                author,
+                booktitle,
+            };
+            if(!flag){
+                this.$http.post('/api/adduserbook',{
+                  temp
+                }).then(res1=>{
+                  console.log(res1);
+                });
+                this.$store.dispatch('add',temp).then(res3=>{
+                    console.log(res3);
+                });
+                 this.$router.go(-1);
+            }else{
+                let temp1 = {
+                  collections,
+                  Chapter,
+                  booktitle
+                }
+                this.$http.post('/api/updateuserbook',{
+                  userid,
+                  collections,
+                  Chapter,
+                  booktitle
+                }).then(res1=>{
+                  console.log(res1);
+                });
+                this.$store.dispatch('change',temp1).then(res3=>{
+                    console.log(this.$store.state);
+                });
+                 this.$router.go(-1);
+            }
+            
+            
+           
+          });
+          }else{
+              // 用户登录
+             setTimeout(()=>{
+                 this.$router.push('/login');
+             },500);
+          }
+      },
+      cancel(){
+        this.$router.go(-1);
+        this.isshow = false;
+      },
       rrr(){
           this.$refs.scroll.refresh();
       },
@@ -165,6 +261,7 @@ export default {
 }
 .read{
     width: 100%;
+
 }
 .read-content{
     width: 98vw;
@@ -281,8 +378,40 @@ margin: .2rem auto;
   .el-icon-arrow-down {
     font-size: 12px;
   }
+<<<<<<< HEAD
   .sss{
       font-size: 14px;
       color: #606266;
+=======
+
+
+    .tologin{
+    position: absolute;
+    top: 47%;
+    left: 31%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: 41vw;
+    margin: 0 auto;
+    z-index: 1000;
+    background-color: #c5c5c580;
+    box-shadow: 1px 1px 1px #c0c7ce;
+  }
+  .tologin > div{
+    padding-bottom: 0.2rem;
+  }
+  .tologin > div:last-child{
+    display: flex;
+  }
+  .tologin h2{
+       font-size: 0.23rem;
+    color: #010101;
+    padding: 0.1rem;
+}
+  .tologin span{
+    font-size: 0.26rem;
+    padding: 0.1rem;
+>>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
   }
 </style>
