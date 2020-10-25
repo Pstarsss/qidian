@@ -431,6 +431,7 @@ export default {
     });
     this.$http.get("/api/booklist").then((res) => {
       this.msg = res;
+      console.log(msg);
     });
   },
 
@@ -681,7 +682,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .el-button--mini,
 .el-button--small {
   display: none !important;
