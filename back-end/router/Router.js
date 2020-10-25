@@ -103,6 +103,70 @@ router.post('/search',function(req,res){
   })
 });
 
+
+
+
+// 点击加入书架的操作1
+router.post('/getchaptertitle',function(req,res){
+  let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
+  sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections} and Chapter = ${Chapter}`).then(results1=>{
+    sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+      let temp = results[0];
+      temp.has = true;
+      res.send(temp);
+    });
+  }).catch(()=>{
+     sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+      let temp = results[0];
+      temp.has = false;
+      res.send(temp);
+    });
+  })
+ 
+});
+// 点击加入书架的操作2
+router.post('/adduserbook',function(req,res){
+  let {
+    userid,
+    collections,
+    Chapter,
+    image,
+    bookname,
+    author,
+    booktitle
+  } = JSON.parse(JSON.stringify(req.body.temp)); 
+  sql.find(`insert into userbookshelf set ?`,[{
+    'userid':userid,
+    'collections':collections,
+    'Chapter':Chapter,
+    'image':image,
+    'bookname':bookname,
+    'author':author,
+    'booktitle':booktitle
+  },userid]).then(res1=>{
+    console.log(res1);
+    res.send('修改成功');
+  })
+});
+// 点击加入书架的操作3
+router.post('/updateuserbook',function(req,res){
+  let {
+    userid,
+    collections,
+    Chapter,
+    booktitle
+  } = JSON.parse(JSON.stringify(req.body)); 
+  sql.find(`update userbookshelf set ? where userid = ${userid} and collections = ${collections}`,[{
+    'Chapter':Chapter,
+    'booktitle':booktitle
+  },userid,collections]).then(res1=>{
+    console.log(res1);
+    res.send('修改成功');
+  })
+});
+
+
+
 router.post('/userbookshelf',function(req,res){
   let temp = JSON.parse(JSON.stringify(req.body)); 
   console.log(temp);

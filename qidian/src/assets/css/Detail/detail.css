@@ -1,5 +1,6 @@
 .all{
     width: 100%;
+    position: relative;
   }
   .detail-top{
     top: 0;
@@ -489,4 +490,29 @@
   }
   .active2{
     color: red;
+  }
+  .tologin{
+    position: absolute;
+    top: 26%;
+    left: 31%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: 41vw;
+    margin: 0 auto;
+    z-index: 10;
+  }
+  .tologin > div{
+    padding-bottom: 0.2rem;
+  }
+  .tologin > div:last-child{
+    display: flex;
+  }
+  .tologin h2{
+    font-size: 0.25rem;
+    color: red;
+}
+  .tologin span{
+    font-size: 0.3rem;
+    padding:0.1rem;
   }
