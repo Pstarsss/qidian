@@ -354,24 +354,26 @@ export default {
             Chapter
           }).then((res)=>{
             let flag = res.data.has;
+            let booktitle = res.data.title;
+            let temp = {
+                userid,
+                collections,
+                Chapter,
+                image,
+                bookname,
+                author,
+                booktitle
+            }
             if(!flag){
-                let booktitle = res.data.title;
-                let temp = {
-                  userid,
-                  collections,
-                  Chapter,
-                  image,
-                  bookname,
-                  author,
-                  booktitle
-                }
                 this.$http.post('/api/adduserbook',{
                   temp
                 }).then(res1=>{
                   console.log(res1);
                 });
+                this.$store.dispatch('add',temp).then(res3=>{
+                    console.log(res3);
+                });
             }else{
-                let booktitle = res.data.title;
                 this.$http.post('/api/updateuserbook',{
                   userid,
                   collections,
@@ -379,6 +381,9 @@ export default {
                   booktitle
                 }).then(res1=>{
                   console.log(res1);
+                });
+                 this.$store.dispatch('change',temp1).then(res3=>{
+                    console.log(res3);
                 });
             }
             

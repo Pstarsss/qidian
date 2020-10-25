@@ -2,7 +2,7 @@
   <div>
     <book-crack class="bookcolor"></book-crack>
     <scroll :probeType="3" class="wrapper" ref="scroll">
-      <div v-if="isshow">
+      <div v-if="temp">
         <book-list v-for="(item,index) in temp" :key="item.collections" :data="item" :image="image[index]"
         @toread="toread"></book-list>
       </div>
@@ -28,9 +28,9 @@ export default {
   },
   data(){
     return{
-      isshow:false,
       temp:'',
-      image:''
+      image:'',
+      temp1:''
     }
   },
   computed:{
@@ -38,14 +38,13 @@ export default {
   },
   created(){
       if(sessionStorage.getItem('image')){
-        this.isshow = true;
         this.image = sessionStorage.getItem('image').split('-');
         let bookname = sessionStorage.getItem('bookname').split('-');
         let author = sessionStorage.getItem('author').split('-');
         let chapter = sessionStorage.getItem('chapter').split('-');
         let booktitle = sessionStorage.getItem('booktitle').split('-');
         let collections = sessionStorage.getItem('collections').split('-');
-        this.temp = booktitle.map((i,j)=>{
+        this.temp1 = booktitle.map((i,j)=>{
           return {
             bookname:bookname[j],
             author:author[j],
@@ -54,8 +53,11 @@ export default {
             collections:collections[j]
           };
         });
+        // console.log(this.temp1);
+        // console.log(this.$store.state.bookrecords);
+        this.temp = this.$store.state.bookrecords[0];
       }else{
-        this.isshow = false;
+
       };
       
   },

@@ -26,8 +26,6 @@ router.get('/read/:id',function(req,res){
 });
 router.get('/read/:id/:pp',function(req,res){
   let id = req.params.id;
-  console.log(req.params);
-  console.log(req.params);
   let pp = req.params.pp;
   sql.find(`select * from book${id} where id = ${pp}`).then(results=>{
     res.send(results);
