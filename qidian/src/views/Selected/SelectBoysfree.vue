@@ -97,7 +97,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .time-free-item {
   margin-top: 0.1rem;
 }
