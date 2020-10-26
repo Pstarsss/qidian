@@ -577,7 +577,7 @@
     align-items: center;
     margin: 0 auto;
     z-index: 10;
-    background-color: aqua;
+    background-color: #e6e53a;
     padding: .3rem .3rem 0 .3rem;
     border-radius: .1rem;
   }

@@ -35,6 +35,7 @@ const Detail = () => import('@/views/Details/Detail.vue')
 const Read = () => import('@/views/Read/read.vue')
 const Chapter = () => import('@/views/Details/Chapter.vue')
 const Detaildiscuss = () => import('@/views/Details/Detaildiscuss.vue')
+const Comment = () => import('@/views/Details/Comment.vue')
 
 //登录注册
 const Login = () => import('@/views/Login/Login.vue');
@@ -111,6 +112,11 @@ const routes = [
     path: '/detaildiscuss/:id',
     name: 'Detaildiscuss',
     component: Detaildiscuss,
+  },
+  {
+    path: '/comment',
+    name: 'Comment',
+    component: Comment,
   },
 
   //发现页面的
