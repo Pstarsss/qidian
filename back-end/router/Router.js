@@ -26,8 +26,6 @@ router.get('/read/:id',function(req,res){
 });
 router.get('/read/:id/:pp',function(req,res){
   let id = req.params.id;
-  console.log(req.params);
-  console.log(req.params);
   let pp = req.params.pp;
   sql.find(`select * from book${id} where id = ${pp}`).then(results=>{
     res.send(results);
@@ -40,7 +38,13 @@ router.get('/booklist',function(req,res){
     res.send(results);
   })
 });
-
+// 获取小说的目录
+router.get('/booktitle/:id',function(req,res){
+  let id = req.params.id;
+  sql.find(`select * from booktitles where id = ${id}`).then(results=>{
+    res.send(results);
+  })
+});
 //指定表的list
 router.get('/booklist/:id',function(req,res){
   let id = req.params.id;
@@ -57,12 +61,8 @@ router.get('/detail/:id',(req,res)=>{
   });
 });
 
-router.get('/booktitle/:id',function(req,res){
-  let id = req.params.id;
-  sql.find(`select * from booktitles where id = ${id}`).then(results=>{
-    res.send(results);
-  })
-});
+
+
 
 
 // 获取select的推荐信息；
@@ -87,6 +87,12 @@ router.get('/finddetail/:id',function(req,res){
   })
 });
 
+// 增加finddiscuss的评论
+router.get('/adddiscuss',function(req,res){
+  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+    res.send(results);
+  })
+});
 
 // 搜索
 router.post('/search',function(req,res){
@@ -96,11 +102,82 @@ router.post('/search',function(req,res){
 });
 
 
+
+
+// 点击加入书架的操作1
+router.post('/getchaptertitle',function(req,res){
+  let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
+  sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections} and Chapter = ${Chapter}`).then(results1=>{
+    sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+      let temp = results[0];
+      temp.has = true;
+      res.send(temp);
+    });
+  }).catch(()=>{
+     sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+      let temp = results[0];
+      temp.has = false;
+      res.send(temp);
+    });
+  })
+ 
+});
+// 点击加入书架的操作2
+router.post('/adduserbook',function(req,res){
+  let {
+    userid,
+    collections,
+    Chapter,
+    image,
+    bookname,
+    author,
+    booktitle
+  } = JSON.parse(JSON.stringify(req.body.temp)); 
+  sql.find(`insert into userbookshelf set ?`,[{
+    'userid':userid,
+    'collections':collections,
+    'Chapter':Chapter,
+    'image':image,
+    'bookname':bookname,
+    'author':author,
+    'booktitle':booktitle
+  },userid]).then(res1=>{
+    console.log(res1);
+    res.send('修改成功');
+  })
+});
+// 点击加入书架的操作3
+router.post('/updateuserbook',function(req,res){
+  let {
+    userid,
+    collections,
+    Chapter,
+    booktitle
+  } = JSON.parse(JSON.stringify(req.body)); 
+  sql.find(`update userbookshelf set ? where userid = ${userid} and collections = ${collections}`,[{
+    'Chapter':Chapter,
+    'booktitle':booktitle
+  },userid,collections]).then(res1=>{
+    console.log(res1);
+    res.send('修改成功');
+  })
+});
+
+
+
+router.post('/userbookshelf',function(req,res){
+  let temp = JSON.parse(JSON.stringify(req.body)); 
+  console.log(temp);
+  res.send('111');
+  // sql.find('select * from hotdiscuss').then(results=>{
+  //   res.send(results);
+  // })
+});
+
 // 用户登录后获取的书架信息;
 router.post('/userbasic',function(req,res){
   let {userid} = req.body;
   sql.find(`select * from userbookshelf where userid = ${userid}`).then(results=>{
-    console.log(results);
     res.send(JSON.parse(JSON.stringify(results)));
   })
 });
