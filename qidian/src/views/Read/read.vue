@@ -101,6 +101,7 @@ export default {
       isshow: false,
       message: "本小说是否加入书架记录",
       isshow2: "",
+      menu:false
     };
   },
   components: {
@@ -222,8 +223,9 @@ export default {
       this.$refs.scroll.finishPullup();
     },
     xq() {
-      this.$router.push("/detail/" + this.id);
       this.menu = false;
+      this.$router.push("/detail/" + this.id);
+      
     },
     ss() {
       this.$router.push("/search");
