@@ -42,7 +42,8 @@ export default {
     this.scroll = new BS(this.$refs.wrapper,{
       zoom:true,
       click:true,
-      tap:true,
+      taps:true,
+      dblclick:true,
       probeType:this.probeType,
       pullUpLoad:{
 

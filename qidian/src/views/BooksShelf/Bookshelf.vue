@@ -1,23 +1,21 @@
 <template>
   <div>
     <book-crack class="bookcolor"></book-crack>
-    <scroll :probeType="3" class="wrapper" ref="scroll">
-      <div v-if="temp">
+    <div v-if="temp">
         <book-list v-for="(item,index) in temp" :key="item.collections" :data="item" :image="image[index]"
-        @toread="toread"></book-list>
-      </div>
-      <div class="b-findmore">
+        @toread='toread' ></book-list>
+    </div>
+    <div class="b-findmore" @click="openmore">
           <button>查找更多精彩作品</button>
-      </div>
-      <div class="placeholder"></div>
-    </scroll>
+    </div>
+    <!-- <div class="placeholder"></div> -->
   </div>
    
 </template>
 
 <script>
-import BookCrack from '@/components/common/bookcrack/BookCrack.vue'
-import BookList from '@/components/common/bookcrack/Bookposition.vue'
+import BookCrack from './bookcrack/BookCrack.vue'
+import BookList from './bookcrack/Bookposition.vue'
 import Scroll from '@/components/common/Scroll/scroll.vue'
 export default {
   name: 'bookshelf',
@@ -55,7 +53,9 @@ export default {
         });
         // console.log(this.temp1);
         // console.log(this.$store.state.bookrecords);
-        this.temp = this.$store.state.bookrecords[0];
+
+        // this.temp = this.$store.state.bookrecords[0];
+        this.temp = this.temp1;
       }else{
 
       };
@@ -63,9 +63,14 @@ export default {
   },
   methods:{
     toread(a,b){
-      this.$router.push('/read/'+a+"/chapter/"+b);
+        this.$router.push('/read/'+a+"/chapter/"+b);
     },
+    openmore(){
 
+    },
+    openset(){
+
+    }
   },
 }
 </script>

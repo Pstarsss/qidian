@@ -42,20 +42,21 @@
         <span>{{ publishReview.length }}/200</span>
       </p>
     </el-drawer>
-    
   </div>
 </template>
 
 <script>
 import '../iconfont/iconfont'
+// import '../css/FindDetailsBottom.css'
 export default {
   data() {
     return {
       drawerSize: '30%',
       drawer: false,
+      dialog: false,
       publishReview: '',
-      dialog:false,
       // isshow:false
+      showNologin: true,
     }
   },
   watch: {
@@ -67,59 +68,61 @@ export default {
     //   }
     // },
   },
-  methods:{
-    changedialog(){
-      if(sessionStorage.getItem('userid')){
-         this.drawer = true;
-         this.dialog = true;
-      }else{
-        
-         this.drawer = false;
-         this.dialog = false;
+  methods: {
+    changedialog() {
+      if (sessionStorage.getItem('userid')) {
+        this.drawer = true
+        this.dialog = true
+        this.showNologin = false
+      } else {
+        this.drawer = false
+        this.dialog = false
+        this.showNologin = true
       }
+      this.$emit('getShowNologin', this.showNologin)
     },
     // open(){
     //   this.drawer = false;
     //   this.dialog = true;
     // },
-    submits(){
-        let temp = {};
-        temp.headimg = sessionStorage.getItem('headimg');
-        temp.name = sessionStorage.getItem('username');
-        temp.content = this.publishReview;
-        temp.tag = '见习';
-        temp.image = '';
-        temp.time = this.getTime();
-        temp.likes = 0;
-        temp.reviews = 0;
-        this.$emit('submits',temp);
+    submits() {
+      let temp = {}
+      temp.headimg = sessionStorage.getItem('headimg')
+      temp.name = sessionStorage.getItem('username')
+      temp.content = this.publishReview
+      temp.tag = '见习'
+      temp.image = ''
+      temp.time = this.getTime()
+      temp.likes = 0
+      temp.reviews = 0
+      this.$emit('submits', temp)
     },
-    getTime(){
-      let dd = new Date();
-      let h1 = dd.getHours();
-      h1 = h1.length > 1? h1 : '0'+h1;
-      let m1 = dd.getMinutes();
-      m1 = m1.length > 1? m1 : '0'+m1;
-      return `${dd.getMonth()+1}月${dd.getDate()+1}日 ${h1}:${m1}`;
+    getTime() {
+      let dd = new Date()
+      let h1 = dd.getHours()
+      h1 = h1.length > 1 ? h1 : '0' + h1
+      let m1 = dd.getMinutes()
+      m1 = m1.length > 1 ? m1 : '0' + m1
+      return `${dd.getMonth() + 1}月${dd.getDate() + 1}日 ${h1}:${m1}`
     },
-  }
+  },
 }
 </script>
 
 <style>
 .el-drawer {
-  border-top-left-radius: 5%;
+  /* border-top-left-radius: 5%;
   border-top-right-radius: 5%;
-  padding: 0.2rem;
+  padding: 0.2rem; */
 }
 /* .findDetailsBottom .el-drawer__body {
   margin: 0.2rem;
 } */
 </style>
 <style scoped>
-.tologin{
+.tologin {
   position: absolute;
-  top:40%;
+  top: 40%;
   right: 0;
   left: 0;
 }
@@ -132,7 +135,6 @@ export default {
   z-index: 98;
   width: 100%;
   bottom: 0;
-
 }
 .content {
   display: flex;
@@ -213,6 +215,6 @@ textarea {
 .submitReviewBottom > span:first-of-type > i {
   margin-right: 0.2rem;
   font-size: 0.4rem;
-  /* line-height: 0.35rem; */
+  line-height: 0.35rem;
 }
 </style>
