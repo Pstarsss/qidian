@@ -534,4 +534,7 @@ export default {
   font-size: 0.7rem;
   color: #db3b3b;
 }
+.navs a:last-of-type{
+  /* color: #000; */
+}
 </style>
