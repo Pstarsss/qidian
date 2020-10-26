@@ -9,7 +9,7 @@ import Search from '@/views/Search/Search.vue'
 
 // 发现
 import Find from '@/views/Find.vue'
-import FindFollow from '@/views/Find/FindFollow.vue'
+import FindFollow from '@/views/Find/findFollow.vue'
 import FindSquares from '@/views/Find/findSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
@@ -21,6 +21,10 @@ import mineSet from '@/views/Mine/components/mineSet.vue'
 import mineMsg from '@/views/Mine/components/mineMsg.vue'
 import peopleDetails from '@/views/Mine/components/peopleDetails.vue'
 import privacySet from '@/views/Mine/components/privacySet.vue'
+import hobbySet from '@/views/Mine/components/hobbySet.vue'
+import hobbychild from '@/views/Mine/components/hobbychild.vue'
+import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
+import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
 
 // 精选
 import Select from '@/views/Selected/Select.vue'
@@ -181,6 +185,29 @@ const routes = [
     path: '/privacySet',
     name: 'PrivacySet',
     component: privacySet,
+  },
+  {
+    path: '/hobbySet',
+    name: 'hobbySet',
+    component: hobbySet,
+  	redirect:'/hobbySet/hobbychild',
+  	children:[
+  		{
+  		  path: '/hobbySet/hobbychild',
+  		  name: 'hobbychild',
+  		  component: hobbychild,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyGirls',
+  		  name: 'hobbyGirls',
+  		  component: hobbyGirls,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyBoys',
+  		  name: 'hobbyBoys',
+  		  component: hobbyBoys,
+  		},
+  	]
   },
   
  //搜索
