@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div class="all" :class="'dark'">
       <div class="detail-top">
         <div class="detail-top-left">
           <div class="detail-top-left-icon" @click="back">
@@ -192,7 +192,7 @@
          </div>
          <div class="detail-lookmore">
               <div class="lookmore-detail" :key="index" v-for="(item,index) in info4">
-                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs" @click="openDetail(index)"></div>
+                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs" @click="openDetail1(index)"></div>
                  <div class="lookmore-detail-title">
                    <p class="lookmore-name">{{item.name}}</p>
                    <p class="lookmore-tj">{{item.wordcount}}万字</p>
@@ -206,7 +206,7 @@
          </div>
          <div class="detail-lookmore">
               <div class="lookmore-detail" :key="index" v-for="(item,index) in info1">
-                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs" @click="openDetail(index)"></div>
+                 <div><img :src="item.images" alt="" class="lookmore-detail-imgs" @click="openDetail2(index)"></div>
                  <div class="lookmore-detail-title">
                    <p class="lookmore-name">{{item.name}}</p>
                    <p class="lookmore-tj">80%还看过</p>
@@ -245,8 +245,8 @@
           <h2>您需要登录才能加入书架</h2>
         </div>
         <div>
-            <span @click="tologin">登录</span>
-            <span @click="cancel">就看看</span>
+            <span @click="tologin" class="dl">登录</span>
+            <span @click="cancel" class="jkk">就看看</span>
         </div>
         
       </div>    
@@ -271,52 +271,49 @@ export default {
         info2:{},
         info3:[],
         info4:[],
-<<<<<<< HEAD
         info5:{},
         info6:{},
         pp:'',
-=======
         isshow:false,
->>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
       };
     },
     created(){
     let id = this.$router.currentRoute.params.id;
     this.$http.get('/api/detail/'+id).then(res=>{
       this.info=res.data[0];
-      // console.log(res.data);
     });
-    this.$http.get('/api/booklist/'+id).then(res=>{
-      this.info1=res.data.slice(1,5);
-      // console.log(res.data.slice(1,5));
+    this.$http.get('/api/booklist/'+8).then(res=>{
+      this.info1=res.data.slice(0,4);
     })
-    this.$http.get('/api/booklist/'+id).then(res=>{
+    this.$http.get('/api/booklist/'+11).then(res=>{
       this.info2=res.data.slice(1,3);
-      // console.log(res.data.slice(1,3));
     })
-<<<<<<< HEAD
-    this.$http.get('/api/booktitle/'+id).then(res=>{
-      this.info3=res.data[0].titles.split('-');
-      console.log('sss');
-=======
      this.$http.get('/api/read/'+id).then(res=>{
       this.info3=res.data.slice(0,1000);
-      // console.log(res.data.slice(0,1000));
->>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
+
     })
-    this.$http.get('/api/booklist/'+id).then(res=>{
-      this.info4=res.data.slice(6,10);
-      // console.log(res.data.slice(6,10));
+    this.$http.get('/api/booklist/'+12).then(res=>{
+      this.info4=res.data.slice(0,4);
     })
     this.$http.get('/api/detaildiscuss/').then(res=>{
-      this.info5=res.data[id];
-      this.info6=res.data
-      console.log(res.data.length);
+      if(id<61){
+          this.info5=res.data[id];
+      }else{
+         this.info5=res.data[id%3];
+      }   
+      this.info6=res.data;
     });
   },
   methods: {
-     openDetail(index) {
-      this.$http.get("/api/booklist").then((res) => {
+     openDetail1(index) {
+      this.$http.get("/api/booklist/12").then((res) => {
+        this.msg = res;
+        let a = this.msg.data[index].id;
+        this.$router.push("/detail/" + a);
+      });
+    },
+     openDetail2(index) {
+      this.$http.get("/api/booklist/8").then((res) => {
         this.msg = res;
         let a = this.msg.data[index].id;
         this.$router.push("/detail/" + a);
@@ -380,7 +377,7 @@ export default {
                 bookname,
                 author,
                 booktitle
-            }
+            };
             if(!flag){
                 this.$http.post('/api/adduserbook',{
                   temp
@@ -391,6 +388,12 @@ export default {
                     console.log(res3);
                 });
             }else{
+                let temp1 = {
+                  userid,
+                  collections,
+                  Chapter,
+                  booktitle
+               };
                 this.$http.post('/api/updateuserbook',{
                   userid,
                   collections,

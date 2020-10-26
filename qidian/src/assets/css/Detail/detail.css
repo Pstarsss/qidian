@@ -491,21 +491,18 @@
   .active2{
     color: red;
   }
-<<<<<<< HEAD
-  .author-name{
-    margin-left: .1rem;
-    margin-top: .02rem;
-=======
   .tologin{
-    position: absolute;
-    top: 26%;
-    left: 31%;
+    position: fixed;
+    top: 40%;
+    left: 28.5%;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    width: 41vw;
     margin: 0 auto;
     z-index: 10;
+    background-color: aqua;
+    padding: .3rem .3rem 0 .3rem;
+    border-radius: .1rem;
   }
   .tologin > div{
     padding-bottom: 0.2rem;
@@ -517,8 +514,19 @@
     font-size: 0.25rem;
     color: red;
 }
-  .tologin span{
-    font-size: 0.3rem;
-    padding:0.1rem;
->>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
+  .dl{
+    font-size: 0.2rem;
+    padding:0.05rem .2rem;
+    background-color: green;
+    color: #f2f6fc;
+    border-radius: .5rem;
+    margin: 0 .1rem;
+  }
+  .jkk{
+    font-size: 0.2rem;
+    padding:0.05rem .2rem;
+    background-color: #ecf5ff;
+    color: #409eff;
+    border-radius: .5rem;
+    margin: 0 .1rem;
   }

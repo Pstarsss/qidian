@@ -64,15 +64,16 @@
           —— · 已经没有啦 · ——
       </div>   
       </scroll>
-      <div class="tologin" v-if="isshow">
+      <div class="tologin1" v-if="isshow">
         <div>
-          <h2>{{message}}</h2>
+          <h2 class="read-dl">喜欢这本书就加入书架吧?</h2>
         </div>
         <div>
-            <span @click="tologin">加入</span>
-            <span @click="cancel">就看看</span>
+            <span @click="tologin" class="dl">登录</span>
+            <span @click="cancel" class="jkk">就看看</span>
         </div>
-      </div>   
+        
+      </div>    
   </div>
 </template>
 
@@ -88,13 +89,9 @@ export default {
          pp:'',
          id:'',
          qidian:'false',
-<<<<<<< HEAD
-         menu:true,
-=======
          isshow:false,
          message:'本小说是否加入书架记录',
          isshow2:''
->>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
       }      
   },
   components: {
@@ -378,40 +375,43 @@ margin: .2rem auto;
   .el-icon-arrow-down {
     font-size: 12px;
   }
-<<<<<<< HEAD
-  .sss{
-      font-size: 14px;
-      color: #606266;
-=======
-
-
-    .tologin{
-    position: absolute;
-    top: 47%;
-    left: 31%;
+  .tologin1{
+    position: fixed;
+    top: 40%;
+    left: 26%;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    width: 41vw;
     margin: 0 auto;
-    z-index: 1000;
-    background-color: #c5c5c580;
-    box-shadow: 1px 1px 1px #c0c7ce;
+    z-index: 120;
+    background-color: #e4e4e4d1;
+    padding: .3rem .3rem 0 .3rem;
+    border-radius: .1rem;
   }
-  .tologin > div{
+  .tologin1 > div{
     padding-bottom: 0.2rem;
   }
-  .tologin > div:last-child{
+  .tologin1 > div:last-child{
     display: flex;
   }
-  .tologin h2{
-       font-size: 0.23rem;
-    color: #010101;
-    padding: 0.1rem;
+  .read-dl{
+    font-size: 0.25rem;
+    color: black;
 }
-  .tologin span{
-    font-size: 0.26rem;
-    padding: 0.1rem;
->>>>>>> 898a81ed2b5db29c0e1305a93b9866ea71a50a8f
+  .dl{
+    font-size: 0.2rem;
+    padding:0.05rem .2rem;
+    background-color: pink;
+    color: red;
+    border-radius: .5rem;
+    margin: 0 .1rem;
+  }
+  .jkk{
+    font-size: 0.2rem;
+    padding:0.05rem .2rem;
+    background-color: red;
+    color: white;
+    border-radius: .5rem;
+    margin: 0 .1rem;
   }
 </style>
