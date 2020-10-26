@@ -54,7 +54,10 @@ export default {
 
   watch: {
     $route(to, from) {
-      if (this.$route.path == "/selectboysfree") {
+      if (
+        this.$route.path == "/selectboysfree" ||
+        this.$route.path == "/wanben"
+      ) {
         this.footShow = false;
       }
       this.nowUrl = to.fullPath; //全称路径

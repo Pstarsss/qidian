@@ -29,6 +29,7 @@ import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
 import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
+import wanben from '@/views/Selected/wanben'
 
 //详情
 const Detail = () => import('@/views/Details/Detail.vue')
@@ -57,6 +58,11 @@ const routes = [
   },
 
   // 精选的
+  {
+    path: '/wanben',
+    name: 'wanben',
+    component: wanben,
+  },
   {
     path: '/selectboysfree',
     name: 'SelectBoysfree',
