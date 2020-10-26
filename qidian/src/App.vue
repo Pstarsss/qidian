@@ -37,7 +37,7 @@
       </div>
     </div>
     <keep-alive>
-    <router-view />
+      <router-view />
     </keep-alive>
   </div>
 </template>
@@ -69,7 +69,7 @@ export default {
       }
     },
     isActive(names) {
-      if(this.$router.currentRoute.name){
+      if (this.$router.currentRoute.name) {
         return this.$router.currentRoute.name.includes(names);
       }
     },
