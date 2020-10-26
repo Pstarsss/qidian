@@ -1,6 +1,5 @@
 <template>
   <!-- 发现 -->
-
   <div class="find">
     <div class="findTop">
       <navBar>
@@ -61,5 +60,9 @@ export default {
   color: #fff;
   margin: 0 0.3rem;
   line-height: 1rem;
+}
+.el-icon-search {
+  color: #fff;
+  font-size: 0.3rem;
 }
 </style>
