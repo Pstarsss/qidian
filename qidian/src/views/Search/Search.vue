@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-     <top-nav-bar >
+     <top-nav-bar class="navigaitionsss">
         <div slot="left"><i class="el-icon-search"></i></div>
         <div slot="center"  class="search-content"><input type="search"  v-model="search_val" placeholder="请输入你感兴趣的内容"></div>
         <div slot="right"  @click="$router.go(-1)" class="search-back">取消</div>
@@ -174,7 +174,7 @@ export default {
 </script>
 
 <style>
-.navigaition[data-v-5768cac4] {
+.navigaitionsss[data-v-5768cac4] {
     display: flex;
     font-size: 0.25rem;
     align-items: center;
