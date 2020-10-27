@@ -354,9 +354,9 @@ export default {
          this.$router.push('/detaildiscuss/'+id);
       },
       addCollections(){
-        if(sessionStorage.getItem('userid')){
+        if(sessionStorage.getItem('userbasic')){
           this.isshow = false;
-          let userid = sessionStorage.getItem('userid');
+          let userid = JSON.parse(sessionStorage.getItem('userbasic')).userid;
           let collections = this.$router.currentRoute.params.id;
           let Chapter = 1;
           let image = this.info.images;
@@ -379,14 +379,20 @@ export default {
                 booktitle
             };
             if(!flag){
+                
                 this.$http.post('/api/adduserbook',{
                   temp
                 }).then(res1=>{
                   console.log(res1);
                 });
-                this.$store.dispatch('add',temp).then(res3=>{
-                    console.log(res3);
-                });
+                console.log(JSON.parse(sessionStorage.getItem('userbookinfo')));
+                let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
+                aa.push(temp);
+                sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
+           
+                // this.$store.dispatch('add',temp).then(res3=>{
+                //     console.log(res3);
+                // });
             }else{
                 let temp1 = {
                   userid,
@@ -400,11 +406,22 @@ export default {
                   Chapter,
                   booktitle
                 }).then(res1=>{
-                  console.log(res1);
                 });
-                 this.$store.dispatch('change',temp1).then(res3=>{
-                    console.log(res3);
-                });
+                let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
+                 let temp = aa.find((i)=>{
+                   return i.collections == collections;
+                 });
+                temp.Chapter = Chapter+"";
+                temp.booktitle = booktitle;
+                sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
+                
+                 
+                 
+                 
+                 
+                //  this.$store.dispatch('change',temp1).then(res3=>{
+                //     console.log(res3);
+                // });
             }
             
           });
@@ -414,6 +431,7 @@ export default {
       },
       tologin(){
         setTimeout(()=>{
+          this.isshow = false;
           this.$router.push('/login');
         },800);
       },

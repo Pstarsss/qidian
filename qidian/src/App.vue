@@ -56,7 +56,8 @@ export default {
     $route(to, from) {
       if (
         this.$route.path == "/selectboysfree" ||
-        this.$route.path == "/wanben"
+        this.$route.path == "/wanben" ||
+        this.$route.path == "/sanjiang"
       ) {
         this.footShow = false;
       }
@@ -76,7 +77,19 @@ export default {
         return this.$router.currentRoute.name.includes(names);
       }
     },
+    reload(){
+      this.isRouterAlive = false;
+      this.$nextTick(()=>{
+        this.isRouterAlive = true;
+      });
+    }
   },
+  provide(){
+    return {
+      reload:this.reload
+    }
+  },
+
 };
 </script>
 
