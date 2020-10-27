@@ -263,7 +263,7 @@ router.post('/validate',(req,res)=>{
     console.log(ex);
   })
 });
-// 获取所以用户信息；
+// 获取所有用户信息；
 router.get('/ddd',(req,res)=>{
   sql.find('select * from user').then(re=>{
     res.send(JSON.stringify(re));

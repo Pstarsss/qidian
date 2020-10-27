@@ -29,7 +29,7 @@
           <span><i class="el-icon-delete" @click="empty"></i></span>
       </div>
      <ul class="hot-search-content">
-         <li class="hot-search-color" v-for="(item,index) in historyList" :key="index" @click="goSearchDetail(item.id)">{{item}}</li>
+         <li class="hot-search-color" v-for="(item,index) in historyList" :key="index" @click="goSearchDetail(item.id)">{{item.name}}</li>
      </ul>
 
      <div class="hot-search">
@@ -136,37 +136,36 @@ export default {
     })
       },
       opendetail4(id,index){
-      // this.$http.get('/api/booklist').then(res=>{
-      // this.resout=res.data;
-     // console.log(res.data);
-        console.log(this.getResoutItem[index]);
-       	if(this.search_val == ''){
+        let temp ={
+          id:this.getResoutItem[index].id,
+          name:this.getResoutItem[index].name,
+        }
+        console.log(this.getResoutItem[index].name);
+        console.log(this.getResoutItem[index].id);
+       	if(this.getResoutItem[index].name == ''){
         		return false;
         	}else{
-                if (!this.historyList.includes(this.search_val)) {
-                    this.historyList.unshift(this.search_val);
-
+                 // 没有搜索记录，把搜索值push进数组首位，存入本地
+                if (!this.historyList.includes(temp)) {
+                    this.historyList.unshift(temp);
                     localStorage.setItem("historyList", JSON.stringify(this.historyList));
                 }else{
-                    let i =this.historyList.indexOf(this.search_val);
-                    this.historyList.splice(i,1)
-                    this.historyList.unshift(this.search_val);
-                    localStorage.setItem("historyList", JSON.stringify(this.historyList));
+                   //有搜索记录，删除之前的旧记录，将新搜索值重新push到数组首位
+                    // let i =this.historyList.indexOf(this.getResoutItem[index].name);
+                    // this.historyList.splice(i,1)
+                    // this.historyList.unshift(this.getResoutItem[index].name);
+                    // localStorage.setItem("historyList", JSON.stringify(this.historyList));
                 }
              this.resout = [];
         		 this.$router.push('/detail/'+id);
         	}
-    // })
       },
        hotsearch (){
         this.show1=!this.show1;
         this.show2=!this.show2;
-      },
-      get_search(){
-       
-        },       
+      },     
         goSearchDetail(id){
-        	//this.$router.push('/detail/'+id);
+        	this.$router.push('/detail/'+id);
         },       
         empty(){
             localStorage.removeItem('historyList');
