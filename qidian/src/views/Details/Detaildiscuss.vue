@@ -42,7 +42,16 @@
        </scroll>
     <div class="detaildiscuss-discuss">
         <div class="detaildiscuss-discuss-center" @click="comment"><i class="el-icon-edit"></i> 发帖</div>
-    </div>        
+    </div> 
+    <div class="tologin1" v-if="isshow">
+        <div>
+          <h2 class="read-dl">喜欢这本书就加入书架吧?</h2>
+        </div>
+        <div>
+            <span @click="tologin" class="dl">登录</span>
+            <span @click="cancel" class="jkk">就看看</span>
+        </div>       
+      </div>        
   </div>
 </template>
 
@@ -286,6 +295,45 @@ export default {
   }
   .disscuss-likes{
       margin-left: .1rem;
+  }
+  .tologin1{
+    position: fixed;
+    top: 40%;
+    left: 26%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    z-index: 120;
+    background-color: #e4e4e4d1;
+    padding: .3rem .3rem 0 .3rem;
+    border-radius: .1rem;
+  }
+  .tologin1 > div{
+    padding-bottom: 0.2rem;
+  }
+  .tologin1 > div:last-child{
+    display: flex;
+  }
+  .read-dl{
+    font-size: 0.25rem;
+    color: black;
+}
+  .dl{
+    font-size: 0.2rem;
+    padding:0.05rem .2rem;
+    background-color: pink;
+    color: red;
+    border-radius: .5rem;
+    margin: 0 .1rem;
+  }
+  .jkk{
+    font-size: 0.2rem;
+    padding:0.05rem .2rem;
+    background-color: red;
+    color: white;
+    border-radius: .5rem;
+    margin: 0 .1rem;
   }
 </style>
     
