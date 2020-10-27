@@ -1,7 +1,7 @@
 <template>
    <div class='Lbox'>
      <top-nav-bar>
-       <div slot="left" class="Lleft"><img :src="srcs" alt=""></div>
+       <div slot="left" class="Lleft" @click="tomineshow"><img :src="srcs" alt=""></div>
        <div slot="center"><h2>起点账号登录</h2></div>
      </top-nav-bar>
       <form class="">
@@ -50,6 +50,9 @@ export default {
    };
   },
   methods:{
+    tomineshow(){
+      this.$router.push('/mineShow');
+    },
     toregister(){
       this.$router.push('/register');
     },

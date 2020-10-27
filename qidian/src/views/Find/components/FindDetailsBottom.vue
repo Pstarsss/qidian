@@ -78,7 +78,7 @@ export default {
   },
   methods: {
     changedialog() {
-      if (sessionStorage.getItem('userid')) {
+      if (sessionStorage.getItem('userbasic')) {
         this.drawer = true
         this.dialog = true
         this.showNologin = false
@@ -101,23 +101,25 @@ export default {
     },
     submits() {
       let temp = {}
-      temp.headimg = sessionStorage.getItem('headimg')
-      temp.name = sessionStorage.getItem('username')
-      temp.content = this.publishReview
-      temp.tag = '见习'
-      temp.image = ''
-      temp.time = this.getTime()
-      temp.likes = 0
-      temp.reviews = 0
-      this.$emit('submits', temp, this.publishReview)
+      let aa = JSON.parse(sessionStorage.getItem('userbasic'));
+      temp.headimg = aa.userhead;
+      temp.name = aa.username;
+      temp.content = this.publishReview;
+      temp.tag = '见习';
+      temp.image = '';
+      temp.time = this.getTime();
+      temp.likes = 0;
+      temp.reviews = 0;
+      temp.title = '冲冲冲';
+      this.$emit('submits', temp, this.publishReview);
     },
     getTime() {
-      let dd = new Date()
-      let h1 = dd.getHours()
-      h1 = h1.length > 1 ? h1 : '0' + h1
-      let m1 = dd.getMinutes()
-      m1 = m1.length > 1 ? m1 : '0' + m1
-      return `${dd.getMonth() + 1}月${dd.getDate() + 1}日 ${h1}:${m1}`
+      let dd = new Date();
+      let h1 = dd.getHours();
+      h1 = h1.length > 1 ? h1 : '0' + h1;
+      let m1 = dd.getMinutes();
+      m1 = m1.length > 1 ? m1 : '0' + m1;
+      return `${dd.getMonth() + 1}月${dd.getDate() + 1}日 ${h1}:${m1}`;
     },
   },
 }

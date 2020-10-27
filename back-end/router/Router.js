@@ -65,7 +65,6 @@ router.get('/detail/:id',(req,res)=>{
 // 详情页的评论发布;
 router.post('/detaildiscuss',(req,res)=>{
   let { content } = req.body;
-  console.log(content);
   res.send('nice');
   // sql.find(`select * from booklist where id = ${id}`).then(results=>{
   //   res.send(results);
@@ -99,10 +98,13 @@ router.get('/finddetail/:id',function(req,res){
 });
 
 // 增加finddiscuss的评论
-router.get('/adddiscuss',function(req,res){
-  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+router.post('/adddiscuss',function(req,res){
+  let {content,tag,time,reviews,likes,headimg,title} = req.body.value;
+  sql.find(`insert into hotdiscuss (content,tag,time,reviews,likes,imgSrc,title) 
+   value('${content}','${tag}','${time}','${reviews}','${likes}','${headimg}','${title}')`).then(results=>{
     res.send(results);
-  })
+  });
+
 });
 
 // 搜索
@@ -233,6 +235,7 @@ router.put('/changepassword',(req,res)=>{
 
 
 const Core = require('@alicloud/pop-core');
+const { log } = require('math');
 
 var client = new Core({
   accessKeyId: 'LTAI4G3rASxgYtmSgUKSaxJM',
