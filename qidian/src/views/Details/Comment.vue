@@ -31,24 +31,29 @@ export default {
   },
   methods:{
       onComent(){
-        //   this.$http.post('/api/detaildiscuss/', this.form)
-        //         .then(({
-        //             data,
-        //             config
-        //         }) => {
-        //             console.log(data, config);
-        //             if (data.code == 200) {
-        //                 this.$message({
-        //                     message: "评论成功",
-        //                     type: "success"
-        //                 })
-        //             } else {
-        //                 this.$message({
-        //                     message: "评论失败",
-        //                     type: "error"
-        //                 })
-        //             }
-        //         })
+          console.log(this.info);
+          this.$http.post('/api/detaildiscuss', this.info).then(res=>{
+              console.log(res,1);
+          }).catch(err=>{
+              console.log(err,2);
+          });
+                // .then(({
+                //     data,
+                //     config
+                // }) => {
+                //     console.log(data, config);
+                //     if (data.code == 200) {
+                //         this.$message({
+                //             message: "评论成功",
+                //             type: "success"
+                //         });
+                //     } else {
+                //         this.$message({
+                //             message: "评论失败",
+                //             type: "error"
+                //         });
+                //     };
+                // });
       },
   },
   

@@ -35,14 +35,27 @@ export default {
    
   },
   created(){
-      if(sessionStorage.getItem('image')){
+       this.temp = this.getSessionStorage();
+  },
+  methods:{
+    toread(a,b){
+        this.$router.push('/read/'+a+"/chapter/"+b);
+    },
+    openmore(){
+
+    },
+    openset(){
+
+    },
+    getSessionStorage(){
+      if(sessionStorage.getItem('userid')){
         this.image = sessionStorage.getItem('image').split('-');
         let bookname = sessionStorage.getItem('bookname').split('-');
         let author = sessionStorage.getItem('author').split('-');
         let chapter = sessionStorage.getItem('chapter').split('-');
         let booktitle = sessionStorage.getItem('booktitle').split('-');
         let collections = sessionStorage.getItem('collections').split('-');
-        this.temp1 = booktitle.map((i,j)=>{
+        return this.temp1 = booktitle.map((i,j)=>{
           return {
             bookname:bookname[j],
             author:author[j],
@@ -55,21 +68,10 @@ export default {
         // console.log(this.$store.state.bookrecords);
 
         // this.temp = this.$store.state.bookrecords[0];
-        this.temp = this.temp1;
+       
       }else{
-
+        return ''
       };
-      
-  },
-  methods:{
-    toread(a,b){
-        this.$router.push('/read/'+a+"/chapter/"+b);
-    },
-    openmore(){
-
-    },
-    openset(){
-
     }
   },
 }
