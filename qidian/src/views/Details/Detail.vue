@@ -35,8 +35,8 @@
                     <span class="tm">™</span>
                 </div>
                 <div class="detail-header-bottom-right">
-                    <span class="tm">Lv{{info.ratings}} 初出茅庐 </span>
-                    <span class="rank"> 30 <i class="el-icon-arrow-right"></i></span>
+                    <span class="tm">Lv{{info.ratings}} 后起之秀 </span>
+                    <span class="rank"> 999 <i class="el-icon-arrow-right"></i></span>
                 </div>
            </div>
       </div>
@@ -342,7 +342,9 @@ export default {
       addin(){
         if(this.msg1=3274){
            this.msg1++;
+           setTimeout(() => {
            this.active1=true;
+        }, 200);         
         }else{
           this.msg1=this.msg1;
         }        
@@ -350,7 +352,9 @@ export default {
       addin1(){
           if(this.msg2=2287){
            this.msg2++;
+          setTimeout(() => {
            this.active2=true;
+        }, 200);  
         }else{
           this.msg2=this.msg2;
         } 
