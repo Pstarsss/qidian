@@ -77,8 +77,7 @@
         <div>
             <span @click="tologin" class="dl">登录</span>
             <span @click="cancel" class="jkk">就看看</span>
-        </div>
-        
+        </div>       
       </div>    
   </div>
 </template>
