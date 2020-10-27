@@ -4,7 +4,7 @@
      <top-nav-bar class="detail-tops">
         <div slot="left" @click="$router.go(-1)"><i class="el-icon-arrow-left"></i></div>
         <div slot="center" class="detaildiscuss-top-imgs" ><div><img :src="info.images" alt="" class="detaildiscuss-top-img" v-show="topleave"></div></div>
-        <div slot="right"><i class="el-icon-search"></i></div>
+        <div slot="right"><i class="el-icon-search" @click="search"></i></div>
      </top-nav-bar>
      <scroll class="wrapper" :probeType="3" ref="scroll" >
      <div class="detail-header1">
@@ -30,8 +30,8 @@
                         <div class="speaker-bottom-right">
                             <div class="reader-pl"><i class="el-icon-chat-dot-round"></i> 评论</div>
                              <div class="reader-dz">
-                                <img src="../../assets/img/Detail/dz.png" alt="" class="dz-img" @click="dzs(index)" v-show="dz">
-                                <img src="../../assets/img/Detail/dz1.png" alt="" class="dz-img" @click="dzs1(index)" v-show="dz1">
+                                <img src="../../assets/img/Detail/dz.png" alt="" class="dz-img" @click="dzs(index)" v-if="dz">
+                                <img src="../../assets/img/Detail/dz1.png" alt="" class="dz-img" @click="dzs1(index)" v-else>
                                  <span class="disscuss-likes">{{item.likes}}</span>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
       </div>
        </scroll>
     <div class="detaildiscuss-discuss">
-        <div class="detaildiscuss-discuss-center"><i class="el-icon-edit"></i> 发帖</div>
+        <div class="detaildiscuss-discuss-center" @click="comment"><i class="el-icon-edit"></i> 发帖</div>
     </div>        
   </div>
 </template>
@@ -60,7 +60,7 @@ export default {
     this.$http.get('/api/detail/'+id).then(res=>{
       this.info=res.data[0];
     });
-    this.$http.get('/api/detaildiscuss/').then(res=>{
+    this.$http.get('/api/detaildiscuss').then(res=>{
       this.infor=res.data;
       console.log(res.data);
     });
@@ -70,24 +70,34 @@ export default {
             info:{},
             infor:{},
             dz:true,
-            dz1:false,
             topleave:true,
+            dz1:{},
       }
   },
    mounted() {
       window.addEventListener("scroll", this.handleScroll, true);
     },
    methods:{
-      dzs(index){
-          this.dz=false;
-          this.dz1=true;
-          console.log(this.dz1[index])
+      comment(){
+          this.$router.push('/comment')
       },
-     dzs1(index){
-          this.dz1=false;
-          this.dz=true;
-          console.log('sss')
-     },
+       search(){
+          this.$router.push('/search') 
+       },
+      dzs(index){
+      this.$http.get('/api/detaildiscuss').then(res=>{
+      this.dz1=res.data[index].likes;
+      console.log(res.data[index].likes);
+    });
+          this.dz=false;        
+      },
+       dzs1(index){
+      this.$http.get('/api/detaildiscuss').then(res=>{
+      this.dz1=res.data[index].likes;
+      console.log(res.data[index].likes);
+    });
+          this.dz=true;        
+      },
      handleScroll() {
 	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
 	      scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);

@@ -37,7 +37,7 @@
       </div>
     </div>
     <keep-alive>
-    <router-view />
+      <router-view />
     </keep-alive>
   </div>
 </template>
@@ -54,7 +54,11 @@ export default {
 
   watch: {
     $route(to, from) {
-      if (this.$route.path == "/selectboysfree") {
+      if (
+        this.$route.path == "/selectboysfree" ||
+        this.$route.path == "/wanben" ||
+        this.$route.path == "/sanjiang"
+      ) {
         this.footShow = false;
       }
       this.nowUrl = to.fullPath; //全称路径
@@ -69,11 +73,23 @@ export default {
       }
     },
     isActive(names) {
-      if(this.$router.currentRoute.name){
+      if (this.$router.currentRoute.name) {
         return this.$router.currentRoute.name.includes(names);
       }
     },
+    reload(){
+      this.isRouterAlive = false;
+      this.$nextTick(()=>{
+        this.isRouterAlive = true;
+      });
+    }
   },
+  provide(){
+    return {
+      reload:this.reload
+    }
+  },
+
 };
 </script>
 

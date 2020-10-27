@@ -19,9 +19,14 @@ export default {
   },
   methods: {
     openkinds(a) {
-      console.log(a);
+      if (a == 3) {
+        this.$router.push("/sanjiang");
+      }
       if (a == 4) {
         this.$router.push("/selectboysfree");
+      }
+      if (a == 5) {
+        this.$router.push("/wanben");
       }
     },
   },

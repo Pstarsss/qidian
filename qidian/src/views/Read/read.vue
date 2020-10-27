@@ -47,42 +47,39 @@
           </div>
         </div>
 
-        <div class="read-author-speak">
-          <p>希望大家喜欢这本书，并支持正版阅读！</p>
-          <p class="read-author-name">—— {{ info.author }}</p>
+                <div class="read-author-speak">
+                        <p>希望大家喜欢这本书，并支持正版阅读！</p>
+                        <p class="read-author-name">—— {{info.author}}</p>
+                </div>
+                <p class="read-book-bottom">[盟主]迪迪卡卡俱乐部[盟主]Cz丶</p>
+                <p class="read-book-bottom">- 本作品由起点中文网进行电子制作与发行 -</p>
+                <p class="read-book-bottom1">版权所有·侵权必究</p>
+            </div>
+            
+            <div class="read-content1">
+                <p class="book-content-icon"> <i class="el-icon-magic-stick"></i></p>   
+                <p class="book-content-name">{{infor.bookName}}</p>
+                <h1 class="book-content-content">正文卷</h1> 
+                        <div :key="index" v-for="(item,index) in infor" id="index">
+                            <h1 class="book-content-title">{{item.title}}</h1>
+                            <p class="book-content-contents" v-for="(m,n) in item.content" :key="n">{{m}}</p> 
+                        </div>  
+                </div>    
+                <div class="read-space"></div>
+      <div class="read-bottom" v-show="qidian">
+          —— · 已经没有啦 · ——
+      </div>   
+      </scroll>
+      <div class="tologin1" v-if="isshow">
+        <div>
+          <h2 class="read-dl">{{message}}</h2>
         </div>
-        <p class="read-book-bottom">[盟主]迪迪卡卡俱乐部[盟主]Cz丶</p>
-        <p class="read-book-bottom">- 本作品由起点中文网进行电子制作与发行 -</p>
-        <p class="read-book-bottom1">版权所有·侵权必究</p>
-      </div>
-
-      <div class="read-content1">
-        <p class="book-content-icon"><i class="el-icon-magic-stick"></i></p>
-        <p class="book-content-name">{{ infor.bookName }}</p>
-        <h1 class="book-content-content">正文卷</h1>
-        <div :key="index" v-for="(item, index) in infor" id="index">
-          <h1 class="book-content-title">{{ item.title }}</h1>
-          <p
-            class="book-content-contents"
-            v-for="(m, n) in item.content"
-            :key="n"
-          >
-            {{ m }}
-          </p>
+        <div>
+            <span @click="tologin" class="dl">{{message1}}</span>
+            <span @click="cancel" class="jkk">就看看</span>
         </div>
-      </div>
-      <div class="read-space"></div>
-      <div class="read-bottom" v-show="qidian">—— · 已经没有啦 · ——</div>
-    </scroll>
-    <div class="tologin" v-if="isshow">
-      <div>
-        <h2>{{ message }}</h2>
-      </div>
-      <div>
-        <span @click="tologin">加入</span>
-        <span @click="cancel">就看看</span>
-      </div>
-    </div>
+        
+      </div>    
   </div>
 </template>
 
@@ -90,18 +87,20 @@
 import scroll from "@/components/common/Scroll/scroll.vue";
 import TopNavBar from "@/components/common/TopNavBar/NavBar.vue";
 export default {
-  name: "Read",
-  data() {
-    return {
-      infor: {},
-      info: {},
-      pp: "",
-      id: "",
-      qidian: "false",
-      isshow: false,
-      message: "本小说是否加入书架记录",
-      isshow2: "",
-    };
+  name: 'Read',
+  data(){
+      return{
+         infor:{},
+         info:{},
+         pp:'',
+         id:'',
+         qidian:'false',
+         isshow:false,
+         message:'喜欢这本书就加入书架吧?',
+         message1:'加入',
+         isshow2:false,
+         menu:false,
+      }      
   },
   components: {
     scroll,
@@ -116,7 +115,7 @@ export default {
     });
     this.$http.get("/api/detail/" + this.id).then((res) => {
       this.info = res.data[0];
-      console.log(res.data);
+      // console.log(res.data);
     });
   },
   updated() {
@@ -125,23 +124,25 @@ export default {
   methods: {
     goback() {
       this.isshow = true;
-      if (sessionStorage.getItem("userid")) {
-        this.message = "您是否添加本书阅读记录";
+      if (sessionStorage.getItem("userbasic")) {
+        this.message = "喜欢这本书就加入书架吧?";
+        this.message1 = '加入';
         this.isshow2 = true;
       } else {
-        this.message = "您需要登录才能加入书架";
+        this.message = "您需要登录才能加入书架!";
+        this.message1 = '登录';
         this.isshow2 = false;
       }
     },
     tologin() {
       if (this.isshow2) {
         // 用户添加本书阅读记录
-        let userid = sessionStorage.getItem("userid");
+        let userid = JSON.parse(sessionStorage.getItem("userbasic")).userid;
         let collections = this.$router.currentRoute.params.id;
         let Chapter = this.pp;
-        let image = this.infor.images;
-        let bookname = this.infor.name;
-        let author = this.infor.author;
+        let image = this.info.images;
+        let bookname = this.info.name;
+        let author = this.info.author;
         this.$http
           .post("/api/getchaptertitle", {
             userid,
@@ -150,7 +151,6 @@ export default {
           })
           .then((res) => {
             let flag = res.data.has;
-            console.log(res.data);
             let booktitle = res.data.title;
             let temp = {
               userid,
@@ -164,14 +164,18 @@ export default {
             if (!flag) {
               this.$http
                 .post("/api/adduserbook", {
-                  temp,
+                  temp
                 })
                 .then((res1) => {
-                  console.log(res1);
                 });
-              this.$store.dispatch("add", temp).then((res3) => {
-                console.log(res3);
-              });
+              let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
+              console.log(temp);
+              aa.push(temp);
+              sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
+              // this.$store.dispatch("add", temp).then((res3) => {
+              //   console.log(res3);
+              // });
+        
               this.$router.go(-1);
             } else {
               let temp1 = {
@@ -189,9 +193,17 @@ export default {
                 .then((res1) => {
                   console.log(res1);
                 });
-              this.$store.dispatch("change", temp1).then((res3) => {
-                console.log(this.$store.state);
-              });
+                 let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
+                 let temp = aa.find((i)=>{
+                   return i.collections == collections;
+                 });
+                 temp.Chapter = Chapter+"";
+                 temp.booktitle = booktitle;
+                 sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
+                 
+                //  this.$store.dispatch("change", temp1).then((res3) => {
+                //     console.log(this.$store.state);
+                //  });
               this.$router.go(-1);
             }
           });
@@ -221,9 +233,9 @@ export default {
         });
       this.$refs.scroll.finishPullup();
     },
-    xq() {
-      this.$router.push("/detail/" + this.id);
-      this.menu = false;
+    xq() { 
+      this.$router.push("/detail/" + this.id);  
+      this.menu = false;   
     },
     ss() {
       this.$router.push("/search");
@@ -388,33 +400,53 @@ export default {
 .el-icon-arrow-down {
   font-size: 12px;
 }
-
-.tologin {
-  position: absolute;
-  top: 47%;
-  left: 31%;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  width: 41vw;
-  margin: 0 auto;
-  z-index: 1000;
-  background-color: #c5c5c580;
-  box-shadow: 1px 1px 1px #c0c7ce;
+ .el-dropdown-link {
+    cursor: pointer;
+    color: #409EFF;
+  }
+  .el-icon-arrow-down {
+    font-size: 12px;
+  }
+  .tologin1{
+    position: fixed;
+    top: 40%;
+    left: 26%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    z-index: 120;
+    background-color: #e4e4e4d1;
+    padding: .3rem .3rem 0 .3rem;
+    border-radius: .1rem;
+  }
+  .tologin1 > div{
+    padding-bottom: 0.2rem;
+  }
+  .tologin1 > div:last-child{
+    display: flex;
+  }
+  .read-dl{
+    font-size: 0.25rem;
+    color: black;
 }
-.tologin > div {
-  padding-bottom: 0.2rem;
-}
-.tologin > div:last-child {
-  display: flex;
-}
-.tologin h2 {
-  font-size: 0.23rem;
-  color: #010101;
-  padding: 0.1rem;
-}
-.tologin span {
-  font-size: 0.26rem;
-  padding: 0.1rem;
-}
+  .dl{
+    font-size: 0.2rem;
+    padding:0.05rem .2rem;
+    background-color: pink;
+    color: red;
+    border-radius: .5rem;
+    margin: 0 .1rem;
+  }
+  .jkk{
+    font-size: 0.2rem;
+    padding:0.05rem .2rem;
+    background-color: red;
+    color: white;
+    border-radius: .5rem;
+    margin: 0 .1rem;
+  }
+  .sss{
+    font-size: .18rem;
+  }
 </style>

@@ -21,6 +21,10 @@ import mineSet from '@/views/Mine/components/mineSet.vue'
 import mineMsg from '@/views/Mine/components/mineMsg.vue'
 import peopleDetails from '@/views/Mine/components/peopleDetails.vue'
 import privacySet from '@/views/Mine/components/privacySet.vue'
+import hobbySet from '@/views/Mine/components/hobbySet.vue'
+import hobbychild from '@/views/Mine/components/hobbychild.vue'
+import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
+import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
 
 // 精选
 import Select from '@/views/Selected/Select.vue'
@@ -29,12 +33,15 @@ import SelectBoys from '@/views/Selected/SelectBoys.vue'
 import SelectGirls from '@/views/Selected/SelectGirls.vue'
 import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
+import wanben from '@/views/Selected/wanben'
+import sanjiang from '@/views/Selected/sanjiang'
 
 //详情
 const Detail = () => import('@/views/Details/Detail.vue')
 const Read = () => import('@/views/Read/read.vue')
 const Chapter = () => import('@/views/Details/Chapter.vue')
 const Detaildiscuss = () => import('@/views/Details/Detaildiscuss.vue')
+const Comment = () => import('@/views/Details/Comment.vue')
 
 //登录注册
 const Login = () => import('@/views/Login/Login.vue');
@@ -55,8 +62,17 @@ const routes = [
     name: 'Bookshelf',
     component: Bookshelf,
   },
-
+  {
+    path: '/sanjiang',
+    name: 'sanjiang',
+    component: sanjiang,
+  },
   // 精选的
+  {
+    path: '/wanben',
+    name: 'wanben',
+    component: wanben,
+  },
   {
     path: '/selectboysfree',
     name: 'SelectBoysfree',
@@ -111,6 +127,11 @@ const routes = [
     path: '/detaildiscuss/:id',
     name: 'Detaildiscuss',
     component: Detaildiscuss,
+  },
+  {
+    path: '/comment',
+    name: 'Comment',
+    component: Comment,
   },
 
   //发现页面的
@@ -169,6 +190,29 @@ const routes = [
     path: '/privacySet',
     name: 'PrivacySet',
     component: privacySet,
+  },
+  {
+    path: '/hobbySet',
+    name: 'hobbySet',
+    component: hobbySet,
+  	redirect:'/hobbySet/hobbychild',
+  	children:[
+  		{
+  		  path: '/hobbySet/hobbychild',
+  		  name: 'hobbychild',
+  		  component: hobbychild,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyGirls',
+  		  name: 'hobbyGirls',
+  		  component: hobbyGirls,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyBoys',
+  		  name: 'hobbyBoys',
+  		  component: hobbyBoys,
+  		},
+  	]
   },
   
  //搜索

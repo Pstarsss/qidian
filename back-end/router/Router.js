@@ -24,6 +24,7 @@ router.get('/read/:id',function(req,res){
     res.send(-1);
   })
 });
+// 加载另外的章节内容
 router.get('/read/:id/:pp',function(req,res){
   let id = req.params.id;
   let pp = req.params.pp;
@@ -59,6 +60,16 @@ router.get('/detail/:id',(req,res)=>{
   sql.find(`select * from booklist where id = ${id}`).then(results=>{
     res.send(results);
   });
+});
+
+// 详情页的评论发布;
+router.post('/detaildiscuss',(req,res)=>{
+  let { content } = req.body;
+  console.log(content);
+  res.send('nice');
+  // sql.find(`select * from booklist where id = ${id}`).then(results=>{
+  //   res.send(results);
+  // });
 });
 
 
@@ -104,24 +115,28 @@ router.post('/search',function(req,res){
 
 
 
+
 // 点击加入书架的操作1
 router.post('/getchaptertitle',function(req,res){
   let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
-  sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections} and Chapter = ${Chapter}`).then(results1=>{
-    sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
-      let temp = results[0];
-      temp.has = true;
-      res.send(temp);
-    });
-  }).catch(()=>{
-     sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
-      let temp = results[0];
-      temp.has = false;
-      res.send(temp);
-    });
+  sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections}`).then(results1=>{
+    if(results1.length){
+      sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+        let temp = results[0];
+        temp.has = true;
+        res.send(temp);
+      })
+    }else{
+      sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+        let temp = results[0];
+        temp.has = false;
+        res.send(temp);
+      });
+    }
   })
  
 });
+
 // 点击加入书架的操作2
 router.post('/adduserbook',function(req,res){
   let {
@@ -142,10 +157,10 @@ router.post('/adduserbook',function(req,res){
     'author':author,
     'booktitle':booktitle
   },userid]).then(res1=>{
-    console.log(res1);
-    res.send('修改成功');
+    res.send('添加成功');
   })
 });
+
 // 点击加入书架的操作3
 router.post('/updateuserbook',function(req,res){
   let {
@@ -158,10 +173,11 @@ router.post('/updateuserbook',function(req,res){
     'Chapter':Chapter,
     'booktitle':booktitle
   },userid,collections]).then(res1=>{
-    console.log(res1);
+    // console.log(res1);
     res.send('修改成功');
   })
 });
+
 
 
 
@@ -197,7 +213,7 @@ router.post('/post',(req,res)=>{
 router.post('/login',(req,res)=>{
   let {iphone,password } = req.body;
   sql.find('select * from user where iphone = ? and password = ?',[iphone,password]).then((re)=>{
-    console.log(JSON.parse(JSON.stringify(re)));
+    // console.log(JSON.parse(JSON.stringify(re)));
     res.send(re);
   }).catch((err)=>{
     res.send('登录失败');
