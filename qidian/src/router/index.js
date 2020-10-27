@@ -34,6 +34,7 @@ import SelectGirls from '@/views/Selected/SelectGirls.vue'
 import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
 import wanben from '@/views/Selected/wanben'
+import sanjiang from '@/views/Selected/sanjiang'
 
 //详情
 const Detail = () => import('@/views/Details/Detail.vue')
@@ -61,7 +62,11 @@ const routes = [
     name: 'Bookshelf',
     component: Bookshelf,
   },
-
+  {
+    path: '/sanjiang',
+    name: 'sanjiang',
+    component: sanjiang,
+  },
   // 精选的
   {
     path: '/wanben',

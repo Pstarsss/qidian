@@ -56,7 +56,8 @@ export default {
     $route(to, from) {
       if (
         this.$route.path == "/selectboysfree" ||
-        this.$route.path == "/wanben"
+        this.$route.path == "/wanben" ||
+        this.$route.path == "/sanjiang"
       ) {
         this.footShow = false;
       }
