@@ -21,7 +21,7 @@ router.get('/read/:id',function(req,res){
   sql.find(`select * from book${id}`).then(results=>{
     res.send(results);
   }).catch(err=>{
-    res.send(-1);
+    res.send('-1');
   })
 });
 // 加载另外的章节内容

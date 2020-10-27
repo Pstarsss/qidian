@@ -23,16 +23,20 @@
             <div class="detaildisccuss-content-body" v-for="(item,index) in infor" :key="index">
                 <div><img :src="item.headimg" alt="" class="detaildisccuss-content-body-left-img"></div>
                 <div class="detaildisccuss-content-body-right">
-                    <p class="speaker-name">{{item.name}}<span class="speaker-rank">{{item.tag}}</span></p>
+                    <div class="speaker-name">
+                      <div> {{item.name}}<span class="speaker-rank">{{item.tag}}</span></div>
+                      <div>
+                        <el-button :plain="true" @click="open2" class="clzs"> <i class="el-icon-delete "></i></el-button>                                      
+                      </div>
+                    </div>
                     <p class="speaker-content">{{item.content}}</p>
                     <div class="speaker-bottom">
                         <div class="speaker-bottom-left">{{item.time}}</div>
                         <div class="speaker-bottom-right">
                             <div class="reader-pl"><i class="el-icon-chat-dot-round"></i> 评论</div>
                              <div class="reader-dz">
-                                <img src="../../assets/img/Detail/dz.png" alt="" class="dz-img" @click="dzs(index)" v-if="dz">
-                                <img src="../../assets/img/Detail/dz1.png" alt="" class="dz-img" @click="dzs1(index)" v-else>
-                                 <span class="disscuss-likes">{{item.likes}}</span>
+                               <i class="el-icon-thumb" :class="{detaildisccussdz}" @click="dz(index)"></i>
+                                <span class="disscuss-likes">{{item.likes}}</span>
                             </div>
                         </div>
                     </div>
@@ -48,21 +52,23 @@
           <h2 class="read-dl">你需要登录才能发表评论哦!</h2>
         </div>
         <div>
-            <span @click="tologin" class="dl">登录</span>
+            <span @click="tologin" class="dl"> 登 录 </span>
             <span @click="cancel" class="jkk">下次一定</span>
         </div>       
-      </div>        
+      </div>   
   </div>
 </template>
 
 <script>
 import scroll from "@/components/common/Scroll/scroll.vue";
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue';
+import findDetailsBottom from '../Find/components/FindDetailsBottom'
 export default {
   name: 'Detaildisccuss',
   components: {
      TopNavBar,
      scroll,
+     findDetailsBottom,
   },
    created(){
    let id = this.$router.currentRoute.params.id;
@@ -70,24 +76,27 @@ export default {
       this.info=res.data[0];
     });
     this.$http.get('/api/detaildiscuss').then(res=>{
-      this.infor=res.data;
-      console.log(res.data);
+      this.infor=res.data.reverse();
+      //console.log(res.data);
     });
   },
   data(){
       return{
             info:{},
             infor:{},
-            dz:true,
             topleave:true,
-            dz1:{},
-            isshow:false
+            isshow:false,
+            detaildisccussdz:false,
       }
   },
    mounted() {
       window.addEventListener("scroll", this.handleScroll, true);
     },
    methods:{
+     dz(index){
+           this.infor[index].detaildisccussdz=true;
+           console.log(this.infor[index])
+     },
       comment(){
         if(sessionStorage.getItem('userbasic')){
               this.$router.push('/comment');
@@ -98,20 +107,6 @@ export default {
        search(){
           this.$router.push('/search') 
        },
-      dzs(index){
-      this.$http.get('/api/detaildiscuss').then(res=>{
-      this.dz1=res.data[index].likes;
-      console.log(res.data[index].likes);
-    });
-          this.dz=false;        
-      },
-       dzs1(index){
-      this.$http.get('/api/detaildiscuss').then(res=>{
-      this.dz1=res.data[index].likes;
-      console.log(res.data[index].likes);
-    });
-          this.dz=true;        
-      },
      handleScroll() {
 	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
 	      scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
@@ -125,12 +120,21 @@ export default {
     cancel() {
       this.isshow = false;
     },
+    open2() {
+        this.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+      },
   },
   
 }
 </script>
 
 <style scoped>
+.detaildisccussdz{
+  color: red;
+}
 .detail-tops{
     position: fixed;
     z-index: 110;
@@ -211,7 +215,7 @@ export default {
   .detaildisccuss-content-body-left-img{
       width: .35rem;
       height: .8rem;
-      margin: .1rem 0 0 .2rem;
+      margin: .12rem 0 0 .2rem;
       border-radius: 50%;
   }
   .detaildisccuss-content-body-right{
@@ -231,13 +235,22 @@ export default {
   .speaker-bottom{
        font-size: .16rem;
        padding-bottom: .1rem;
-       padding-top: .05rem;     
+       padding-top: .07rem;     
   }
   .speaker-name{
-      display: flex;
-      color: black;
-      text-align: center;
-      justify-items: center;
+     display: flex;
+    justify-content: space-between;
+    color: black;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+    height: .35rem
+  }
+  .clzs{
+    color: #a2a2a2;
+    margin-right: .1rem;
+    background-color: whitesmoke;
+    border: none;
   }
   .speaker-rank{
       background-color: orange;
