@@ -10,7 +10,7 @@ import Search from '@/views/Search/Search.vue'
 // 发现
 import Find from '@/views/Find.vue'
 import FindFollow from '@/views/Find/FindFollow.vue'
-import FindSquares from '@/views/Find/findSquares.vue'
+import FindSquares from '@/views/Find/FindSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
 
