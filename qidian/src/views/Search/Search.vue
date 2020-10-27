@@ -10,7 +10,7 @@
           class="itemlie"
           v-for="(target, index) in getResoutItem"
           :key="index"
-          @click="opendetail4(target.id)"
+          @click="opendetail4(target.id,index)"
         >
           {{ target.name }}
         </li>
@@ -104,6 +104,7 @@ export default {
       for(var i=0; i<this.resout.length; i++){
         if(this.resout[i].name.toLowerCase().indexOf(this.search_val.toLowerCase()) != -1){
           callback.push(this.resout[i])
+          // console.log(this.resout[i]);
         }
       }
       return callback
@@ -134,26 +135,28 @@ export default {
       this.$router.push("/detail/" + a);
     })
       },
-      opendetail4(id){
-      this.$http.get('/api/booklist').then(res=>{
-      this.resout=res.data;
+      opendetail4(id,index){
+      // this.$http.get('/api/booklist').then(res=>{
+      // this.resout=res.data;
      // console.log(res.data);
-     
+        console.log(this.getResoutItem[index]);
        	if(this.search_val == ''){
         		return false;
         	}else{
                 if (!this.historyList.includes(this.search_val)) {
-                  this.historyList.unshift(this.search_val);
-                  localStorage.setItem("historyList", JSON.stringify(this.historyList));
+                    this.historyList.unshift(this.search_val);
+
+                    localStorage.setItem("historyList", JSON.stringify(this.historyList));
                 }else{
                     let i =this.historyList.indexOf(this.search_val);
                     this.historyList.splice(i,1)
                     this.historyList.unshift(this.search_val);
                     localStorage.setItem("historyList", JSON.stringify(this.historyList));
                 }
+             this.resout = [];
         		 this.$router.push('/detail/'+id);
         	}
-    })
+    // })
       },
        hotsearch (){
         this.show1=!this.show1;

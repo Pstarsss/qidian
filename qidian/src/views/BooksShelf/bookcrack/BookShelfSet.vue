@@ -13,10 +13,12 @@
        </div>
      </div>
      <div class="bookset-center">
-       2
+       <div class="bookset-center-">
+
+       </div>
      </div>
      <div class="bookset-bottom">
-       3
+       
      </div>
    </div>
 </template>
