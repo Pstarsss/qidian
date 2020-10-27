@@ -37,23 +37,6 @@ export default {
           }).catch(err=>{
               console.log(err,2);
           });
-                // .then(({
-                //     data,
-                //     config
-                // }) => {
-                //     console.log(data, config);
-                //     if (data.code == 200) {
-                //         this.$message({
-                //             message: "评论成功",
-                //             type: "success"
-                //         });
-                //     } else {
-                //         this.$message({
-                //             message: "评论失败",
-                //             type: "error"
-                //         });
-                //     };
-                // });
       },
   },
   

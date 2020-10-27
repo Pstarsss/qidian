@@ -72,10 +72,10 @@
       </scroll>
       <div class="tologin1" v-if="isshow">
         <div>
-          <h2 class="read-dl">喜欢这本书就加入书架吧?</h2>
+          <h2 class="read-dl">{{message}}</h2>
         </div>
         <div>
-            <span @click="tologin" class="dl">登录</span>
+            <span @click="tologin" class="dl">{{message1}}</span>
             <span @click="cancel" class="jkk">就看看</span>
         </div>
         
@@ -96,8 +96,9 @@ export default {
          id:'',
          qidian:'false',
          isshow:false,
-         message:'本小说是否加入书架记录',
-         isshow2:'',
+         message:'喜欢这本书就加入书架吧?',
+         message1:'加入',
+         isshow2:false,
          menu:false,
       }      
   },
@@ -114,7 +115,7 @@ export default {
     });
     this.$http.get("/api/detail/" + this.id).then((res) => {
       this.info = res.data[0];
-      console.log(res.data);
+      // console.log(res.data);
     });
   },
   updated() {
@@ -123,23 +124,25 @@ export default {
   methods: {
     goback() {
       this.isshow = true;
-      if (sessionStorage.getItem("userid")) {
-        this.message = "您是否添加本书阅读记录";
+      if (sessionStorage.getItem("userbasic")) {
+        this.message = "喜欢这本书就加入书架吧?";
+        this.message1 = '加入';
         this.isshow2 = true;
       } else {
-        this.message = "您需要登录才能加入书架";
+        this.message = "您需要登录才能加入书架!";
+        this.message1 = '登录';
         this.isshow2 = false;
       }
     },
     tologin() {
       if (this.isshow2) {
         // 用户添加本书阅读记录
-        let userid = sessionStorage.getItem("userid");
+        let userid = JSON.parse(sessionStorage.getItem("userbasic")).userid;
         let collections = this.$router.currentRoute.params.id;
         let Chapter = this.pp;
-        let image = this.infor.images;
-        let bookname = this.infor.name;
-        let author = this.infor.author;
+        let image = this.info.images;
+        let bookname = this.info.name;
+        let author = this.info.author;
         this.$http
           .post("/api/getchaptertitle", {
             userid,
@@ -148,7 +151,6 @@ export default {
           })
           .then((res) => {
             let flag = res.data.has;
-            console.log(res.data);
             let booktitle = res.data.title;
             let temp = {
               userid,
@@ -162,14 +164,18 @@ export default {
             if (!flag) {
               this.$http
                 .post("/api/adduserbook", {
-                  temp,
+                  temp
                 })
                 .then((res1) => {
-                  console.log(res1);
                 });
-              this.$store.dispatch("add", temp).then((res3) => {
-                console.log(res3);
-              });
+              let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
+              console.log(temp);
+              aa.push(temp);
+              sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
+              // this.$store.dispatch("add", temp).then((res3) => {
+              //   console.log(res3);
+              // });
+        
               this.$router.go(-1);
             } else {
               let temp1 = {
@@ -187,9 +193,17 @@ export default {
                 .then((res1) => {
                   console.log(res1);
                 });
-              this.$store.dispatch("change", temp1).then((res3) => {
-                console.log(this.$store.state);
-              });
+                 let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
+                 let temp = aa.find((i)=>{
+                   return i.collections == collections;
+                 });
+                 temp.Chapter = Chapter+"";
+                 temp.booktitle = booktitle;
+                 sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
+                 
+                //  this.$store.dispatch("change", temp1).then((res3) => {
+                //     console.log(this.$store.state);
+                //  });
               this.$router.go(-1);
             }
           });

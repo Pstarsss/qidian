@@ -1,7 +1,7 @@
 <template>
    <div class='bookposition'>
-      <div class="bp-left" v-show='image' @click="aa">
-          <img :src="image" alt="">
+      <div class="bp-left" v-show='data.image' @click="aa">
+          <img :src="data.image">
       </div>
       <div class="bp-center" @click="aa">
          <div class="bp-title">
@@ -26,7 +26,7 @@
          size="40%"
          >
          <bookshelfset
-         :image="image"
+         :image="data.image"
          :bookname="data.bookname"
          :author="data.author">
          </bookshelfset>
@@ -46,10 +46,9 @@ export default {
         type:[Object,Array],
         default:null
      },
-     image:{
-        type:[String,Object],
-        default:''
-     }
+  },
+  created(){
+     
   },
   data() {
    return {
@@ -58,8 +57,8 @@ export default {
  },
  methods:{
     aa(){
-       this.$emit('toread',this.data.chapter,this.data.collections);
-      //  this.$router.push('/read/'+this.data.chapter+"/chapter/"+this.data.collections);
+       this.$emit('toread',this.data.collections,this.data.Chapter);
+     
     },
     bb(){
       // this.$emit('openset');

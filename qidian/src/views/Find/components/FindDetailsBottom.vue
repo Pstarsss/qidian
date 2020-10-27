@@ -17,13 +17,13 @@
       :visible.sync="dialog"
       direction="btt"
       :size="drawerSize"
-      :modal="true"
-      :append-to-body="true"
+      :modal="false"
+      :append-to-body="false"
     >
       <form action="submitReview" method="POST">
         <p>
           <span>发表评论</span>
-          <button type="submmit" @click.prevent="submits">发布</button>
+          <button type="submit" @click.prevent="submits">发布</button>
         </p>
         <el-divider></el-divider>
         <textarea
@@ -37,17 +37,20 @@
       <p class="submitReviewBottom">
         <span>
           <i class="el-icon-chicken"></i>
-          <i class="el-icon-picture-outline"></i>
+          <i class="el-icon-picture-outline" @click="chosePicSheet"></i>
         </span>
         <span>{{ publishReview.length }}/200</span>
       </p>
     </el-drawer>
+    <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
   </div>
 </template>
 
 <script>
 import '../iconfont/iconfont'
 // import '../css/FindDetailsBottom.css'
+// import { Actionsheet } from 'mint-ui'
+// Vue.component(Actionsheet.name, Actionsheet)
 export default {
   data() {
     return {
@@ -57,6 +60,11 @@ export default {
       publishReview: '',
       // isshow:false
       showNologin: true,
+      actions: [
+        { name: '拍照', methods: '' },
+        { name: '从相册中选择', methods: 'chosePic' },
+      ],
+      sheetVisible: false,
     }
   },
   watch: {
@@ -85,6 +93,12 @@ export default {
     //   this.drawer = false;
     //   this.dialog = true;
     // },
+    chosePicSheet() {
+      this.sheetVisible = true
+    },
+    chosePic(){
+      
+    },
     submits() {
       let temp = {}
       temp.headimg = sessionStorage.getItem('headimg')
@@ -95,7 +109,7 @@ export default {
       temp.time = this.getTime()
       temp.likes = 0
       temp.reviews = 0
-      this.$emit('submits', temp)
+      this.$emit('submits', temp, this.publishReview)
     },
     getTime() {
       let dd = new Date()
@@ -111,9 +125,12 @@ export default {
 
 <style>
 .el-drawer {
-  /* border-top-left-radius: 5%;
+  border-top-left-radius: 5%;
   border-top-right-radius: 5%;
-  padding: 0.2rem; */
+  padding: 0.2rem;
+}
+.el-drawer__wrapper {
+  z-index: 2000 !important;
 }
 /* .findDetailsBottom .el-drawer__body {
   margin: 0.2rem;
