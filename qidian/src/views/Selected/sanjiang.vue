@@ -1,10 +1,15 @@
 <template>
   <div>
-    <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
-      <div class="kindhead">
-        <i class="el-icon-arrow-left bk" @click="backup()"></i>
-        <el-tabs v-model="activeName">
-          <el-tab-pane label="三江推荐" name="first">
+    <div class="kindhead">
+      <i class="el-icon-arrow-left bk" @click="backup()"></i>
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="三江推荐" name="first">
+          <scroll
+            class="wrapper"
+            :probeType="3"
+            ref="scroll"
+            @pullingUp="pullingUp"
+          >
             <div
               @click="openDetail(index)"
               class="sanjiangtuijian"
@@ -26,9 +31,16 @@
               </div>
               <div class="fenge"></div>
             </div>
-          </el-tab-pane>
+          </scroll>
+        </el-tab-pane>
 
-          <el-tab-pane label="新书强推" name="second">
+        <el-tab-pane label="新书强推" name="second">
+          <scroll
+            class="wrapper"
+            :probeType="3"
+            ref="scroll"
+            @pullingUp="pullingUp"
+          >
             <div
               @click="openDetail(index)"
               class="sanjiangtuijian"
@@ -48,11 +60,12 @@
               <div class="bottom">
                 <span class="desc">{{ item.intro }}</span>
               </div>
-              <div class="fenge"></div></div
-          ></el-tab-pane>
-        </el-tabs>
-      </div>
-    </scroll>
+              <div class="fenge"></div>
+            </div>
+          </scroll>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
   </div>
 </template>
 <script>
@@ -72,7 +85,7 @@ export default {
       startline1: 54,
       endline1: 60,
       startline: 0,
-      endline: 6,
+      endline: 7,
       msg: {},
       activeName: "first",
     };
@@ -92,11 +105,16 @@ export default {
     },
     backup() {
       this.$router.go(-1);
+      console.log("sb");
     },
   },
 };
 </script>
 <style>
+.kindhead .bk {
+  position: relative;
+  z-index: 999;
+}
 .sanjiangtuijian .fenge {
   margin-top: 0.3rem;
   margin-left: -0.3rem;

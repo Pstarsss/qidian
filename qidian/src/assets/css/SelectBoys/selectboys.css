@@ -129,7 +129,7 @@ li {
 }
 
 .el-carousel__item img {
-    height: 2.3rem !important;
+    height: 2.3rem;
 }
 
 .wellsell-title>h3 {
@@ -143,7 +143,6 @@ li {
 
 .el-carousel__item img {
     width: 100%;
-
     color: #475669;
     font-size: 14px;
     opacity: 0.75;
@@ -361,7 +360,7 @@ hr {
 }
 
 .el-carousel__item img {
-    height: 1.5rem !important;
+    height: 1.5rem;
 }
 
 .special-for {
