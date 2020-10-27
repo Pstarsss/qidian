@@ -114,6 +114,7 @@ import findDetailsBottom from './components/FindDetailsBottom'
 // import findDetailsReviews from './components/FindDetailsReviews'
 import './iconfont/iconfont'
 import reviews from './components/FindDetailsReviews'
+import { Toast, Indicator } from 'mint-ui'
 export default {
   data() {
     return {
@@ -133,6 +134,7 @@ export default {
   //   this.$refs.scroll.refresh()
   // },
   created() {
+    Indicator.open()
     this.getDetail()
     this.getReviews()
   },
@@ -159,15 +161,18 @@ export default {
       this.$http.get('/api/detaildiscuss').then((res) => {
         this.revs = res.data.reverse()
         console.log(this.revs)
+        Indicator.close()
       })
     },
-    submits(value) {
+    submits(value, e) {
       this.$http
         .post('/api/adddiscuss', {
           value,
         })
         .then((ree) => {
           console.log(ree)
+          e = ''
+          Toast('回复成功')
         })
     },
     getShowNologin(e) {
