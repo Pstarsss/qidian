@@ -11,7 +11,7 @@
   font-size: .26rem;
   line-height: .6rem;
   display: flex;
-  background-color: #fff;
+  background-color:transparent;
   justify-content: space-between;
   position: fixed;
 }
@@ -208,7 +208,7 @@
 .detail-content-tops-left-imgs {
   width: .6rem;
   height: .6rem;
-  margin-right: .1rem;
+  margin-right: .2rem;
 }
 
 .detail-books-details {
@@ -606,4 +606,7 @@
     color: #409eff;
     border-radius: .5rem;
     margin: 0 .1rem;
+  }
+  .topcolor{
+    background-color: #fff;
   }

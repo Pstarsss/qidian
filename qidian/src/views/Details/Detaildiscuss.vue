@@ -43,13 +43,13 @@
     <div class="detaildiscuss-discuss">
         <div class="detaildiscuss-discuss-center" @click="comment"><i class="el-icon-edit"></i> 发帖</div>
     </div> 
-    <div class="tologin1" v-if="isshow">
+    <div class="tologin2" v-if="isshow">
         <div>
-          <h2 class="read-dl">喜欢这本书就加入书架吧?</h2>
+          <h2 class="read-dl">你需要登录才能发表评论哦!</h2>
         </div>
         <div>
             <span @click="tologin" class="dl">登录</span>
-            <span @click="cancel" class="jkk">就看看</span>
+            <span @click="cancel" class="jkk">下次一定</span>
         </div>       
       </div>        
   </div>
@@ -89,8 +89,11 @@ export default {
     },
    methods:{
       comment(){
-          // this.$router.push('/comment');
-          this.isshow=true
+        if(sessionStorage.getItem('userbasic')){
+              this.$router.push('/comment');
+        }else{
+            this.isshow=true
+        }       
       },
        search(){
           this.$router.push('/search') 
@@ -113,74 +116,11 @@ export default {
 	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
 	      scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
       },
-      tologin() {
-      if (this.isshow2) {
-        // 用户添加本书阅读记录
-        let userid = sessionStorage.getItem("userid");
-        let collections = this.$router.currentRoute.params.id;
-        let Chapter = this.pp;
-        let image = this.infor.images;
-        let bookname = this.infor.name;
-        let author = this.infor.author;
-        this.$http
-          .post("/api/getchaptertitle", {
-            userid,
-            collections,
-            Chapter,
-          })
-          .then((res) => {
-            let flag = res.data.has;
-            console.log(res.data);
-            let booktitle = res.data.title;
-            let temp = {
-              userid,
-              collections,
-              Chapter,
-              image,
-              bookname,
-              author,
-              booktitle,
-            };
-            if (!flag) {
-              this.$http
-                .post("/api/adduserbook", {
-                  temp,
-                })
-                .then((res1) => {
-                  console.log(res1);
-                });
-              this.$store.dispatch("add", temp).then((res3) => {
-                console.log(res3);
-              });
-              this.$router.go(-1);
-            } else {
-              let temp1 = {
-                collections,
-                Chapter,
-                booktitle,
-              };
-              this.$http
-                .post("/api/updateuserbook", {
-                  userid,
-                  collections,
-                  Chapter,
-                  booktitle,
-                })
-                .then((res1) => {
-                  console.log(res1);
-                });
-              this.$store.dispatch("change", temp1).then((res3) => {
-                console.log(this.$store.state);
-              });
-              this.$router.go(-1);
-            }
-          });
-      } else {
+      tologin() {     
         // 用户登录
         setTimeout(() => {
           this.$router.push("/login");
         }, 500);
-      }
     },
     cancel() {
       this.isshow = false;
@@ -370,7 +310,7 @@ export default {
   .disscuss-likes{
       margin-left: .1rem;
   }
-  .tologin1{
+  .tologin2{
     position: fixed;
     top: 40%;
     left: 26%;
@@ -383,10 +323,10 @@ export default {
     padding: .3rem .3rem 0 .3rem;
     border-radius: .1rem;
   }
-  .tologin1 > div{
+  .tologin2 > div{
     padding-bottom: 0.2rem;
   }
-  .tologin1 > div:last-child{
+  .tologin2 > div:last-child{
     display: flex;
   }
   .read-dl{
