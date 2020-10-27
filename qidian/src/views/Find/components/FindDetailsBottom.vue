@@ -54,9 +54,9 @@ import '../iconfont/iconfont'
 export default {
   data() {
     return {
-      drawerSize: '30%',
-      drawer: false,
-      dialog: false,
+      drawerSize: '40%',
+      drawer: true,
+      dialog: true,
       publishReview: '',
       // isshow:false
       showNologin: true,
@@ -96,8 +96,8 @@ export default {
     chosePicSheet() {
       this.sheetVisible = true
     },
-    chosePic(){
-      
+    chosePic() {
+
     },
     submits() {
       let temp = {}
@@ -209,12 +209,12 @@ form button {
   margin: 0.1rem 0;
 }
 form {
-  height: 90%;
+  height: 80%;
   /* padding-bottom: 2rem; */
 }
 textarea {
   resize: none;
-  height: 75%;
+  height: 90%;
   width: 100%;
   padding: 0.05rem;
   font-size: 0.3rem;
@@ -223,10 +223,12 @@ textarea {
 .submitReviewBottom {
   display: flex;
   justify-content: space-between;
+  height: 0.6rem;
+  align-items: center;
 }
 .submitReviewBottom {
-  font-size: 0.3rem;
-  top: 0.1rem;
+  font-size: 0.25rem;
+  top: 0.55rem;
   position: relative;
 }
 .submitReviewBottom > span:first-of-type > i {
