@@ -51,18 +51,24 @@
             <span @click="tologin" class="dl">登录</span>
             <span @click="cancel" class="jkk">下次一定</span>
         </div>       
-      </div>        
+      </div>
+
+      <findDetailsBottom
+        
+    ></findDetailsBottom>        
   </div>
 </template>
 
 <script>
 import scroll from "@/components/common/Scroll/scroll.vue";
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue';
+import findDetailsBottom from '../Find/components/FindDetailsBottom'
 export default {
   name: 'Detaildisccuss',
   components: {
      TopNavBar,
      scroll,
+     findDetailsBottom,
   },
    created(){
    let id = this.$router.currentRoute.params.id;
@@ -70,7 +76,7 @@ export default {
       this.info=res.data[0];
     });
     this.$http.get('/api/detaildiscuss').then(res=>{
-      this.infor=res.data;
+      this.infor=res.data.reverse();
       console.log(res.data);
     });
   },
