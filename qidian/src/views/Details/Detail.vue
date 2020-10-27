@@ -255,9 +255,13 @@
 
 <script>
 export default {
-  
+  inject:['reload'],
   name: 'Detail',
   components: {   
+  },
+  beforeRouteEnter (to, from, next) {
+    
+    next();
   },
   data() {
       return {
@@ -280,15 +284,12 @@ export default {
         topwhite:false
       };
     },
-    
     created(){
-    let id = this.$router.currentRoute.params.id;
-    this.$http.get('/api/detail/'+id).then(res=>{
-      this.info=res.data[0];
-    });
-    this.$http.get('/api/booklist/'+8).then(res=>{
-      this.info1=res.data.slice(0,4);
-    })
+      let id = this.$router.currentRoute.params.id;
+      this.getdata(id);
+      this.$http.get('/api/booklist/'+8).then(res=>{
+        this.info1=res.data.slice(0,4);
+      })
     this.$http.get('/api/booklist/'+11).then(res=>{
       this.info2=res.data.slice(1,3);
     })
@@ -333,10 +334,10 @@ export default {
         this.$router.push("/detail/" + a);
       });
     },
-      handleChange(val) {
+    handleChange(val) {
         console.log(val);
     },
-      back(){
+    back(){
         this.$router.go(-1);
     },
       addin(){
@@ -428,11 +429,6 @@ export default {
                 temp.Chapter = Chapter+"";
                 temp.booktitle = booktitle;
                 sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
-                
-                 
-                 
-                 
-                 
                 //  this.$store.dispatch('change',temp1).then(res3=>{
                 //     console.log(res3);
                 // });
@@ -451,6 +447,11 @@ export default {
       },
       cancel(){
         this.isshow = false;
+      },
+      getdata(id){ 
+        this.$http.get('/api/detail/'+id).then(res=>{
+        this.info=res.data[0];
+       });       
       }
     }
 }

@@ -46,6 +46,14 @@ router.get('/booktitle/:id',function(req,res){
     res.send(results);
   })
 });
+
+//或指定条数的数据;
+router.get('/booklist/px/:num',function(req,res){
+  let num = req.params.num;
+  sql.find(`select * from booklist limit ${num}`).then(results=>{
+    res.send(results);
+  })
+});
 //指定表的list
 router.get('/booklist/:id',function(req,res){
   let id = req.params.id;
