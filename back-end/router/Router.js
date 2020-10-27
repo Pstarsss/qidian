@@ -24,6 +24,7 @@ router.get('/read/:id',function(req,res){
     res.send(-1);
   })
 });
+// 加载另外的章节内容
 router.get('/read/:id/:pp',function(req,res){
   let id = req.params.id;
   let pp = req.params.pp;
@@ -59,6 +60,16 @@ router.get('/detail/:id',(req,res)=>{
   sql.find(`select * from booklist where id = ${id}`).then(results=>{
     res.send(results);
   });
+});
+
+// 详情页的评论发布;
+router.post('/detaildiscuss',(req,res)=>{
+  let { content } = req.body;
+  console.log(content);
+  res.send('nice');
+  // sql.find(`select * from booklist where id = ${id}`).then(results=>{
+  //   res.send(results);
+  // });
 });
 
 
@@ -104,6 +115,7 @@ router.post('/search',function(req,res){
 
 
 
+
 // 点击加入书架的操作1
 router.post('/getchaptertitle',function(req,res){
   let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
@@ -122,6 +134,7 @@ router.post('/getchaptertitle',function(req,res){
   })
  
 });
+
 // 点击加入书架的操作2
 router.post('/adduserbook',function(req,res){
   let {
@@ -146,6 +159,7 @@ router.post('/adduserbook',function(req,res){
     res.send('修改成功');
   })
 });
+
 // 点击加入书架的操作3
 router.post('/updateuserbook',function(req,res){
   let {
@@ -162,6 +176,7 @@ router.post('/updateuserbook',function(req,res){
     res.send('修改成功');
   })
 });
+
 
 
 

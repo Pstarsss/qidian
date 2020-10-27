@@ -97,7 +97,8 @@ export default {
          qidian:'false',
          isshow:false,
          message:'本小说是否加入书架记录',
-         isshow2:''
+         isshow2:'',
+         menu:false,
       }      
   },
   components: {
@@ -218,10 +219,9 @@ export default {
         });
       this.$refs.scroll.finishPullup();
     },
-    xq() {
-      this.menu = false;
-      this.$router.push("/detail/" + this.id);
-      
+    xq() { 
+      this.$router.push("/detail/" + this.id);  
+      this.menu = false;   
     },
     ss() {
       this.$router.push("/search");
@@ -431,5 +431,8 @@ export default {
     color: white;
     border-radius: .5rem;
     margin: 0 .1rem;
+  }
+  .sss{
+    font-size: .18rem;
   }
 </style>

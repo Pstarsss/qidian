@@ -22,7 +22,7 @@
 			隐私设置
 			<i class="el-icon-arrow-right icon-right"></i>
 		</div>
-		<div class="list1">
+		<div class="list1" @click="hobby">
 			偏好设置
 			<i class="el-icon-arrow-right icon-right"></i>
 		</div>
@@ -102,6 +102,9 @@
 			go(){
 				this.$router.push('/privacySet');
 			},	
+			hobby(){
+				this.$router.push('/hobbySet');
+			},
 			tochangepassword(){
 				this.$router.push('/changepassword');
 			}
