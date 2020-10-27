@@ -1,7 +1,7 @@
 <template>
    <div class='Lbox'>
      <top-nav-bar>
-       <div slot="left" class="Lleft" @click="tomineshow"><img :src="srcs" alt=""></div>
+       <div slot="left" class="Lleft" @click="toback"><img :src="srcs" alt=""></div>
        <div slot="center"><h2>起点账号登录</h2></div>
      </top-nav-bar>
       <form class="">
@@ -39,19 +39,41 @@ export default {
   },
   data() {
    return {
-      input3: '',
-      input4: '',
       disabled:false,
       issure:false,
       srcs:require('@/assets/img/loginimg/guanbi.png'),
       phonevalue:'',
       error:'',
       passowordvalue:'',
+      from:''
    };
   },
+  watch:{
+    $route:{
+      handler(newVal,oldVal){
+        console.log(oldVal,111);
+        this.from = oldVal;
+      },
+      deep:true,
+      immediate:true
+    },
+    // $route(to,from){
+    //   this.from = from.path;
+    //   console.log(this.from);
+    // }
+  },
+  created(){
+   
+  },
   methods:{
-    tomineshow(){
-      this.$router.push('/mineShow');
+    toback(){
+      if(this.from){
+         console.log(this.from);
+        this.$router.go(`${this.from}`);
+      }else{
+        this.$router.push('/mineShow');
+      }
+     
     },
     toregister(){
       this.$router.push('/register');
@@ -81,44 +103,39 @@ export default {
     },
     rush(){
       if(this.issure&&this.phonevalue&&this.passowordvalue){
-
         this.$http.post('/api/login',{
           iphone:this.phonevalue,
           password:this.passowordvalue
         }).then(res=>{
           let {iphone,password,userid,username,userhead} = res.data[0];
-          // sessionStorage.setItem('userinfo',iphone);
-          // sessionStorage.setItem('password',password);
-          // sessionStorage.setItem('userid',userid);
-          // sessionStorage.setItem('username',username);
-          // sessionStorage.setItem('userhead',userhead);
+
           sessionStorage.setItem('userbasic',JSON.stringify(res.data[0]));
           this.$http.post('/api/userbasic',{
               userid,
           }).then((res1)=>{
              let temp = res1.data;
              sessionStorage.setItem('userbookinfo',JSON.stringify(temp));
-            //  let image = (temp.map(i=>i.image)).join('-');
-            //  let bookname = (temp.map(i=>i.bookname)).join('-');
-            //  let author = (temp.map(i=>i.author)).join('-');
-            //  let chapter = (temp.map(i=>i.Chapter)).join('-');
-            //  let bookid = (temp.map(i=>i.collections)).join('-');
-            //  let booktitle = (temp.map(i=>i.booktitle)).join('-');
-            //  sessionStorage.setItem('image',image);
-            //  sessionStorage.setItem('bookname',bookname);
-            //  sessionStorage.setItem('author',author);
-            //  sessionStorage.setItem('chapter',chapter);
-            //  sessionStorage.setItem('collections',bookid);
-            //  sessionStorage.setItem('booktitle',booktitle);
-             this.$store.dispatch('add',temp).then(res2=>{
+           
+            //  this.$store.dispatch('add',temp).then(res2=>{
                 
-             });
-             this.$router.push('/mineShow');
+            //  });
+            console.log(this.from);
+             if(this.from){
+               this.$router.replace(`${this.from}`);
+             }else if(true){
+               this.$router.go(-1);
+             }else{
+               this.$router.push('/mineShow');
+             }
+           
           }).catch(()=>{
-              console.log('fffail ');
-             this.$router.push('/mineShow');
+            if(this.from){
+               this.$router.replace(`${this.from}`);
+             }else{
+               this.$router.go(-1);
+             }
           })
-          
+
         }).catch(()=>{
           this.issure = false;
           console.log('账号或者密码错误');
