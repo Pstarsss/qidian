@@ -2,7 +2,7 @@
   <!-- 帖子详情底部 -->
   <div class="findDetailsBottom">
     <div class="content" @click.prevent="changedialog">
-      <div class="review" @click="drawer = true">
+      <div class="review" @click="opendrawer">
         <p class="iconfont icon-bi">终于来啦，聊聊吧~</p>
       </div>
       <div class="interact">
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       drawerSize: '40%',
-      drawer: true,
+      drawer: false,
       dialog: true,
       publishReview: '',
       // isshow:false
@@ -77,17 +77,20 @@ export default {
     // },
   },
   methods: {
+    opendrawer(){
+      this.drawer = !this.drawer;
+    },
     changedialog() {
       if (sessionStorage.getItem('userbasic')) {
-        this.drawer = true
-        this.dialog = true
-        this.showNologin = false
+        this.drawer = true;
+        this.dialog = true;
+        this.showNologin = false;
       } else {
-        this.drawer = false
-        this.dialog = false
-        this.showNologin = true
+        this.drawer = false;
+        this.dialog = false;
+        this.showNologin = true;
       }
-      this.$emit('getShowNologin', this.showNologin)
+      this.$emit('getShowNologin', this.showNologin);
     },
     // open(){
     //   this.drawer = false;

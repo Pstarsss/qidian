@@ -79,7 +79,7 @@
     <!-- 底部组件 -->
     <findDetailsBottom
       @submits="submits"
-      @getShowNologin.native="getShowNologin"
+      @getShowNologin="getShowNologin"
     ></findDetailsBottom>
     <!-- 遮罩 -->
     <div class="noLoginShade" v-show="showNologin"></div>
@@ -128,7 +128,7 @@ export default {
       touSize: 'small',
       touSrc:
         'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-      showNologin: false,
+      showNologin: '',
     }
   },
   // beforeCreate() {
@@ -179,6 +179,7 @@ export default {
         }).then((ree) => {
           console.log(ree);
           e = '';
+          this.showNologin = false;
           this.reload();
           Toast('回复成功');
         })
