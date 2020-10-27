@@ -112,7 +112,7 @@ export default {
   white-space: nowrap;
   font-size: 0.25rem;
 }
-.bottom {
+.sanjiangtuijian .bottom {
   display: block;
 }
 .topright {
