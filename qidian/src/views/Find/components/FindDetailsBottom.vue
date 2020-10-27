@@ -79,8 +79,8 @@ export default {
   methods: {
     changedialog() {
       if (sessionStorage.getItem('userid')) {
-        this.drawer = true
-        this.dialog = true
+        this.drawer = false
+        this.dialog = false
         this.showNologin = false
       } else {
         this.drawer = false
