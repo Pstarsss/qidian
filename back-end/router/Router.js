@@ -62,13 +62,11 @@ router.get('/detail/:id',(req,res)=>{
   });
 });
 
-// 详情页的评论发布;
+// 详情页的评论;
 router.post('/detaildiscuss',(req,res)=>{
-  let { content } = req.body;
-  res.send('nice');
-  // sql.find(`select * from booklist where id = ${id}`).then(results=>{
-  //   res.send(results);
-  // });
+  sql.find(`select * from dicsuss1`).then(results=>{
+    res.send(results);
+  });
 });
 
 
@@ -99,9 +97,9 @@ router.get('/finddetail/:id',function(req,res){
 
 // 增加finddiscuss的评论
 router.post('/adddiscuss',function(req,res){
-  let {content,tag,time,reviews,likes,headimg,title} = req.body.value;
-  sql.find(`insert into hotdiscuss (content,tag,time,reviews,likes,imgSrc,title) 
-   value('${content}','${tag}','${time}','${reviews}','${likes}','${headimg}','${title}')`).then(results=>{
+  let {headimg,name,tag,content,time,image,likes,reviews} = req.body.value;
+  sql.find(`insert into discuss1 (headimg,name,tag,content,image,time,likes,reviews) 
+   value('${headimg}','${name}','${tag}','${content}','${image}','${time}','${likes}','${reviews}')`).then(results=>{
     res.send(results);
   });
 

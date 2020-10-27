@@ -78,15 +78,9 @@ export default {
   },
   methods: {
     changedialog() {
-<<<<<<< HEAD
       if (sessionStorage.getItem('userbasic')) {
         this.drawer = true
         this.dialog = true
-=======
-      if (sessionStorage.getItem('userid')) {
-        this.drawer = false
-        this.dialog = false
->>>>>>> 165a04402c81eaace439da8774bc58b90acbc81d
         this.showNologin = false
       } else {
         this.drawer = false
@@ -116,7 +110,6 @@ export default {
       temp.time = this.getTime();
       temp.likes = 0;
       temp.reviews = 0;
-      temp.title = '冲冲冲';
       this.$emit('submits', temp, this.publishReview);
     },
     getTime() {
