@@ -19,18 +19,22 @@
       </div>
       <div class="bookshelf-drawer">
          <el-drawer
-         :visible.sync="drawer"
+         :visible="drawer"
          direction="btt"
          :with-header="false"
          :before-close="handleClose"
-         size="40%"
+         size="50%"
+         :append-to-body="false"
+         :modal-append-to-body="false"
          >
          <bookshelfset
          :image="data.image"
          :bookname="data.bookname"
-         :author="data.author">
+         :author="data.author"
+         >
          </bookshelfset>
          </el-drawer>
+         
       </div>
    </div>
 </template>
@@ -58,17 +62,14 @@ export default {
  methods:{
     aa(){
        this.$emit('toread',this.data.collections,this.data.Chapter);
-     
     },
     bb(){
       // this.$emit('openset');
     },
     handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
+         this.drawer = false;
+         done();
+       
     }
  }
 
@@ -118,5 +119,8 @@ export default {
 }
 .bookshelf-drawer /deep/ .el-drawer{
    border-radius: 0;
+}
+.bookshelf-drawer /deep/ .v-modal{
+   z-index: 2 !important;
 }
 </style>
