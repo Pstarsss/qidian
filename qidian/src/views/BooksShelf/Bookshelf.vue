@@ -2,7 +2,7 @@
   <div>
     <book-crack class="bookcolor"></book-crack>
     <div v-if="temp">
-        <book-list v-for="(item,index) in temp" :key="item.collections" :data="item" :image="image[index]"
+        <book-list v-for="(item) in temp" :key="item.collections" :data="item"
         @toread='toread' ></book-list>
     </div>
     <div class="b-findmore" @click="openmore">
@@ -18,6 +18,7 @@ import BookCrack from './bookcrack/BookCrack.vue'
 import BookList from './bookcrack/Bookposition.vue'
 import Scroll from '@/components/common/Scroll/scroll.vue'
 export default {
+  inject:['reload'],
   name: 'bookshelf',
   components: {
     BookCrack,
@@ -35,10 +36,14 @@ export default {
    
   },
   created(){
-       this.temp = this.getSessionStorage();
+       this.reload();
+       this.temp = JSON.parse(sessionStorage.getItem('userbookinfo'));
+       console.log(this.temp);
+       
   },
   methods:{
     toread(a,b){
+        // console.log(a,b);
         this.$router.push('/read/'+a+"/chapter/"+b);
     },
     openmore(){
@@ -47,32 +52,36 @@ export default {
     openset(){
 
     },
-    getSessionStorage(){
-      if(sessionStorage.getItem('userid')){
-        this.image = sessionStorage.getItem('image').split('-');
-        let bookname = sessionStorage.getItem('bookname').split('-');
-        let author = sessionStorage.getItem('author').split('-');
-        let chapter = sessionStorage.getItem('chapter').split('-');
-        let booktitle = sessionStorage.getItem('booktitle').split('-');
-        let collections = sessionStorage.getItem('collections').split('-');
-        return this.temp1 = booktitle.map((i,j)=>{
-          return {
-            bookname:bookname[j],
-            author:author[j],
-            booktitle:booktitle[j],
-            chapter:chapter[j],
-            collections:collections[j]
-          };
-        });
-        // console.log(this.temp1);
-        // console.log(this.$store.state.bookrecords);
+    // getSessionStorage(){
+      
+    //   if(sessionStorage.getItem('userid')){
+    //     this.image = sessionStorage.getItem('image').split('-');
+    //     let bookname = sessionStorage.getItem('bookname').split('-');
+    //     let author = sessionStorage.getItem('author').split('-');
+    //     let chapter = sessionStorage.getItem('chapter').split('-');
+    //     let booktitle = sessionStorage.getItem('booktitle').split('-');
+    //     let collections = sessionStorage.getItem('collections').split('-');
 
-        // this.temp = this.$store.state.bookrecords[0];
+
+
+    //     return this.temp1 = booktitle.map((i,j)=>{
+    //       return {
+    //         bookname:bookname[j],
+    //         author:author[j],
+    //         booktitle:booktitle[j],
+    //         chapter:chapter[j],
+    //         collections:collections[j]
+    //       };
+    //     });
+    //     // console.log(this.temp1);
+    //     // console.log(this.$store.state.bookrecords);
+
+    //     // this.temp = this.$store.state.bookrecords[0];
        
-      }else{
-        return ''
-      };
-    }
+    //   }else{
+    //     return ''
+    //   };
+    // }
   },
 }
 </script>

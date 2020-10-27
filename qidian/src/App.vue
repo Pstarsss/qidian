@@ -76,7 +76,19 @@ export default {
         return this.$router.currentRoute.name.includes(names);
       }
     },
+    reload(){
+      this.isRouterAlive = false;
+      this.$nextTick(()=>{
+        this.isRouterAlive = true;
+      });
+    }
   },
+  provide(){
+    return {
+      reload:this.reload
+    }
+  },
+
 };
 </script>
 
