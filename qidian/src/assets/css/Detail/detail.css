@@ -7,7 +7,7 @@
   top: 0;
   width: 100%;
   height: .6rem;
-  color: black;
+  color: white;
   font-size: .26rem;
   line-height: .6rem;
   display: flex;
@@ -295,7 +295,7 @@
 }
 
 .el-icon-star-off {
-  margin-left: .08rem;
+  margin-left: .12rem;
 }
 
 .detail-catalog {
@@ -609,4 +609,7 @@
   }
   .topcolor{
     background-color: #fff;
+  }
+  .topwhite{
+    color:black;
   }

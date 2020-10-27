@@ -1,6 +1,6 @@
 <template>
   <div class="all" :class="'dark'">
-      <div class="detail-top" :class="'topcolor'">
+      <div class="detail-top" :class="{topcolor,topwhite}">
         <div class="detail-top-left">
           <div class="detail-top-left-icon" @click="back">
             <i class="el-icon-arrow-left"></i>
@@ -276,7 +276,8 @@ export default {
         pp:'',
         isshow:false,
         leavetop:false,
-        topcolor:false,
+        topcolor:true,
+        topwhite:false
       };
     },
     
@@ -314,7 +315,9 @@ export default {
   methods: {
     handleScroll() {
 	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
-	      scrolltop > 500 ? (this.leavetop,this.topcolor = true) : (this.leavetop,this.topcolor = false);
+        scrolltop > 200 ? (this.leavetop = true) : (this.leavetop = false);
+        scrolltop > 200 ? (this.topcolor = true) : (this.topcolor = false);
+         scrolltop > 200 ? (this.topwhite = true) : (this.topwhite = false);
 	    },
      openDetail1(index) {
       this.$http.get("/api/booklist/12").then((res) => {
@@ -337,7 +340,7 @@ export default {
         this.$router.go(-1);
     },
       addin(){
-        if(this.msg1=100){
+        if(this.msg1=3274){
            this.msg1++;
            this.active1=true;
         }else{
@@ -345,7 +348,7 @@ export default {
         }        
       },
       addin1(){
-          if(this.msg2=100){
+          if(this.msg2=2287){
            this.msg2++;
            this.active2=true;
         }else{
