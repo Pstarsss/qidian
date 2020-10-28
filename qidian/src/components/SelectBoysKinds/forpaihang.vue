@@ -6,7 +6,7 @@
     <div
       class="ph-items"
       v-bind="number"
-      v-for="(item, index) in msg[0]"
+      v-for="(item, index) in msg[number]"
       :key="index"
     >
       <div class="ph-items-left">
@@ -38,7 +38,7 @@ export default {
   created() {
     this.$http.get("/api/booklist").then((res) => {
       this.msg[0] = res.data;
-      console.log(this.msg[number]);
+      console.log(this.msg[0]);
     });
   },
 };

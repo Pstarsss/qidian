@@ -7,7 +7,7 @@
       <div class="paihangtype">
         <el-tabs v-model="activeName">
           <el-tab-pane label="全部" name="first">
-            <fp :number="aa"></fp>
+            <fp :number="0"></fp>
           </el-tab-pane>
           <el-tab-pane label="玄幻"> </el-tab-pane>
           <el-tab-pane label="奇幻"> </el-tab-pane>
@@ -41,7 +41,6 @@ export default {
   methods: {
     backup() {
       this.$router.go(-1);
-      console.log("sb");
     },
   },
 };
