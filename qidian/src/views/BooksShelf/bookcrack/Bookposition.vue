@@ -23,7 +23,7 @@
          direction="btt"
          :with-header="false"
          :before-close="handleClose"
-         size="50%"
+         size="45%"  
          :append-to-body="false"
          :modal-append-to-body="false"
          >
