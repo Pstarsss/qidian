@@ -43,7 +43,7 @@
             <div class="authorAndFollow">
               <div class="author">
                 <el-avatar :size="touSize" :src="touSrc"></el-avatar>
-                <p>蒋子明</p>
+                <p>作者</p>
               </div>
               <div class="follow">
                 <i class="el-icon-plus"></i>

@@ -39,10 +39,14 @@
           <i class="el-icon-chicken"></i>
           <i class="el-icon-picture-outline" @click="chosePicSheet"></i>
         </span>
+        <span class="centerImgs">
+          <img :src="i.src" alt="" v-for="i in reviewImgs" :key="i.id" />
+        </span>
         <span>{{ publishReview.length }}/200</span>
       </p>
     </el-drawer>
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
+    <!-- <input type="file" id="inputFile" accept=".png,.jpg" /> -->
   </div>
 </template>
 
@@ -54,7 +58,7 @@ import '../iconfont/iconfont'
 export default {
   data() {
     return {
-      drawerSize: '40%',
+      drawerSize: '50%',
       drawer: false,
       dialog: false,
       publishReview: '',
@@ -65,6 +69,11 @@ export default {
         { name: '从相册中选择', methods: 'chosePic' },
       ],
       sheetVisible: false,
+      reviewImgs: [
+        { src: require('../img/海王星.png') },
+        { src: require('../img/海王星.png') },
+        { src: require('../img/海王星.png') },
+      ],
     }
   },
   watch: {
@@ -77,20 +86,20 @@ export default {
     // },
   },
   methods: {
-    opendrawer(){
-      this.drawer = !this.drawer;
+    opendrawer() {
+      this.drawer = !this.drawer
     },
     changedialog() {
       if (sessionStorage.getItem('userbasic')) {
-        this.drawer = true;
-        this.dialog = true;
-        this.showNologin = false;
+        this.drawer = true
+        this.dialog = true
+        this.showNologin = false
       } else {
-        this.drawer = false;
-        this.dialog = false;
-        this.showNologin = true;
+        this.drawer = false
+        this.dialog = false
+        this.showNologin = true
       }
-      this.$emit('getShowNologin', this.showNologin);
+      this.$emit('getShowNologin', this.showNologin)
     },
     // open(){
     //   this.drawer = false;
@@ -99,29 +108,27 @@ export default {
     chosePicSheet() {
       this.sheetVisible = true
     },
-    chosePic() {
-      
-    },
+    chosePic() {},
     submits() {
       let temp = {}
-      let aa = JSON.parse(sessionStorage.getItem('userbasic'));
-      temp.headimg = aa.userhead;
-      temp.name = aa.username;
-      temp.content = this.publishReview;
-      temp.tag = '见习';
-      temp.image = '';
-      temp.time = this.getTime();
-      temp.likes = 0;
-      temp.reviews = 0;
-      this.$emit('submits', temp, this.publishReview);
+      let aa = JSON.parse(sessionStorage.getItem('userbasic'))
+      temp.headimg = aa.userhead
+      temp.name = aa.username
+      temp.content = this.publishReview
+      temp.tag = '见习'
+      temp.image = ''
+      temp.time = this.getTime()
+      temp.likes = 0
+      temp.reviews = 0
+      this.$emit('submits', temp, this.publishReview)
     },
     getTime() {
-      let dd = new Date();
-      let h1 = dd.getHours();
-      h1 = h1.length > 1 ? h1 : '0' + h1;
-      let m1 = dd.getMinutes();
-      m1 = m1.length > 1 ? m1 : '0' + m1;
-      return `${dd.getMonth() + 1}月${dd.getDate() + 1}日 ${h1}:${m1}`;
+      let dd = new Date()
+      let h1 = dd.getHours()
+      h1 = h1.length > 1 ? h1 : '0' + h1
+      let m1 = dd.getMinutes()
+      m1 = m1.length > 1 ? m1 : '0' + m1
+      return `${dd.getMonth() + 1}月${dd.getDate() + 1}日 ${h1}:${m1}`
     },
   },
 }
@@ -229,8 +236,6 @@ textarea {
   justify-content: space-between;
   height: 0.6rem;
   align-items: center;
-}
-.submitReviewBottom {
   font-size: 0.25rem;
   top: 0.55rem;
   position: relative;
@@ -239,5 +244,13 @@ textarea {
   margin-right: 0.2rem;
   font-size: 0.4rem;
   line-height: 0.35rem;
+}
+.centerImgs img {
+  float: left;
+}
+#inputFile {
+  position: fixed;
+  bottom: 1rem;
+  /* background-color: #000; */
 }
 </style>
