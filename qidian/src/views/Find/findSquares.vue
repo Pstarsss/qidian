@@ -137,7 +137,7 @@ export default {
         { name: '新书投资', src: require('./img/没有积分@3x.png') },
         { name: '点点圈', src: require('./img/海王星.png') },
         { name: '对话小说', src: require('./img/蓝紫色星空.png') },
-        { name: '红包', src: require('./img/红包.png'), index: 'findHB' },
+        { name: '红包', src: require('./img/红包.png') },
       ],
       // 人气点点圈
       num1,
