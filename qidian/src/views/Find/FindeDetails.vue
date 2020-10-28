@@ -116,7 +116,7 @@ import './iconfont/iconfont'
 import reviews from './components/FindDetailsReviews'
 import { Toast, Indicator } from 'mint-ui'
 export default {
-  inject:['reload'],
+  inject: ['reload'],
   data() {
     return {
       drawer: false,
@@ -143,12 +143,12 @@ export default {
     this.$refs.scroll.refresh()
   },
   methods: {
-    tologin(){
+    tologin() {
       // if(sessionStorage.getItem('userbasic')){
       //   this.showNologin = false;
       // }else{
-
-        this.$router.push('/login');
+      this.showNologin = false
+      this.$router.push('/login')
       // }
     },
     pullingUp() {
@@ -174,14 +174,16 @@ export default {
       })
     },
     submits(value, e) {
-      this.$http.post('/api/adddiscuss', {
+      this.$http
+        .post('/api/adddiscuss', {
           value,
-        }).then((ree) => {
-          console.log(ree);
-          e = '';
-          this.showNologin = false;
-          this.reload();
-          Toast('回复成功');
+        })
+        .then((ree) => {
+          console.log(ree)
+          e = ''
+          this.showNologin = false
+          this.reload()
+          Toast('回复成功')
         })
     },
     getShowNologin(e) {
@@ -191,7 +193,7 @@ export default {
     //   this.$emit('update:drawer', false)
     // },
     clsNoLogin() {
-      this.showNologin = false;
+      this.showNologin = false
     },
   },
   components: {
@@ -437,11 +439,8 @@ export default {
   background-color: #fbe7e7;
 }
 .noLoginOperation > span:last-of-type {
-  /* color: #db3b3b; */
-  background-color: #db3b3b;
-}
-.noLoginOperation a {
   color: #fff;
+  background-color: #db3b3b;
 }
 .noLogin i {
   position: absolute;

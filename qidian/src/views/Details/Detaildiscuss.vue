@@ -34,8 +34,9 @@
                         <div class="speaker-bottom-left">{{item.time}}</div>
                         <div class="speaker-bottom-right">
                             <div class="reader-pl"><i class="el-icon-chat-dot-round"></i> 评论</div>
-                             <div class="reader-dz">
-                               <i class="el-icon-thumb" :class="{detaildisccussdz}" @click="dz(index)"></i>
+                             <div class="reader-dz" @click="dz(index)" >
+                               <img src="../../assets/img/Detail/dz.png"  v-show="!item.dzshow" class="dzshow">
+                               <img src="../../assets/img/Detail/dz1.png"  v-show="item.dzshow" class="dzshow">
                                 <span class="disscuss-likes">{{item.likes}}</span>
                             </div>
                         </div>
@@ -78,6 +79,9 @@ export default {
     });
     this.$http.get('/api/detaildiscuss').then(res=>{
       this.infor=res.data.reverse();
+       this.infor.forEach(i=>{
+         this.$set(i,'dzshow',false);
+       });
       //console.log(res.data);
     });
   },
@@ -87,7 +91,7 @@ export default {
             infor:{},
             topleave:true,
             isshow:false,
-            detaildisccussdz:false,
+            dzshow:true,
       }
   },
   updated(){
@@ -102,8 +106,8 @@ export default {
        this.$refs.scroll.refresh();
      },
      dz(index){
-           this.infor[index].detaildisccussdz=true;
-           console.log(this.infor[index])
+           this.infor[index].dzshow=!this.infor[index].dzshow;
+           console.log(this.infor[index].dzshow);
      },
       comment(){
         if(sessionStorage.getItem('userbasic')){
@@ -140,9 +144,7 @@ export default {
               type: 'success' 
             });
             console.log(this.infor.length);
-          });
-          
-          
+          });         
         });
         
       },
@@ -382,6 +384,10 @@ export default {
     color: white;
     border-radius: .5rem;
     margin: 0 .1rem;
+  }
+  .dzshow{
+    width: .2rem;
+    height: .2rem;
   }
 </style>
     

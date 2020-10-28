@@ -56,7 +56,7 @@ export default {
     return {
       drawerSize: '40%',
       drawer: false,
-      dialog: true,
+      dialog: false,
       publishReview: '',
       // isshow:false
       showNologin: true,
@@ -100,7 +100,7 @@ export default {
       this.sheetVisible = true
     },
     chosePic() {
-
+      
     },
     submits() {
       let temp = {}
