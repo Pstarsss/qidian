@@ -2,7 +2,7 @@
   <!-- 帖子详情底部 -->
   <div class="findDetailsBottom">
     <div class="content" @click.prevent="changedialog">
-      <div class="review" @click="drawer = true">
+      <div class="review" @click="opendrawer">
         <p class="iconfont icon-bi">终于来啦，聊聊吧~</p>
       </div>
       <div class="interact">
@@ -17,13 +17,13 @@
       :visible.sync="dialog"
       direction="btt"
       :size="drawerSize"
-      :modal="true"
-      :append-to-body="true"
+      :modal="false"
+      :append-to-body="false"
     >
       <form action="submitReview" method="POST">
         <p>
           <span>发表评论</span>
-          <button type="submmit" @click.prevent="submits">发布</button>
+          <button type="submit" @click.prevent="submits">发布</button>
         </p>
         <el-divider></el-divider>
         <textarea
@@ -37,25 +37,34 @@
       <p class="submitReviewBottom">
         <span>
           <i class="el-icon-chicken"></i>
-          <i class="el-icon-picture-outline"></i>
+          <i class="el-icon-picture-outline" @click="chosePicSheet"></i>
         </span>
         <span>{{ publishReview.length }}/200</span>
       </p>
     </el-drawer>
-    
+    <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
   </div>
 </template>
 
 <script>
 import '../iconfont/iconfont'
+// import '../css/FindDetailsBottom.css'
+// import { Actionsheet } from 'mint-ui'
+// Vue.component(Actionsheet.name, Actionsheet)
 export default {
   data() {
     return {
-      drawerSize: '30%',
+      drawerSize: '40%',
       drawer: false,
+      dialog: true,
       publishReview: '',
-      dialog:false,
       // isshow:false
+      showNologin: true,
+      actions: [
+        { name: '拍照', methods: '' },
+        { name: '从相册中选择', methods: 'chosePic' },
+      ],
+      sheetVisible: false,
     }
   },
   watch: {
@@ -67,42 +76,54 @@ export default {
     //   }
     // },
   },
-  methods:{
-    changedialog(){
-      if(sessionStorage.getItem('userid')){
-         this.drawer = true;
-         this.dialog = true;
-      }else{
-        
-         this.drawer = false;
-         this.dialog = false;
+  methods: {
+    opendrawer(){
+      this.drawer = !this.drawer;
+    },
+    changedialog() {
+      if (sessionStorage.getItem('userbasic')) {
+        this.drawer = true;
+        this.dialog = true;
+        this.showNologin = false;
+      } else {
+        this.drawer = false;
+        this.dialog = false;
+        this.showNologin = true;
       }
+      this.$emit('getShowNologin', this.showNologin);
     },
     // open(){
     //   this.drawer = false;
     //   this.dialog = true;
     // },
-    submits(){
-        let temp = {};
-        temp.headimg = sessionStorage.getItem('headimg');
-        temp.name = sessionStorage.getItem('username');
-        temp.content = this.publishReview;
-        temp.tag = '见习';
-        temp.image = '';
-        temp.time = this.getTime();
-        temp.likes = 0;
-        temp.reviews = 0;
-        this.$emit('submits',temp);
+    chosePicSheet() {
+      this.sheetVisible = true
     },
-    getTime(){
+    chosePic() {
+
+    },
+    submits() {
+      let temp = {}
+      let aa = JSON.parse(sessionStorage.getItem('userbasic'));
+      temp.headimg = aa.userhead;
+      temp.name = aa.username;
+      temp.content = this.publishReview;
+      temp.tag = '见习';
+      temp.image = '';
+      temp.time = this.getTime();
+      temp.likes = 0;
+      temp.reviews = 0;
+      this.$emit('submits', temp, this.publishReview);
+    },
+    getTime() {
       let dd = new Date();
       let h1 = dd.getHours();
-      h1 = h1.length > 1? h1 : '0'+h1;
+      h1 = h1.length > 1 ? h1 : '0' + h1;
       let m1 = dd.getMinutes();
-      m1 = m1.length > 1? m1 : '0'+m1;
-      return `${dd.getMonth()+1}月${dd.getDate()+1}日 ${h1}:${m1}`;
+      m1 = m1.length > 1 ? m1 : '0' + m1;
+      return `${dd.getMonth() + 1}月${dd.getDate() + 1}日 ${h1}:${m1}`;
     },
-  }
+  },
 }
 </script>
 
@@ -112,14 +133,17 @@ export default {
   border-top-right-radius: 5%;
   padding: 0.2rem;
 }
+.el-drawer__wrapper {
+  z-index: 2000 !important;
+}
 /* .findDetailsBottom .el-drawer__body {
   margin: 0.2rem;
 } */
 </style>
 <style scoped>
-.tologin{
+.tologin {
   position: absolute;
-  top:40%;
+  top: 40%;
   right: 0;
   left: 0;
 }
@@ -132,7 +156,6 @@ export default {
   z-index: 98;
   width: 100%;
   bottom: 0;
-
 }
 .content {
   display: flex;
@@ -190,12 +213,12 @@ form button {
   margin: 0.1rem 0;
 }
 form {
-  height: 90%;
+  height: 80%;
   /* padding-bottom: 2rem; */
 }
 textarea {
   resize: none;
-  height: 75%;
+  height: 90%;
   width: 100%;
   padding: 0.05rem;
   font-size: 0.3rem;
@@ -204,15 +227,17 @@ textarea {
 .submitReviewBottom {
   display: flex;
   justify-content: space-between;
+  height: 0.6rem;
+  align-items: center;
 }
 .submitReviewBottom {
-  font-size: 0.3rem;
-  top: 0.1rem;
+  font-size: 0.25rem;
+  top: 0.55rem;
   position: relative;
 }
 .submitReviewBottom > span:first-of-type > i {
   margin-right: 0.2rem;
   font-size: 0.4rem;
-  /* line-height: 0.35rem; */
+  line-height: 0.35rem;
 }
 </style>

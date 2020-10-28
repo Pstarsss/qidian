@@ -21,9 +21,10 @@ router.get('/read/:id',function(req,res){
   sql.find(`select * from book${id}`).then(results=>{
     res.send(results);
   }).catch(err=>{
-    res.send(-1);
+    res.send('-1');
   })
 });
+// 加载另外的章节内容
 router.get('/read/:id/:pp',function(req,res){
   let id = req.params.id;
   let pp = req.params.pp;
@@ -45,6 +46,14 @@ router.get('/booktitle/:id',function(req,res){
     res.send(results);
   })
 });
+
+//或指定条数的数据;
+router.get('/booklist/px/:num',function(req,res){
+  let num = req.params.num;
+  sql.find(`select * from booklist limit ${num}`).then(results=>{
+    res.send(results);
+  })
+});
 //指定表的list
 router.get('/booklist/:id',function(req,res){
   let id = req.params.id;
@@ -57,6 +66,13 @@ router.get('/booklist/:id',function(req,res){
 router.get('/detail/:id',(req,res)=>{
   let id = req.params.id;
   sql.find(`select * from booklist where id = ${id}`).then(results=>{
+    res.send(results);
+  });
+});
+
+// 详情页的评论;
+router.post('/detaildiscuss',(req,res)=>{
+  sql.find(`select * from dicsuss1`).then(results=>{
     res.send(results);
   });
 });
@@ -88,10 +104,13 @@ router.get('/finddetail/:id',function(req,res){
 });
 
 // 增加finddiscuss的评论
-router.get('/adddiscuss',function(req,res){
-  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+router.post('/adddiscuss',function(req,res){
+  let {headimg,name,tag,content,time,image,likes,reviews} = req.body.value;
+  sql.find(`insert into discuss1 (headimg,name,tag,content,image,time,likes,reviews) 
+   value('${headimg}','${name}','${tag}','${content}','${image}','${time}','${likes}','${reviews}')`).then(results=>{
     res.send(results);
-  })
+  });
+
 });
 
 // 搜索
@@ -104,24 +123,28 @@ router.post('/search',function(req,res){
 
 
 
+
 // 点击加入书架的操作1
 router.post('/getchaptertitle',function(req,res){
   let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
-  sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections} and Chapter = ${Chapter}`).then(results1=>{
-    sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
-      let temp = results[0];
-      temp.has = true;
-      res.send(temp);
-    });
-  }).catch(()=>{
-     sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
-      let temp = results[0];
-      temp.has = false;
-      res.send(temp);
-    });
+  sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections}`).then(results1=>{
+    if(results1.length){
+      sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+        let temp = results[0];
+        temp.has = true;
+        res.send(temp);
+      })
+    }else{
+      sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+        let temp = results[0];
+        temp.has = false;
+        res.send(temp);
+      });
+    }
   })
  
 });
+
 // 点击加入书架的操作2
 router.post('/adduserbook',function(req,res){
   let {
@@ -142,10 +165,10 @@ router.post('/adduserbook',function(req,res){
     'author':author,
     'booktitle':booktitle
   },userid]).then(res1=>{
-    console.log(res1);
-    res.send('修改成功');
+    res.send('添加成功');
   })
 });
+
 // 点击加入书架的操作3
 router.post('/updateuserbook',function(req,res){
   let {
@@ -158,10 +181,11 @@ router.post('/updateuserbook',function(req,res){
     'Chapter':Chapter,
     'booktitle':booktitle
   },userid,collections]).then(res1=>{
-    console.log(res1);
+    // console.log(res1);
     res.send('修改成功');
   })
 });
+
 
 
 
@@ -197,7 +221,7 @@ router.post('/post',(req,res)=>{
 router.post('/login',(req,res)=>{
   let {iphone,password } = req.body;
   sql.find('select * from user where iphone = ? and password = ?',[iphone,password]).then((re)=>{
-    console.log(JSON.parse(JSON.stringify(re)));
+    // console.log(JSON.parse(JSON.stringify(re)));
     res.send(re);
   }).catch((err)=>{
     res.send('登录失败');
@@ -217,6 +241,7 @@ router.put('/changepassword',(req,res)=>{
 
 
 const Core = require('@alicloud/pop-core');
+const { log } = require('math');
 
 var client = new Core({
   accessKeyId: 'LTAI4G3rASxgYtmSgUKSaxJM',
@@ -248,7 +273,7 @@ router.post('/validate',(req,res)=>{
     console.log(ex);
   })
 });
-// 获取所以用户信息；
+// 获取所有用户信息；
 router.get('/ddd',(req,res)=>{
   sql.find('select * from user').then(re=>{
     res.send(JSON.stringify(re));

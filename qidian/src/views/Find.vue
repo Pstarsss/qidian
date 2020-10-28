@@ -1,6 +1,5 @@
 <template>
   <!-- 发现 -->
-
   <div class="find">
     <div class="findTop">
       <navBar>
@@ -9,7 +8,7 @@
           <router-link to="/findSquares">广场</router-link>
         </template>
         <template #right>
-          <a href="">
+          <a href="/search">
             <i class="el-icon-search"></i>
           </a>
         </template>
@@ -61,5 +60,9 @@ export default {
   color: #fff;
   margin: 0 0.3rem;
   line-height: 1rem;
+}
+.el-icon-search {
+  color: #fff;
+  font-size: 0.3rem;
 }
 </style>

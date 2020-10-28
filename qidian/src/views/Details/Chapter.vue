@@ -43,11 +43,11 @@ export default {
       this.$router.push('/read/'+id+"/chapter/"+(index+1));
      },
      overturn(){
-      let id = this.$router.currentRoute.params.id;
-      this.$http.get('/api/read/'+id).then(res=>{
-          this.info=res.data.reverse().slice(0,1000);
-          console.log('sss');
-          console.log(res.data.reverse().slice(0,1000));
+     let id = this.$router.currentRoute.params.id;
+     this.$http.get('/api/booktitle/'+id).then(res=>{
+      this.info=res.data[0].titles.split('-').reverse();
+      console.log('666');
+      console.log(res.data[0].titles.split('-').reverse());
     })
      }
   },

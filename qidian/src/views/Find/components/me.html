@@ -4,8 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style lang="css">
+      .app {
+        background-color: #999;
+        border: 1px solid #f00;
+        /* width: 1000px;
+        height: 50; */
+      }
+      .one {
+        float: right;
+        width: 200px;
+        height: 300px;
+        background-color: #0f0;
+      }
+      .two {
+        float: left;
+        width: 500px;
+        height: 800px;
+        background-color: #00f;
+      }
+      .clearfix:after {
+        content: '';
+        display: block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="app clearfix">
+      <div class="one"></div>
+      <div class="two"></div>
+    </div>
+    <input type="file" name="sp" id="sp" />
+  </body>
   <script>
     function add(num1, num2) {
       let sum = num1 + num2

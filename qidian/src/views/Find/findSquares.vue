@@ -5,7 +5,7 @@
       <div class="findSquares">
         <!-- 导航组件 -->
         <div id="nav" class="findSquareContent">
-          <navs :list="navlist"></navs>
+          <navs :list="navlist" @click="FindHb"></navs>
         </div>
         <!-- 人气点点圈 -->
         <div id="popularity" class="findSquareContent">
@@ -127,6 +127,7 @@ import hotDiscuss from './components/FindHotDiscuss'
 import navs from '@/components/navs'
 import scroll from '@/components/common/Scroll/scroll.vue'
 import './iconfont/iconfont.css'
+import { Indicator } from 'mint-ui'
 export default {
   data() {
     return {
@@ -136,7 +137,7 @@ export default {
         { name: '新书投资', src: require('./img/没有积分@3x.png') },
         { name: '点点圈', src: require('./img/海王星.png') },
         { name: '对话小说', src: require('./img/蓝紫色星空.png') },
-        { name: '红包', src: require('./img/红包.png') },
+        { name: '红包', src: require('./img/红包.png'), inedx: 'HB' },
       ],
       // 人气点点圈
       num1,
@@ -317,11 +318,13 @@ export default {
       this.$refs.scroll.finishPullup()
       if (this.disNum <= 40) {
         this.disLoading = true
+        Indicator.open()
       }
       setTimeout(() => {
         this.disNum += 5
         this.addDisList()
         this.$refs.scroll.refresh()
+        Indicator.close()
       }, 500)
     },
     // updataNew() {
@@ -342,6 +345,9 @@ export default {
         this.disLoading = false
         this.showHotList = true
       }
+    },
+    FindHb() {
+      console.log('1')
     },
   },
   created() {
@@ -379,6 +385,13 @@ export default {
   },
 }
 </script>
+
+<style lang="css">
+.mint-indicator-wrapper {
+  /* padding: 0 15px !important; */
+  /* width: 1.95rem; */
+}
+</style>
 
 <style scoped>
 .wrapper {
@@ -533,5 +546,8 @@ export default {
   bottom: 0.2rem;
   font-size: 0.7rem;
   color: #db3b3b;
+}
+.navs a:last-of-type {
+  /* color: #000; */
 }
 </style>

@@ -77,7 +77,21 @@
       </div>
     </scroll>
     <!-- 底部组件 -->
-    <findDetailsBottom @submits="submits"></findDetailsBottom>
+    <findDetailsBottom
+      @submits="submits"
+      @getShowNologin="getShowNologin"
+    ></findDetailsBottom>
+    <!-- 遮罩 -->
+    <div class="noLoginShade" v-show="showNologin"></div>
+    <!-- 未登录时弹窗  -->
+    <div class="noLogin" v-show="showNologin">
+      <p>登陆后再评论吧😅</p>
+      <p class="noLoginOperation">
+        <span @click="clsNoLogin">我 知 道 了</span>
+        <span @click="tologin">现 在 登 陆</span>
+      </p>
+      <i class="el-icon-circle-close" @click="clsNoLogin"></i>
+    </div>
     <el-drawer
       title=""
       :visible.sync="drawer"
@@ -100,7 +114,9 @@ import findDetailsBottom from './components/FindDetailsBottom'
 // import findDetailsReviews from './components/FindDetailsReviews'
 import './iconfont/iconfont'
 import reviews from './components/FindDetailsReviews'
+import { Toast, Indicator } from 'mint-ui'
 export default {
+  inject:['reload'],
   data() {
     return {
       drawer: false,
@@ -112,50 +128,71 @@ export default {
       touSize: 'small',
       touSrc:
         'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
+      showNologin: '',
     }
   },
   // beforeCreate() {
   //   this.$refs.scroll.refresh()
   // },
   created() {
-    this.getDetail();
-    this.getReviews();
+    Indicator.open()
+    this.getDetail()
+    this.getReviews()
   },
   updated() {
-    this.$refs.scroll.refresh();
+    this.$refs.scroll.refresh()
   },
   methods: {
+    tologin(){
+      // if(sessionStorage.getItem('userbasic')){
+      //   this.showNologin = false;
+      // }else{
+
+        this.$router.push('/login');
+      // }
+    },
     pullingUp() {
-      console.log('findDetails上拉');
-      this.$refs.scroll.finishPullup();
+      console.log('findDetails上拉')
+      this.$refs.scroll.finishPullup()
     },
     findDetailsBack() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
     getDetail() {
       // let that = this
-      this.id = this.$router.currentRoute.params.id;
+      this.id = this.$router.currentRoute.params.id
       this.$http.get(`/api/finddetail/${this.id}`).then((res) => {
-        this.det = res.data[0];
-        console.log(this.det);
+        this.det = res.data[0]
+        console.log(this.det)
       })
     },
     getReviews() {
       this.$http.get('/api/detaildiscuss').then((res) => {
-        this.revs = res.data.reverse();
-        console.log(this.revs);
+        this.revs = res.data.reverse()
+        console.log(this.revs)
+        Indicator.close()
       })
     },
-    submits(value){
-      this.$http.post('/api/adddiscuss',{
-        value
-      }).then(ree=>{
-        console.log(ree);
-      })
-    }
+    submits(value, e) {
+      this.$http.post('/api/adddiscuss', {
+          value,
+        }).then((ree) => {
+          console.log(ree);
+          e = '';
+          this.showNologin = false;
+          this.reload();
+          Toast('回复成功');
+        })
+    },
+    getShowNologin(e) {
+      this.showNologin = e
+    },
     // clsDrawer() {
     //   this.$emit('update:drawer', false)
     // },
+    clsNoLogin() {
+      this.showNologin = false;
+    },
   },
   components: {
     navBar,
@@ -328,8 +365,6 @@ export default {
   background-color: #f5f5f5;
 }
 </style>
-// 回复
-<style lang="css" scoped></style>
 // 抽屉
 <style lang="css" scoped>
 .findDetails .el-drawer__wrapper > div > div {
@@ -350,5 +385,70 @@ export default {
   color: #808080;
 }
 .reviewsTitle {
+}
+</style>
+// 未登录
+<style lang="css">
+.noLoginShade {
+  position: fixed;
+  z-index: 998;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.5;
+}
+.noLogin {
+  width: 70%;
+  height: 3rem;
+  background-color: #fff;
+  position: fixed;
+  z-index: 999;
+  bottom: 40%;
+  left: 15%;
+  right: 15%;
+  padding: 0.5rem 0.2rem;
+  border-radius: 0.2rem;
+  /* transition: all 0.5s; */
+}
+.noLogin > p:first-of-type {
+  font-size: 0.4rem;
+  text-align: center;
+  color: #000;
+}
+.noLoginOperation {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.7rem;
+  /* align-items: flex-end; */
+}
+.noLoginOperation > span {
+  font-size: 0.2rem;
+  font-weight: bold;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.5rem;
+}
+
+.noLoginOperation > span:first-of-type {
+  color: #db3b3b;
+  background-color: #fbe7e7;
+}
+.noLoginOperation > span:last-of-type {
+  /* color: #db3b3b; */
+  background-color: #db3b3b;
+}
+.noLoginOperation a {
+  color: #fff;
+}
+.noLogin i {
+  position: absolute;
+  top: 3.3rem;
+  font-size: 0.6rem;
+  left: 45%;
+  color: #fff;
+  /* background-color:#000; */
 }
 </style>
