@@ -96,10 +96,7 @@ export default {
   },
   updated(){
     this.$refs.scroll.refresh();
-<<<<<<< HEAD
-=======
     this.reload();
->>>>>>> dc1220a6ca318f1cf61693ae97fc70faa13abb20
   },
    mounted() {
       window.addEventListener("scroll", this.handleScroll, true);
@@ -147,9 +144,7 @@ export default {
               type: 'success' 
             });
             console.log(this.infor.length);
-          });
-          
-          
+          });         
         });
         
       },
