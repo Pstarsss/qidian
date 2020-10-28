@@ -6,7 +6,7 @@
         <div slot="center" class="detaildiscuss-top-imgs" ><div><img :src="info.images" alt="" class="detaildiscuss-top-img" v-show="topleave"></div></div>
         <div slot="right"><i class="el-icon-search" @click="search"></i></div>
      </top-nav-bar>
-     <scroll class="wrapper" :probeType="3" ref="scroll" >
+     <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
      <div class="detail-header1">
            <div class="detail-header-top">
               <div class="detail-header-top-imgss">
@@ -26,7 +26,7 @@
                     <div class="speaker-name">
                       <div> {{item.name}}<span class="speaker-rank">{{item.tag}}</span></div>
                       <div>
-                        <el-button :plain="true" @click="open2" class="clzs"> <i class="el-icon-delete "></i></el-button>                                      
+                        <el-button type="plain" @click="open2(item.discussid)" class="clzs"> <i class="el-icon-delete "></i></el-button>                                      
                       </div>
                     </div>
                     <p class="speaker-content">{{item.content}}</p>
@@ -65,6 +65,7 @@ import scroll from "@/components/common/Scroll/scroll.vue";
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue';
 import findDetailsBottom from '../Find/components/FindDetailsBottom'
 export default {
+  inject:['reload'],
   name: 'Detaildisccuss',
   components: {
      TopNavBar,
@@ -95,11 +96,18 @@ export default {
   },
   updated(){
     this.$refs.scroll.refresh();
+<<<<<<< HEAD
+=======
+    this.reload();
+>>>>>>> dc1220a6ca318f1cf61693ae97fc70faa13abb20
   },
    mounted() {
       window.addEventListener("scroll", this.handleScroll, true);
     },
    methods:{
+     pullingUp(){
+       this.$refs.scroll.refresh();
+     },
      dz(index){
            this.infor[index].dzshow=!this.infor[index].dzshow;
            console.log(this.infor[index].dzshow);
@@ -116,7 +124,7 @@ export default {
        },
      handleScroll() {
 	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
-	      scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
+	        scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
       },
       tologin() {     
         // 用户登录
@@ -127,11 +135,23 @@ export default {
     cancel() {
       this.isshow = false;
     },
-    open2() {
-        this.$message({
-          message: '删除成功',
-          type: 'success'
+    open2(index) {
+        this.$http.post('/api/delete/discuss',{
+          index:index
+        }).then(res=>{
+          this.$http.get('/api/detaildiscuss').then(res=>{
+            this.infor=res.data.reverse();
+            //console.log(res.data);
+            this.$message({
+              message: '删除成功',
+              type: 'success' 
+            });
+            console.log(this.infor.length);
+          });
+          
+          
         });
+        
       },
   },
   
@@ -258,6 +278,7 @@ export default {
     margin-right: .1rem;
     background-color: whitesmoke;
     border: none;
+    padding: 0.1rem !important;
   }
   .speaker-rank{
       background-color: orange;

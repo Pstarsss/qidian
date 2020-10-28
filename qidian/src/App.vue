@@ -36,10 +36,16 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
     <keep-alive exclude="Detail">
         <router-view />
     </keep-alive>
   
+=======
+    <keep-alive exclude="[Detail,Comment]">
+      <router-view />
+    </keep-alive>
+>>>>>>> dc1220a6ca318f1cf61693ae97fc70faa13abb20
   </div>
 </template>
 
