@@ -1,0 +1,86 @@
+<template>
+  <div>
+    <div class="paihangtopfixed">
+      <div class="backrouter">
+        <i class="el-icon-arrow-left bk" @click="backup()"></i>
+      </div>
+      <div class="paihangtype">
+        <el-tabs v-model="activeName">
+          <el-tab-pane label="全部" name="first">
+            <fp :number="0"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="玄幻"> </el-tab-pane>
+          <el-tab-pane label="奇幻"> </el-tab-pane>
+          <el-tab-pane label="武侠"> </el-tab-pane>
+          <el-tab-pane label="仙侠"> </el-tab-pane>
+          <el-tab-pane label="都市"> </el-tab-pane>
+          <el-tab-pane label="现实"> </el-tab-pane>
+          <el-tab-pane label="历史"> </el-tab-pane>
+          <el-tab-pane label="军事"> </el-tab-pane>
+          <el-tab-pane label="游戏"> </el-tab-pane>
+          <el-tab-pane label="体育"> </el-tab-pane>
+          <el-tab-pane label="科幻"> </el-tab-pane>
+        </el-tabs>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import fp from "../../components/SelectBoysKinds/forpaihang";
+export default {
+  components: {
+    fp,
+  },
+  data() {
+    return {
+      aa: 0,
+      name: ["first", "second"],
+      activeName: "first",
+    };
+  },
+  methods: {
+    backup() {
+      this.$router.go(-1);
+    },
+  },
+};
+</script>
+<style>
+.bk {
+  position: relative;
+  z-index: 999;
+  font-size: 0.5rem;
+}
+.paihangtype .el-tabs__nav-wrap::after {
+  background-color: white;
+}
+.paihangtype .el-tabs__nav::-webkit-scrollbar {
+  display: none;
+}
+.paihangtype .el-tabs__nav {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+.paihangtype .el-tabs__item {
+  font-size: 0.25rem;
+  color: #848484;
+}
+.paihangtype .el-tabs__active-bar {
+  background-color: #e5353f;
+  left: 0.15rem;
+  height: 0.05rem;
+  border-radius: 0.2rem;
+  width: 0.25rem !important;
+}
+.paihangtype .el-tabs__nav {
+  height: 0.8rem;
+}
+.paihangtype .el-tabs__item {
+  top: -0.55rem;
+}
+.paihangtype .el-tabs__item.is-active {
+  color: #e5353f;
+  font-size: 0.28rem;
+}
+</style>

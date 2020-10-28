@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="choices">
-			<span v-for="(item,index) in lists" :key="index" @click="girls(index)" :class="{active:index===number}">
+			<span v-for="(item,index) in lists" :key="index" @click="girls(index)" :class="{active:item.flag}">
 			     {{item.text}}
 			</span>
 		</div>
@@ -16,32 +16,25 @@
 		data(){
 			return{
 				lists:[
-					{text:'古代言情'},
-					{text:'现代言情'},
-					{text:'玄幻言情'},
-					{text:'悬疑灵异'},
-					{text:'浪漫青春'},
-					{text:'仙侠奇缘'},
-					{text:'科幻空间'},
-					{text:'游戏竞技'},
-					{text:'N次元'},
-					{text:'纯爱小说'}	
+					{text:'古代言情',flag:false},
+					{text:'现代言情',flag:false},
+					{text:'玄幻言情',flag:false},
+					{text:'悬疑灵异',flag:false},
+					{text:'浪漫青春',flag:false},
+					{text:'仙侠奇缘',flag:false},
+					{text:'科幻空间',flag:false},
+					{text:'游戏竞技',flag:false},
+					{text:'N次元',flag:false},
+					{text:'纯爱小说',flag:false}	
 				],
-				number:0,
 				
 			}
 		},
 		methods:{
 			girls(index){
-				this.number = index;
+				this.lists[index].flag=!this.lists[index].flag;
 				let finish = document.querySelector(".finish");
-				//console.log(finish);
 				finish.style.opacity = '1';
-				// let spans = document.querySelectorAll(".choices span");
-				// console.log(spans.length);
-				// for(let i = 0;i<spans.length;i++){
-				// 	this.spans[i].style.backgroundColor = "red";
-				//}
 			}
 			
 		}
@@ -80,9 +73,9 @@
 		text-align: center;
 		opacity: 0.25;
 	}
-	.active{
-		/* background-color: indianred; */
+	.choices .active{
+		background-color:#ffe7e7;
 		color: red;
-		border: 1px solid rgba(255,0,0,0.5);
+		border: 1px solid #f3bdbd;
 	}
 </style>

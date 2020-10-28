@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="choices">
-			<span v-for="(item,index) in lists" :key="index" :class="{active:index===number}" @click="boys(index)">
+			<span v-for="(item,index) in lists" :key="index" :class="{active:item.flag}" @click="boys(index)">
 			     {{item.text}}
 			</span>
 		</div>
@@ -16,27 +16,28 @@
 		data(){
 			return{
 				lists:[
-					{text:'玄幻'},
-					{text:'奇幻'},
-					{text:'武侠'},
-					{text:'仙侠'},
-					{text:'都市'},
-					{text:'现实'},
-					{text:'历史'},
-					{text:'军事'},
-					{text:'游戏'},
-					{text:'体育'},	
-					{text:'科幻'},
-					{text:'灵异'},
-					{text:'二次元'},
-					{text:'短篇'},
+					{text:'玄幻',flag:false},
+					{text:'奇幻',flag:false},
+					{text:'武侠',flag:false},
+					{text:'仙侠',flag:false},
+					{text:'都市',flag:false},
+					{text:'现实',flag:false},
+					{text:'历史',flag:false},
+					{text:'军事',flag:false},
+					{text:'游戏',flag:false},
+					{text:'体育',flag:false},	
+					{text:'科幻',flag:false},
+					{text:'灵异',flag:false},
+					{text:'二次元',flag:false},
+					{text:'短篇',flag:false},
 				],
 				number:0,
 			}
 		},	
 		methods:{
 			boys(index){
-				this.number = index;
+				//this.number = index;
+				this.lists[index].flag=!this.lists[index].flag;
 				let finish = document.querySelector(".finish");
 				finish.style.opacity = '1';
 			}
@@ -76,9 +77,9 @@
 		text-align: center;
 		opacity: 0.25;
 	}
-	.active{
-		/* background-color: indianred; */
+	.choices .active{
+		background-color:#ffe7e7;
 		color: red;
-		border: 1px solid rgba(255,0,0,0.5);
+		border: 1px solid #f3bdbd;
 	}
 </style>

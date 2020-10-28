@@ -36,10 +36,14 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
     <keep-alive exclude="Detail">
       <router-view />
     </keep-alive>
     
+=======
+    <router-view />
+>>>>>>> 18ee5c79b5eab94a6d6b02d7d3f19f502a5d9b08
   </div>
 </template>
 
@@ -58,7 +62,9 @@ export default {
       if (
         this.$route.path == "/selectboysfree" ||
         this.$route.path == "/wanben" ||
-        this.$route.path == "/sanjiang"
+        this.$route.path == "/sanjiang" ||
+        this.$route.path == "/fenlei" ||
+        this.$route.path == "/paihang"
       ) {
         this.footShow = false;
       }
@@ -78,19 +84,18 @@ export default {
         return this.$router.currentRoute.name.includes(names);
       }
     },
-    reload(){
+    reload() {
       this.isRouterAlive = false;
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.isRouterAlive = true;
       });
-    }
+    },
   },
-  provide(){
+  provide() {
     return {
-      reload:this.reload
-    }
+      reload: this.reload,
+    };
   },
-
 };
 </script>
 

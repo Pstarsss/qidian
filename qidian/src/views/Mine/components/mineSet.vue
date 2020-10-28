@@ -5,7 +5,7 @@
 			设置
 		</div>
 		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown">
-		<div class="list1">
+		<div class="list1" @click="pushSet">
 			推送通知
 			<i class="el-icon-arrow-right icon-right"></i>
 		</div>
@@ -104,6 +104,9 @@
 			},	
 			hobby(){
 				this.$router.push('/hobbySet');
+			},
+			pushSet(){
+				this.$router.push('/pushSet');
 			},
 			tochangepassword(){
 				this.$router.push('/changepassword');
