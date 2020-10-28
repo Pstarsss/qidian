@@ -1,16 +1,16 @@
 <template>
   <div class="all" :class="'dark'">
-      <div class="detail-top">
+      <div class="detail-top" :class="{topcolor,topwhite}">
         <div class="detail-top-left">
           <div class="detail-top-left-icon" @click="back">
             <i class="el-icon-arrow-left"></i>
           </div>         
-           <div class="detail-top-middle">
+           <div class="detail-top-middle" v-show="leavetop">
               <div class="detail-top-img"><img :src="info.images" alt="" class="detail-top-imgs"></div>            
               <div class="detail-top-content">
                 <div class="detail-top-content-title"><span >{{info.name}}</span></div>
                 <div class="detail-top-content-kind"><span >{{info.type}}</span></div>                 
-              </div>
+            </div>
         </div>
         </div>
                
@@ -35,8 +35,8 @@
                     <span class="tm">™</span>
                 </div>
                 <div class="detail-header-bottom-right">
-                    <span class="tm">Lv{{info.ratings}} 初出茅庐 </span>
-                    <span class="rank"> 30 <i class="el-icon-arrow-right"></i></span>
+                    <span class="tm">Lv{{info.ratings}} 后起之秀 </span>
+                    <span class="rank"> 999 <i class="el-icon-arrow-right"></i></span>
                 </div>
            </div>
       </div>
@@ -47,11 +47,11 @@
             <div class="detail-content-tops">
                   <div class="detail-content-tops-left">
                        <div class="detail-content-tops-left-img">
-                           <img src="../../assets/logo.png" alt="" class="detail-content-tops-left-imgs">
+                           <img src="../../assets/img/Detail/ss.png" alt="" class="detail-content-tops-left-imgs">
                        </div>
                        <div>
-                          <p class="detail-content-tops-right-top">三百收藏</p>
-                          <p class="detail-content-tops-right-bottom">2里程碑 <i class="el-icon-arrow-right"></i></p>
+                          <p class="detail-content-tops-right-top">五十万收藏</p>
+                          <p class="detail-content-tops-right-bottom">46里程碑 <i class="el-icon-arrow-right"></i></p>
                        </div>
                   </div>
                   <div class="detail-content-tops-right">
@@ -92,7 +92,7 @@
                       <div class="detail-role-left-top">
                            <div class="detail-role-left-top-imgs"><img src="../../assets/img/Detail/1.jpg"  alt="" class="detail-role-left-top-img"></div>
                            <div class="detail-role-left-top-name">
-                             <p class="detail-role-left-top-names">萧仙仙</p>
+                             <p class="detail-role-left-top-names">徐有容</p>
                              <p class="detail-role-left-top-role">女主</p>
                            </div>
                       </div>
@@ -109,7 +109,7 @@
                        <div class="detail-role-left-top">
                            <div class="detail-role-left-top-imgs"><img src="../../assets/img/Detail/gy.jpg"  alt="" class="detail-role-left-top-img"></div>
                            <div class="detail-role-left-top-name">
-                             <p class="detail-role-left-top-names">郭勇</p>
+                             <p class="detail-role-left-top-names">陈长生</p>
                              <p class="detail-role-left-top-role">男主</p>
                            </div>
                       </div>
@@ -255,15 +255,19 @@
 
 <script>
 export default {
-  
+  inject:['reload'],
   name: 'Detail',
   components: {   
+  },
+  beforeRouteEnter (to, from, next) {
+    
+    next();
   },
   data() {
       return {
         activeNames: ['0'],
-        msg1:100,
-        msg2:100,
+        msg1:3274,
+        msg2:2287,
         active1:false,
         active2:false,
         info:{},     
@@ -275,16 +279,17 @@ export default {
         info6:{},
         pp:'',
         isshow:false,
+        leavetop:false,
+        topcolor:true,
+        topwhite:false
       };
     },
     created(){
-    let id = this.$router.currentRoute.params.id;
-    this.$http.get('/api/detail/'+id).then(res=>{
-      this.info=res.data[0];
-    });
-    this.$http.get('/api/booklist/'+8).then(res=>{
-      this.info1=res.data.slice(0,4);
-    })
+      let id = this.$router.currentRoute.params.id;
+      this.getdata(id);
+      this.$http.get('/api/booklist/'+8).then(res=>{
+        this.info1=res.data.slice(0,4);
+      })
     this.$http.get('/api/booklist/'+11).then(res=>{
       this.info2=res.data.slice(1,3);
     })
@@ -304,7 +309,17 @@ export default {
       this.info6=res.data;
     });
   },
+  mounted() {
+  　　// 此处true需要加上，不加滚动事件可能绑定不成功
+      window.addEventListener("scroll", this.handleScroll, true);
+    },
   methods: {
+    handleScroll() {
+	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+        scrolltop > 200 ? (this.leavetop = true) : (this.leavetop = false);
+        scrolltop > 200 ? (this.topcolor = true) : (this.topcolor = false);
+         scrolltop > 200 ? (this.topwhite = true) : (this.topwhite = false);
+	    },
      openDetail1(index) {
       this.$http.get("/api/booklist/12").then((res) => {
         this.msg = res;
@@ -319,24 +334,28 @@ export default {
         this.$router.push("/detail/" + a);
       });
     },
-      handleChange(val) {
+    handleChange(val) {
         console.log(val);
     },
-      back(){
+    back(){
         this.$router.go(-1);
     },
       addin(){
-        if(this.msg1=100){
+        if(this.msg1=3274){
            this.msg1++;
+           setTimeout(() => {
            this.active1=true;
+        }, 200);         
         }else{
           this.msg1=this.msg1;
         }        
       },
       addin1(){
-          if(this.msg2=100){
+          if(this.msg2=2287){
            this.msg2++;
+          setTimeout(() => {
            this.active2=true;
+        }, 200);  
         }else{
           this.msg2=this.msg2;
         } 
@@ -414,11 +433,6 @@ export default {
                 temp.Chapter = Chapter+"";
                 temp.booktitle = booktitle;
                 sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
-                
-                 
-                 
-                 
-                 
                 //  this.$store.dispatch('change',temp1).then(res3=>{
                 //     console.log(res3);
                 // });
@@ -437,6 +451,11 @@ export default {
       },
       cancel(){
         this.isshow = false;
+      },
+      getdata(id){ 
+        this.$http.get('/api/detail/'+id).then(res=>{
+        this.info=res.data[0];
+       });       
       }
     }
 }

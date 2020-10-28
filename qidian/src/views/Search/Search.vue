@@ -26,7 +26,7 @@
      </ul>
       <div class="hot-search">
           <span>搜索历史</span>
-          <span><i class="el-icon-delete" @click="empty"></i></span>
+          <span><i class="el-icon-delete" @click="empty" v-show="historyList.length>0"></i></span>
       </div>
      <ul class="hot-search-content">
          <li class="hot-search-color" v-for="(item,index) in historyList" :key="index" @click="goSearchDetail(item.id)">{{item.name}}</li>

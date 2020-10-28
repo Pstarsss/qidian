@@ -10,10 +10,8 @@
             </el-carousel-item>
           </el-carousel>
         </div>
-
         <!-- 分类图标 -->
         <bnavs :list="navlist"> </bnavs>
-
         <!-- 分割线奥 -->
         <hr style="margin-top: 0.3rem" />
 
@@ -21,7 +19,7 @@
         <div class="scroll-wrap" v-if="msg">
           <ul class="scroll-content" :style="{ top }">
             <li
-              v-for="(item, index) in msg.data"
+              v-for="(item, index) in msg"
               :key="index"
               @click="openDetail1(index)"
             >
@@ -33,70 +31,12 @@
             </li>
           </ul>
         </div>
+
         <!-- 畅销精选 -->
-        <div class="wellsell" v-if="msgArr">
-          <div class="wellsell-title">
-            <h2>畅销精选</h2>
-            <span>
-              更多
-              <i class="el-icon-arrow-right"></i>
-            </span>
-          </div>
-          <div
-            class="wellsell-container"
-            v-for="(item, index) in msgArr[0].data.slice(0, 3)"
-            :key="index"
-            @click="openDetail(index, 0)"
-          >
-            <div class="wellsell-container-left">
-              <img :src="item.images" alt="" @click="openDetail(index, 0)" />
-            </div>
-            <div class="wellsell-container-right">
-              <span class="wellsell-container-right-title">{{
-                item.name
-              }}</span>
-              <p class="wellsell-desc1">
-                {{ item.serialize }} {{ item.wordcount }}万字
-              </p>
-              <p class="wellsell-desc2">{{ item.intro }}</p>
-            </div>
-            <hr />
-          </div>
-        </div>
-
-        <!-- 主编力荐 -->
-        <div class="wellsell" v-if="msgArr">
-          <div class="wellsell-title">
-            <h2>主编力荐</h2>
-            <span>
-              更多
-              <i class="el-icon-arrow-right"></i>
-            </span>
-          </div>
-          <div
-            class="wellsell-container"
-            v-for="(item, index) in msgArr[1].data.slice(0, 3)"
-            :key="index"
-            @click="openDetail(index, 1)"
-          >
-            <div class="wellsell-container-left">
-              <img :src="item.images" alt="" />
-            </div>
-            <div class="wellsell-container-right">
-              <span class="wellsell-container-right-title">{{
-                item.name
-              }}</span>
-              <p class="wellsell-desc1">
-                {{ item.serialize }} {{ item.wordcount }}万字
-              </p>
-              <p class="wellsell-desc2">{{ item.intro }}</p>
-            </div>
-            <hr />
-          </div>
-        </div>
-
+        <boys-child title="畅销精选" :lists="pxinfo1" @openDetail="openDetail"></boys-child>
+        <boys-child title="主编力推" :lists="pxinfo2" @openDetail="openDetail"></boys-child>
         <!-- 限时免费 -->
-        <div class="time-free" v-if="msgArr">
+        <!-- <div class="time-free" v-if="msgArr">
           <h2>限时免费</h2>
           <span class="free-hour">{{ this.hour }}</span> :
           <span class="free-minu">{{ this.min }}</span> :
@@ -129,72 +69,9 @@
             <i class="el-icon-refresh"></i> 换一批
           </div>
           <hr />
-        </div>
-
-        <!-- 新书强推 -->
-        <div class="wellsell" v-if="msgArr">
-          <div class="wellsell-title">
-            <h2>新书强推</h2>
-            <span>
-              更多
-              <i class="el-icon-arrow-right"></i>
-            </span>
-          </div>
-
-          <div
-            @click="openDetail(index, 5)"
-            class="wellsell-container"
-            v-for="(item, index) in msgArr[5].data.slice(0, 3)"
-            :key="index"
-          >
-            <div class="wellsell-container-left">
-              <img :src="item.images" alt="" />
-            </div>
-            <div class="wellsell-container-right">
-              <span class="wellsell-container-right-title">{{
-                item.name
-              }}</span>
-              <p class="wellsell-desc1">
-                {{ item.serialize }} {{ item.wordcount }}万字
-              </p>
-              <p class="wellsell-desc2">{{ item.intro }}</p>
-            </div>
-            <hr />
-          </div>
-        </div>
-
-        <!-- 经典完本 -->
-        <div class="wellsell" v-if="msgArr">
-          <div class="wellsell-title">
-            <h2>经典完本</h2>
-            <span>
-              更多
-              <i class="el-icon-arrow-right"></i>
-            </span>
-          </div>
-
-          <div
-            @click="openDetail(index, 6)"
-            class="wellsell-container"
-            v-for="(item, index) in msgArr[6].data.slice(0, 3)"
-            :key="index"
-          >
-            <div class="wellsell-container-left">
-              <img :src="item.images" alt="" />
-            </div>
-            <div class="wellsell-container-right">
-              <span class="wellsell-container-right-title">{{
-                item.name
-              }}</span>
-              <p class="wellsell-desc1">
-                {{ item.serialize }} {{ item.wordcount }}万字
-              </p>
-              <p class="wellsell-desc2">{{ item.intro }}</p>
-            </div>
-            <hr />
-          </div>
-        </div>
-
+        </div> -->
+        <boys-child title="新书强推" :lists="pxinfo3" @openDetail="openDetail"></boys-child>
+        <boys-child title="经典完本" :lists="pxinfo4" @openDetail="openDetail"></boys-child>
         <!-- 潜力新书和优质精品 -->
         <div class="qianli-youzhi">
           <img src="../../assets/img/SelectBoys/1.png" alt="" />
@@ -204,73 +81,10 @@
             alt=""
           />
         </div>
-
-        <!-- 二次元精品 -->
-        <div class="wellsell" v-if="msgArr">
-          <div class="wellsell-title">
-            <h2>二次元精品</h2>
-            <span>
-              更多
-              <i class="el-icon-arrow-right"></i>
-            </span>
-          </div>
-
-          <div
-            @click="openDetail(index, 7)"
-            class="wellsell-container"
-            v-for="(item, index) in msgArr[7].data.slice(0, 3)"
-            :key="index"
-          >
-            <div class="wellsell-container-left">
-              <img :src="item.images" alt="" />
-            </div>
-            <div class="wellsell-container-right">
-              <span class="wellsell-container-right-title">{{
-                item.name
-              }}</span>
-              <p class="wellsell-desc1">
-                {{ item.serialize }} {{ item.wordcount }}万字
-              </p>
-              <p class="wellsell-desc2">{{ item.intro }}</p>
-            </div>
-            <hr />
-          </div>
-        </div>
-
-        <!-- 军事精品 -->
-        <div class="wellsell" v-if="msgArr">
-          <div class="wellsell-title">
-            <h2>军事精品</h2>
-            <span>
-              更多
-              <i class="el-icon-arrow-right"></i>
-            </span>
-          </div>
-
-          <div
-            @click="openDetail(index, 8)"
-            class="wellsell-container"
-            v-for="(item, index) in msgArr[8].data.slice(0, 3)"
-            :key="index"
-          >
-            <div class="wellsell-container-left">
-              <img :src="item.images" alt="" />
-            </div>
-            <div class="wellsell-container-right">
-              <span class="wellsell-container-right-title">{{
-                item.name
-              }}</span>
-              <p class="wellsell-desc1">
-                {{ item.serialize }} {{ item.wordcount }}万字
-              </p>
-              <p class="wellsell-desc2">{{ item.intro }}</p>
-            </div>
-            <hr />
-          </div>
-        </div>
-
+        <boys-child title="二次元精品" :lists="pxinfo5" @openDetail="openDetail"></boys-child>
+        <boys-child title="军事精品" :lists="pxinfo6" @openDetail="openDetail"></boys-child>
         <!-- 出版力荐 -->
-        <div class="time-free" v-if="msgArr">
+        <!-- <div class="time-free" v-if="msgArr">
           <h2>出版力荐</h2>
 
           <span class="for-more">
@@ -300,7 +114,7 @@
             <i class="el-icon-refresh"></i> 换一批
           </div>
           <hr />
-        </div>
+        </div> -->
 
         <!-- 专题 -->
         <div class="wellsell">
@@ -340,7 +154,7 @@
         <div class="bottomtuijian" v-if="msg">
           <div
             class="wellsell"
-            v-for="(item, index) in msg.data.slice(startline, endline)"
+            v-for="(item, index) in msg"
             :key="index"
           >
             <div v-show="display">
@@ -354,7 +168,7 @@
               </div>
               <div class="wellsell-container">
                 <div class="wellsell-container-left">
-                  <img :src="item.images" alt="" @click="openDetail1(index)" />
+                  <img :src="item.images" alt="" @click="openDetail1(item.id)" />
                 </div>
                 <div class="wellsell-container-right">
                   <span class="wellsell-container-right-title">{{
@@ -374,6 +188,7 @@
 </template>
 
 <script>
+import BoysChild from './SelectChild/BoysChild.vue'
 import scroll from "@/components/common/Scroll/scroll.vue";
 import $ from "jquery";
 import bnavs from "../../components/navs";
@@ -382,11 +197,13 @@ export default {
   components: {
     bnavs,
     scroll,
+    BoysChild
   },
   computed: {
     top() {
       return -this.activeIndex * 0.55 + "rem";
     },
+    
   },
   created() {
     this.hour = 0;
@@ -394,42 +211,17 @@ export default {
     this.sec = 0;
     this.overtime = "2021-11-01 00:00:00";
     this.inittime();
-
-    this.$http.get("/api/booklist/1").then((res) => {
-      this.msgArr[0] = res;
-    });
-    this.$http.get("/api/booklist/2").then((res) => {
-      this.msgArr[1] = res;
-    });
-    this.$http.get("/api/booklist/3").then((res) => {
-      this.msgArr[2] = res;
-    });
-    this.$http.get("/api/booklist/4").then((res) => {
-      this.msgArr[3] = res;
-    });
-    this.$http.get("/api/booklist/5").then((res) => {
-      this.msgArr[4] = res;
-    });
-    this.$http.get("/api/booklist/6").then((res) => {
-      this.msgArr[5] = res;
-    });
-    this.$http.get("/api/booklist/7").then((res) => {
-      this.msgArr[6] = res;
-    });
-    this.$http.get("/api/booklist/8").then((res) => {
-      this.msgArr[7] = res;
-    });
-    this.$http.get("/api/booklist/9").then((res) => {
-      this.msgArr[8] = res;
-    });
-    this.$http.get("/api/booklist/10").then((res) => {
-      this.msgArr[9] = res;
-    });
-    this.$http.get("/api/booklist/11").then((res) => {
-      this.msgArr[10] = res;
-    });
-    this.$http.get("/api/booklist").then((res) => {
-      this.msg = res;
+    this.$http.get('/api/booklist/px/18').then(res=>{
+      this.pxinfo = res.data;
+      this.pxinfo1 = this.pxinfo.slice(0,3);
+      this.pxinfo2 = this.pxinfo.slice(3,6);
+      this.pxinfo3 = this.pxinfo.slice(6,9);
+      this.pxinfo4 = this.pxinfo.slice(9,12);
+      this.pxinfo5 = this.pxinfo.slice(12,15);
+      this.pxinfo6 = this.pxinfo.slice(15,18);
+    })
+    this.$http.get("/api/booklist/px/8").then((res) => {
+      this.msg = res.data;
     });
   },
 
@@ -502,23 +294,25 @@ export default {
         });
       });
     },
-    open(a) {
-      if (this.$route.path == a) {
-        return "";
-      } else {
-        this.$router.push(a);
-      }
+    // open(a) {
+    //   if (this.$route.path == a) {
+    //     return "";
+    //   } else {
+    //     this.$router.push(a);
+    //   }
+    // },
+    openDetail(id) {
+      this.$router.push("/detail/" + id);
     },
-    openDetail(index, i) {
-      let a = this.msgArr[i].data[index].id;
-      this.$router.push("/detail/" + a);
-    },
-    openDetail1(index) {
-      let a = this.msg.data[index].id;
-      this.$router.push("/detail/" + a);
+    openDetail1(id) {
+      console.log(id);
+      this.$router.push("/detail/" + id);
     },
     pullingUp() {
-      this.endline += 4;
+      this.pxi++;
+      this.$http.get(`/api/booklist/px/${8*(this.pxi)}`).then(res=>{
+        this.msg = res.data;
+      })
       this.$refs.scroll.finishPullup();
       this.$refs.scroll.refresh();
       // console.log(this.startline, this.endline);
@@ -627,6 +421,15 @@ export default {
       msg: {},
       msgArr: [],
       activeIndex: 0,
+      pxinfo:'',
+      pxinfo1:'',
+      pxinfo2:'',
+      pxinfo3:'',
+      pxinfo4:'',
+      pxinfo5:'',
+      pxinfo6:'',
+      pxmsg:'',
+      pxi:1,
       carouseData: [
         { src: require("../../assets/img/SelectBoys/sp1.png") },
         { src: require("../../assets/img/SelectBoys/sp2.png") },
