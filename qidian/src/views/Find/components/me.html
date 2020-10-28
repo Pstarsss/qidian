@@ -65,5 +65,27 @@
     function btnlog() {
       console.log('1')
     }
+
+    let arr1 = [1, 2, 3, 4, 5]
+    let newarr = arr1.reduce((p, c, i, a) => {
+      console.log(p, c, i, a)
+      return p + c
+    }, 0)
+    console.log(newarr)
+
+    let arr2 = [3, 4, 5]
+    console.log(arr2.reduce((x, y) => x + y))
+    console.log(arr2.reduce((x, y) => x * y))
+
+    let names = ['Alice', 'Bob', 'Tiff', 'Bruce', 'Alice']
+    let nameNum = names.reduce((pre, cur) => {
+      if (cur in pre) {
+        pre[cur]++
+      } else {
+        pre[cur] = 1
+      }
+      return pre
+    }, {})
+    console.log(nameNum) //{Alice: 2, Bob: 1, Tiff: 1, Bruce: 1}
   </script>
 </html>
