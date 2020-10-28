@@ -113,6 +113,14 @@ router.post('/adddiscuss',function(req,res){
 
 });
 
+// 删除discuss1表的评论
+router.post('/delete/discuss',function(req,res){
+  let temp = req.body.index;
+  sql.find(`delete from discuss1 where discussid = ${temp}`).then(results=>{
+    res.send("删除成功");
+  })
+});
+
 // 搜索
 router.post('/search',function(req,res){
   sql.find('select * from hotdiscuss').then(results=>{

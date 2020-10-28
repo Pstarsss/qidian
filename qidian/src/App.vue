@@ -36,7 +36,9 @@
         </div>
       </div>
     </div>
-    <router-view />
+    <keep-alive exclude="[Detail,Comment]">
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
