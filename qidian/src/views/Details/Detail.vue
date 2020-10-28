@@ -36,7 +36,7 @@
                 </div>
                 <div class="detail-header-bottom-right">
                     <span class="tm">Lv{{info.ratings}} 后起之秀 </span>
-                    <span class="rank"> 999 <i class="el-icon-arrow-right"></i></span>
+                    <span class="rank"> 999+ <i class="el-icon-arrow-right"></i></span>
                 </div>
            </div>
       </div>
@@ -280,7 +280,7 @@ export default {
         pp:'',
         isshow:false,
         leavetop:false,
-        topcolor:true,
+        topcolor:false,
         topwhite:false
       };
     },
@@ -315,7 +315,7 @@ export default {
     },
   methods: {
     handleScroll() {
-	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+         let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
         scrolltop > 200 ? (this.leavetop = true) : (this.leavetop = false);
         scrolltop > 200 ? (this.topcolor = true) : (this.topcolor = false);
          scrolltop > 200 ? (this.topwhite = true) : (this.topwhite = false);
