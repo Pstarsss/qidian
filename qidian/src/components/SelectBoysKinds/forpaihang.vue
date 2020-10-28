@@ -3,12 +3,7 @@
     <div class="ph">本月作品排行</div>
     <hr />
     <div class="yp">月票</div>
-    <div
-      class="ph-items"
-      v-bind="number"
-      v-for="(item, index) in msg[number]"
-      :key="index"
-    >
+    <div class="ph-items" v-for="(item, index) in msg" :key="index">
       <div class="ph-items-left">
         <img :src="item.images" alt="" />
       </div>
@@ -17,8 +12,8 @@
         <span class="descr"
           >{{ item.author }} · {{ item.type }} · {{ item.wordcount }}万字</span
         >
-        <span class="yuepiao">{{ item.like }}</span>
       </div>
+      <span class="yuepiao">{{ item.like }}</span>
     </div>
   </div>
 </template>
@@ -27,19 +22,30 @@ export default {
   name: "forpaihang",
   props: {
     number: {
-      type: Number,
+      type: [Number],
+      default: 0,
     },
   },
   data() {
     return {
-      msg: [{}],
+      msg: [],
+      temp: "",
     };
   },
   created() {
-    this.$http.get("/api/booklist").then((res) => {
-      this.msg[0] = res.data;
-      console.log(this.msg[0]);
+    this.$http.get(`/api/booklist/${this.number}`).then((res) => {
+      this.msg = res.data;
+      this.msg.forEach((i) => {
+        i.like = i.like.replace(/-/g, "");
+      });
+      this.msg.sort((a, b) => parseInt(b.like) - parseInt(a.like));
     });
+  },
+  computed: {
+    count(f) {
+      return 1;
+      // return f.replace(/-/g, "");
+    },
   },
 };
 </script>
@@ -47,15 +53,14 @@ export default {
 .yp {
   font-size: 0.2rem;
   position: relative;
-  top: 0.8rem;
-  right: -6rem;
+  right: -5.8rem;
 }
 .ph-items-right > span {
   color: #8f8f8f;
 }
-.ph-items-right .yuepiao {
-  position: relative;
-  right: -2rem;
+.ph-items .yuepiao {
+  margin-top: 1.2rem;
+  float: right;
 }
 .ph-items-right > h4 {
   position: relative;
@@ -63,12 +68,12 @@ export default {
   font-size: 0.25rem;
 }
 .ph-items-right .descr,
-.ph-items-right .yuepiao {
+.ph-items .yuepiao {
   position: relative;
   top: -0.33rem;
   font-size: 0.18rem;
 }
-.ph-items-right .yuepiao {
+.ph-items .yuepiao {
   font-size: 0.18rem;
 }
 .ph-items-right {
