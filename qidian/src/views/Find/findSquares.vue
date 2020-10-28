@@ -335,10 +335,9 @@ export default {
         this.$http.get('/api/hotDiscuss').then((res) => {
           // this.disLoading = false
           // console.log(this.disNum, this.disNum + 5)
-          this.hotDiscussionList = [
-            ...this.hotDiscussionList,
-            ...res.data.slice(this.disNum, this.disNum + 5),
-          ]
+          this.hotDiscussionList.push(
+            ...res.data.slice(this.disNum, this.disNum + 5)
+          )
           // console.log(this.hotDiscussionList)
         })
       } else {
