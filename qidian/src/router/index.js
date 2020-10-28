@@ -20,7 +20,6 @@ import mineShow from '@/views/Mine/mineShow.vue'
 import mineSet from '@/views/Mine/components/mineSet.vue'
 import mineMsg from '@/views/Mine/components/mineMsg.vue'
 import peopleDetails from '@/views/Mine/components/peopleDetails.vue'
-<<<<<<< HEAD
 import privacySet from '@/views/Mine/components/privacySet.vue'
 import hobbySet from '@/views/Mine/components/hobbySet.vue'
 import hobbychild from '@/views/Mine/components/hobbychild.vue'
@@ -28,13 +27,6 @@ import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
 import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
 import pushSet from '@/views/Mine/components/pushSet.vue'
 import mineGames from '@/views/Mine/components/mineGames.vue'
-=======
-import privacySet from '@/views/Mine/components/privacySet.vue'
-import hobbySet from '@/views/Mine/components/hobbySet.vue'
-import hobbychild from '@/views/Mine/components/hobbychild.vue'
-import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
-import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
->>>>>>> 9a6baf7808587e215dbd5551a4bc3dc308a68dcc
 
 // 精选
 import Select from '@/views/Selected/Select.vue'
@@ -227,7 +219,6 @@ const routes = [
     path: '/privacySet',
     name: 'PrivacySet',
     component: privacySet,
-<<<<<<< HEAD
   },
   {
     path: '/hobbySet',
@@ -261,8 +252,6 @@ const routes = [
     path: '/mineGames',
     name: 'mineGames',
     component: mineGames,
-=======
->>>>>>> 9a6baf7808587e215dbd5551a4bc3dc308a68dcc
   },
   {
     path: '/hobbySet',
