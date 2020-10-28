@@ -64,6 +64,7 @@ import scroll from "@/components/common/Scroll/scroll.vue";
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue';
 import findDetailsBottom from '../Find/components/FindDetailsBottom'
 export default {
+  inject:['reload'],
   name: 'Detaildisccuss',
   components: {
      TopNavBar,
@@ -91,6 +92,7 @@ export default {
   },
   updated(){
     this.$refs.scroll.refresh();
+    this.reload();
   },
    mounted() {
       window.addEventListener("scroll", this.handleScroll, true);
@@ -115,7 +117,7 @@ export default {
        },
      handleScroll() {
 	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
-	      scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
+	        scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
       },
       tologin() {     
         // 用户登录
@@ -127,12 +129,20 @@ export default {
       this.isshow = false;
     },
     open2(index) {
-        this.$http.delete('/api/delete/discuss',index).then(res=>{
-          console.log(res);
-          this.$message({
-            message: '删除成功',
-            type: 'success' 
+        this.$http.post('/api/delete/discuss',{
+          index:index
+        }).then(res=>{
+          this.$http.get('/api/detaildiscuss').then(res=>{
+            this.infor=res.data.reverse();
+            //console.log(res.data);
+            this.$message({
+              message: '删除成功',
+              type: 'success' 
+            });
+            console.log(this.infor.length);
           });
+          
+          
         });
         
       },
