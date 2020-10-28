@@ -9,8 +9,8 @@ import Search from '@/views/Search/Search.vue'
 
 // 发现
 import Find from '@/views/Find.vue'
-import FindFollow from '@/views/Find/findFollow.vue'
-import FindSquares from '@/views/Find/findSquares.vue'
+import FindFollow from '@/views/Find/FindFollow.vue'
+import FindSquares from '@/views/Find/FindSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
 
@@ -20,6 +20,7 @@ import mineShow from '@/views/Mine/mineShow.vue'
 import mineSet from '@/views/Mine/components/mineSet.vue'
 import mineMsg from '@/views/Mine/components/mineMsg.vue'
 import peopleDetails from '@/views/Mine/components/peopleDetails.vue'
+<<<<<<< HEAD
 import privacySet from '@/views/Mine/components/privacySet.vue'
 import hobbySet from '@/views/Mine/components/hobbySet.vue'
 import hobbychild from '@/views/Mine/components/hobbychild.vue'
@@ -27,6 +28,13 @@ import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
 import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
 import pushSet from '@/views/Mine/components/pushSet.vue'
 import mineGames from '@/views/Mine/components/mineGames.vue'
+=======
+import privacySet from '@/views/Mine/components/privacySet.vue'
+import hobbySet from '@/views/Mine/components/hobbySet.vue'
+import hobbychild from '@/views/Mine/components/hobbychild.vue'
+import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
+import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
+>>>>>>> 9a6baf7808587e215dbd5551a4bc3dc308a68dcc
 
 // 精选
 import Select from '@/views/Selected/Select.vue'
@@ -65,6 +73,9 @@ const routes = [
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
+    meta:{
+      keepAlive:false
+    }
   },
   {
     path: '/sanjiang',
@@ -96,6 +107,7 @@ const routes = [
     path: '/select',
     name: 'Select',
     component: Select,
+
     children: [
       {
         path: '/selecthome',
@@ -106,17 +118,25 @@ const routes = [
         path: '/selectboys',
         name: 'SelectBoys',
         component: SelectBoys,
-       
+        meta:{
+          keepAlive:true
+        }
       },
       {
         path: '/selectgirls',
         name: 'SelectGirls',
         component: SelectGirls,
+        meta:{
+          keepAlive:true
+        }
       },
       {
         path: '/selectcartoon',
         name: 'SelectCartoon',
         component: SelectCartoon,
+        meta:{
+          keepAlive:true
+        }
       },
     ],
     redirect: '/selectboys',
@@ -126,6 +146,9 @@ const routes = [
     path: '/detail/:id',
     name: 'Detail',
     component: Detail,
+    meta:{
+      keepAlive:false
+    }
   },
   {
     path: '/chapter/:id',
@@ -204,6 +227,7 @@ const routes = [
     path: '/privacySet',
     name: 'PrivacySet',
     component: privacySet,
+<<<<<<< HEAD
   },
   {
     path: '/hobbySet',
@@ -237,7 +261,33 @@ const routes = [
     path: '/mineGames',
     name: 'mineGames',
     component: mineGames,
+=======
+>>>>>>> 9a6baf7808587e215dbd5551a4bc3dc308a68dcc
   },
+  {
+    path: '/hobbySet',
+    name: 'hobbySet',
+    component: hobbySet,
+  	redirect: '/hobbySet/hobbychild',
+  	children:[
+  		{
+  		  path: '/hobbySet/hobbychild',
+  		  name: 'hobbychild',
+  		  component: hobbychild,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyGirls',
+  		  name: 'hobbyGirls',
+  		  component: hobbyGirls,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyBoys',
+  		  name: 'hobbyBoys',
+  		  component: hobbyBoys,
+  		},
+  	]
+  },
+  
   
  //搜索
  {

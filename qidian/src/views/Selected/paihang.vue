@@ -7,19 +7,42 @@
       <div class="paihangtype">
         <el-tabs v-model="activeName">
           <el-tab-pane label="全部" name="first">
-            <fp :number="0"></fp>
+            <fp :number="1"></fp>
           </el-tab-pane>
-          <el-tab-pane label="玄幻"> </el-tab-pane>
-          <el-tab-pane label="奇幻"> </el-tab-pane>
-          <el-tab-pane label="武侠"> </el-tab-pane>
-          <el-tab-pane label="仙侠"> </el-tab-pane>
-          <el-tab-pane label="都市"> </el-tab-pane>
-          <el-tab-pane label="现实"> </el-tab-pane>
-          <el-tab-pane label="历史"> </el-tab-pane>
-          <el-tab-pane label="军事"> </el-tab-pane>
-          <el-tab-pane label="游戏"> </el-tab-pane>
-          <el-tab-pane label="体育"> </el-tab-pane>
-          <el-tab-pane label="科幻"> </el-tab-pane>
+          <el-tab-pane label="玄幻">
+            <fp :number="2"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="奇幻">
+            <fp :number="3"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="武侠">
+            <fp :number="4"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="仙侠">
+            <fp :number="5"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="都市">
+            <fp :number="6"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="现实">
+            <fp :number="7"></fp>
+          </el-tab-pane>
+
+          <el-tab-pane label="历史">
+            <fp :number="8"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="军事">
+            <fp :number="9"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="游戏">
+            <fp :number="10"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="体育">
+            <fp :number="11"></fp>
+          </el-tab-pane>
+          <el-tab-pane label="科幻">
+            <fp :number="12"></fp>
+          </el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -41,6 +64,9 @@ export default {
   methods: {
     backup() {
       this.$router.go(-1);
+    },
+    tabclick() {
+      console.log(111);
     },
   },
 };

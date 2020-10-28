@@ -33,8 +33,16 @@
         </div>
 
         <!-- 畅销精选 -->
-        <boys-child title="畅销精选" :lists="pxinfo1" @openDetail="openDetail"></boys-child>
-        <boys-child title="主编力推" :lists="pxinfo2" @openDetail="openDetail"></boys-child>
+        <boys-child
+          title="畅销精选"
+          :lists="pxinfo1"
+          @openDetail="openDetail"
+        ></boys-child>
+        <boys-child
+          title="主编力推"
+          :lists="pxinfo2"
+          @openDetail="openDetail"
+        ></boys-child>
         <!-- 限时免费 -->
         <!-- <div class="time-free" v-if="msgArr">
           <h2>限时免费</h2>
@@ -70,8 +78,16 @@
           </div>
           <hr />
         </div> -->
-        <boys-child title="新书强推" :lists="pxinfo3" @openDetail="openDetail"></boys-child>
-        <boys-child title="经典完本" :lists="pxinfo4" @openDetail="openDetail"></boys-child>
+        <boys-child
+          title="新书强推"
+          :lists="pxinfo3"
+          @openDetail="openDetail"
+        ></boys-child>
+        <boys-child
+          title="经典完本"
+          :lists="pxinfo4"
+          @openDetail="openDetail"
+        ></boys-child>
         <!-- 潜力新书和优质精品 -->
         <div class="qianli-youzhi">
           <img src="../../assets/img/SelectBoys/1.png" alt="" />
@@ -81,8 +97,16 @@
             alt=""
           />
         </div>
-        <boys-child title="二次元精品" :lists="pxinfo5" @openDetail="openDetail"></boys-child>
-        <boys-child title="军事精品" :lists="pxinfo6" @openDetail="openDetail"></boys-child>
+        <boys-child
+          title="二次元精品"
+          :lists="pxinfo5"
+          @openDetail="openDetail"
+        ></boys-child>
+        <boys-child
+          title="军事精品"
+          :lists="pxinfo6"
+          @openDetail="openDetail"
+        ></boys-child>
         <!-- 出版力荐 -->
         <!-- <div class="time-free" v-if="msgArr">
           <h2>出版力荐</h2>
@@ -152,11 +176,7 @@
 
         <!-- 个性化推荐分类 -->
         <div class="bottomtuijian" v-if="msg">
-          <div
-            class="wellsell"
-            v-for="(item, index) in msg"
-            :key="index"
-          >
+          <div class="wellsell" v-for="(item, index) in msg" :key="index">
             <div v-show="display">
               <div class="wellsell-title">
                 <h3>你可能感兴趣的好书</h3>
@@ -168,7 +188,11 @@
               </div>
               <div class="wellsell-container">
                 <div class="wellsell-container-left">
-                  <img :src="item.images" alt="" @click="openDetail1(item.id)" />
+                  <img
+                    :src="item.images"
+                    alt=""
+                    @click="openDetail1(item.id)"
+                  />
                 </div>
                 <div class="wellsell-container-right">
                   <span class="wellsell-container-right-title">{{
@@ -188,7 +212,7 @@
 </template>
 
 <script>
-import BoysChild from './SelectChild/BoysChild.vue'
+import BoysChild from "./SelectChild/BoysChild.vue";
 import scroll from "@/components/common/Scroll/scroll.vue";
 import $ from "jquery";
 import bnavs from "../../components/navs";
@@ -197,13 +221,12 @@ export default {
   components: {
     bnavs,
     scroll,
-    BoysChild
+    BoysChild,
   },
   computed: {
     top() {
       return -this.activeIndex * 0.55 + "rem";
     },
-    
   },
   created() {
     this.hour = 0;
@@ -211,15 +234,15 @@ export default {
     this.sec = 0;
     this.overtime = "2021-11-01 00:00:00";
     this.inittime();
-    this.$http.get('/api/booklist/px/18').then(res=>{
+    this.$http.get("/api/booklist/px/18").then((res) => {
       this.pxinfo = res.data;
-      this.pxinfo1 = this.pxinfo.slice(0,3);
-      this.pxinfo2 = this.pxinfo.slice(3,6);
-      this.pxinfo3 = this.pxinfo.slice(6,9);
-      this.pxinfo4 = this.pxinfo.slice(9,12);
-      this.pxinfo5 = this.pxinfo.slice(12,15);
-      this.pxinfo6 = this.pxinfo.slice(15,18);
-    })
+      this.pxinfo1 = this.pxinfo.slice(0, 3);
+      this.pxinfo2 = this.pxinfo.slice(3, 6);
+      this.pxinfo3 = this.pxinfo.slice(6, 9);
+      this.pxinfo4 = this.pxinfo.slice(9, 12);
+      this.pxinfo5 = this.pxinfo.slice(12, 15);
+      this.pxinfo6 = this.pxinfo.slice(15, 18);
+    });
     this.$http.get("/api/booklist/px/8").then((res) => {
       this.msg = res.data;
     });
@@ -310,9 +333,9 @@ export default {
     },
     pullingUp() {
       this.pxi++;
-      this.$http.get(`/api/booklist/px/${8*(this.pxi)}`).then(res=>{
+      this.$http.get(`/api/booklist/px/${8 * this.pxi}`).then((res) => {
         this.msg = res.data;
-      })
+      });
       this.$refs.scroll.finishPullup();
       this.$refs.scroll.refresh();
       // console.log(this.startline, this.endline);
@@ -421,15 +444,15 @@ export default {
       msg: {},
       msgArr: [],
       activeIndex: 0,
-      pxinfo:'',
-      pxinfo1:'',
-      pxinfo2:'',
-      pxinfo3:'',
-      pxinfo4:'',
-      pxinfo5:'',
-      pxinfo6:'',
-      pxmsg:'',
-      pxi:1,
+      pxinfo: "",
+      pxinfo1: "",
+      pxinfo2: "",
+      pxinfo3: "",
+      pxinfo4: "",
+      pxinfo5: "",
+      pxinfo6: "",
+      pxmsg: "",
+      pxi: 1,
       carouseData: [
         { src: require("../../assets/img/SelectBoys/sp1.png") },
         { src: require("../../assets/img/SelectBoys/sp2.png") },

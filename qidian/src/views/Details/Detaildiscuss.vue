@@ -6,7 +6,7 @@
         <div slot="center" class="detaildiscuss-top-imgs" ><div><img :src="info.images" alt="" class="detaildiscuss-top-img" v-show="topleave"></div></div>
         <div slot="right"><i class="el-icon-search" @click="search"></i></div>
      </top-nav-bar>
-     <scroll class="wrapper" :probeType="3" ref="scroll" >
+     <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
      <div class="detail-header1">
            <div class="detail-header-top">
               <div class="detail-header-top-imgss">
@@ -26,7 +26,7 @@
                     <div class="speaker-name">
                       <div> {{item.name}}<span class="speaker-rank">{{item.tag}}</span></div>
                       <div>
-                        <el-button :plain="true" @click="open2" class="clzs"> <i class="el-icon-delete "></i></el-button>                                      
+                        <el-button type="plain" @click="open2(item.discussid)" class="clzs"> <i class="el-icon-delete "></i></el-button>                                      
                       </div>
                     </div>
                     <p class="speaker-content">{{item.content}}</p>
@@ -34,8 +34,9 @@
                         <div class="speaker-bottom-left">{{item.time}}</div>
                         <div class="speaker-bottom-right">
                             <div class="reader-pl"><i class="el-icon-chat-dot-round"></i> 评论</div>
-                             <div class="reader-dz">
-                               <i class="el-icon-thumb" :class="{detaildisccussdz}" @click="dz(index)"></i>
+                             <div class="reader-dz" @click="dz(index)" >
+                               <img src="../../assets/img/Detail/dz.png"  v-show="!item.dzshow" class="dzshow">
+                               <img src="../../assets/img/Detail/dz1.png"  v-show="item.dzshow" class="dzshow">
                                 <span class="disscuss-likes">{{item.likes}}</span>
                             </div>
                         </div>
@@ -64,6 +65,7 @@ import scroll from "@/components/common/Scroll/scroll.vue";
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue';
 import findDetailsBottom from '../Find/components/FindDetailsBottom'
 export default {
+  inject:['reload'],
   name: 'Detaildisccuss',
   components: {
      TopNavBar,
@@ -77,6 +79,9 @@ export default {
     });
     this.$http.get('/api/detaildiscuss').then(res=>{
       this.infor=res.data.reverse();
+       this.infor.forEach(i=>{
+         this.$set(i,'dzshow',false);
+       });
       //console.log(res.data);
     });
   },
@@ -86,16 +91,23 @@ export default {
             infor:{},
             topleave:true,
             isshow:false,
-            detaildisccussdz:false,
+            dzshow:true,
       }
+  },
+  updated(){
+    this.$refs.scroll.refresh();
+    this.reload();
   },
    mounted() {
       window.addEventListener("scroll", this.handleScroll, true);
     },
    methods:{
+     pullingUp(){
+       this.$refs.scroll.refresh();
+     },
      dz(index){
-           this.infor[index].detaildisccussdz=true;
-           console.log(this.infor[index])
+           this.infor[index].dzshow=!this.infor[index].dzshow;
+           console.log(this.infor[index].dzshow);
      },
       comment(){
         if(sessionStorage.getItem('userbasic')){
@@ -109,7 +121,7 @@ export default {
        },
      handleScroll() {
 	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
-	      scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
+	        scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
       },
       tologin() {     
         // 用户登录
@@ -120,11 +132,21 @@ export default {
     cancel() {
       this.isshow = false;
     },
-    open2() {
-        this.$message({
-          message: '删除成功',
-          type: 'success'
+    open2(index) {
+        this.$http.post('/api/delete/discuss',{
+          index:index
+        }).then(res=>{
+          this.$http.get('/api/detaildiscuss').then(res=>{
+            this.infor=res.data.reverse();
+            //console.log(res.data);
+            this.$message({
+              message: '删除成功',
+              type: 'success' 
+            });
+            console.log(this.infor.length);
+          });         
         });
+        
       },
   },
   
@@ -251,6 +273,7 @@ export default {
     margin-right: .1rem;
     background-color: whitesmoke;
     border: none;
+    padding: 0.1rem !important;
   }
   .speaker-rank{
       background-color: orange;
@@ -361,6 +384,10 @@ export default {
     color: white;
     border-radius: .5rem;
     margin: 0 .1rem;
+  }
+  .dzshow{
+    width: .2rem;
+    height: .2rem;
   }
 </style>
     
