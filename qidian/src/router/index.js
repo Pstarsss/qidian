@@ -10,7 +10,7 @@ import Search from '@/views/Search/Search.vue'
 // 发现
 import Find from '@/views/Find.vue'
 import FindFollow from '@/views/Find/FindFollow.vue'
-import FindSquares from '@/views/Find/findSquares.vue'
+import FindSquares from '@/views/Find/FindSquares.vue'
 import findDetails from '@/views/Find/FindeDetails.vue'
 
 
@@ -31,6 +31,8 @@ import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
 import wanben from '@/views/Selected/wanben'
 import sanjiang from '@/views/Selected/sanjiang'
+import paihang from '@/views/Selected/paihang'
+import fenlei from '@/views/Selected/fenlei'
 
 //详情
 const Detail = () => import('@/views/Details/Detail.vue')
@@ -61,6 +63,16 @@ const routes = [
     path: '/sanjiang',
     name: 'sanjiang',
     component: sanjiang,
+  },
+  {
+    path: '/fenlei',
+    name: 'fenlei',
+    component: fenlei,
+  },
+  {
+    path: '/paihang',
+    name: 'paihang',
+    component: paihang,
   },
   // 精选的
   {

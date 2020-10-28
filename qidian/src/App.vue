@@ -57,7 +57,9 @@ export default {
       if (
         this.$route.path == "/selectboysfree" ||
         this.$route.path == "/wanben" ||
-        this.$route.path == "/sanjiang"
+        this.$route.path == "/sanjiang" ||
+        this.$route.path == "/fenlei" ||
+        this.$route.path == "/paihang"
       ) {
         this.footShow = false;
       }
@@ -77,19 +79,18 @@ export default {
         return this.$router.currentRoute.name.includes(names);
       }
     },
-    reload(){
+    reload() {
       this.isRouterAlive = false;
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.isRouterAlive = true;
       });
-    }
+    },
   },
-  provide(){
+  provide() {
     return {
-      reload:this.reload
-    }
+      reload: this.reload,
+    };
   },
-
 };
 </script>
 

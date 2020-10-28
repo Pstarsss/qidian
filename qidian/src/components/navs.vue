@@ -19,6 +19,12 @@ export default {
   },
   methods: {
     openkinds(a) {
+      if (a == 1) {
+        this.$router.push("/fenlei");
+      }
+      if (a == 2) {
+        this.$router.push("/paihang");
+      }
       if (a == 3) {
         this.$router.push("/sanjiang");
       }
