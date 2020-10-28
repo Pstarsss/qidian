@@ -25,6 +25,7 @@ import hobbySet from '@/views/Mine/components/hobbySet.vue'
 import hobbychild from '@/views/Mine/components/hobbychild.vue'
 import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
 import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
+import pushSet from '@/views/Mine/components/pushSet.vue'
 
 // 精选
 import Select from '@/views/Selected/Select.vue'
@@ -226,7 +227,11 @@ const routes = [
   		},
   	]
   },
-  
+  {
+    path: '/pushSet',
+    name: 'pushSet',
+    component: pushSet,
+  },
   
  //搜索
  {
