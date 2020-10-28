@@ -6,7 +6,7 @@
         <div slot="center" class="detaildiscuss-top-imgs" ><div><img :src="info.images" alt="" class="detaildiscuss-top-img" v-show="topleave"></div></div>
         <div slot="right"><i class="el-icon-search" @click="search"></i></div>
      </top-nav-bar>
-     <scroll class="wrapper" :probeType="3" ref="scroll" >
+     <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
      <div class="detail-header1">
            <div class="detail-header-top">
               <div class="detail-header-top-imgss">
@@ -26,7 +26,7 @@
                     <div class="speaker-name">
                       <div> {{item.name}}<span class="speaker-rank">{{item.tag}}</span></div>
                       <div>
-                        <el-button :plain="true" @click="open2" class="clzs"> <i class="el-icon-delete "></i></el-button>                                      
+                        <el-button type="plain" @click="open2(item.discussid)" class="clzs"> <i class="el-icon-delete "></i></el-button>                                      
                       </div>
                     </div>
                     <p class="speaker-content">{{item.content}}</p>
@@ -89,10 +89,16 @@ export default {
             detaildisccussdz:false,
       }
   },
+  updated(){
+    this.$refs.scroll.refresh();
+  },
    mounted() {
       window.addEventListener("scroll", this.handleScroll, true);
     },
    methods:{
+     pullingUp(){
+       this.$refs.scroll.refresh();
+     },
      dz(index){
            this.infor[index].detaildisccussdz=true;
            console.log(this.infor[index])
@@ -120,11 +126,15 @@ export default {
     cancel() {
       this.isshow = false;
     },
-    open2() {
-        this.$message({
-          message: '删除成功',
-          type: 'success'
+    open2(index) {
+        this.$http.delete('/api/delete/discuss',index).then(res=>{
+          console.log(res);
+          this.$message({
+            message: '删除成功',
+            type: 'success' 
+          });
         });
+        
       },
   },
   
@@ -251,6 +261,7 @@ export default {
     margin-right: .1rem;
     background-color: whitesmoke;
     border: none;
+    padding: 0.1rem !important;
   }
   .speaker-rank{
       background-color: orange;

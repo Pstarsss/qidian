@@ -61,6 +61,9 @@ const routes = [
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
+    meta:{
+      keepAlive:false
+    }
   },
   {
     path: '/sanjiang',
@@ -82,6 +85,7 @@ const routes = [
     path: '/select',
     name: 'Select',
     component: Select,
+
     children: [
       {
         path: '/selecthome',
@@ -92,17 +96,25 @@ const routes = [
         path: '/selectboys',
         name: 'SelectBoys',
         component: SelectBoys,
-       
+        meta:{
+          keepAlive:true
+        }
       },
       {
         path: '/selectgirls',
         name: 'SelectGirls',
         component: SelectGirls,
+        meta:{
+          keepAlive:true
+        }
       },
       {
         path: '/selectcartoon',
         name: 'SelectCartoon',
         component: SelectCartoon,
+        meta:{
+          keepAlive:true
+        }
       },
     ],
     redirect: '/selectboys',
@@ -112,6 +124,9 @@ const routes = [
     path: '/detail/:id',
     name: 'Detail',
     component: Detail,
+    meta:{
+      keepAlive:false
+    }
   },
   {
     path: '/chapter/:id',
