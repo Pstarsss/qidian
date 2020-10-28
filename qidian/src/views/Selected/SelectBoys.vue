@@ -215,7 +215,7 @@
 import BoysChild from "./SelectChild/BoysChild.vue";
 import scroll from "@/components/common/Scroll/scroll.vue";
 import $ from "jquery";
-import bnavs from "../../components/navs";
+import bnavs from "../../components/SelectBoysKinds/nav1";
 export default {
   name: "selectboys",
   components: {

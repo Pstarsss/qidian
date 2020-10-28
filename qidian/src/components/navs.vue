@@ -17,25 +17,7 @@ export default {
   data() {
     return {};
   },
-  methods: {
-    openkinds(a) {
-      if (a == 1) {
-        this.$router.push("/fenlei");
-      }
-      if (a == 2) {
-        this.$router.push("/paihang");
-      }
-      if (a == 3) {
-        this.$router.push("/sanjiang");
-      }
-      if (a == 4) {
-        this.$router.push("/selectboysfree");
-      }
-      if (a == 5) {
-        this.$router.push("/wanben");
-      }
-    },
-  },
+  methods: {},
   props: {
     //返回数组默认值
     list: {
