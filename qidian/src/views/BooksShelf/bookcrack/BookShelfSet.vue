@@ -8,7 +8,7 @@
           <p class="top-center-bookname">{{bookname}}</p>
           <p class="top-center-author">{{author}}</p>
        </div>
-        <div class="bookset-top-right">
+        <div class="bookset-top-right" @click="toDetail">
           <el-button round>详情</el-button>
        </div>
      </div>
@@ -53,7 +53,7 @@
            <img :src="imgs[2].src">
             <span>分享本书</span>
           </div>
-          <div class="level1-shuyou">
+          <div class="level1-shuyou" @click="deleteBook">
             <el-badge  class="el-icon-delete"></el-badge>
             <span>删除</span>
           </div>
@@ -112,6 +112,14 @@ export default {
     author:{
       type:[String],
       default:''
+    }
+  },
+  methods:{
+    toDetail(){
+      this.$emit('toDetail');
+    },
+    deleteBook(){
+      this.$emit('deleteBook');
     }
   }
 }

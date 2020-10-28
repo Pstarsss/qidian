@@ -194,12 +194,18 @@ router.post('/updateuserbook',function(req,res){
   })
 });
 
+router.post('/delete/book',(req,res)=>{
+  let {userid,collections} =req.body;
+  sql.find(`delete from userbookshelf where userid = ${userid} and collections =${collections} `).then(re=>{
+    res.send('删除成功');
+  });
+});
 
 
-
+// 获取用户书架的信息
 router.post('/userbookshelf',function(req,res){
   let temp = JSON.parse(JSON.stringify(req.body)); 
-  console.log(temp);
+  
   res.send('111');
   // sql.find('select * from hotdiscuss').then(results=>{
   //   res.send(results);

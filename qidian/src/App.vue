@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <keep-alive exclude="[Detail,Comment]">
+    <keep-alive exclude="[Detail,Comment,Bookshelf]">
       <router-view />
     </keep-alive>
   </div>

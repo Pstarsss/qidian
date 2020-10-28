@@ -51,7 +51,6 @@ export default {
   watch:{
     $route:{
       handler(newVal,oldVal){
-        console.log(oldVal,111);
         this.from = oldVal;
       },
       deep:true,
@@ -68,7 +67,6 @@ export default {
   methods:{
     toback(){
       if(this.from){
-         console.log(this.from);
         this.$router.go(`${this.from}`);
       }else{
         this.$router.push('/mineShow');
@@ -119,7 +117,6 @@ export default {
             //  this.$store.dispatch('add',temp).then(res2=>{
                 
             //  });
-            console.log(this.from);
              if(this.from){
                this.$router.replace(`${this.from}`);
              }else if(true){
