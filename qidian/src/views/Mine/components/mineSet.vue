@@ -5,7 +5,7 @@
 			设置
 		</div>
 		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown">
-		<div class="list1">
+		<div class="list1" @click="pushSet">
 			推送通知
 			<i class="el-icon-arrow-right icon-right"></i>
 		</div>
@@ -27,7 +27,7 @@
 			<i class="el-icon-arrow-right icon-right"></i>
 		</div>
 		<div class="list2">
-			自动订阅管理
+			仅Wi-Fi网络环境下载图片
 			<el-switch
 			  v-model="value1"
 			  active-color="gainsboro"
@@ -46,19 +46,20 @@
 			清除缓存
 			<i class="el-icon-arrow-right icon-right"></i>
 		</div>
-		<div class="list2" v-for="(item,index) in lists" :key="index + '-only'">
-			<span>{{item.title}}</span>
-			<i class="el-icon-arrow-right icon-right"></i>
-			<span class="text">{{item.text}}</span>
-		</div>
-		<div class="list2">
+		<div class="list2" @click="tochangepassword">
 			修改密码
-			<el-switch
+			<i class="el-icon-arrow-right icon-right"></i>
+			<!-- <el-switch
 			  v-model="value2"
 			  active-color="gainsboro"
 			  inactive-color="#ff4949" class="switch"
 				@change="tochangepassword">
-			</el-switch>
+			</el-switch> -->
+		</div>
+		<div class="list2" v-for="(item,index) in lists" :key="index + '-only'">
+			<span>{{item.title}}</span>
+			<i class="el-icon-arrow-right icon-right"></i>
+			<span class="text">{{item.text}}</span>
 		</div>
 		</scroll>
 		<div class="foot">
@@ -104,6 +105,9 @@
 			},	
 			hobby(){
 				this.$router.push('/hobbySet');
+			},
+			pushSet(){
+				this.$router.push('/pushSet');
 			},
 			tochangepassword(){
 				this.$router.push('/changepassword');

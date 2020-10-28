@@ -21,7 +21,7 @@ router.get('/read/:id',function(req,res){
   sql.find(`select * from book${id}`).then(results=>{
     res.send(results);
   }).catch(err=>{
-    res.send(-1);
+    res.send('-1');
   })
 });
 // 加载另外的章节内容
@@ -46,6 +46,14 @@ router.get('/booktitle/:id',function(req,res){
     res.send(results);
   })
 });
+
+//或指定条数的数据;
+router.get('/booklist/px/:num',function(req,res){
+  let num = req.params.num;
+  sql.find(`select * from booklist limit ${num}`).then(results=>{
+    res.send(results);
+  })
+});
 //指定表的list
 router.get('/booklist/:id',function(req,res){
   let id = req.params.id;
@@ -62,14 +70,11 @@ router.get('/detail/:id',(req,res)=>{
   });
 });
 
-// 详情页的评论发布;
+// 详情页的评论;
 router.post('/detaildiscuss',(req,res)=>{
-  let { content } = req.body;
-  console.log(content);
-  res.send('nice');
-  // sql.find(`select * from booklist where id = ${id}`).then(results=>{
-  //   res.send(results);
-  // });
+  sql.find(`select * from dicsuss1`).then(results=>{
+    res.send(results);
+  });
 });
 
 
@@ -99,9 +104,20 @@ router.get('/finddetail/:id',function(req,res){
 });
 
 // 增加finddiscuss的评论
-router.get('/adddiscuss',function(req,res){
-  sql.find(`select * from hotdiscuss where discussid = ${id}`).then(results=>{
+router.post('/adddiscuss',function(req,res){
+  let {headimg,name,tag,content,time,image,likes,reviews} = req.body.value;
+  sql.find(`insert into discuss1 (headimg,name,tag,content,image,time,likes,reviews) 
+   value('${headimg}','${name}','${tag}','${content}','${image}','${time}','${likes}','${reviews}')`).then(results=>{
     res.send(results);
+  });
+
+});
+
+// 删除discuss1表的评论
+router.post('/delete/discuss',function(req,res){
+  let temp = req.body.index;
+  sql.find(`delete from discuss1 where discussid = ${temp}`).then(results=>{
+    res.send("删除成功");
   })
 });
 
@@ -233,6 +249,7 @@ router.put('/changepassword',(req,res)=>{
 
 
 const Core = require('@alicloud/pop-core');
+const { log } = require('math');
 
 var client = new Core({
   accessKeyId: 'LTAI4G3rASxgYtmSgUKSaxJM',

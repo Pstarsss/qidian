@@ -13,6 +13,7 @@
     "better-scroll": "^2.0.5",
     "element-ui": "^2.13.2",
     "jquery": "^3.5.1",
+    "mint-ui": "^2.2.13",
     "swiper": "^6.3.3",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",

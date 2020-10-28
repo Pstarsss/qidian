@@ -6,7 +6,7 @@
         <div slot="center" class="detaildiscuss-top-imgs" ><div><img :src="info.images" alt="" class="detaildiscuss-top-img" v-show="topleave"></div></div>
         <div slot="right"><i class="el-icon-search" @click="search"></i></div>
      </top-nav-bar>
-     <scroll class="wrapper" :probeType="3" ref="scroll" >
+     <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
      <div class="detail-header1">
            <div class="detail-header-top">
               <div class="detail-header-top-imgss">
@@ -23,16 +23,21 @@
             <div class="detaildisccuss-content-body" v-for="(item,index) in infor" :key="index">
                 <div><img :src="item.headimg" alt="" class="detaildisccuss-content-body-left-img"></div>
                 <div class="detaildisccuss-content-body-right">
-                    <p class="speaker-name">{{item.name}}<span class="speaker-rank">{{item.tag}}</span></p>
+                    <div class="speaker-name">
+                      <div> {{item.name}}<span class="speaker-rank">{{item.tag}}</span></div>
+                      <div>
+                        <el-button type="plain" @click="open2(item.discussid)" class="clzs"> <i class="el-icon-delete "></i></el-button>                                      
+                      </div>
+                    </div>
                     <p class="speaker-content">{{item.content}}</p>
                     <div class="speaker-bottom">
                         <div class="speaker-bottom-left">{{item.time}}</div>
                         <div class="speaker-bottom-right">
                             <div class="reader-pl"><i class="el-icon-chat-dot-round"></i> 评论</div>
-                             <div class="reader-dz">
-                                <img src="../../assets/img/Detail/dz.png" alt="" class="dz-img" @click="dzs(index)" v-if="dz">
-                                <img src="../../assets/img/Detail/dz1.png" alt="" class="dz-img" @click="dzs1(index)" v-else>
-                                 <span class="disscuss-likes">{{item.likes}}</span>
+                             <div class="reader-dz" @click="dz(index)" >
+                               <img src="../../assets/img/Detail/dz.png"  v-show="!item.dzshow" class="dzshow">
+                               <img src="../../assets/img/Detail/dz1.png"  v-show="item.dzshow" class="dzshow">
+                                <span class="disscuss-likes">{{item.likes}}</span>
                             </div>
                         </div>
                     </div>
@@ -43,26 +48,29 @@
     <div class="detaildiscuss-discuss">
         <div class="detaildiscuss-discuss-center" @click="comment"><i class="el-icon-edit"></i> 发帖</div>
     </div> 
-    <div class="tologin1" v-if="isshow">
+    <div class="tologin2" v-if="isshow">
         <div>
-          <h2 class="read-dl">喜欢这本书就加入书架吧?</h2>
+          <h2 class="read-dl">你需要登录才能发表评论哦!</h2>
         </div>
         <div>
-            <span @click="tologin" class="dl">登录</span>
-            <span @click="cancel" class="jkk">就看看</span>
+            <span @click="tologin" class="dl"> 登 录 </span>
+            <span @click="cancel" class="jkk">下次一定</span>
         </div>       
-      </div>        
+      </div>   
   </div>
 </template>
 
 <script>
 import scroll from "@/components/common/Scroll/scroll.vue";
 import TopNavBar from '@/components/common/TopNavBar/NavBar.vue';
+import findDetailsBottom from '../Find/components/FindDetailsBottom'
 export default {
+  inject:['reload'],
   name: 'Detaildisccuss',
   components: {
      TopNavBar,
      scroll,
+     findDetailsBottom,
   },
    created(){
    let id = this.$router.currentRoute.params.id;
@@ -70,127 +78,85 @@ export default {
       this.info=res.data[0];
     });
     this.$http.get('/api/detaildiscuss').then(res=>{
-      this.infor=res.data;
-      console.log(res.data);
+      this.infor=res.data.reverse();
+       this.infor.forEach(i=>{
+         this.$set(i,'dzshow',false);
+       });
+      //console.log(res.data);
     });
   },
   data(){
       return{
             info:{},
             infor:{},
-            dz:true,
             topleave:true,
-            dz1:{},
-            isshow:false
+            isshow:false,
+            dzshow:true,
       }
+  },
+  updated(){
+    this.$refs.scroll.refresh();
+    this.reload();
   },
    mounted() {
       window.addEventListener("scroll", this.handleScroll, true);
     },
    methods:{
+     pullingUp(){
+       this.$refs.scroll.refresh();
+     },
+     dz(index){
+           this.infor[index].dzshow=!this.infor[index].dzshow;
+           console.log(this.infor[index].dzshow);
+     },
       comment(){
-          // this.$router.push('/comment');
-          this.isshow=true
+        if(sessionStorage.getItem('userbasic')){
+              this.$router.push('/comment');
+        }else{
+            this.isshow=true
+        }       
       },
        search(){
           this.$router.push('/search') 
        },
-      dzs(index){
-      this.$http.get('/api/detaildiscuss').then(res=>{
-      this.dz1=res.data[index].likes;
-      console.log(res.data[index].likes);
-    });
-          this.dz=false;        
-      },
-       dzs1(index){
-      this.$http.get('/api/detaildiscuss').then(res=>{
-      this.dz1=res.data[index].likes;
-      console.log(res.data[index].likes);
-    });
-          this.dz=true;        
-      },
      handleScroll() {
 	       let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
-	      scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
+	        scrolltop > 300 ? (this.topleave = true) : (this.topleave = false);
       },
-      tologin() {
-      if (this.isshow2) {
-        // 用户添加本书阅读记录
-        let userid = sessionStorage.getItem("userid");
-        let collections = this.$router.currentRoute.params.id;
-        let Chapter = this.pp;
-        let image = this.infor.images;
-        let bookname = this.infor.name;
-        let author = this.infor.author;
-        this.$http
-          .post("/api/getchaptertitle", {
-            userid,
-            collections,
-            Chapter,
-          })
-          .then((res) => {
-            let flag = res.data.has;
-            console.log(res.data);
-            let booktitle = res.data.title;
-            let temp = {
-              userid,
-              collections,
-              Chapter,
-              image,
-              bookname,
-              author,
-              booktitle,
-            };
-            if (!flag) {
-              this.$http
-                .post("/api/adduserbook", {
-                  temp,
-                })
-                .then((res1) => {
-                  console.log(res1);
-                });
-              this.$store.dispatch("add", temp).then((res3) => {
-                console.log(res3);
-              });
-              this.$router.go(-1);
-            } else {
-              let temp1 = {
-                collections,
-                Chapter,
-                booktitle,
-              };
-              this.$http
-                .post("/api/updateuserbook", {
-                  userid,
-                  collections,
-                  Chapter,
-                  booktitle,
-                })
-                .then((res1) => {
-                  console.log(res1);
-                });
-              this.$store.dispatch("change", temp1).then((res3) => {
-                console.log(this.$store.state);
-              });
-              this.$router.go(-1);
-            }
-          });
-      } else {
+      tologin() {     
         // 用户登录
         setTimeout(() => {
           this.$router.push("/login");
         }, 500);
-      }
     },
     cancel() {
       this.isshow = false;
     },
+    open2(index) {
+        this.$http.post('/api/delete/discuss',{
+          index:index
+        }).then(res=>{
+          this.$http.get('/api/detaildiscuss').then(res=>{
+            this.infor=res.data.reverse();
+            //console.log(res.data);
+            this.$message({
+              message: '删除成功',
+              type: 'success' 
+            });
+            console.log(this.infor.length);
+          });         
+        });
+        
+      },
   },
   
 }
 </script>
 
 <style scoped>
+.detaildisccussdz{
+  color: red;
+}
 .detail-tops{
     position: fixed;
     z-index: 110;
@@ -271,7 +237,7 @@ export default {
   .detaildisccuss-content-body-left-img{
       width: .35rem;
       height: .8rem;
-      margin: .1rem 0 0 .2rem;
+      margin: .12rem 0 0 .2rem;
       border-radius: 50%;
   }
   .detaildisccuss-content-body-right{
@@ -291,13 +257,23 @@ export default {
   .speaker-bottom{
        font-size: .16rem;
        padding-bottom: .1rem;
-       padding-top: .05rem;     
+       padding-top: .07rem;     
   }
   .speaker-name{
-      display: flex;
-      color: black;
-      text-align: center;
-      justify-items: center;
+     display: flex;
+    justify-content: space-between;
+    color: black;
+    text-align: center;
+    justify-items: center;
+    align-items: center;
+    height: .35rem
+  }
+  .clzs{
+    color: #a2a2a2;
+    margin-right: .1rem;
+    background-color: whitesmoke;
+    border: none;
+    padding: 0.1rem !important;
   }
   .speaker-rank{
       background-color: orange;
@@ -370,7 +346,7 @@ export default {
   .disscuss-likes{
       margin-left: .1rem;
   }
-  .tologin1{
+  .tologin2{
     position: fixed;
     top: 40%;
     left: 26%;
@@ -383,10 +359,10 @@ export default {
     padding: .3rem .3rem 0 .3rem;
     border-radius: .1rem;
   }
-  .tologin1 > div{
+  .tologin2 > div{
     padding-bottom: 0.2rem;
   }
-  .tologin1 > div:last-child{
+  .tologin2 > div:last-child{
     display: flex;
   }
   .read-dl{
@@ -408,6 +384,10 @@ export default {
     color: white;
     border-radius: .5rem;
     margin: 0 .1rem;
+  }
+  .dzshow{
+    width: .2rem;
+    height: .2rem;
   }
 </style>
     

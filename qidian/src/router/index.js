@@ -20,7 +20,21 @@ import mineShow from '@/views/Mine/mineShow.vue'
 import mineSet from '@/views/Mine/components/mineSet.vue'
 import mineMsg from '@/views/Mine/components/mineMsg.vue'
 import peopleDetails from '@/views/Mine/components/peopleDetails.vue'
+<<<<<<< HEAD
 import privacySet from '@/views/Mine/components/privacySet.vue'
+import hobbySet from '@/views/Mine/components/hobbySet.vue'
+import hobbychild from '@/views/Mine/components/hobbychild.vue'
+import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
+import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
+import pushSet from '@/views/Mine/components/pushSet.vue'
+import mineGames from '@/views/Mine/components/mineGames.vue'
+=======
+import privacySet from '@/views/Mine/components/privacySet.vue'
+import hobbySet from '@/views/Mine/components/hobbySet.vue'
+import hobbychild from '@/views/Mine/components/hobbychild.vue'
+import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
+import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
+>>>>>>> 9a6baf7808587e215dbd5551a4bc3dc308a68dcc
 
 // 精选
 import Select from '@/views/Selected/Select.vue'
@@ -31,12 +45,15 @@ import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
 import wanben from '@/views/Selected/wanben'
 import sanjiang from '@/views/Selected/sanjiang'
+import paihang from '@/views/Selected/paihang'
+import fenlei from '@/views/Selected/fenlei'
 
 //详情
 const Detail = () => import('@/views/Details/Detail.vue')
 const Read = () => import('@/views/Read/read.vue')
 const Chapter = () => import('@/views/Details/Chapter.vue')
 const Detaildiscuss = () => import('@/views/Details/Detaildiscuss.vue')
+const Comment = () => import('@/views/Details/Comment.vue')
 
 //登录注册
 const Login = () => import('@/views/Login/Login.vue');
@@ -56,11 +73,24 @@ const routes = [
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
+    meta:{
+      keepAlive:false
+    }
   },
   {
     path: '/sanjiang',
     name: 'sanjiang',
     component: sanjiang,
+  },
+  {
+    path: '/fenlei',
+    name: 'fenlei',
+    component: fenlei,
+  },
+  {
+    path: '/paihang',
+    name: 'paihang',
+    component: paihang,
   },
   // 精选的
   {
@@ -77,6 +107,7 @@ const routes = [
     path: '/select',
     name: 'Select',
     component: Select,
+
     children: [
       {
         path: '/selecthome',
@@ -87,17 +118,25 @@ const routes = [
         path: '/selectboys',
         name: 'SelectBoys',
         component: SelectBoys,
-       
+        meta:{
+          keepAlive:true
+        }
       },
       {
         path: '/selectgirls',
         name: 'SelectGirls',
         component: SelectGirls,
+        meta:{
+          keepAlive:true
+        }
       },
       {
         path: '/selectcartoon',
         name: 'SelectCartoon',
         component: SelectCartoon,
+        meta:{
+          keepAlive:true
+        }
       },
     ],
     redirect: '/selectboys',
@@ -107,6 +146,9 @@ const routes = [
     path: '/detail/:id',
     name: 'Detail',
     component: Detail,
+    meta:{
+      keepAlive:false
+    }
   },
   {
     path: '/chapter/:id',
@@ -122,6 +164,11 @@ const routes = [
     path: '/detaildiscuss/:id',
     name: 'Detaildiscuss',
     component: Detaildiscuss,
+  },
+  {
+    path: '/comment',
+    name: 'Comment',
+    component: Comment,
   },
 
   //发现页面的
@@ -180,7 +227,67 @@ const routes = [
     path: '/privacySet',
     name: 'PrivacySet',
     component: privacySet,
+<<<<<<< HEAD
   },
+  {
+    path: '/hobbySet',
+    name: 'hobbySet',
+    component: hobbySet,
+  	redirect: '/hobbySet/hobbychild',
+  	children:[
+  		{
+  		  path: '/hobbySet/hobbychild',
+  		  name: 'hobbychild',
+  		  component: hobbychild,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyGirls',
+  		  name: 'hobbyGirls',
+  		  component: hobbyGirls,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyBoys',
+  		  name: 'hobbyBoys',
+  		  component: hobbyBoys,
+  		},
+  	]
+  },
+  {
+    path: '/pushSet',
+    name: 'pushSet',
+    component: pushSet,
+  },
+  {
+    path: '/mineGames',
+    name: 'mineGames',
+    component: mineGames,
+=======
+>>>>>>> 9a6baf7808587e215dbd5551a4bc3dc308a68dcc
+  },
+  {
+    path: '/hobbySet',
+    name: 'hobbySet',
+    component: hobbySet,
+  	redirect: '/hobbySet/hobbychild',
+  	children:[
+  		{
+  		  path: '/hobbySet/hobbychild',
+  		  name: 'hobbychild',
+  		  component: hobbychild,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyGirls',
+  		  name: 'hobbyGirls',
+  		  component: hobbyGirls,
+  		},
+  		{
+  		  path: '/hobbySet/hobbyBoys',
+  		  name: 'hobbyBoys',
+  		  component: hobbyBoys,
+  		},
+  	]
+  },
+  
   
  //搜索
  {

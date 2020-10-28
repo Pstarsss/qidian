@@ -88,7 +88,7 @@
       <p>登陆后再评论吧😅</p>
       <p class="noLoginOperation">
         <span @click="clsNoLogin">我 知 道 了</span>
-        <span><a href="/login">现 在 登 陆</a></span>
+        <span @click="tologin">现 在 登 陆</span>
       </p>
       <i class="el-icon-circle-close" @click="clsNoLogin"></i>
     </div>
@@ -116,6 +116,7 @@ import './iconfont/iconfont'
 import reviews from './components/FindDetailsReviews'
 import { Toast, Indicator } from 'mint-ui'
 export default {
+  inject:['reload'],
   data() {
     return {
       drawer: false,
@@ -142,6 +143,14 @@ export default {
     this.$refs.scroll.refresh()
   },
   methods: {
+    tologin(){
+      // if(sessionStorage.getItem('userbasic')){
+      //   this.showNologin = false;
+      // }else{
+
+        this.$router.push('/login');
+      // }
+    },
     pullingUp() {
       console.log('findDetails上拉')
       this.$refs.scroll.finishPullup()
@@ -165,14 +174,14 @@ export default {
       })
     },
     submits(value, e) {
-      this.$http
-        .post('/api/adddiscuss', {
+      this.$http.post('/api/adddiscuss', {
           value,
-        })
-        .then((ree) => {
-          console.log(ree)
-          e = ''
-          Toast('回复成功')
+        }).then((ree) => {
+          console.log(ree);
+          e = '';
+          this.showNologin = false;
+          this.reload();
+          Toast('回复成功');
         })
     },
     getShowNologin(e) {
@@ -182,7 +191,7 @@ export default {
     //   this.$emit('update:drawer', false)
     // },
     clsNoLogin() {
-      this.showNologin = false
+      this.showNologin = false;
     },
   },
   components: {
