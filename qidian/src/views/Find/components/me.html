@@ -38,6 +38,7 @@
       <div class="two"></div>
     </div>
     <input type="file" name="sp" id="sp" />
+    <button>防抖测试</button>
   </body>
   <script>
     function add(num1, num2) {
@@ -46,10 +47,23 @@
         console.log(sum)
         return sum
       } else {
-        console.log(sum)
         return add(sum, num2 + 1)
       }
     }
     add(1, 2)
+
+    document
+      .querySelector('button')
+      .addEventListener('mousemove', debounce(btnlog, 1000))
+    function debounce(fn, cd) {
+      let time = null
+      return () => {
+        clearTimeout(time)
+        time = setTimeout(fn, cd)
+      }
+    }
+    function btnlog() {
+      console.log('1')
+    }
   </script>
 </html>
