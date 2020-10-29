@@ -157,6 +157,13 @@ export default {
           .then((res) => {
             let flag = res.data.has;
             let booktitle = res.data.title;
+            if(res == '-1'){
+              this.$message({
+                message:'没有更多了',
+                type:'error'
+              })
+              return ;
+            }
             let temp = {
               userid,
               collections,
@@ -173,6 +180,7 @@ export default {
                 })
                 .then((res1) => {
                 });
+              // console.log('书籍添加');
               let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
               console.log(temp);
               aa.push(temp);
@@ -196,8 +204,9 @@ export default {
                   booktitle,
                 })
                 .then((res1) => {
-                  console.log(res1);
+                  // console.log(res1);
                 });
+                //  console.log('书籍更新');
                  let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
                  let temp = aa.find((i)=>{
                    return i.collections == collections;

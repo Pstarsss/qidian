@@ -108,7 +108,7 @@ const routes = [
     component: SelectBoysfree,
   },
   {
-    path: '/fenleidetail',
+    path: '/fenleidetail/:id',
     name: 'fenleidetail',
     component: fenleidetail,
   },
