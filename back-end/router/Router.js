@@ -190,30 +190,60 @@ router.post('/search',function(req,res){
 router.post('/getchaptertitle',function(req,res){
   let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
   sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections}`).then(results1=>{
-      sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
-        if(results){
-          let temp = results[0];
-          temp.has = true;
-          res.send(temp);
-        }
-        else{
-          res.send("-1");
-        }
+      if(results1.length){
+
+        sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+          if(results){
+            let temp = results[0];
+            temp.has = true;
+
+            res.send(temp);
+          }
+          else{
+            res.send("-1");
+          }
+        });
+      }else{
+
+        sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+
+          if(results){
+            let temp = results[0];
+            temp.has = false;
+  
+            res.send(temp);
+          }
+          else{
+            res.send("-1");
+          }
+        });
+      }
+      // sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
         
-      });
+      //   if(results){
+      //     let temp = results[0];
+      //     temp.has = true;
+      //     res.send(temp);
+      //   }
+      //   else{
+      //     res.send("-1");
+      //   }
+      // });
+
   }).catch(()=>{
-    sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
-      if(results){
-        let temp = results[0];
-        temp.has = true;
-        res.send(temp);
-      }
-      else{
-        res.send("-1");
-      }
-      });
+    console.log("meiyou")
+    // sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+    //   console.log(2);
+    //   if(results){
+    //     let temp = results[0];
+    //     temp.has = false;
+    //     res.send(temp);
+    //   }
+    //   else{
+    //     res.send("-1");
+    //   }
+    // });
   })
- 
 });
 
 // 点击加入书架的操作2
