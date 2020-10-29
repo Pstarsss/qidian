@@ -20,6 +20,9 @@ export default {
   props: {
     list: {
       type: Object,
+      default: function () {
+        return "";
+      },
     },
   },
 };
