@@ -82,7 +82,6 @@ export default {
        this.infor.forEach(i=>{
          this.$set(i,'dzshow',false);
        });
-      //console.log(res.data);
     });
   },
   data(){
@@ -106,8 +105,20 @@ export default {
        this.$refs.scroll.refresh();
      },
      dz(index){
-           this.infor[index].dzshow=!this.infor[index].dzshow;
-           console.log(this.infor[index].dzshow);
+            this.infor[index].dzshow=!this.infor[index].dzshow;                      
+            if(this.infor[index].dzshow==true){
+               this.infor[index].likes++;
+               this.$http.put('/api/update/discuss',this.infor[index]).then((res) => {
+                console.log("点赞成功");
+                console.log(this.infor[index])               
+            }); 
+            }else{
+                 this.infor[index].likes--;
+                 this.$http.put('/api/update/discuss',this.infor[index]).then((res) => {
+                     console.log("取消点赞成功");
+                     console.log(this.infor[index]) 
+                 });
+            }                              
      },
       comment(){
         if(sessionStorage.getItem('userbasic')){
@@ -143,7 +154,7 @@ export default {
               message: '删除成功',
               type: 'success' 
             });
-            console.log(this.infor.length);
+            //console.log(this.infor.length);
           });         
         });
         

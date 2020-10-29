@@ -121,6 +121,36 @@ router.post('/delete/discuss',function(req,res){
   })
 });
 
+// sql.find(`update discuss1 set likes=? where discussid = ?`
+//     , [likes,discussid])
+//     .then((result) => {
+//       console.log(result);
+//         res.send("点赞成功");
+//     }).catch((err) => {
+//         console.log(err);
+//     })
+//修改discuss1表的点赞
+router.put('/update/discuss', (req, res) => { 
+    let {content,headimg,image,likes,name,reviews,tag,time,discussid} = req.body;
+    console.log({content,headimg,image,likes,name,reviews,tag,time,discussid});
+    sql.find(`update discuss1 set likes = ? where discussid = ?`
+    , [likes,discussid])
+    .then((result) => {
+      console.log(result);
+        res.send("点赞成功");
+    }).catch((err) => {
+        console.log(err);
+    })
+    // sql.find(`update discuss1 set content=?,headimg=?,image=?,likes=?,name=?,reviews=?,tag=?,time=? where discussid = ?`
+    // , [[content,headimg,image,likes,name,reviews,tag,time],discussid])
+    // .then((result) => {
+    //   console.log(result);
+    //     res.send("点赞成功");
+    // }).catch((err) => {
+    //     console.log(err);
+    // })
+})
+
 // 搜索
 router.post('/search',function(req,res){
   sql.find('select * from hotdiscuss').then(results=>{
@@ -194,12 +224,18 @@ router.post('/updateuserbook',function(req,res){
   })
 });
 
+router.post('/delete/book',(req,res)=>{
+  let {userid,collections} =req.body;
+  sql.find(`delete from userbookshelf where userid = ${userid} and collections =${collections} `).then(re=>{
+    res.send('删除成功');
+  });
+});
 
 
-
+// 获取用户书架的信息
 router.post('/userbookshelf',function(req,res){
   let temp = JSON.parse(JSON.stringify(req.body)); 
-  console.log(temp);
+  
   res.send('111');
   // sql.find('select * from hotdiscuss').then(results=>{
   //   res.send(results);
