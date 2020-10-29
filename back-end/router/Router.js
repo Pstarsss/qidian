@@ -166,19 +166,28 @@ router.post('/search',function(req,res){
 router.post('/getchaptertitle',function(req,res){
   let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
   sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections}`).then(results1=>{
-    if(results1.length){
-      sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
+      sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+        if(results){
+          let temp = results[0];
+          temp.has = true;
+          res.send(temp);
+        }
+        else{
+          res.send("-1");
+        }
+        
+      });
+  }).catch(()=>{
+    sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+      if(results){
         let temp = results[0];
         temp.has = true;
         res.send(temp);
-      })
-    }else{
-      sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
-        let temp = results[0];
-        temp.has = false;
-        res.send(temp);
+      }
+      else{
+        res.send("-1");
+      }
       });
-    }
   })
  
 });
