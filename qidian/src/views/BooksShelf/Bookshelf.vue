@@ -5,6 +5,7 @@
         <book-list v-for="(item) in temp" :key="item.collections" :data="item"
         @toread='toread' ></book-list>
     </div>
+    <div></div>
     <div class="b-findmore" @click="openmore">
           <button>查找更多精彩作品</button>
     </div>
@@ -17,12 +18,14 @@
 import BookCrack from './bookcrack/BookCrack.vue'
 import BookList from './bookcrack/Bookposition.vue'
 import Scroll from '@/components/common/Scroll/scroll.vue'
+import BookType from './bookcrack/BookType'
 export default {
   inject:['reload'],
   name: 'bookshelf',
   components: {
     BookCrack,
     BookList,
+    BookType,
     Scroll
   },
   data(){
