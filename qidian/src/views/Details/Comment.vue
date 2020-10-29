@@ -36,7 +36,7 @@ export default {
       submits() {       
       let value = {}
       let aa = JSON.parse(sessionStorage.getItem('userbasic'));
-      value.headimg = "aa.userhead";
+      value.headimg = "http://inews.gtimg.com/newsapp_bt/0/5711390577/1000/0";
       value.name = aa.username;
       value.content = this.info.content;
       value.tag = '盟主';
