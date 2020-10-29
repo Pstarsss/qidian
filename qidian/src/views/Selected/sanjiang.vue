@@ -3,7 +3,7 @@
     <div class="kindhead">
       <i class="el-icon-arrow-left bk" @click="backup()"></i>
       <el-tabs v-model="activeName">
-        <el-tab-pane label="三江推荐" name="first">
+        <el-tab-pane label="三江推荐" name="first" v-if="msg.data">
           <scroll
             class="wrapper"
             :probeType="3"

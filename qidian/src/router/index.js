@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 // 书架
 import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
+import BookShare from '../views/BooksShelf/bookwindow/BookShare'
+import BookScreen from '../views/BooksShelf/bookwindow/BookScreen'
 
 //搜索
 import Search from '@/views/Search/Search.vue'
@@ -10,7 +12,7 @@ import Search from '@/views/Search/Search.vue'
 // 发现
 import Find from '@/views/Find.vue'
 import FindFollow from '@/views/Find/FindFollow.vue'
-import FindSquares from '@/views/Find/FindSquares.vue'
+import FindSquares from '@/views/Find/findSquares.vue'
 import FindDetails from '@/views/Find/FindeDetails.vue'
 import FindHB from '@/views/Find/components/FindHB.vue'
 
@@ -66,7 +68,19 @@ const routes = [
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
+    // children: [
+    //   {
+    //     path: '/bookshare',
+    //     name: 'BookShare',
+    //     component: BookShare,
+    //   },
+    // ],
   },
+  {
+    path:'/bookscreen',
+    name: 'BookScreen',
+    component:BookScreen
+},
   {
     path: '/sanjiang',
     name: 'sanjiang',
