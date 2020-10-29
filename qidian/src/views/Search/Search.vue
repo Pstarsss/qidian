@@ -21,8 +21,11 @@
      </div>
      <ul class="hot-search-content">
          <li :key="index" v-for="(item,index) in info1" @click="opendetail(index)" v-show="show1" class="hot-search-color">{{item.name}}</li>  
-         <li :key="'info2'+index" v-for="(item,index) in info2" @click="opendetail1(index)" v-show="show2">{{item.name}}</li>
-         <li class="hot-search-rank">热搜作品榜</li>  
+         <li :key="'info2'+index" v-for="(item,index) in info2" @click="opendetail1(index)" v-show="show2" class="hot-search-color">{{item.name}}</li>
+         <li class="hot-search-rank">
+            <img src="../../assets/img/Detail/hot.png" alt="">
+            热搜作品榜
+         </li>         
      </ul>
       <div class="hot-search">
           <span>搜索历史</span>
@@ -307,5 +310,13 @@ height: .4rem;
 }
 .hot-search-rank{
     background-color: rgb(255, 192, 203);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hot-search-rank img{
+  width: .2rem;
+  height: .2rem;
+  margin-right: .1rem;
 }
 </style>
