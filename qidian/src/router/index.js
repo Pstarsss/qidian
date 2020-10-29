@@ -39,6 +39,7 @@ import wanben from '@/views/Selected/wanben'
 import sanjiang from '@/views/Selected/sanjiang'
 import paihang from '@/views/Selected/paihang'
 import fenlei from '@/views/Selected/fenlei'
+import fenleidetail from '@/views/Selected/fenleidetail'
 
 //详情
 const Detail = () => import('@/views/Details/Detail.vue')
@@ -91,6 +92,11 @@ const routes = [
     path: '/selectboysfree',
     name: 'SelectBoysfree',
     component: SelectBoysfree,
+  },
+  {
+    path: '/fenleidetail',
+    name: 'fenleidetail',
+    component: fenleidetail,
   },
   {
     path: '/select',

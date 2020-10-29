@@ -22,8 +22,8 @@ export default {
   },
   data() {
     return {
-      type: ["玄幻", "奇幻", "都市", "历史", "其他"],
-      arr: [],
+      type: ["玄幻", "都市", "历史", "修真", "网游", "言情", "科幻", "其他"],
+      arr: {},
       freetype: { type: "分类" },
       length: 0,
     };
@@ -31,14 +31,22 @@ export default {
   created() {
     this.$http.get("/api/booklist").then((res) => {
       this.length = res.data.length;
+      console.log(res);
     });
 
     this.$http.get("/api/booklist").then((res) => {
       let temp = res.data;
-      for (let a = 0; a < 5; a++) {
-        this.arr[a] = temp.filter((i) => {
-          return i.type == this.type[a];
-        });
+      for (let a = 0; a < this.type.length; a++) {
+        // this.arr.a = temp.filter((i) => {
+        //   return i.type == this.type[a];
+        // });
+        this.$set(
+          this.arr,
+          a,
+          temp.filter((i) => {
+            return i.type == this.type[a];
+          })
+        );
       }
     });
   },

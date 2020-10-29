@@ -2,13 +2,18 @@
   <div>
     <div class="itemscontent">
       <div class="count">共{{ length }}部</div>
-      <div class="items">
-        <div class="eachitems" v-for="(item, index) in arr" :key="index">
+      <div class="items" v-if="arr">
+        <div
+          class="eachitems"
+          v-for="(item, index) in arr"
+          :key="index"
+          @click="todetail()"
+        >
           <div class="eachitems-imgs">
-            <img :src="item[0].images" alt="" />
+            <img :src="arr[index][1].images" alt="" />
             <div class="eachitems-desc">
-              <h4>{{ item[0].type }}</h4>
-              <span>{{}}部</span>
+              <h4>{{ arr[index][0].type }}</h4>
+              <span>{{ item.length }}部</span>
             </div>
           </div>
         </div>
@@ -18,6 +23,11 @@
 </template>
 <script>
 export default {
+  created() {
+    console.log(this.type);
+    console.log(this.length);
+    console.log(this.arr);
+  },
   data() {
     return {};
   },
@@ -27,14 +37,19 @@ export default {
       type: [Array],
     },
     arr: {
-      type: [Array],
+      type: [Object, Array],
+      default: [],
     },
     length: {
       type: [Number],
     },
   },
-
-  methods: {},
+  methods: {
+    todetail() {
+      this.$router.push("/fenleidetail");
+      console.log("sb");
+    },
+  },
 };
 </script>
 <style>
