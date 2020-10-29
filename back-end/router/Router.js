@@ -305,6 +305,16 @@ router.post('/login',(req,res)=>{
   })
 });
 
+//用户验证码登录
+router.post('/validatelogin',(req,res)=>{
+  let {iphone} = req.body;
+  sql.find('select * from user where iphone = ?',iphone).then((re)=>{
+    // console.log(JSON.parse(JSON.stringify(re)));
+    res.send(re);
+  }).catch((err)=>{
+    res.send('登录失败');
+  })
+});
 
 //密码修改
 router.post('/changepassword',(req,res)=>{
@@ -357,6 +367,7 @@ router.get('/ddd',(req,res)=>{
   })
 })
 
+// 获取所有的评论;
 router.get('/detaildiscuss',(req,res)=>{
   sql.find('select * from discuss1').then(re=>{
     res.send(JSON.stringify(re));
