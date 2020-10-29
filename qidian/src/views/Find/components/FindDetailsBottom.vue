@@ -71,8 +71,8 @@ export default {
       sheetVisible: false,
       reviewImgs: [
         { src: require('../img/海王星.png') },
-        { src: require('../img/海王星.png') },
-        { src: require('../img/海王星.png') },
+        // { src: require('../img/海王星.png') },
+        // { src: require('../img/海王星.png') },
       ],
     }
   },

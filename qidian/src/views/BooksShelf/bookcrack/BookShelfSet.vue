@@ -24,15 +24,15 @@
      <div class="bookset-bottom">
         <div class="bottom-level1">
           <div>
-           <el-switch v-model="value1" active-color="#f40" inactive-color="#e5e5e5"></el-switch>
+           <el-switch v-model="value1" active-color="#f40" inactive-color="#e5e5e5" :width="50"></el-switch>
            <span>置顶</span>
           </div>
           <div>
-            <el-switch v-model="value2" active-color="#f40" inactive-color="#e5e5e5"></el-switch>
+            <el-switch v-model="value2" active-color="#f40" inactive-color="#e5e5e5" :width="50"></el-switch>
             <span>更新提醒</span>
           </div>
           <div> 
-            <el-switch v-model="value3" active-color="#f40" inactive-color="#e5e5e5"></el-switch>
+            <el-switch v-model="value3" active-color="#f40" inactive-color="#e5e5e5" :width="50"></el-switch>
             <span>自动订阅</span>
           </div>
           <div class="level1-shuyou">
@@ -165,7 +165,7 @@ export default {
 .bookset-center{
   display: flex;
   align-items: center;
-  padding: 0.1rem 0;
+  padding: 0.06rem 0;
   border-bottom: 1px solid #b1b1b12e;
   font-size: 0.25rem;
     font-weight: 500;
@@ -191,7 +191,7 @@ export default {
   text-align:right;
 }
 .bookset-bottom {
-    padding-top: 0.2rem;
+    padding-top: 0.16rem;
 }
 .bottom-level1{
   display: flex;
@@ -200,7 +200,8 @@ export default {
   padding-top: 0.1rem;
 }
 .bottom-level1 img{
-  width:0.43rem;
+      width: 0.36rem;
+    max-width: 30px;
 }
 .bottom-level1 > div{
   display:flex;
@@ -209,13 +210,11 @@ export default {
   flex:1;
 }
 .bottom-level1 > div span{
-    padding: 0.14rem 0;
-    font-size: 0.24rem;
+        padding: 0.1rem 0;
+    font-size: 0.20rem;
 }
 .el-badge{
   font-size: 0.43rem;
 }
-.level1-shuyou{
 
-}
 </style>

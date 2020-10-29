@@ -274,9 +274,9 @@ router.post('/login',(req,res)=>{
 
 
 //密码修改
-router.put('/changepassword',(req,res)=>{
-  let {password2,iphone} = req.body;
-  sql.find('update user set ? where iphone = ?',[{'password':password2},iphone]).then(re=>{
+router.post('/changepassword',(req,res)=>{
+  let {password,iphone} = req.body;
+  sql.find('update user set ? where iphone = ?',[{'password':password},iphone]).then(re=>{
     res.send('密码修改成功');
   }).catch(eer=>{
     res.send('修改失败');
