@@ -7,7 +7,7 @@ const Math = require('math');
 // 对文件处理需要；
 let multer = require('multer');
 let storage = multer.diskStorage({
-  destination:'../public/upload',
+  destination:'public/upload',
   filename:function(req,file,cb){
     let fileFormat = (file.originalname).split('.');
     let filename = new Date().getTime();
