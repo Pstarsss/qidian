@@ -4,25 +4,29 @@
       <div slot="left" @click="goback"><i class="el-icon-arrow-left"></i></div>
       <div slot="center"></div>
       <div slot="right">
-        <el-dropdown hide-on-click>
-          <span class="el-dropdown-link">
-            <i class="el-icon-more"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown" v-show="menu">
-            <el-dropdown-item @click.native="xq">
-              <i class="el-icon-view" command="a"></i> 详情</el-dropdown-item
-            >
-            <el-dropdown-item @click.native="ss" divided command="b"
-              ><i class="el-icon-search sss"></i> 搜索</el-dropdown-item
-            >
-            <el-dropdown-item @click.native="ml" divided command="c"
-              ><i class="el-icon-tickets"></i> 目录</el-dropdown-item
-            >
-            <el-dropdown-item @click.native="syq" divided command="d"
-              ><i class="el-icon-chat-dot-round"></i> 书友圈</el-dropdown-item
-            >
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-row class="block-col-2">
+          <el-col :span="12">
+            <el-dropdown trigger="click">
+              <span class="el-dropdown-link">
+                <i class="el-icon-more"></i>
+              </span>
+               <el-dropdown-menu slot="dropdown" v-show="menu">
+                    <el-dropdown-item @click.native="xq">
+                      <i class="el-icon-view" command="a"></i> 详情</el-dropdown-item
+                    >
+                    <el-dropdown-item @click.native="ss" divided command="b"
+                      ><i class="el-icon-search sss"></i> 搜索</el-dropdown-item
+                    >
+                    <el-dropdown-item @click.native="ml" divided command="c"
+                      ><i class="el-icon-tickets"></i> 目录</el-dropdown-item
+                    >
+                    <el-dropdown-item @click.native="syq" divided command="d"
+                      ><i class="el-icon-chat-dot-round"></i> 书友圈</el-dropdown-item
+                    >
+                  </el-dropdown-menu>
+            </el-dropdown>
+          </el-col>
+        </el-row>
       </div>
     </top-nav-bar>
     <scroll class="wrapper" :probeType="3" ref="scroll" @pullingUp="pullingUp">
@@ -211,6 +215,7 @@ export default {
         // 用户登录
         setTimeout(() => {
           this.$router.push("/login");
+          this.isshow = false;
         }, 500);
       }
     },
@@ -393,19 +398,18 @@ export default {
   line-height: 0.6rem;
   border-top: none;
 }
-.el-dropdown-link {
-  cursor: pointer;
-  color: #409eff;
-}
-.el-icon-arrow-down {
-  font-size: 12px;
-}
  .el-dropdown-link {
     cursor: pointer;
     color: #409EFF;
   }
   .el-icon-arrow-down {
     font-size: 12px;
+  }
+  .demonstration {
+    display: block;
+    color: #8492a6;
+    font-size: 14px;
+    margin-bottom: 20px;
   }
   .tologin1{
     position: fixed;

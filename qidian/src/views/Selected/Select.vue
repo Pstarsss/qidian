@@ -37,7 +37,7 @@
         </ul>
       </div>
       <div slot="right" class="select_top_right">
-        <i class="el-icon-search"></i>
+        <i class="el-icon-search tatata" @click="$router.push('/search')"></i>
       </div>
     </div>
 
@@ -88,6 +88,9 @@ export default {
 </script>
 
 <style scoped>
+.tatata{
+  color: white;
+}
 .wrapper {
   height: calc(100vh - 1.2rem);
 }
