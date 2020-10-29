@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 
 // 书架
 import Bookshelf from '@/views/BooksShelf/Bookshelf.vue'
+import BookShare from '../views/BooksShelf/bookwindow/BookShare'
+import BookScreen from '../views/BooksShelf/bookwindow/BookScreen'
 
 //搜索
 import Search from '@/views/Search/Search.vue'
@@ -39,6 +41,7 @@ import wanben from '@/views/Selected/wanben'
 import sanjiang from '@/views/Selected/sanjiang'
 import paihang from '@/views/Selected/paihang'
 import fenlei from '@/views/Selected/fenlei'
+import fenleidetail from '@/views/Selected/fenleidetail'
 
 //详情
 const Detail = () => import('@/views/Details/Detail.vue')
@@ -65,7 +68,19 @@ const routes = [
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
+    // children: [
+    //   {
+    //     path: '/bookshare',
+    //     name: 'BookShare',
+    //     component: BookShare,
+    //   },
+    // ],
   },
+  {
+    path:'/bookscreen',
+    name: 'BookScreen',
+    component:BookScreen
+},
   {
     path: '/sanjiang',
     name: 'sanjiang',
@@ -91,6 +106,11 @@ const routes = [
     path: '/selectboysfree',
     name: 'SelectBoysfree',
     component: SelectBoysfree,
+  },
+  {
+    path: '/fenleidetail',
+    name: 'fenleidetail',
+    component: fenleidetail,
   },
   {
     path: '/select',

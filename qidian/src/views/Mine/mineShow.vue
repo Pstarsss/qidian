@@ -14,10 +14,12 @@
 		<div class="people">
 			<div class="details" @click="people">
 				<div class="details1">
-					<img src="./mine-imgs/05.jpg" />
+					<img v-if="!isshow" :src="userimg" />
+					<img v-if="isshow" :src="defaultimg" />
 				</div>
 				<div class="details2">
-					<p class="details2-p1">star_8</p>
+					<p class="details2-p1" v-if="!isshow">{{username}}</p>
+					<p class="details2-p1" v-if="isshow">到此一游</p>
 					<p class="details2-p2">
 						<span><i class="el-icon-s-opportunity icon-op"></i></span>Lv.0
 						<span><i class="el-icon-star-on icon-star"></i></span>普通用户
@@ -87,6 +89,15 @@
 	import scroll from '@/components/common/Scroll/scroll.vue'
 	import navs from '@/components/navs'
 	export default{
+		created(){
+			if(sessionStorage.getItem('userbasic')){
+				let temp = JSON.parse(sessionStorage.getItem('userbasic'));
+				this.isshow = false;
+				this.userimg = temp.userhead;
+				this.username = temp.username;
+				console.log(this.userimg,this.username);
+			}
+		},
 		data(){
 			return{
 				navlist1:[
@@ -121,7 +132,11 @@
 				],
 				y:'',
 				flag:false,
-				flag1:false
+				flag1:false,
+				defaultimg:require('./mine-imgs/05.jpg'),
+				userimg:'',
+				username:'',
+				isshow:true
 			}
 		},
 		methods:{
@@ -164,7 +179,7 @@
 		  navs,
 		  scroll
 		},
-		
+	
 	}
 	
 </script>
@@ -229,15 +244,17 @@
 		font-size: 0.3rem;
 		padding: 0.05rem 0.05rem 0.05rem 0.05rem;
 		position: relative;
+		    display: flex;
+    align-items: center;
 	}
 	.details1{
 		width: 18%;
+		display: flex;
+		justify-content: center;
 	}
 	.details1 img{
-		width: 1rem;
-		height: 1rem;
-		border-radius: 50%;
-		/* border: 1px solid black; */
+		max-width: 90px;
+    border-radius: 50%;
 	}
 	.details2{
 		display: inline;

@@ -2,35 +2,19 @@
   <div>
     <div class="itemscontent">
       <div class="count">共{{ length }}部</div>
-      <div class="items">
-        <div class="eachitem">
-          <img
-            src="http://qidian.qpic.cn/qdbimg/349573/1004608738/150"
-            alt=""
-          />
-          <div class="eachitemdesc">
-            <h4>玄幻</h4>
-            <span>123部</span>
-          </div>
-        </div>
-        <div class="eachitem">
-          <img
-            src="http://qidian.qpic.cn/qdbimg/349573/1004608738/150"
-            alt=""
-          />
-          <div class="eachitemdesc">
-            <h4>玄幻</h4>
-            <span>123部</span>
-          </div>
-        </div>
-        <div class="eachitem">
-          <img
-            src="http://qidian.qpic.cn/qdbimg/349573/1004608738/150"
-            alt=""
-          />
-          <div class="eachitemdesc">
-            <h4>玄幻</h4>
-            <span>123部</span>
+      <div class="items" v-if="arr">
+        <div
+          class="eachitems"
+          v-for="(item, index) in arr"
+          :key="index"
+          @click="todetail()"
+        >
+          <div class="eachitems-imgs">
+            <img :src="arr[index][1].images" alt="" />
+            <div class="eachitems-desc">
+              <h4>{{ arr[index][0].type }}</h4>
+              <span>{{ item.length }}部</span>
+            </div>
           </div>
         </div>
       </div>
@@ -39,45 +23,59 @@
 </template>
 <script>
 export default {
+  created() {
+    console.log(this.type);
+    console.log(this.length);
+    console.log(this.arr);
+  },
+  data() {
+    return {};
+  },
   name: "forfenlei",
   props: {
     type: {
       type: [Array],
     },
     arr: {
-      type: [Array],
+      type: [Object, Array],
+      default: [],
     },
     length: {
       type: [Number],
     },
   },
+  methods: {
+    todetail() {
+      this.$router.push("/fenleidetail");
+      console.log("sb");
+    },
+  },
 };
 </script>
-<style scoped>
-.eachitem {
-  position: relative;
-  z-index: 999;
+<style>
+.eachitems {
+  width: 2.5rem;
   display: inline-block;
-  margin-top: 0.2rem;
-  margin-left: 0.5rem;
 }
-.eachitem .eachitemdesc > span {
+.eachitems-desc > span {
   position: relative;
   top: 0.2rem;
 }
-.eachitem .eachitemdesc > h4 {
-  font-size: 0.24rem;
-}
-.eachitem .eachitemdesc {
+.eachitems-desc {
+  margin-left: 0.2rem;
+  top: -0.4rem;
   position: relative;
-  top: -0.6rem;
-  left: 0.2rem;
+  display: inline-block;
   font-size: 0.2rem;
+}
+.eachitems-imgs > img {
   display: inline-block;
 }
-.eachitem > img {
+.eachitems-imgs {
   display: inline-block;
-  width: 1rem;
+  margin-top: 0.2rem;
+}
+.eachitems-imgs > img {
   border-radius: 0.1rem;
 }
 .itemscontent .count {

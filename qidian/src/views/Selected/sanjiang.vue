@@ -3,7 +3,7 @@
     <div class="kindhead">
       <i class="el-icon-arrow-left bk" @click="backup()"></i>
       <el-tabs v-model="activeName">
-        <el-tab-pane label="三江推荐" name="first">
+        <el-tab-pane label="三江推荐" name="first" v-if="msg.data">
           <scroll
             class="wrapper"
             :probeType="3"
@@ -14,7 +14,7 @@
               @click="openDetail(index)"
               class="sanjiangtuijian"
               :key="index"
-              v-for="(item, index) in msg.data.slice(startline, endline)"
+              v-for="(item, index) in msg"
             >
               <div class="top">
                 <img :src="item.images" alt="" />
@@ -45,7 +45,7 @@
               @click="openDetail(index)"
               class="sanjiangtuijian"
               :key="index"
-              v-for="(item, index) in msg.data.slice(startline1, endline1)"
+              v-for="(item, index) in msg"
             >
               <div class="top">
                 <img :src="item.images" alt="" />
@@ -75,32 +75,27 @@ export default {
     scroll,
   },
   created() {
-    this.$http.get("/api/booklist").then((res) => {
-      this.msg = res;
-      console.log(res);
+    this.$http.get(`/api/booklist/px/${8 * this.pxi}`).then((res) => {
+      this.msg = res.data;
     });
   },
   data() {
     return {
-      startline1: 54,
-      endline1: 60,
-      startline: 0,
-      endline: 7,
+      pxi: 1,
+
       msg: {},
       activeName: "first",
     };
   },
   methods: {
     pullingUp() {
-      console.log(this.startline, this.endline);
-      this.endline += 4;
-      this.endline1 += 4;
-      this.$refs.scroll.finishPullup();
-      this.$refs.scroll.refresh();
-      // console.log(this.startline, this.endline);
+      this.pxi++;
+      this.$http.get(`/api/booklist/px/${8 * this.pxi}`).then((res) => {
+        this.msg = res.data;
+      });
     },
     openDetail(index) {
-      let a = this.msg.data[index].id;
+      let a = this.msg[index].id;
       this.$router.push("/detail/" + a);
     },
     backup() {

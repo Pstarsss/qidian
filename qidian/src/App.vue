@@ -62,6 +62,8 @@ export default {
         this.$route.path == "/paihang"
       ) {
         this.footShow = false;
+      }else{
+        this.footShow = true;
       }
       this.nowUrl = to.fullPath; //全称路径
     },

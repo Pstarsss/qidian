@@ -2,8 +2,8 @@
   <div class="publish">
     <button
       @click="
-        trans()
-        show = !show
+        trans();
+        show = !show;
       "
       :class="[rotate ? 'out' : 'in']"
     >
@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import '../iconfont/iconfont.css'
-import '../iconfont/iconfont.css'
+import "../iconfont/iconfont.css";
+import "../iconfont/iconfont.css";
 export default {
   data: () => ({
     show: false,
@@ -30,15 +30,14 @@ export default {
   }),
   methods: {
     trans() {
-      this.rotate = !this.rotate
+      this.rotate = !this.rotate;
     },
   },
-}
+};
 </script>
 
 <style scoped>
-.publish {
-}
+
 button {
   width: 0.9rem;
   height: 0.9rem;
