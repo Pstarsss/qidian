@@ -415,6 +415,7 @@ export default {
           }).then((res)=>{
             let flag = res.data.has;
             let booktitle = res.data.title;
+            console.log(flag);
             let temp = {
                 userid,
                 collections,
@@ -460,9 +461,10 @@ export default {
                 }).then(res1=>{
                 });
                 let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
-                 let temp = aa.find((i)=>{
+                let temp = aa.find((i)=>{
                    return i.collections == collections;
                  });
+                console.log(temp);
                 temp.Chapter = Chapter+"";
                 temp.booktitle = booktitle;
                 sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
