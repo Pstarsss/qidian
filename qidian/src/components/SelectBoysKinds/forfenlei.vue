@@ -3,34 +3,13 @@
     <div class="itemscontent">
       <div class="count">共{{ length }}部</div>
       <div class="items">
-        <div class="eachitem">
-          <img
-            src="http://qidian.qpic.cn/qdbimg/349573/1004608738/150"
-            alt=""
-          />
-          <div class="eachitemdesc">
-            <h4>玄幻</h4>
-            <span>123部</span>
-          </div>
-        </div>
-        <div class="eachitem">
-          <img
-            src="http://qidian.qpic.cn/qdbimg/349573/1004608738/150"
-            alt=""
-          />
-          <div class="eachitemdesc">
-            <h4>玄幻</h4>
-            <span>123部</span>
-          </div>
-        </div>
-        <div class="eachitem">
-          <img
-            src="http://qidian.qpic.cn/qdbimg/349573/1004608738/150"
-            alt=""
-          />
-          <div class="eachitemdesc">
-            <h4>玄幻</h4>
-            <span>123部</span>
+        <div class="eachitems" v-for="(item, index) in arr" :key="index">
+          <div class="eachitems-imgs">
+            <img :src="item[0].images" alt="" />
+            <div class="eachitems-desc">
+              <h4>{{ item[0].type }}</h4>
+              <span>{{}}部</span>
+            </div>
           </div>
         </div>
       </div>
@@ -39,6 +18,9 @@
 </template>
 <script>
 export default {
+  data() {
+    return {};
+  },
   name: "forfenlei",
   props: {
     type: {
@@ -51,33 +33,34 @@ export default {
       type: [Number],
     },
   },
+
+  methods: {},
 };
 </script>
-<style scoped>
-.eachitem {
-  position: relative;
-  z-index: 999;
+<style>
+.eachitems {
+  width: 2.5rem;
   display: inline-block;
-  margin-top: 0.2rem;
-  margin-left: 0.5rem;
 }
-.eachitem .eachitemdesc > span {
+.eachitems-desc > span {
   position: relative;
   top: 0.2rem;
 }
-.eachitem .eachitemdesc > h4 {
-  font-size: 0.24rem;
-}
-.eachitem .eachitemdesc {
+.eachitems-desc {
+  margin-left: 0.2rem;
+  top: -0.4rem;
   position: relative;
-  top: -0.6rem;
-  left: 0.2rem;
+  display: inline-block;
   font-size: 0.2rem;
+}
+.eachitems-imgs > img {
   display: inline-block;
 }
-.eachitem > img {
+.eachitems-imgs {
   display: inline-block;
-  width: 1rem;
+  margin-top: 0.2rem;
+}
+.eachitems-imgs > img {
   border-radius: 0.1rem;
 }
 .itemscontent .count {

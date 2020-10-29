@@ -5,7 +5,7 @@
     <div class="fenleicontent">
       <el-tabs tab-position="left" style="height: 200px">
         <el-tab-pane label="男生"
-          ><forfenlei :type="type" :length="length"></forfenlei>
+          ><forfenlei :type="type" :length="length" :arr="arr"></forfenlei>
         </el-tab-pane>
         <el-tab-pane label="女生"></el-tab-pane>
       </el-tabs>
@@ -31,7 +31,6 @@ export default {
   created() {
     this.$http.get("/api/booklist").then((res) => {
       this.length = res.data.length;
-      console.log(this.length);
     });
 
     this.$http.get("/api/booklist").then((res) => {
@@ -39,7 +38,6 @@ export default {
       for (let a = 0; a < 5; a++) {
         this.arr[a] = temp.filter((i) => {
           return i.type == this.type[a];
-          temp.data.forEach((i) => console.log(i.type));
         });
       }
     });
@@ -47,6 +45,9 @@ export default {
 };
 </script>
 <style>
+.fenleicontent .el-tabs--left {
+  overflow: unset !important;
+}
 .fenleicontent .el-tabs__active-bar {
   background-color: #e5353f;
 }
