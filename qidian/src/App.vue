@@ -44,6 +44,11 @@
 
 <script>
 export default {
+  provide() {
+    return {
+      reload: this.reload,
+    };
+  },
   name: "App",
   data() {
     return {
@@ -70,6 +75,12 @@ export default {
     },
   },
   methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function () {
+        this.isRouterAlive = true;
+      });
+    },
     open(a) {
       if (this.$route.path == a) {
         return "";

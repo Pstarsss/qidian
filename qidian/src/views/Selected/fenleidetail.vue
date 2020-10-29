@@ -35,11 +35,13 @@
 <script>
 import afree from "../../components/SelectBoysKinds/free";
 export default {
+  inject: ["reload"],
   data() {
     return {
       id: "",
       a: { type: "" },
       arr: [],
+      zz: "",
     };
   },
 
@@ -52,13 +54,13 @@ export default {
       this.arr = temp.filter((i) => {
         return i.type == this.$router.currentRoute.params.id;
       });
-      console.log(this.arr[0].type);
+      this.zz = this.arr[0].type;
+      console.log(this.zz);
     });
   },
   watch: {
     $route() {
-      this.a.type = this.$router.currentRoute.params.id;
-      if (this.arr[0].type != this.$router.currentRoute.params.id) {
+      if (this.zz !== this.$router.currentRoute.params.id) {
         this.$http.get("/api/booklist").then((res) => {
           let temp = res.data;
           this.arr = temp.filter((i) => {
@@ -66,7 +68,11 @@ export default {
           });
         });
       }
+      this.a.type = this.$router.currentRoute.params.id;
     },
+  },
+  mounted() {
+    this.reload();
   },
   components: {
     afree,
