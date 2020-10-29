@@ -59,10 +59,11 @@ export default {
         this.$route.path == "/wanben" ||
         this.$route.path == "/sanjiang" ||
         this.$route.path == "/fenlei" ||
-        this.$route.path == "/paihang"
+        this.$route.path == "/paihang" ||
+        this.$route.path == "/fenleidetail"
       ) {
         this.footShow = false;
-      }else{
+      } else {
         this.footShow = true;
       }
       this.nowUrl = to.fullPath; //全称路径

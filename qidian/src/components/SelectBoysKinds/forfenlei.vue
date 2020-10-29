@@ -7,7 +7,7 @@
           class="eachitems"
           v-for="(item, index) in arr"
           :key="index"
-          @click="todetail()"
+          @click="todetail(arr[index][0].type)"
         >
           <div class="eachitems-imgs">
             <img :src="arr[index][1].images" alt="" />
@@ -45,9 +45,8 @@ export default {
     },
   },
   methods: {
-    todetail() {
-      this.$router.push("/fenleidetail");
-      console.log("sb");
+    todetail(a) {
+      this.$router.push("/fenleidetail/" + a);
     },
   },
 };
