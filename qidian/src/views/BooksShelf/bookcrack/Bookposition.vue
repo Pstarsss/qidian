@@ -33,6 +33,7 @@
          :author="data.author"
          @toDetail="toDetail"
          @deleteBook="deleteBook"
+         @toHB="toHB"
          >
          </bookshelfset>
          </el-drawer>
@@ -80,6 +81,10 @@ export default {
        this.drawer = false;
        this.$emit('deleteBook',this.data.userid,this.data.collections);
     },
+    toHB(){
+       this.drawer = false;
+       this.$router.push('/findHB');
+    }
  }
 
 }

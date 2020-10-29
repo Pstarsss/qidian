@@ -244,6 +244,8 @@
 		font-size: 0.3rem;
 		padding: 0.05rem 0.05rem 0.05rem 0.05rem;
 		position: relative;
+		    display: flex;
+    align-items: center;
 	}
 	.details1{
 		width: 18%;
@@ -251,7 +253,7 @@
 		justify-content: center;
 	}
 	.details1 img{
-	 	width: 0.5rem;
+		max-width: 90px;
     border-radius: 50%;
 	}
 	.details2{
