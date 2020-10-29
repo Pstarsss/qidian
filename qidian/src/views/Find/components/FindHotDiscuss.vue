@@ -66,7 +66,7 @@ export default {
       // this.detailE = e
       // console.log(e)
       this.$router.push({
-        path: '/findDetails/' + e.discussid
+        path: '/findDetails/' + e.discussid,
       })
     },
   },
