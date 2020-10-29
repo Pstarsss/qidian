@@ -63,7 +63,7 @@ export default {
         this.$router.push('/read/'+a+"/chapter/"+b);
     },
     openmore(){
-
+      this.$router.push('/paihang');
     },
     openset(){
 

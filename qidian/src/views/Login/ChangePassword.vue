@@ -8,11 +8,14 @@
      <div class="form1">
        <input type="password" placeholder="旧密码" class="input1" name="password" :value="passowordvalue1" @input="ispassword1">
      </div>
+     <div class="tips" v-if="error">
+       <span>您的原密码与您填写的不核对</span>
+     </div>
      <div class="form1">
        <input type="password" placeholder="新密码" class="input1" name="password" :value="passowordvalue2" @input="ispassword2">
      </div>
      <div class="form1">
-       <input type="submit" @click.prevent="rush" value="确认" class="login1" >
+       <input type="submit" @click.prevent="rush" value="确认" class="login1" :disabled="disabled" :class="{'red':!disabled}">
      </div>
   </form>
    </div>
@@ -30,7 +33,9 @@ export default {
    return {
       srcs:require('@/assets/img/loginimg/shangyibu.png'),
       passowordvalue1:'',
-      passowordvalue2:''
+      passowordvalue2:'',
+      error:false,
+      disabled:true
    };
   },
   methods:{
@@ -42,17 +47,42 @@ export default {
     },
     ispassword2(){
       this.passowordvalue2 = event.target.value;
+      if(this.passowordvalue2.length){
+        this.disabled = false;
+      }else{
+        this.disabled = true;
+      }
+      
     },
     rush(){
-      console.log(sessionStorage);
-      // if(this.issure&&this.phonevalue&&this.passowordvalue){
-      //   this.$http.post('/api/changepassword',{
-      //     password2:this.passowordvalue2,
+      let correctpassword = JSON.parse(sessionStorage.getItem('userbasic'));
+      let iphone = correctpassword.iphone;
+      let password = correctpassword.password;
+      
 
-      //   }).then(res=>{
-      //     this.$router.push('/mineShow');
-      //   })
-      // }
+      if(password == this.passowordvalue1){
+        
+        this.error = false;
+        this.$http.post('/api/changepassword',{
+          password,
+          iphone
+        }).then(res=>{
+          this.$message({
+            message: '密码修改成功',
+            type: 'success'
+          });
+          correctpassword.password = this.passowordvalue1;
+          sessionStorage.setItem('userbasic',JSON.stringify(correctpassword));
+          setTimeout(()=>{
+            this.$router.push('/mineShow');
+          },500);
+          
+        })
+      }else{
+        this.error = true;
+        
+      }
+      
     }
    }
 
@@ -118,5 +148,14 @@ form{
   font-size:0.23rem;
   color:red;
   text-align: center;
+}
+.red{
+  background-color:red;
+}
+.tips {
+    font-size: 0.2rem;
+    width: 80vw;
+    margin: 0 auto;
+    color: red;
 }
 </style>

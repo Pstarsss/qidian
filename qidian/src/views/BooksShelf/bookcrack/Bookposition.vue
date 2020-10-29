@@ -128,8 +128,10 @@ export default {
 }
 .bookshelf-drawer /deep/ .el-drawer{
    border-radius: 0;
+   padding: 0.1rem 0.2rem;
 }
 .bookshelf-drawer /deep/ .v-modal{
    z-index: 2 !important;
 }
+
 </style>

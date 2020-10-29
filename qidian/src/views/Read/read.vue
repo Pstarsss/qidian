@@ -135,6 +135,7 @@ export default {
       }
     },
     tologin() {
+      this.isshow = false;
       if (this.isshow2) {
         // 用户添加本书阅读记录
         let userid = JSON.parse(sessionStorage.getItem("userbasic")).userid;
