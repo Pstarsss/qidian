@@ -71,7 +71,7 @@
            <img :src="imgs[5].src">
             <span>打赏</span>
           </div>
-          <div class="level1-shuyou">
+          <div class="level1-shuyou" @click="toHB">
             <img :src="imgs[6].src">
             <span>红包</span>
           </div>
@@ -120,6 +120,9 @@ export default {
     },
     deleteBook(){
       this.$emit('deleteBook');
+    },
+    toHB(){
+      this.$emit('toHB');
     }
   }
 }
