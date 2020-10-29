@@ -264,11 +264,16 @@
 export default {
   inject:['reload'],
   name: 'Detail',
-  components: {   
+  watch:{
+    $route:{
+      handler(){
+        this.reload();
+      }, 
+      deep:true,
+      immediate:true
+    }
   },
-  beforeRouteEnter (to, from, next) {
-    
-    next();
+  components: {   
   },
   data() {
       return {
@@ -296,6 +301,7 @@ export default {
       };
     },
     created(){
+      console.log(1);
       let id = this.$router.currentRoute.params.id;
       this.getdata(id);
       this.$http.get('/api/booklist/'+8).then(res=>{
@@ -407,6 +413,7 @@ export default {
           }).then((res)=>{
             let flag = res.data.has;
             let booktitle = res.data.title;
+            console.log(booktitle,flag);
             let temp = {
                 userid,
                 collections,
@@ -427,8 +434,8 @@ export default {
                     type: 'success'
                 });
                 });
-                this.rightshow=!this.rightshow;
-                this.jrsj=!this.jrsj
+                // this.rightshow=!this.rightshow;
+                // this.jrsj=!this.jrsj
                 console.log(JSON.parse(sessionStorage.getItem('userbookinfo')));
                 let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
                 aa.push(temp);

@@ -36,9 +36,13 @@
         </div>
       </div>
     </div>
-    <keep-alive exclude="[Detail,Comment,Bookshelf]">
-      <router-view />
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <!-- <keep-alive exclude="[Detail,Comment,Bookshelf]">
+      <router-view />
+    </keep-alive> -->
   </div>
 </template>
 
