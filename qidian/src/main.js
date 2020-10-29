@@ -16,6 +16,7 @@ Vue.use(MintUI)
 
 Vue.use(ElementUI)
 Vue.prototype.$http = axios
+
 Vue.config.productionTip = false
 
 new Vue({

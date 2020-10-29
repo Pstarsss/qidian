@@ -65,9 +65,6 @@ const routes = [
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
-    meta: {
-      keepAlive: false,
-    },
   },
   {
     path: '/sanjiang',
@@ -227,23 +224,23 @@ const routes = [
   },
   {
     path: '/hobbySet',
-    name: 'hobbySet',
+    name: 'HobbySet',
     component: hobbySet,
     redirect: '/hobbySet/hobbychild',
     children: [
       {
         path: '/hobbySet/hobbychild',
-        name: 'hobbychild',
+        name: 'Hobbychild',
         component: hobbychild,
       },
       {
         path: '/hobbySet/hobbyGirls',
-        name: 'hobbyGirls',
+        name: 'HobbyGirls',
         component: hobbyGirls,
       },
       {
         path: '/hobbySet/hobbyBoys',
-        name: 'hobbyBoys',
+        name: 'HobbyBoys',
         component: hobbyBoys,
       },
     ],

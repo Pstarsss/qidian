@@ -577,7 +577,7 @@
     align-items: center;
     margin: 0 auto;
     z-index: 10;
-    background-color: #e6e53a;
+    background-color: #dfdfdf70;
     padding: .3rem .3rem 0 .3rem;
     border-radius: .1rem;
   }
@@ -589,12 +589,12 @@
   }
   .tologin h2{
     font-size: 0.25rem;
-    color: red;
+    color: black;
 }
   .dl{
     font-size: 0.2rem;
     padding:0.05rem .2rem;
-    background-color: green;
+    background-color: gray;
     color: #f2f6fc;
     border-radius: .5rem;
     margin: 0 .1rem;
@@ -602,8 +602,7 @@
   .jkk{
     font-size: 0.2rem;
     padding:0.05rem .2rem;
-    background-color: #ecf5ff;
-    color: #409eff;
+    color: #ff0000;
     border-radius: .5rem;
     margin: 0 .1rem;
   }

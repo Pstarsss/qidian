@@ -8,7 +8,7 @@
           <p class="top-center-bookname">{{bookname}}</p>
           <p class="top-center-author">{{author}}</p>
        </div>
-        <div class="bookset-top-right">
+        <div class="bookset-top-right" @click="toDetail">
           <el-button round>详情</el-button>
        </div>
      </div>
@@ -22,7 +22,60 @@
        </div>
      </div>
      <div class="bookset-bottom">
-       
+        <div class="bottom-level1">
+          <div>
+           <el-switch v-model="value1" active-color="#f40" inactive-color="#e5e5e5"></el-switch>
+           <span>置顶</span>
+          </div>
+          <div>
+            <el-switch v-model="value2" active-color="#f40" inactive-color="#e5e5e5"></el-switch>
+            <span>更新提醒</span>
+          </div>
+          <div> 
+            <el-switch v-model="value3" active-color="#f40" inactive-color="#e5e5e5"></el-switch>
+            <span>自动订阅</span>
+          </div>
+          <div class="level1-shuyou">
+            <el-badge class="el-icon-chat-dot-square"></el-badge>
+            <span>书友圈</span>
+          </div>
+        </div>
+        <div class="bottom-level1">
+          <div>
+           <img :src="imgs[0].src">
+           <span>批量订阅</span>
+          </div>
+          <div>
+            <img :src="imgs[1].src">
+            <span>移到分组</span>
+          </div>
+          <div> 
+           <img :src="imgs[2].src">
+            <span>分享本书</span>
+          </div>
+          <div class="level1-shuyou" @click="deleteBook">
+            <el-badge  class="el-icon-delete"></el-badge>
+            <span>删除</span>
+          </div>
+        </div>
+        <div class="bottom-level1">
+          <div>
+           <img :src="imgs[3].src">
+           <span>投推荐票</span>
+          </div>
+          <div>
+           <img :src="imgs[4].src">
+            <span>投月票</span>
+          </div>
+          <div> 
+           <img :src="imgs[5].src">
+            <span>打赏</span>
+          </div>
+          <div class="level1-shuyou">
+            <img :src="imgs[6].src">
+            <span>红包</span>
+          </div>
+        </div>
      </div>
    </div>
 </template>
@@ -32,7 +85,19 @@ export default {
   components: {},
   data() {
     return {
-
+      value1:false,
+      value2:false,
+      value3:false,
+      value4:true,
+      imgs:[
+        {src:require('../booksetimage/xiazai.png')},
+        {src:require('../booksetimage/wenjian.png')},
+        {src:require('../booksetimage/fenxiang.png')},
+        {src:require('../booksetimage/tuijian.png')},
+        {src:require('../booksetimage/yue.png')},
+        {src:require('../booksetimage/dashang.png')},
+        {src:require('../booksetimage/huabanx.png')}
+      ]
     };
   },
   props:{
@@ -47,6 +112,14 @@ export default {
     author:{
       type:[String],
       default:''
+    }
+  },
+  methods:{
+    toDetail(){
+      this.$emit('toDetail');
+    },
+    deleteBook(){
+      this.$emit('deleteBook');
     }
   }
 }
@@ -75,7 +148,7 @@ export default {
   flex:1;
 }
 .top-center-bookname{
-  font-size: 0.28rem;
+  font-size: 0.32rem;
   font-weight: 500;
   font-family: cursive;
   padding: 0.1rem;
@@ -92,12 +165,16 @@ export default {
 .bookset-center{
   display: flex;
   align-items: center;
-  
+  padding: 0.1rem 0;
+  border-bottom: 1px solid #b1b1b12e;
+  font-size: 0.25rem;
+    font-weight: 500;
 }
 .bookset-center >div{
   flex:1;
   font-family: cursive;
   padding: 0.1rem;
+
 }
 .bookset-center-left {
     display: flex;
@@ -113,5 +190,32 @@ export default {
 .bookset-center-right{
   text-align:right;
 }
+.bookset-bottom {
+    padding-top: 0.2rem;
+}
+.bottom-level1{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.1rem;
+}
+.bottom-level1 img{
+  width:0.43rem;
+}
+.bottom-level1 > div{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  flex:1;
+}
+.bottom-level1 > div span{
+    padding: 0.14rem 0;
+    font-size: 0.24rem;
+}
+.el-badge{
+  font-size: 0.43rem;
+}
+.level1-shuyou{
 
+}
 </style>

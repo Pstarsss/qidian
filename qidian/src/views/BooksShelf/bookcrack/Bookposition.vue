@@ -23,7 +23,7 @@
          direction="btt"
          :with-header="false"
          :before-close="handleClose"
-         size="50%"
+         size="60%"  
          :append-to-body="false"
          :modal-append-to-body="false"
          >
@@ -31,6 +31,8 @@
          :image="data.image"
          :bookname="data.bookname"
          :author="data.author"
+         @toDetail="toDetail"
+         @deleteBook="deleteBook"
          >
          </bookshelfset>
          </el-drawer>
@@ -69,8 +71,15 @@ export default {
     handleClose(done) {
          this.drawer = false;
          done();
-       
-    }
+    },
+    toDetail(){
+       this.drawer = false;
+       this.$router.push('/read/'+this.data.collections+"/chapter/"+this.data.Chapter);
+    },
+    deleteBook(){
+       this.drawer = false;
+       this.$emit('deleteBook',this.data.userid,this.data.collections);
+    },
  }
 
 }
