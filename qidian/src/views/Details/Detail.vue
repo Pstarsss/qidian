@@ -15,7 +15,7 @@
         </div>
                
         <div class="detail-top-right">
-           <i class="el-icon-more"></i>
+           <i class="el-icon-more  detail-more-more"></i>
         </div>      
       </div>
       <div class="detail-header">
@@ -98,8 +98,11 @@
                       </div>
                       <div class="detail-role-left-bottom">
                            <span>可爱，盟，机智怜悯</span>
-                           <span  @click="addin">
-                             <p><i class="el-icon-star-off" :class="{active1}"></i></p>
+                           <span  @click="addin" >
+                             <p>
+                               <img src="../../assets/img/Detail/love 1.png" alt="" v-if="loveshow" class="detail-love">
+                               <img src="../../assets/img/Detail/love 2.png" alt="" v-else class="detail-love">
+                             </p>
                              <span class="detail-role-left-bottom-num">{{msg1}}</span>
                            </span>
                       </div>
@@ -116,7 +119,10 @@
                       <div class="detail-role-left-bottom">
                            <span>傲娇，口嫌体正直，专一</span>
                            <span @click="addin1">
-                             <p><i class="el-icon-star-off" :class="{active2}"></i></p>
+                              <p>
+                               <img src="../../assets/img/Detail/love 1.png" alt="" v-if="loveshow1" class="detail-love">
+                               <img src="../../assets/img/Detail/love 2.png" alt="" v-else class="detail-love">
+                             </p>
                              <span class="detail-role-left-bottom-num">{{msg2}}</span>
                            </span>
                       </div>
@@ -215,7 +221,7 @@
          </div>
         
          <div class="space-white"></div>
-         <div class="detail-updates">
+         <div class="detail-updatess">
              <hr>
          </div>
          
@@ -232,8 +238,9 @@
             <span>听书</span>
         </div>
         <div class="detail-add" @click="addCollections">
-            <img src="../../assets/img/Detail/6.png" alt="">
-            <span>加入书架</span>
+            <img src="../../assets/img/Detail/6.png" alt="" v-if="rightshow">
+             <img src="../../assets/img/Detail/gou.png" alt="" v-else>
+            <span :class="{jrsj}">加入书架</span>
         </div>
         <div class="free-read" @click="read">
             <p class="free-read1">免费阅读</p>
@@ -281,7 +288,11 @@ export default {
         isshow:false,
         leavetop:false,
         topcolor:false,
-        topwhite:false
+        topwhite:false,
+        loveshow:true,
+        loveshow1:true,
+        rightshow:true,
+        jrsj:false,
       };
     },
     created(){
@@ -316,9 +327,9 @@ export default {
   methods: {
     handleScroll() {
          let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
-        scrolltop > 200 ? (this.leavetop = true) : (this.leavetop = false);
-        scrolltop > 200 ? (this.topcolor = true) : (this.topcolor = false);
-         scrolltop > 200 ? (this.topwhite = true) : (this.topwhite = false);
+        scrolltop > 180 ? (this.leavetop = true) : (this.leavetop = false);
+        scrolltop > 180 ? (this.topcolor = true) : (this.topcolor = false);
+         scrolltop > 180 ? (this.topwhite = true) : (this.topwhite = false);
 	    },
      openDetail1(index) {
       this.$http.get("/api/booklist/12").then((res) => {
@@ -344,8 +355,12 @@ export default {
         if(this.msg1=3274){
            this.msg1++;
            setTimeout(() => {
-           this.active1=true;
-        }, 200);         
+           this.loveshow=false;
+        }, 200);
+          this.$message({
+            message: '感谢比心，明天记得再来哦~',
+            type: 'success'
+        });         
         }else{
           this.msg1=this.msg1;
         }        
@@ -354,8 +369,12 @@ export default {
           if(this.msg2=2287){
            this.msg2++;
           setTimeout(() => {
-           this.active2=true;
-        }, 200);  
+           this.loveshow1=false;
+        }, 200);
+        this.$message({
+            message: '感谢比心，明天记得再来哦~',
+            type: 'success'
+        });  
         }else{
           this.msg2=this.msg2;
         } 
@@ -403,12 +422,18 @@ export default {
                   temp
                 }).then(res1=>{
                   console.log(res1);
+                   this.$message({
+                    message: '加入成功',
+                    type: 'success'
                 });
+                });
+                this.rightshow=!this.rightshow;
+                this.jrsj=!this.jrsj
                 console.log(JSON.parse(sessionStorage.getItem('userbookinfo')));
                 let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
                 aa.push(temp);
                 sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
-           
+                 
                 // this.$store.dispatch('add',temp).then(res3=>{
                 //     console.log(res3);
                 // });

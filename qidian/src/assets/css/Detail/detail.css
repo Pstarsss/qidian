@@ -500,8 +500,8 @@
 }
 
 .detail-updates {
-  margin: 0 auto;
-  width: 6.8rem;
+  margin: .2rem auto;
+  width: 98vw;
   }
   .space-whites{
    height: 1rem;
@@ -611,4 +611,15 @@
   }
   .topwhite{
     color:black;
+  }
+  .detail-love{
+    width: .3rem;
+    height: .3rem;
+    margin-left: .08rem;
+  }
+  .detail-more-more{
+    font-size: .2rem;
+  }
+  .jrsj{
+    color: #a2a2a2;
   }
