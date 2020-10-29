@@ -491,7 +491,7 @@ export default {
 <style lang="css" scoped>
 #roll {
   width: 100%;
-  height: 0.7rem;
+  height: 0.6rem;
   background-color: #eee;
   margin: 0.2rem 0;
   padding: 0.15rem 0.2rem;

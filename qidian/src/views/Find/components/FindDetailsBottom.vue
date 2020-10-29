@@ -43,10 +43,14 @@
           <img :src="i.src" alt="" v-for="i in reviewImgs" :key="i.id" />
         </span>
         <span>{{ publishReview.length }}/200</span>
+
       </p>
     </el-drawer>
     <mt-actionsheet :actions="actions" v-model="sheetVisible"> </mt-actionsheet>
-    <!-- <input type="file" id="inputFile" accept=".png,.jpg" /> -->
+    <!-- <div v-if="ispicture" class="uploadpicture">
+      <input type="file" id="inputFile" accept=".png,.jpg" @change="add_img" />
+    </div> -->
+    
   </div>
 </template>
 
@@ -74,6 +78,10 @@ export default {
         // { src: require('../img/海王星.png') },
         // { src: require('../img/海王星.png') },
       ],
+      ispicture:false,
+      imgData: {
+            accept: 'image/gif, image/jpeg, image/png, image/jpg',
+      }
     }
   },
   watch: {
@@ -106,7 +114,8 @@ export default {
     //   this.dialog = true;
     // },
     chosePicSheet() {
-      this.sheetVisible = true
+      this.sheetVisible = true;
+      this.ispicture = true;
     },
     chosePic() {},
     submits() {
@@ -130,6 +139,42 @@ export default {
       m1 = m1.length > 1 ? m1 : '0' + m1
       return `${dd.getMonth() + 1}月${dd.getDate() + 1}日 ${h1}:${m1}`
     },
+    add_img(event){
+      let reader = new FileReader();
+      let img1 = event.target.files[0];
+      let name = img1.name;
+      console.log(img1);
+      let img2 = JSON.stringify(img1);
+      // 文件的类型，判断是否为图片;
+      let type = img1.type;
+      // 文件的大小，判断图片的大小;
+      let size = img1.size;
+      if(!(this.imgData.accept.includes(type))){
+        this.$message.error('图片类型不匹配');
+        return false;
+      }
+      if(size>3145728){
+         this.$message.error('图片过大');
+        return false;
+      }
+      let uri = '';
+      let form = new FormData();
+
+      form.append('file',img1,img1.name);
+      this.$http.post('/api/file/upload',form,{
+                headers:{'Content-Type':'multipart/form-data'}
+            }).then(res=>{
+        console.log(res);
+        uri = res.data.url;
+        reader.readAsDataURL(img1);
+        
+        reader.onloadend = function(){
+          console.log(uri);
+        }
+      }).catch(error=>{
+        this.$message.error('上传图片出错了');
+      })
+    } 
   },
 }
 </script>
@@ -200,9 +245,7 @@ export default {
   line-height: 0.8rem;
   float: left;
 }
-section {
-  /* padding: 0.2rem; */
-}
+
 section > form > p:first-of-type {
   line-height: 0.6rem;
   color: #000;
@@ -252,5 +295,11 @@ textarea {
   position: fixed;
   bottom: 1rem;
   /* background-color: #000; */
+}
+.uploadpicture{
+  position: absolute;
+  /* top:50%; */
+  left:50%;
+  z-index: 10000;
 }
 </style>

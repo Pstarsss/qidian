@@ -3,6 +3,20 @@ let express = require('express');
 let router = express.Router();
 let sql = require('../store/mysql.js');
 const Math = require('math');
+
+// 对文件处理需要；
+let multer = require('multer');
+let storage = multer.diskStorage({
+  destination:'../public/upload',
+  filename:function(req,file,cb){
+    let fileFormat = (file.originalname).split('.');
+    let filename = new Date().getTime();
+    cb(null,filename +'.'+fileFormat[fileFormat.length-1]);
+  }
+});
+let upload = multer({
+  storage,
+});
 // get 一般为查询请求
 // post 一般为新增用户
 // put  一般为修改信息；
@@ -150,6 +164,16 @@ router.put('/update/discuss', (req, res) => {
     //     console.log(err);
     // })
 })
+// 上传文件的处理;
+router.post('/file/upload',upload.single('file'),function(req,res){
+  let file = req.file;
+  console.log(file);
+  let fileName = file.filename;
+  let avatarUrl = '/upload/'+fileName;
+  console.log(avatarUrl);
+  res.send('----');
+});
+
 
 // 搜索
 router.post('/search',function(req,res){
@@ -297,8 +321,8 @@ const Core = require('@alicloud/pop-core');
 const { log } = require('math');
 
 var client = new Core({
-  accessKeyId: 'LTAI4G3rASxgYtmSgUKSaxJM',
-  accessKeySecret: 'KxyLR92rsbtcit9K2foDbkifuS2rn6',
+  accessKeyId: 'LTAI4G9pA3GqufjtMwAANbBa',
+  accessKeySecret: 'g6NnMidKTsoERhoSjXcpXt1Ma3xNmP',
   endpoint: 'https://dysmsapi.aliyuncs.com',
   apiVersion: '2017-05-25'
 });
