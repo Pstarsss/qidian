@@ -73,7 +73,7 @@
 		</div>
 		<!-- 列表板块 -->
 		<div class="foot-list">
-			<div v-for="(item,index) in bottomLists" :key="index" class="lists">
+			<div v-for="(item,index) in bottomLists" :key="index" class="lists" @click="getLists(item.methods)">
 				<i :class="item.icon1"></i>
 				<span>{{item.content}}</span>
 				<i class="el-icon-arrow-right"></i>
@@ -113,7 +113,7 @@
 				],
 				bottomLists:[
 					{ icon1:'el-icon-tickets', content:'新书投资'},
-					{ icon1:'el-icon-position', content:'我的游戏'},
+					{ icon1:'el-icon-position', content:'我的游戏',methods:'mineGames'},
 					{ icon1:'el-icon-bangzhu', content:'领币'},
 					{ icon1:'el-icon-coin', content:'积分商城'},
 					{ icon1:'el-icon-edit', content:'成为作家'},
@@ -150,7 +150,15 @@
 			},
 			stopflag(){
 				this.flag = false;
+			},
+			getLists(methodsWords){
+				this[methodsWords]();
+			},
+			mineGames(){
+				this.$router.push('/mineGames')
 			}
+			
+			
 		},
 		components: {
 		  navs,

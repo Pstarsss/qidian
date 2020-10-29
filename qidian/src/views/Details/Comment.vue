@@ -36,13 +36,13 @@ export default {
       submits() {       
       let value = {}
       let aa = JSON.parse(sessionStorage.getItem('userbasic'));
-      value.headimg = aa.userhead;
+      value.headimg = "aa.userhead";
       value.name = aa.username;
       value.content = this.info.content;
-      value.tag = '见习';
+      value.tag = '盟主';
       value.image = '';
       value.time = this.getTime();
-      value.likes = 0;
+      value.likes = 666;
       value.reviews = 0;
        if(this.info.content == null){
           this.$message({

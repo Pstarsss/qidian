@@ -3,7 +3,7 @@
     <div class="foot1">
       <div class="bottom1">
         <div class="a1" v-for="(item, index) in list" :key="index">
-          <img :src="item.src" @click="openkinds(item.index)" />
+          <img :src="item.src" @click="openkind(item)" />
           <span>{{ item.name }}</span>
         </div>
       </div>
@@ -13,20 +13,15 @@
 
 <script>
 export default {
-  name: "navs",
+  name: 'navs',
   data() {
-    return {};
+    return {}
   },
   methods: {
-    openkinds(a) {
-      if (a == 3) {
-        this.$router.push("/sanjiang");
-      }
-      if (a == 4) {
-        this.$router.push("/selectboysfree");
-      }
-      if (a == 5) {
-        this.$router.push("/wanben");
+    openkind(e) {
+      if (e.name == '红包') {
+        this.$router.push('/findHB')
+        console.log('1')
       }
     },
   },
@@ -34,12 +29,12 @@ export default {
     //返回数组默认值
     list: {
       type: Array,
-      default: function () {
-        return [];
+      default: function() {
+        return []
       },
     },
   },
-};
+}
 </script>
 
 <style>

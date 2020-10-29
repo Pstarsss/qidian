@@ -1,15 +1,18 @@
 <template>
   <div>
+    <!-- <scroll :probeType="3" ref="scroll" @pullingUp="pullingUp"> -->
     <book-crack class="bookcolor"></book-crack>
     <div v-if="temp">
         <book-list v-for="(item) in temp" :key="item.collections" :data="item"
-        @toread='toread' ></book-list>
+        @toread.native='toread'
+        @deleteBook='deleteBook' ></book-list>
     </div>
     <div></div>
     <div class="b-findmore" @click="openmore">
           <button>查找更多精彩作品</button>
     </div>
-    <!-- <div class="placeholder"></div> -->
+    <div class="placeholder"></div>
+    <!-- </scroll> -->
   </div>
    
 </template>
@@ -35,14 +38,27 @@ export default {
       temp1:''
     }
   },
-  computed:{
-   
+  watch:{
+    $route:{
+      handler(){
+         this.temp = JSON.parse(sessionStorage.getItem('userbookinfo'));
+      },
+      deep:true,  
+      immediate:true,
+    },
+    // sessionStorage:{
+    //   handler(){
+    //     console.log('111');
+    //   },
+    //   deep:true,
+    //   immediate:true
+    // }
   },
+  // updated(){
+  //   this.temp = JSON.parse(sessionStorage.getItem('userbookinfo'));     
+  // },
   created(){
-       this.reload();
-       this.temp = JSON.parse(sessionStorage.getItem('userbookinfo'));
-       console.log(this.temp);
-       
+       this.temp = JSON.parse(sessionStorage.getItem('userbookinfo'));     
   },
   methods:{
     toread(a,b){
@@ -55,6 +71,25 @@ export default {
     openset(){
 
     },
+    deleteBook(userid,collections){
+      let tt = JSON.parse(sessionStorage.getItem('userbookinfo'));
+      let index = tt.findIndex(i=>{
+        return ((i.userid == userid)&&(i.collections == collections));
+      })
+      tt.splice(index,1);
+      sessionStorage.setItem('userbookinfo',JSON.stringify(tt));
+      this.temp.splice(index,1);
+      this.reload();
+      this.$http.post('/api/delete/book',{
+          userid,
+          collections
+      }).then(res=>{
+        console.log(res);
+      })
+    }
+    // pullingUp(){
+    //   this.$refs.scroll.refresh();
+    // },
     // getSessionStorage(){
       
     //   if(sessionStorage.getItem('userid')){
@@ -89,12 +124,13 @@ export default {
 }
 </script>
 <style scoped>
+
 .wrapper{
-  height: calc(100vh - 1.45rem);
+    height: calc(100vh - 0.68rem);
 }
 .placeholder {
     width: 100vw;
-    height: 100vh;
+    height: 40vh;
 }
 .b-findmore{
       width: 100vw;

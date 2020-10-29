@@ -11,10 +11,10 @@ import Search from '@/views/Search/Search.vue'
 
 // 发现
 import Find from '@/views/Find.vue'
-import FindFollow from '@/views/Find/findFollow.vue'
-import FindSquares from '@/views/Find/findSquares.vue'
-import findDetails from '@/views/Find/FindeDetails.vue'
-
+import FindFollow from '@/views/Find/FindFollow.vue'
+import FindSquares from '@/views/Find/FindSquares.vue'
+import FindDetails from '@/views/Find/FindeDetails.vue'
+import FindHB from '@/views/Find/components/FindHB.vue'
 
 // 我的
 import Mine from '@/views/Mine.vue'
@@ -27,6 +27,8 @@ import hobbySet from '@/views/Mine/components/hobbySet.vue'
 import hobbychild from '@/views/Mine/components/hobbychild.vue'
 import hobbyGirls from '@/views/Mine/components/hobbyGirls.vue'
 import hobbyBoys from '@/views/Mine/components/hobbyBoys.vue'
+import pushSet from '@/views/Mine/components/pushSet.vue'
+import mineGames from '@/views/Mine/components/mineGames.vue'
 
 // 精选
 import Select from '@/views/Selected/Select.vue'
@@ -37,6 +39,8 @@ import SelectCartoon from '@/views/Selected/SelectCartoon.vue'
 import SelectBoysfree from '@/views/Selected/SelectBoysfree.vue'
 import wanben from '@/views/Selected/wanben'
 import sanjiang from '@/views/Selected/sanjiang'
+import paihang from '@/views/Selected/paihang'
+import fenlei from '@/views/Selected/fenlei'
 
 //详情
 const Detail = () => import('@/views/Details/Detail.vue')
@@ -46,10 +50,10 @@ const Detaildiscuss = () => import('@/views/Details/Detaildiscuss.vue')
 const Comment = () => import('@/views/Details/Comment.vue')
 
 //登录注册
-const Login = () => import('@/views/Login/Login.vue');
-const Validatelogin = () => import('@/views/Login/validatelogin.vue');
-const Register = () => import('@/views/Login/Register.vue');
-const ChangePassword = () => import('@/views/Login/ChangePassword.vue');
+const Login = () => import('@/views/Login/Login.vue')
+const Validatelogin = () => import('@/views/Login/validatelogin.vue')
+const Register = () => import('@/views/Login/Register.vue')
+const ChangePassword = () => import('@/views/Login/ChangePassword.vue')
 
 Vue.use(VueRouter)
 
@@ -81,6 +85,16 @@ const routes = [
     name: 'sanjiang',
     component: sanjiang,
   },
+  {
+    path: '/fenlei',
+    name: 'fenlei',
+    component: fenlei,
+  },
+  {
+    path: '/paihang',
+    name: 'paihang',
+    component: paihang,
+  },
   // 精选的
   {
     path: '/wanben',
@@ -96,6 +110,7 @@ const routes = [
     path: '/select',
     name: 'Select',
     component: Select,
+
     children: [
       {
         path: '/selecthome',
@@ -106,17 +121,25 @@ const routes = [
         path: '/selectboys',
         name: 'SelectBoys',
         component: SelectBoys,
-       
+        meta: {
+          keepAlive: true,
+        },
       },
       {
         path: '/selectgirls',
         name: 'SelectGirls',
         component: SelectGirls,
+        meta: {
+          keepAlive: true,
+        },
       },
       {
         path: '/selectcartoon',
         name: 'SelectCartoon',
         component: SelectCartoon,
+        meta: {
+          keepAlive: true,
+        },
       },
     ],
     redirect: '/selectboys',
@@ -126,6 +149,9 @@ const routes = [
     path: '/detail/:id',
     name: 'Detail',
     component: Detail,
+    meta: {
+      keepAlive: false,
+    },
   },
   {
     path: '/chapter/:id',
@@ -163,16 +189,21 @@ const routes = [
         path: '/findSquares',
         name: 'FindSquares',
         component: FindSquares,
+        // children: [{ path: '/findHB', name: 'FindHB', component: FindHB }],
       },
     ],
     redirect: '/findSquares',
   },
   {
+    path: '/findHB',
+    name: 'FindHB',
+    component: FindHB,
+  },
+  {
     path: '/findDetails/:id',
     name: 'FindDetails',
-    component: findDetails,
+    component: FindDetails,
   },
-
 
   // 我的页面
   {
@@ -207,36 +238,67 @@ const routes = [
   },
   {
     path: '/hobbySet',
+    name: 'HobbySet',
+    component: hobbySet,
+    redirect: '/hobbySet/hobbychild',
+    children: [
+      {
+        path: '/hobbySet/hobbychild',
+        name: 'Hobbychild',
+        component: hobbychild,
+      },
+      {
+        path: '/hobbySet/hobbyGirls',
+        name: 'HobbyGirls',
+        component: hobbyGirls,
+      },
+      {
+        path: '/hobbySet/hobbyBoys',
+        name: 'HobbyBoys',
+        component: hobbyBoys,
+      },
+    ],
+  },
+  {
+    path: '/pushSet',
+    name: 'pushSet',
+    component: pushSet,
+  },
+  {
+    path: '/mineGames',
+    name: 'mineGames',
+    component: mineGames,
+  },
+  {
+    path: '/hobbySet',
     name: 'hobbySet',
     component: hobbySet,
-  	redirect: '/hobbySet/hobbychild',
-  	children:[
-  		{
-  		  path: '/hobbySet/hobbychild',
-  		  name: 'hobbychild',
-  		  component: hobbychild,
-  		},
-  		{
-  		  path: '/hobbySet/hobbyGirls',
-  		  name: 'hobbyGirls',
-  		  component: hobbyGirls,
-  		},
-  		{
-  		  path: '/hobbySet/hobbyBoys',
-  		  name: 'hobbyBoys',
-  		  component: hobbyBoys,
-  		},
-  	]
+    redirect: '/hobbySet/hobbychild',
+    children: [
+      {
+        path: '/hobbySet/hobbychild',
+        name: 'hobbychild',
+        component: hobbychild,
+      },
+      {
+        path: '/hobbySet/hobbyGirls',
+        name: 'hobbyGirls',
+        component: hobbyGirls,
+      },
+      {
+        path: '/hobbySet/hobbyBoys',
+        name: 'hobbyBoys',
+        component: hobbyBoys,
+      },
+    ],
   },
-  
-  
- //搜索
- {
-  path: '/search',
-  name: 'Search',
-  component: Search,
- },
 
+  //搜索
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search,
+  },
 
   //用户的登录及账号管理‘
   {
@@ -255,10 +317,10 @@ const routes = [
     component: Register,
   },
   {
-    path:'/changepassword',
+    path: '/changepassword',
     name: 'ChangePassword',
-    component: ChangePassword
-  }
+    component: ChangePassword,
+  },
 ]
 
 const router = new VueRouter({
