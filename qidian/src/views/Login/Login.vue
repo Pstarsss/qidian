@@ -106,7 +106,6 @@ export default {
           password:this.passowordvalue
         }).then(res=>{
           let {iphone,password,userid,username,userhead} = res.data[0];
-
           sessionStorage.setItem('userbasic',JSON.stringify(res.data[0]));
           this.$http.post('/api/userbasic',{
               userid,

@@ -3,6 +3,20 @@ let express = require('express');
 let router = express.Router();
 let sql = require('../store/mysql.js');
 const Math = require('math');
+
+// 对文件处理需要；
+let multer = require('multer');
+let storage = multer.diskStorage({
+  destination:'public/upload',
+  filename:function(req,file,cb){
+    let fileFormat = (file.originalname).split('.');
+    let filename = new Date().getTime();
+    cb(null,filename +'.'+fileFormat[fileFormat.length-1]);
+  }
+});
+let upload = multer({
+  storage,
+});
 // get 一般为查询请求
 // post 一般为新增用户
 // put  一般为修改信息；
@@ -150,6 +164,16 @@ router.put('/update/discuss', (req, res) => {
     //     console.log(err);
     // })
 })
+// 上传文件的处理;
+router.post('/file/upload',upload.single('file'),function(req,res){
+  let file = req.file;
+  console.log(file);
+  let fileName = file.filename;
+  let avatarUrl = '/upload/'+fileName;
+  console.log(avatarUrl);
+  res.send('----');
+});
+
 
 // 搜索
 router.post('/search',function(req,res){
@@ -166,21 +190,60 @@ router.post('/search',function(req,res){
 router.post('/getchaptertitle',function(req,res){
   let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
   sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections}`).then(results1=>{
-    if(results1.length){
-      sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
-        let temp = results[0];
-        temp.has = true;
-        res.send(temp);
-      })
-    }else{
-      sql.find(`select title from book${collections} where id = ${Chapter}`).then(results=>{
-        let temp = results[0];
-        temp.has = false;
-        res.send(temp);
-      });
-    }
+      if(results1.length){
+
+        sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+          if(results){
+            let temp = results[0];
+            temp.has = true;
+
+            res.send(temp);
+          }
+          else{
+            res.send("-1");
+          }
+        });
+      }else{
+
+        sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+
+          if(results){
+            let temp = results[0];
+            temp.has = false;
+  
+            res.send(temp);
+          }
+          else{
+            res.send("-1");
+          }
+        });
+      }
+      // sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+        
+      //   if(results){
+      //     let temp = results[0];
+      //     temp.has = true;
+      //     res.send(temp);
+      //   }
+      //   else{
+      //     res.send("-1");
+      //   }
+      // });
+
+  }).catch(()=>{
+    console.log("meiyou")
+    // sql.find("select title from book"+ collections + " where id = "+Chapter).then(results=>{
+    //   console.log(2);
+    //   if(results){
+    //     let temp = results[0];
+    //     temp.has = false;
+    //     res.send(temp);
+    //   }
+    //   else{
+    //     res.send("-1");
+    //   }
+    // });
   })
- 
 });
 
 // 点击加入书架的操作2
@@ -272,6 +335,16 @@ router.post('/login',(req,res)=>{
   })
 });
 
+//用户验证码登录
+router.post('/validatelogin',(req,res)=>{
+  let {iphone} = req.body;
+  sql.find('select * from user where iphone = ?',iphone).then((re)=>{
+    // console.log(JSON.parse(JSON.stringify(re)));
+    res.send(re);
+  }).catch((err)=>{
+    res.send('登录失败');
+  })
+});
 
 //密码修改
 router.post('/changepassword',(req,res)=>{
@@ -288,8 +361,8 @@ const Core = require('@alicloud/pop-core');
 const { log } = require('math');
 
 var client = new Core({
-  accessKeyId: 'LTAI4G3rASxgYtmSgUKSaxJM',
-  accessKeySecret: 'KxyLR92rsbtcit9K2foDbkifuS2rn6',
+  accessKeyId: 'LTAI4G9pA3GqufjtMwAANbBa',
+  accessKeySecret: 'g6NnMidKTsoERhoSjXcpXt1Ma3xNmP',
   endpoint: 'https://dysmsapi.aliyuncs.com',
   apiVersion: '2017-05-25'
 });
@@ -324,6 +397,7 @@ router.get('/ddd',(req,res)=>{
   })
 })
 
+// 获取所有的评论;
 router.get('/detaildiscuss',(req,res)=>{
   sql.find('select * from discuss1').then(re=>{
     res.send(JSON.stringify(re));

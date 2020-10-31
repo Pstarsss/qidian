@@ -31,7 +31,6 @@ export default {
   created() {
     this.$http.get("/api/booklist").then((res) => {
       this.length = res.data.length;
-      console.log(res);
     });
 
     this.$http.get("/api/booklist").then((res) => {

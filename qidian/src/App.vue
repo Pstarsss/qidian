@@ -36,14 +36,23 @@
         </div>
       </div>
     </div>
-    <keep-alive exclude="[Detail,Comment,Bookshelf]">
-      <router-view />
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <!-- <keep-alive exclude="[Detail,Comment,Bookshelf]">
+      <router-view />
+    </keep-alive> -->
   </div>
 </template>
 
 <script>
 export default {
+  provide() {
+    return {
+      reload: this.reload,
+    };
+  },
   name: "App",
   data() {
     return {
@@ -59,16 +68,23 @@ export default {
         this.$route.path == "/wanben" ||
         this.$route.path == "/sanjiang" ||
         this.$route.path == "/fenlei" ||
-        this.$route.path == "/paihang"
+        this.$route.path == "/paihang" ||
+        this.$route.path == "/fenleidetail"
       ) {
         this.footShow = false;
-      }else{
+      } else {
         this.footShow = true;
       }
       this.nowUrl = to.fullPath; //全称路径
     },
   },
   methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function () {
+        this.isRouterAlive = true;
+      });
+    },
     open(a) {
       if (this.$route.path == a) {
         return "";

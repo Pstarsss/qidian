@@ -4,7 +4,7 @@
     <book-crack class="bookcolor"></book-crack>
     <div v-if="temp">
         <book-list v-for="(item) in temp" :key="item.collections" :data="item"
-        @toread.native='toread'
+        @toread='toread'
         @deleteBook='deleteBook' ></book-list>
     </div>
     <div></div>

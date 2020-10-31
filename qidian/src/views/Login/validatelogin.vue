@@ -106,12 +106,29 @@ export default {
     ddd(){
       if(this.issure&&this.notifyvalue&&this.phonevalue){
         if(this.notifyvalue == this.validation){ 
-         this.$notify({
-            title: '成功',
-            message: '这是一条成功的提示消息',
-            type: 'success'
-         });
-          this.$router.push('/mineShow');
+          this.$http.post('/api/validatelogin',{
+            iphone:this.phonevalue
+          }).then(res=>{
+            let {iphone,password,userid,username,userhead} = res.data[0];
+          sessionStorage.setItem('userbasic',JSON.stringify(res.data[0]));
+           this.$http.post('/api/userbasic',{
+              userid,
+          }).then(res1=>{
+            let temp = res1.data;
+             sessionStorage.setItem('userbookinfo',JSON.stringify(temp));
+             this.$router.push('/mineShow');
+             this.$notify({
+                  title: '成功',
+                  message: '这是一条成功的提示消息',
+                  type: 'success'
+              });
+          }).catch(err=>{
+            
+          })
+          });
+        
+          
+          // this.$router.push('/mineShow');
         }else{
           this.$notify.error({
             title: '错误',
