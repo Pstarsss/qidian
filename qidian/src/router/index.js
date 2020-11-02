@@ -190,15 +190,6 @@ const routes = [
     component: Find,
     children: [
       {
-<<<<<<< HEAD
-=======
-        path: '/findFollow',
-        name: 'FindFollow',
-        component: FindFollow,
-        meta: { keepAlive: true },
-      },
-      {
->>>>>>> 6dec253391a1ba8938ac62247c08bf3cbc2f8414
         path: '/findSquares',
         name: 'FindSquares',
         component: FindSquares,
