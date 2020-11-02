@@ -358,7 +358,7 @@ export default {
         scrolltop > 180 ? (this.leavetop = true) : (this.leavetop = false);
         scrolltop > 180 ? (this.topcolor = true) : (this.topcolor = false);
          scrolltop > 180 ? (this.topwhite = true) : (this.topwhite = false);
-         scrolltop > 1400 ? (this.gotop = true) : (this.gotop = false);
+         scrolltop > 1000 ? (this.gotop = true) : (this.gotop = false);
 	    },
      openDetail1(index) {
       this.$http.get("/api/booklist/12").then((res) => {
