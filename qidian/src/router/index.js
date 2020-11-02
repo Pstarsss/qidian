@@ -190,18 +190,18 @@ const routes = [
     component: Find,
     children: [
       {
-        path: '/findFollow',
-        name: 'FindFollow',
-        component: FindFollow,
-        meta:{keepAlive: true}
-      },
-      {
         path: '/findSquares',
         name: 'FindSquares',
         component: FindSquares,
         meta:{keepAlive: true}
         // children: [{ path: '/findHB', name: 'FindHB', component: FindHB }],
       },
+      {
+        path: '/findFollow',
+        name: 'FindFollow',
+        component: FindFollow,
+        meta:{keepAlive: true}
+      }
     ],
     redirect: '/findSquares',
   },

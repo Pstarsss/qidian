@@ -5,10 +5,13 @@
 			<i slot="right" class="el-icon-brush icon-draw"></i>
 			<i slot="right" class="el-icon-more" @click="isdialog"></i>
 		</mineTopbar>
-		<el-drawer  :before-close="handleClose" :visible="dialog" :with-header="false"  direction="btt" size="21%">
-		  <span class="drawerSet" @click.capture="toprivacy">隐私设置</span>
-		  <el-button @click="cancel" class="drawBtn">取 消</el-button>
-		</el-drawer>
+		<div class="peopleD-set">
+			<el-drawer :modal="true" :before-close="handleClose" :visible="dialog" :with-header="false" :modal-append-to-body="false" direction="btt" size="21%">
+				<span class="drawerSet" @click.capture="toprivacy">隐私设置</span>
+				<el-button @click="cancel" class="drawBtn">取 消</el-button>
+			</el-drawer>
+		</div>
+		
 		<scroll :probeType="3" class="wrapper" ref="scroll" @pullingDown="pullingDown">
 		<div class="main">
 			    <div><img src="../mine-imgs/05.jpg"/></div>
@@ -242,13 +245,22 @@
 	}
 	.drawBtn{
 		width: 94%;
-		height: 1rem;
-		background-color: whitesmoke;
-		margin-left: 3%;
-		font-size: 0.3rem;
-		border-radius: 0.5rem;
-		color: gainsboro;
-		position: absolute;
-		bottom: 15%;
+    background-color: whitesmoke;
+    margin: 0 auto;
+    font-size: 0.3rem;
+    border-radius: 0.5rem;
+    color: gainsboro;
+    display: block;
+    padding: 0.2rem 0;
 	}
+ .peopleD-set /deep/ .v-modal{
+   z-index: 130 !important;
+ }
+ .peopleDetails /deep/ .el-drawer__body{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 </style>

@@ -495,4 +495,4 @@ export default {
 
 <style>
 @import url("../../assets/css/Detail/detail.css");
-</style>
+</style>  

@@ -23,7 +23,7 @@
      </div>
      <div class="bookset-bottom">
         <div class="bottom-level1">
-          <div @click="totop">
+          <div>
            <el-switch v-model="value1" active-color="#f40" inactive-color="#e5e5e5" :width="50"></el-switch>
            <span>置顶</span>
           </div>
