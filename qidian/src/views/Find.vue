@@ -6,14 +6,14 @@
         <template #center>
           <!-- <div class="choseMenu"></div> -->
           <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="关注" name="first" />
-            <el-tab-pane label="广场" name="second" />
+            <el-tab-pane label="关注" name="FindFollow" />
+            <el-tab-pane label="广场" name="FindSquares" />
           </el-tabs>
           <!-- <router-link to="/findFollow">关注</router-link>
           <router-link to="/findSquares">广场</router-link> -->
         </template>
         <template #right>
-          <a href="/search">
+          <a href="./Login">
             <i class="el-icon-search"></i>
           </a>
         </template>
@@ -37,7 +37,7 @@ export default {
   name: 'find',
   data() {
     return {
-      activeName: 'second',
+      activeName: this.$route.name,
     }
   },
   methods: {
@@ -55,6 +55,9 @@ export default {
           break
       }
     },
+    // testtab() {
+    //   console.log(this.$route)
+    // },
   },
   components: {
     navBar,
@@ -88,14 +91,17 @@ export default {
   display: flex;
   justify-content: center;
 }
-.find #tab-first,
-.find #tab-second {
+.find #tab-FindFollow,
+.find #tab-FindSquares {
   color: #fff;
   font-size: 0.3rem;
 }
 .find .el-tabs__active-bar {
   background-color: #fff;
   /* width: 0.2rem; */
+}
+.find .tablist div {
+  /* font-size: 0.5rem; */
 }
 </style>
 <style scoped>

@@ -23,7 +23,7 @@
 			<div class="set1-right">
 				<el-switch v-model="value2" active-color="gainsboro" inactive-color="#ff4949"  @change="closeswitch">
 				</el-switch>
-				<el-dialog title="关闭个性化推荐" :visible.sync="centerDialogVisible" width="80%"center>
+				<el-dialog title="关闭个性化推荐" :visible.sync="centerDialogVisible" width="80%" center>
 				  <span>关闭后你将无法获得与你相关度更高、更适合你的书籍内容，确定要关闭嘛</span>
 				  <span slot="footer" class="dialog-footer">
 				    <el-button @click="centerDialogVisible = false">确定关闭</el-button>

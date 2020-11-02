@@ -92,17 +92,22 @@
       </p>
       <i class="el-icon-circle-close" @click="clsNoLogin"></i>
     </div>
-    <el-drawer
-      title=""
-      :visible.sync="drawer"
-      :with-header="false"
-      direction="btt"
-      size="4.5rem"
-    >
-      <p>分享</p>
-      <p>举报</p>
-      <p>取消</p>
-    </el-drawer>
+    <div class="fd-set">
+      <el-drawer
+        title=""
+        :visible.sync="drawer"
+        :with-header="false"
+        :modal-append-to-body="false"
+        direction="btt"
+        size="4.5rem"
+      >
+        <p>分享</p>
+        <p>举报</p>
+        <p>取消</p>
+      </el-drawer>
+    </div>
+    
+      
   </div>
 </template>
 
@@ -215,6 +220,9 @@ export default {
 </style>
 // 顶部标题
 <style scoped>
+.fd-set /deep/ .v-modal{
+  z-index: 130 !important;
+}
 .findTop {
   /* background-color: #db3b3b; */
   height: 1rem;
