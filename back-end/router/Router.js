@@ -189,6 +189,7 @@ router.post('/search',function(req,res){
 // 点击加入书架的操作1
 router.post('/getchaptertitle',function(req,res){
   let {collections,Chapter,userid} = JSON.parse(JSON.stringify(req.body)); 
+
   sql.find(`select * from userbookshelf where userid = ${userid} and collections = ${collections}`).then(results1=>{
       if(results1.length){
 

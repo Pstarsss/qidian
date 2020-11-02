@@ -256,7 +256,10 @@
             <span @click="cancel" class="jkk">就看看</span>
         </div>
         
-      </div>    
+      </div>
+      <div href="javasrcipt:;" @click="toTop" v-show="gotop" class="detail-uptop">
+				  <img src="../../assets/img/Detail/top.png" alt="">
+	    </div>    
   </div>
 </template>
 
@@ -298,6 +301,7 @@ export default {
         loveshow1:true,
         rightshow:true,
         jrsj:false,
+        gotop: false,
       };
     },
   
@@ -338,11 +342,23 @@ export default {
       window.addEventListener("scroll", this.handleScroll, true);
     },
   methods: {
+      toTop() {
+      
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      // 实现滚动效果 
+      const timeTop = setInterval(() => {
+      document.body.scrollTop = document.documentElement.scrollTop = top -= 50;
+      if (top <= 0) {
+        clearInterval(timeTop);
+      }
+      }, 10);
+    },
     handleScroll() {
          let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
         scrolltop > 180 ? (this.leavetop = true) : (this.leavetop = false);
         scrolltop > 180 ? (this.topcolor = true) : (this.topcolor = false);
          scrolltop > 180 ? (this.topwhite = true) : (this.topwhite = false);
+         scrolltop > 1400 ? (this.gotop = true) : (this.gotop = false);
 	    },
      openDetail1(index) {
       this.$http.get("/api/booklist/12").then((res) => {

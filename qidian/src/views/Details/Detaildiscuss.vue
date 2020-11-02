@@ -82,6 +82,7 @@ export default {
        this.infor.forEach(i=>{
          this.$set(i,'dzshow',false);
        });
+       console.log(this.infor);
     });
   },
   data(){
@@ -90,7 +91,6 @@ export default {
             infor:{},
             topleave:true,
             isshow:false,
-            dzshow:true,
       }
   },
   updated(){
