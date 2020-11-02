@@ -21,7 +21,7 @@
       <div class="detaildisccuss-content">
             <div class="detaildisccuss-content-top">评论</div>
             <div class="detaildisccuss-content-body" v-for="(item,index) in infor" :key="index">
-                <div><img :src="item.headimg" alt="" class="detaildisccuss-content-body-left-img"></div>
+                <div class="detaildisccuss-content-body-left"><img :src="item.headimg" alt="" class="detaildisccuss-content-body-left-img"></div>
                 <div class="detaildisccuss-content-body-right">
                     <div class="speaker-name">
                       <div> {{item.name}}<span class="speaker-rank">{{item.tag}}</span></div>
@@ -82,6 +82,7 @@ export default {
        this.infor.forEach(i=>{
          this.$set(i,'dzshow',false);
        });
+       console.log(this.infor);
     });
   },
   data(){
@@ -90,7 +91,6 @@ export default {
             infor:{},
             topleave:true,
             isshow:false,
-            dzshow:true,
       }
   },
   updated(){
@@ -243,12 +243,15 @@ export default {
       background-color:whitesmoke;
       display: flex;
       border-bottom: 1px solid #ccc;
-      
+   
+  }
+  .detaildisccuss-content-body-left{
+    width: 1.5rem;
   }
   .detaildisccuss-content-body-left-img{
-      width: .35rem;
-      height: .8rem;
-      margin: .12rem 0 0 .2rem;
+      width: .5rem;
+      height: .5rem;
+      margin: .15rem 0 0 .1rem;
       border-radius: 50%;
   }
   .detaildisccuss-content-body-right{

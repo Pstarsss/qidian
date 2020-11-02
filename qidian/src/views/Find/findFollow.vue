@@ -132,6 +132,13 @@ export default {
   components: {
     scroll,
   },
+  created() {
+    if (sessionStorage.getItem('userbasic')) {
+      this.noLogin = false
+    } else {
+      this.noLogin = true
+    }
+  },
 }
 </script>
 <style>

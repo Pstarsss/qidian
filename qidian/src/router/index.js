@@ -12,7 +12,7 @@ import Search from '@/views/Search/Search.vue'
 // 发现
 import Find from '@/views/Find.vue'
 import FindFollow from '@/views/Find/FindFollow.vue'
-import FindSquares from '@/views/Find/FindSquares.vue'
+import FindSquares from '@/views/Find/findSquares.vue'
 import FindDetails from '@/views/Find/FindeDetails.vue'
 import FindHB from '@/views/Find/components/FindHB.vue'
 
@@ -68,7 +68,7 @@ const routes = [
     path: '/bookshelf',
     name: 'Bookshelf',
     component: Bookshelf,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
     // children: [
     //   {
     //     path: '/bookshare',
@@ -78,47 +78,47 @@ const routes = [
     // ],
   },
   {
-    path:'/bookscreen',
+    path: '/bookscreen',
     name: 'BookScreen',
-    component:BookScreen,
-    meta:{keepAlive: true}
-},
+    component: BookScreen,
+    meta: { keepAlive: true },
+  },
   {
     path: '/sanjiang',
     name: 'sanjiang',
     component: sanjiang,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/fenlei',
     name: 'fenlei',
     component: fenlei,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/paihang',
     name: 'paihang',
     component: paihang,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   // 精选的
   {
     path: '/wanben',
     name: 'wanben',
     component: wanben,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/selectboysfree',
     name: 'SelectBoysfree',
     component: SelectBoysfree,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/fenleidetail/:id',
     name: 'fenleidetail',
     component: fenleidetail,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
   {
     path: '/select',
@@ -134,19 +134,19 @@ const routes = [
         path: '/selectboys',
         name: 'SelectBoys',
         component: SelectBoys,
-        meta:{keepAlive: true}
+        meta: { keepAlive: true },
       },
       {
         path: '/selectgirls',
         name: 'SelectGirls',
         component: SelectGirls,
-        meta:{keepAlive: true}
+        meta: { keepAlive: true },
       },
       {
         path: '/selectcartoon',
         name: 'SelectCartoon',
         component: SelectCartoon,
-        meta:{keepAlive: true}
+        meta: { keepAlive: true },
       },
     ],
     redirect: '/selectboys',
@@ -156,31 +156,31 @@ const routes = [
     path: '/detail/:id',
     name: 'Detail',
     component: Detail,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
   {
     path: '/chapter/:id',
     name: 'Chapter',
     component: Chapter,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
   {
     path: '/read/:id/chapter/:pp',
     name: 'Read',
     component: Read,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
   {
     path: '/detaildiscuss/:id',
     name: 'Detaildiscuss',
     component: Detaildiscuss,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
   {
     path: '/comment',
     name: 'Comment',
     component: Comment,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
 
   //发现页面的
@@ -190,10 +190,19 @@ const routes = [
     component: Find,
     children: [
       {
+<<<<<<< HEAD
+=======
+        path: '/findFollow',
+        name: 'FindFollow',
+        component: FindFollow,
+        meta: { keepAlive: true },
+      },
+      {
+>>>>>>> 6dec253391a1ba8938ac62247c08bf3cbc2f8414
         path: '/findSquares',
         name: 'FindSquares',
         component: FindSquares,
-        meta:{keepAlive: true}
+        meta: { keepAlive: true },
         // children: [{ path: '/findHB', name: 'FindHB', component: FindHB }],
       },
       {
@@ -209,13 +218,13 @@ const routes = [
     path: '/findHB',
     name: 'FindHB',
     component: FindHB,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/findDetails/:id',
     name: 'FindDetails',
     component: FindDetails,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
 
   // 我的页面
@@ -223,37 +232,37 @@ const routes = [
     path: '/mine',
     name: 'Mine',
     component: Mine,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
   {
     path: '/mineShow',
     name: 'MineShow',
     component: mineShow,
-    meta:{keepAlive: false}
+    meta: { keepAlive: false },
   },
   {
     path: '/mineSet',
     name: 'MineSet',
     component: mineSet,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/mineMsg',
     name: 'MineMsg',
     component: mineMsg,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/peopleDetails',
     name: 'PeopleDetails',
     component: peopleDetails,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/privacySet',
     name: 'PrivacySet',
     component: privacySet,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/hobbySet',
@@ -265,19 +274,19 @@ const routes = [
         path: '/hobbySet/hobbychild',
         name: 'Hobbychild',
         component: hobbychild,
-        meta:{keepAlive: true}
+        meta: { keepAlive: true },
       },
       {
         path: '/hobbySet/hobbyGirls',
         name: 'HobbyGirls',
         component: hobbyGirls,
-        meta:{keepAlive: true}
+        meta: { keepAlive: true },
       },
       {
         path: '/hobbySet/hobbyBoys',
         name: 'HobbyBoys',
         component: hobbyBoys,
-        meta:{keepAlive: true}
+        meta: { keepAlive: true },
       },
     ],
   },
@@ -285,13 +294,13 @@ const routes = [
     path: '/pushSet',
     name: 'pushSet',
     component: pushSet,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
   {
     path: '/mineGames',
     name: 'mineGames',
     component: mineGames,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
 
   //搜索
@@ -299,7 +308,7 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: Search,
-    meta:{keepAlive: true}
+    meta: { keepAlive: true },
   },
 
   //用户的登录及账号管理‘
@@ -330,5 +339,10 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 })
+
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err)
+}
 
 export default router

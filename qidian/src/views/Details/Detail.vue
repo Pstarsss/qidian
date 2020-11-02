@@ -240,7 +240,7 @@
         <div class="detail-add" @click="addCollections">
             <img src="../../assets/img/Detail/6.png" alt="" v-if="rightshow">
              <img src="../../assets/img/Detail/gou.png" alt="" v-else>
-            <span :class="{jrsj}">加入书架</span>
+            <span :class="jrsj">加入书架</span>
         </div>
         <div class="free-read" @click="read">
             <p class="free-read1">免费阅读</p>
@@ -256,7 +256,10 @@
             <span @click="cancel" class="jkk">就看看</span>
         </div>
         
-      </div>    
+      </div>
+      <div href="javasrcipt:;" @click="toTop" v-show="gotop" class="detail-uptop">
+				  <img src="../../assets/img/Detail/top.png" alt="">
+	    </div>    
   </div>
 </template>
 
@@ -298,8 +301,10 @@ export default {
         loveshow1:true,
         rightshow:true,
         jrsj:false,
+        gotop: false,
       };
     },
+  
     created(){
       console.log(1);
       let id = this.$router.currentRoute.params.id;
@@ -326,16 +331,34 @@ export default {
       this.info6=res.data;
     });
   },
+  watch: {  
+    $route() {
+      let id=this.$router.currentRoute.params.id;   
+      id = this.$router.currentRoute.params.id;
+    },
+  },
   mounted() {
   　　// 此处true需要加上，不加滚动事件可能绑定不成功
       window.addEventListener("scroll", this.handleScroll, true);
     },
   methods: {
+      toTop() {
+      
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      // 实现滚动效果 
+      const timeTop = setInterval(() => {
+      document.body.scrollTop = document.documentElement.scrollTop = top -= 50;
+      if (top <= 0) {
+        clearInterval(timeTop);
+      }
+      }, 10);
+    },
     handleScroll() {
          let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
         scrolltop > 180 ? (this.leavetop = true) : (this.leavetop = false);
         scrolltop > 180 ? (this.topcolor = true) : (this.topcolor = false);
          scrolltop > 180 ? (this.topwhite = true) : (this.topwhite = false);
+         scrolltop > 1400 ? (this.gotop = true) : (this.gotop = false);
 	    },
      openDetail1(index) {
       this.$http.get("/api/booklist/12").then((res) => {
@@ -356,6 +379,7 @@ export default {
     },
     back(){
         this.$router.go(-1);
+         let id = this.$router.currentRoute.params.id;
     },
       addin(){
         if(this.msg1=3274){
@@ -434,8 +458,8 @@ export default {
                     type: 'success'
                 });
                 });
-                // this.rightshow=!this.rightshow;
-                // this.jrsj=!this.jrsj
+                this.rightshow=!this.rightshow;
+                this.jrsj=!this.jrsj
                 console.log(JSON.parse(sessionStorage.getItem('userbookinfo')));
                 let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
                 aa.push(temp);
@@ -459,9 +483,10 @@ export default {
                 }).then(res1=>{
                 });
                 let aa = JSON.parse(sessionStorage.getItem('userbookinfo'));
-                 let temp = aa.find((i)=>{
+                let temp = aa.find((i)=>{
                    return i.collections == collections;
                  });
+                console.log(temp);
                 temp.Chapter = Chapter+"";
                 temp.booktitle = booktitle;
                 sessionStorage.setItem('userbookinfo',JSON.stringify(aa));
