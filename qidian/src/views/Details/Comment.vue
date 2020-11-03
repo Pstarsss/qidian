@@ -42,7 +42,7 @@ export default {
       value.tag = '盟主';
       value.image = '';
       value.time = this.getTime();
-      value.likes = 666;
+      value.likes = 0;
       value.reviews = 0;
        if(this.info.content == null){
           this.$message({

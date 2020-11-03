@@ -152,16 +152,10 @@ export default {
                 if (!this.historyList.includes(temp)) {
                     this.historyList.unshift(temp);
                     localStorage.setItem("historyList", JSON.stringify(this.historyList));
-                }else{
-                   //有搜索记录，删除之前的旧记录，将新搜索值重新push到数组首位
-                    // let i =this.historyList.indexOf(this.getResoutItem[index].name);
-                    // this.historyList.splice(i,1)
-                    // this.historyList.unshift(this.getResoutItem[index].name);
-                    // localStorage.setItem("historyList", JSON.stringify(this.historyList));
-                }
-             this.resout = [];
-        		 this.$router.push('/detail/'+id);
-        	}
+                }     		 
+          }
+           this.$router.push('/detail/'+id);
+           this.search_val = '';
       },
        hotsearch (){
         this.show1=!this.show1;

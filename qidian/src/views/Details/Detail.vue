@@ -306,7 +306,6 @@ export default {
     },
   
     created(){
-      console.log(1);
       let id = this.$router.currentRoute.params.id;
       this.getdata(id);
       this.$http.get('/api/booklist/'+8).then(res=>{
@@ -358,7 +357,7 @@ export default {
         scrolltop > 180 ? (this.leavetop = true) : (this.leavetop = false);
         scrolltop > 180 ? (this.topcolor = true) : (this.topcolor = false);
          scrolltop > 180 ? (this.topwhite = true) : (this.topwhite = false);
-         scrolltop > 1000 ? (this.gotop = true) : (this.gotop = false);
+         scrolltop > 800 ? (this.gotop = true) : (this.gotop = false);
 	    },
      openDetail1(index) {
       this.$http.get("/api/booklist/12").then((res) => {

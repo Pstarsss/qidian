@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="chapter">
-     <top-nav-bar>
+     <top-nav-bar class="chapter-fiex">
         <div slot="left" @click="$router.go(-1)"><i class="el-icon-arrow-left"></i></div>
         <div slot="center">目录</div>
         <div slot="right"><i class="el-icon-sort" @click="overturn"></i></div>
@@ -27,6 +27,7 @@ export default {
   data(){
     return{
        info:[],
+       num:0
     }
   },
    created(){
@@ -43,21 +44,32 @@ export default {
       this.$router.push('/read/'+id+"/chapter/"+(index+1));
      },
      overturn(){
-     let id = this.$router.currentRoute.params.id;
+       let id = this.$router.currentRoute.params.id;
+       this.num++;
+       if(this.num%2 == 1){
      this.$http.get('/api/booktitle/'+id).then(res=>{
       this.info=res.data[0].titles.split('-').reverse();
-      console.log('666');
-      console.log(res.data[0].titles.split('-').reverse());
     })
+       }else{
+     this.$http.get('/api/booktitle/'+id).then(res=>{
+      this.info=res.data[0].titles.split('-');
+    })
+       }    
      }
   },
 }
 </script>
 
 <style  scoped>
+.chapter-fiex{
+  position: fixed;
+  width: 100vw;
+  background-color: #fff;
+  z-index: 99;
+  top: 0;
+}
 .chapter{
   width: 100%;
-  position: fiex;
 }
 .chapter-top{
   font-size: .18rem;
@@ -69,6 +81,7 @@ export default {
 }
 .chapter-top-content{
   margin-left: .1rem;
+   margin-top: .6rem;
 }
 .chapter-title{
   float: left;
