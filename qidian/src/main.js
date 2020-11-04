@@ -2,8 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
 import './assets/js/utils1.js'
 import './assets/css/common.css'
+
 import axios from 'axios'
 //对ele ui 全局注册
 import ElementUI from 'element-ui'

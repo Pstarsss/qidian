@@ -314,9 +314,9 @@ export default {
     this.$http.get('/api/booklist/'+11).then(res=>{
       this.info2=res.data.slice(1,3);
     })
-     this.$http.get('/api/read/'+id).then(res=>{
-      this.info3=res.data.slice(0,1000);
-
+     this.$http.get('/api/booktitle/'+id).then(res=>{
+      this.info3=res.data[0].titles.split('-');
+      // console.log(res.data[0].titles.split('-'))
     })
     this.$http.get('/api/booklist/'+12).then(res=>{
       this.info4=res.data.slice(0,4);
